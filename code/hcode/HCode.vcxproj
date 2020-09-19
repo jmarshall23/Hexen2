@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Template|Win32">
+      <Configuration>Template</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <SccProjectName>"$/H3MP", SEFAAAAA</SccProjectName>
+    <SccLocalPath>..</SccLocalPath>
+    <Keyword>MakeFileProj</Keyword>
+    <ProjectGuid>{1FBEF33F-6366-457A-B550-3B25AFED7AB2}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.Cpp.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <NMakeBuildCommandLine>hccmp.exe -quiet  -oi -on</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>hccmp.exe -quiet  -oi -on </NMakeReBuildCommandLine>
+    <NMakeOutput>..\portals\progs.dat</NMakeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="acidorb.hc" />
+    <CustomBuild Include="Ai.hc" />
+    <CustomBuild Include="allplay.hc" />
+    <CustomBuild Include="altdeath.hc" />
+    <CustomBuild Include="archer.hc" />
+    <CustomBuild Include="artifact.hc" />
+    <CustomBuild Include="assassin.hc" />
+    <CustomBuild Include="assgren.hc" />
+    <CustomBuild Include="axe.hc" />
+    <CustomBuild Include="barrel.hc" />
+    <CustomBuild Include="bldrain.hc" />
+    <CustomBuild Include="boner.hc" />
+    <CustomBuild Include="boulder.hc" />
+    <CustomBuild Include="breakabl.hc" />
+    <CustomBuild Include="buddha.hc" />
+    <CustomBuild Include="builtin.hc" />
+    <CustomBuild Include="Buttons.hc" />
+    <CustomBuild Include="camera.hc" />
+    <CustomBuild Include="cameraMG.hc" />
+    <CustomBuild Include="cat2.hc" />
+    <CustomBuild Include="catapult.hc" />
+    <CustomBuild Include="chunk.hc" />
+    <CustomBuild Include="Client.hc" />
+    <CustomBuild Include="COMBAT.hc" />
+    <CustomBuild Include="constant.hc" />
+    <CustomBuild Include="Corpse.hc" />
+    <CustomBuild Include="crossbow.hc" />
+    <CustomBuild Include="crusader.hc" />
+    <CustomBuild Include="cube.hc" />
+    <CustomBuild Include="damage.hc" />
+    <CustomBuild Include="Doors.hc" />
+    <CustomBuild Include="dthfire.hc" />
+    <CustomBuild Include="dthhorse.hc" />
+    <CustomBuild Include="eidolon.hc" />
+    <CustomBuild Include="entity.hc" />
+    <CustomBuild Include="eric.hc" />
+    <CustomBuild Include="explode.hc" />
+    <CustomBuild Include="FAblade.hc" />
+    <CustomBuild Include="famhorse.hc" />
+    <CustomBuild Include="fangel.hc" />
+    <CustomBuild Include="FAspell.hc" />
+    <CustomBuild Include="FIGHT.hc" />
+    <CustomBuild Include="fireball.hc" />
+    <CustomBuild Include="fish.hc" />
+    <CustomBuild Include="flameorb.hc" />
+    <CustomBuild Include="flames.hc" />
+    <CustomBuild Include="fx.hc" />
+    <CustomBuild Include="gauntlet.hc" />
+    <CustomBuild Include="global.hc" />
+    <CustomBuild Include="glyph.hc" />
+    <CustomBuild Include="golem.hc" />
+    <CustomBuild Include="Head.hc" />
+    <CustomBuild Include="hurter.hc" />
+    <CustomBuild Include="hydra.hc" />
+    <CustomBuild Include="icemace.hc" />
+    <CustomBuild Include="ice_imp.hc" />
+    <CustomBuild Include="imp.hc" />
+    <CustomBuild Include="impulse.hc" />
+    <CustomBuild Include="invntory.hc" />
+    <CustomBuild Include="Items.hc" />
+    <CustomBuild Include="light.hc" />
+    <CustomBuild Include="lightning.hc" />
+    <CustomBuild Include="lightwp.hc" />
+    <CustomBuild Include="magicmis.hc" />
+    <CustomBuild Include="math.hc" />
+    <CustomBuild Include="medusa.hc" />
+    <CustomBuild Include="medusa2.hc" />
+    <CustomBuild Include="messages.hc" />
+    <CustomBuild Include="meteor.hc" />
+    <CustomBuild Include="mezzoman.hc" />
+    <CustomBuild Include="mg_ai.hc" />
+    <CustomBuild Include="Misc.hc" />
+    <CustomBuild Include="MONSTERS.hc" />
+    <CustomBuild Include="mummy.hc" />
+    <CustomBuild Include="necro.hc" />
+    <CustomBuild Include="newai.hc" />
+    <CustomBuild Include="newfunc.hc" />
+    <CustomBuild Include="newplay.hc" />
+    <CustomBuild Include="object.hc" />
+    <CustomBuild Include="paladin.hc" />
+    <CustomBuild Include="path.hc" />
+    <CustomBuild Include="pentacles.hc" />
+    <CustomBuild Include="ph_eido.hc" />
+    <CustomBuild Include="plaque.hc" />
+    <CustomBuild Include="PLATS.hc" />
+    <CustomBuild Include="plats_mp.hc" />
+    <CustomBuild Include="precache.hc" />
+    <CustomBuild Include="Progs.src" />
+    <CustomBuild Include="projbhvr.hc" />
+    <CustomBuild Include="proto.hc" />
+    <CustomBuild Include="pstboar.hc" />
+    <CustomBuild Include="punchdgr.hc" />
+    <CustomBuild Include="purifier.hc" />
+    <CustomBuild Include="quake.hc" />
+    <CustomBuild Include="rat.hc" />
+    <CustomBuild Include="raven.hc" />
+    <CustomBuild Include="ravenai.hc" />
+    <CustomBuild Include="ravenstf.hc" />
+    <CustomBuild Include="rider.hc" />
+    <CustomBuild Include="rings.hc" />
+    <CustomBuild Include="scorpion.hc" />
+    <CustomBuild Include="setmodth.hc" />
+    <CustomBuild Include="setstaff.hc" />
+    <CustomBuild Include="shardice.hc" />
+    <CustomBuild Include="sheep.hc" />
+    <CustomBuild Include="sickle.hc" />
+    <CustomBuild Include="skullwiz.hc" />
+    <CustomBuild Include="snake.hc" />
+    <CustomBuild Include="soul.hc" />
+    <CustomBuild Include="sound.hc" />
+    <CustomBuild Include="spawn.hc" />
+    <CustomBuild Include="specials.hc" />
+    <CustomBuild Include="spider.hc" />
+    <CustomBuild Include="spit.hc" />
+    <CustomBuild Include="stats.hc" />
+    <CustomBuild Include="strings.hc" />
+    <CustomBuild Include="SUBS.hc" />
+    <CustomBuild Include="sunstaff.hc" />
+    <CustomBuild Include="torch.hc" />
+    <CustomBuild Include="TRIGGERS.hc" />
+    <CustomBuild Include="tripmine.hc" />
+    <CustomBuild Include="t_head.hc" />
+    <CustomBuild Include="vorpal.hc" />
+    <CustomBuild Include="warhamer.hc" />
+    <CustomBuild Include="warhorse.hc" />
+    <CustomBuild Include="waypoint.hc" />
+    <CustomBuild Include="Weapons.hc" />
+    <CustomBuild Include="weather.hc" />
+    <CustomBuild Include="WORLD.hc" />
+    <CustomBuild Include="wp_art.hc" />
+    <CustomBuild Include="yakman.hc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\portals\infolist.txt" />
+    <Text Include="..\portals\puzzles.txt" />
+    <Text Include="..\portals\strings.txt" />
+    <Text Include="h3ents.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

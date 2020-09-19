@@ -1,0 +1,408 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{69d8f010-2d5c-4d74-a2f0-56ec413e7aac}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;hpj;bat;for;f90</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="h3ents.txt" />
+    <Text Include="..\portals\infolist.txt" />
+    <Text Include="..\portals\puzzles.txt" />
+    <Text Include="..\portals\strings.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="acidorb.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Ai.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="allplay.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="altdeath.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="archer.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="artifact.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="assassin.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="assgren.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="axe.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="barrel.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="bldrain.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="boner.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="boulder.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="breakabl.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="buddha.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="builtin.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Buttons.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="camera.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="cameraMG.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="cat2.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="catapult.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="chunk.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Client.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="COMBAT.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="constant.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Corpse.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="crossbow.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="crusader.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="cube.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="damage.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Doors.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dthfire.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="dthhorse.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="eidolon.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="entity.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="eric.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="explode.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FAblade.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="famhorse.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="fangel.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FAspell.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FIGHT.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="fireball.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="fish.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="flameorb.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="flames.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="fx.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gauntlet.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="global.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="glyph.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="golem.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Head.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="hurter.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="hydra.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ice_imp.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="icemace.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="imp.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="impulse.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="invntory.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Items.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="light.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="lightning.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="lightwp.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="magicmis.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="math.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="medusa.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="medusa2.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="messages.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="meteor.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mezzoman.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mg_ai.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Misc.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MONSTERS.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mummy.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="necro.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="newai.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="newfunc.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="newplay.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="object.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="paladin.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="path.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="pentacles.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ph_eido.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="plaque.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="PLATS.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="plats_mp.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="precache.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="projbhvr.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="proto.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="pstboar.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="punchdgr.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="purifier.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="quake.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rat.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="raven.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ravenai.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="ravenstf.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rider.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="rings.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="scorpion.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="setmodth.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="setstaff.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="shardice.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="sheep.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="sickle.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="skullwiz.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="snake.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="soul.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="sound.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="spawn.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="specials.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="spider.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="spit.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="stats.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="strings.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SUBS.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="sunstaff.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="t_head.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="torch.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="TRIGGERS.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="tripmine.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="vorpal.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="warhamer.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="warhorse.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="waypoint.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Weapons.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="weather.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="WORLD.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="wp_art.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="yakman.hc">
+      <Filter>Source Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Progs.src" />
+  </ItemGroup>
+</Project>

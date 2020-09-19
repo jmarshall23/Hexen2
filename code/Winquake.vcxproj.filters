@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{fb6ef4f0-2666-431b-848e-7131c83db12e}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;hpj;bat;for;f90</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{de1dfcfd-efa5-40b9-b1cb-03ab8a50be2d}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;fi;fd</Extensions>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{62952944-e74a-4f51-89e7-95e0cceae6b0}</UniqueIdentifier>
+      <Extensions>*.rc</Extensions>
+    </Filter>
+    <Filter Include="Data Files">
+      <UniqueIdentifier>{cd20a811-4369-44ad-8096-a540ee8e67c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scitech">
+      <UniqueIdentifier>{0598df5e-b620-41b0-bcbe-d1a7ccce1c3d}</UniqueIdentifier>
+      <Extensions>*.h</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cd_win.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chase.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_demo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_effect.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_input.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_parse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cl_tent.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="conproc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="console.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cvar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_draw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_mesh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_model.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_refrag.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_rlight.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_rmain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_rmisc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_rsurf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_screen.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_test.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_vidnt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_warp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="host.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="host_cmd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="in_win.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="keys.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mathlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="midi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mstrconv.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_dgrm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_loop.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_vcr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_win.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_wins.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="net_wipx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pr_cmds.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pr_edict.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pr_exec.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="r_part.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sbar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snd_dma.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snd_mem.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snd_mix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="snd_win.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sv_main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sv_move.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sv_phys.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sv_user.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sys_win.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="view.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="world.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zone.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Adivtab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="anorm_dots.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Anorms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bspfile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cdaudio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cl_effect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cmd.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="conproc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Crc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cvar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D_iface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D_local.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dosisms.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Draw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="genmodel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gl_model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gl_warp_sin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="glquake.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Keys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="midi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="midstuff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Net.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Net_dgrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Net_loop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Net_ser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Net_vcr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Net_wins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Net_wipx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pr_comp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="progdefs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Progs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Quakedef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="R_local.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="R_shared.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Render.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sbar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Screen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Server.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spritegn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sys.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Winquake.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Zone.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="scitech\debug.h">
+      <Filter>Scitech</Filter>
+    </ClInclude>
+    <ClInclude Include="scitech\mglwin.h">
+      <Filter>Scitech</Filter>
+    </ClInclude>
+    <ClInclude Include="scitech\mgraph.h">
+      <Filter>Scitech</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="qe3.ico">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="winquake.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="portals\infolist.txt">
+      <Filter>Data Files</Filter>
+    </Text>
+    <Text Include="portals\puzzles.txt">
+      <Filter>Data Files</Filter>
+    </Text>
+    <Text Include="portals\strings.txt">
+      <Filter>Data Files</Filter>
+    </Text>
+    <Text Include="bugs.txt" />
+  </ItemGroup>
+</Project>
