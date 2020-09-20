@@ -18,4 +18,5 @@ stuffcmds
 // start demos if not allready running a server
 //startdemos demo1 demo2 demo3
 
-menu_main
+//menu_main
+map demo1
