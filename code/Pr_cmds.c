@@ -7,6 +7,16 @@
 #include "menu.h"
 #include <windows.h>
 
+#define	STRINGTEMP_BUFFERS		16
+#define	STRINGTEMP_LENGTH		1024
+static	char	pr_string_temp[STRINGTEMP_BUFFERS][STRINGTEMP_LENGTH];
+static	byte	pr_string_tempindex = 0;
+
+static char* PR_GetTempString(void)
+{
+	return pr_string_temp[(STRINGTEMP_BUFFERS - 1) & ++pr_string_tempindex];
+}
+
 #define	RETURN_EDICT(e) (((int *)pr_globals)[OFS_RETURN] = EDICT_TO_PROG(e))
 
 extern UINT info_mask, info_mask2;
@@ -53,8 +63,7 @@ void PF_error (void)
 	edict_t	*ed;
 	
 	s = PF_VarString(0);
-	Con_Printf ("======SERVER ERROR in %s:\n%s\n"
-	,pr_strings + pr_xfunction->s_name,s);
+	Con_Printf("======SERVER ERROR in %s:\n%s\n", PR_GetString(pr_xfunction->s_name), s);
 	ed = PROG_TO_EDICT(pr_global_struct->self);
 	ED_Print (ed);
 
@@ -77,8 +86,7 @@ void PF_objerror (void)
 	edict_t	*ed;
 	
 	s = PF_VarString(0);
-	Con_Printf ("======OBJECT ERROR in %s:\n%s\n"
-	,pr_strings + pr_xfunction->s_name,s);
+	Con_Printf("======OBJECT ERROR in %s:\n%s\n", PR_GetString(pr_xfunction->s_name), s);
 	ed = PROG_TO_EDICT(pr_global_struct->self);
 	ED_Print (ed);
 	ED_Free (ed);
@@ -243,7 +251,7 @@ void PF_setmodel (void)
 		PR_RunError ("no precache: %s\n", m);
 		
 
-	e->v.model = m - pr_strings;
+	e->v.model = PR_SetEngineString(*check);
 	e->v.modelindex = i; //SV_ModelIndex (m);
 
 	mod = sv.models[ (int)e->v.modelindex];  // Mod_ForName (m, true);
@@ -254,43 +262,55 @@ void PF_setmodel (void)
 		SetMinMaxSize (e, vec3_origin, vec3_origin, true);
 }
 
-void PF_setpuzzlemodel (void)
+void PF_setpuzzlemodel(void)
 {
-	edict_t	*e;
-	char	*m, **check;
-	model_t	*mod;
 	int		i;
-	char	NewName[256];
+	const char* m, ** check;
+	model_t* mod;
+	edict_t* e;
 
 	e = G_EDICT(OFS_PARM0);
 	m = G_STRING(OFS_PARM1);
 
-	sprintf(NewName,"models/puzzle/%s.mdl",m);
-// check to see if model was properly precached
-	for (i=0, check = sv.model_precache ; *check ; i++, check++)
-		if (!strcmp(*check, NewName))
-			break;
-			
-	e->v.model = ED_NewString (NewName) - pr_strings;
-
-	if (!*check)
+	m = va("models/puzzle/%s.mdl", m);
+	// check to see if model was properly precached
+	for (i = 0, check = sv.model_precache;
+		i < MAX_MODELS && *check; i++, check++)
 	{
-//		PR_RunError ("no precache: %s\n", NewName);
-		Con_Printf("**** NO PRECACHE FOR PUZZLE PIECE:");
-		Con_Printf("**** %s\n",NewName);
-
-		sv.model_precache[i] = e->v.model + pr_strings;
-		sv.models[i] = Mod_ForName (NewName, true);
+		if (!strcmp(*check, m))
+			break;
 	}
-		
-	e->v.modelindex = i; //SV_ModelIndex (m);
 
-	mod = sv.models[ (int)e->v.modelindex];  // Mod_ForName (m, true);
-	
-	if (mod)
-		SetMinMaxSize (e, mod->mins, mod->maxs, true);
+	if (i >= MAX_MODELS)
+	{
+		PR_RunError("%s: overflow", __FUNCTION__);
+	}
 	else
-		SetMinMaxSize (e, vec3_origin, vec3_origin, true);
+	{
+		if (!*check)
+		{
+			Con_Printf("NO PRECACHE FOR PUZZLE PIECE: %s\n", m);
+			m = (const char*)strdup(m, "puzzlemodel");
+			sv.model_precache[i] = m;
+			e->v.model = PR_SetEngineString(m);
+#if !defined(SERVERONLY)
+			sv.models[i] = Mod_ForName(m, true);
+#endif	/* SERVERONLY */
+		}
+		else
+		{
+			e->v.model = PR_SetEngineString(*check);
+		}
+
+		e->v.modelindex = i;	//SV_ModelIndex (m);
+
+		mod = sv.models[(int)e->v.modelindex];	// Mod_ForName (m, true);
+
+		if (mod)
+			SetMinMaxSize(e, mod->mins, mod->maxs, true);
+		else
+			SetMinMaxSize(e, vec3_origin, vec3_origin, true);
+	}
 }
 
 /*
@@ -1447,18 +1467,18 @@ void PF_dprintv (void)
 	Con_DPrintf (G_STRING(OFS_PARM0),temp);
 }
 
-char	pr_string_temp[1024];
-
 void PF_ftos (void)
 {
 	float	v;
+	char* s;
+
 	v = G_FLOAT(OFS_PARM0);
-	
+	s = PR_GetTempString();
 	if (v == (int)v)
-		sprintf (pr_string_temp, "%d",(int)v);
+		sprintf(s, "%d", (int)v);
 	else
-		sprintf (pr_string_temp, "%5.1f",v);
-	G_INT(OFS_RETURN) = pr_string_temp - pr_strings;
+		sprintf(s, "%5.1f", v);
+	G_INT(OFS_RETURN) = PR_SetEngineString(s);
 }
 
 void PF_fabs (void)
@@ -1470,8 +1490,11 @@ void PF_fabs (void)
 
 void PF_vtos (void)
 {
-	sprintf (pr_string_temp, "'%5.1f %5.1f %5.1f'", G_VECTOR(OFS_PARM0)[0], G_VECTOR(OFS_PARM0)[1], G_VECTOR(OFS_PARM0)[2]);
-	G_INT(OFS_RETURN) = pr_string_temp - pr_strings;
+	char* s;
+
+	s = PR_GetTempString();
+	sprintf(s, "'%5.1f %5.1f %5.1f'", G_VECTOR(OFS_PARM0)[0], G_VECTOR(OFS_PARM0)[1], G_VECTOR(OFS_PARM0)[2]);
+	G_INT(OFS_RETURN) = PR_SetEngineString(s);
 }
 
 #ifdef QUAKE2
@@ -1502,14 +1525,14 @@ void PF_SpawnTemp (void)
 
 void PF_Remove (void)
 {
-	edict_t	*ed;
+	edict_t* ed;
 	int i;
-	
+
 	ed = G_EDICT(OFS_PARM0);
 	if (ed == sv.edicts)
 	{
 		Con_DPrintf("Tried to remove the world at %s in %s!\n",
-			pr_xfunction->s_name + pr_strings, pr_xfunction->s_file + pr_strings);
+			PR_GetString(pr_xfunction->s_name), PR_GetString(pr_xfunction->s_file));
 		return;
 	}
 
@@ -1517,10 +1540,10 @@ void PF_Remove (void)
 	if (i <= svs.maxclients)
 	{
 		Con_DPrintf("Tried to remove a client at %s in %s!\n",
-			pr_xfunction->s_name + pr_strings, pr_xfunction->s_file + pr_strings);
+			PR_GetString(pr_xfunction->s_name), PR_GetString(pr_xfunction->s_file));
 		return;
 	}
-	ED_Free (ed);
+	ED_Free(ed);
 }
 
 
@@ -1576,26 +1599,26 @@ void PF_Find (void)
 }
 #else
 {
-	int		e;	
+	int		e;
 	int		f;
-	char	*s, *t;
-	edict_t	*ed;
+	const char* s, * t;
+	edict_t* ed;
 
 	e = G_EDICTNUM(OFS_PARM0);
 	f = G_INT(OFS_PARM1);
 	s = G_STRING(OFS_PARM2);
 	if (!s)
-		PR_RunError ("PF_Find: bad search string");
-		
-	for (e++ ; e < sv.num_edicts ; e++)
+		PR_RunError("%s: bad search string", __FUNCTION__);
+
+	for (e++; e < sv.num_edicts; e++)
 	{
 		ed = EDICT_NUM(e);
 		if (ed->free)
 			continue;
-		t = E_STRING(ed,f);
+		t = E_STRING(ed, f);
 		if (!t)
 			continue;
-		if (!strcmp(t,s))
+		if (!strcmp(t, s))
 		{
 			RETURN_EDICT(ed);
 			return;
@@ -1750,31 +1773,32 @@ void PF_precache_model4 (void)
 void PF_precache_puzzle_model (void)
 {
 	int		i;
-	char	*s,temp[256],*m;
-	
+	const char* s, * temp;
+
 	if (sv.state != ss_loading && !ignore_precache)
-		PR_RunError ("PF_Precache_*: Precache can only be done in spawn functions");
-		
-	m = G_STRING(OFS_PARM0);
+		PR_RunError("%s: Precache can only be done in spawn functions", __FUNCTION__);
+
+	s = G_STRING(OFS_PARM0);
 	G_INT(OFS_RETURN) = G_INT(OFS_PARM0);
 
-	sprintf(temp,"models/puzzle/%s.mdl",m);
-	s = ED_NewString (temp);
+	PR_CheckEmptyString(s);
+	temp = va("models/puzzle/%s.mdl", s);
 
-	PR_CheckEmptyString (s);
-
-	for (i=0 ; i<MAX_MODELS ; i++)
+	for (i = 0; i < MAX_MODELS; i++)
 	{
 		if (!sv.model_precache[i])
 		{
+			s = (const char*)strdup(temp, "puzzlemodel");
 			sv.model_precache[i] = s;
-			sv.models[i] = Mod_ForName (s, true);
+#if !defined(SERVERONLY)
+			sv.models[i] = Mod_ForName(s, true);
+#endif	/* SERVERONLY */
 			return;
 		}
-		if (!strcmp(sv.model_precache[i], s))
+		if (!strcmp(sv.model_precache[i], temp))
 			return;
 	}
-	PR_RunError ("PF_precache_puzzle_model: overflow");
+	PR_RunError("%s: overflow", __FUNCTION__);
 }
 
 
@@ -2357,7 +2381,7 @@ void PF_makestatic (void)
 
 	MSG_WriteByte (&sv.signon,svc_spawnstatic);
 
-	MSG_WriteShort (&sv.signon, SV_ModelIndex(pr_strings + ent->v.model));
+	MSG_WriteShort(&sv.signon, SV_ModelIndex(PR_GetString(ent->v.model)));
 
 	MSG_WriteByte (&sv.signon, ent->v.frame);
 	MSG_WriteByte (&sv.signon, ent->v.colormap);
@@ -3123,7 +3147,7 @@ void PF_GetString(void)
 	if (Index >= pr_string_count)
 		PR_RunError ("PF_GetString: index(%d) >= pr_string_count(%d)",Index,pr_string_count);
 
-	G_INT(OFS_RETURN) = (&pr_global_strings[pr_string_index[Index]]) - pr_strings;
+	G_INT(OFS_RETURN) = PR_SetEngineString(&pr_global_strings[pr_string_index[Index]]);
 }
 
 

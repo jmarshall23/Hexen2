@@ -16,17 +16,17 @@
 #define MAX_STACK_DEPTH 32
 #define LOCALSTACK_SIZE 2048
 
-#if defined(_MSC_VER) && defined(_WIN32) && defined(_DEBUG)
-// Uses the Pentium specific opcode RDTSC (ReaD TimeStamp Counter)
-#define TIMESNAP_ACTIVE
-#define TIMESNAP(clock) __asm push eax\
-	__asm push edx\
-	__asm _emit 0x0F\
-	__asm _emit 0x31\
-	__asm mov clock, eax\
-	__asm pop edx\
-	__asm pop eax
-#endif
+//#if defined(_MSC_VER) && defined(_WIN32) && defined(_DEBUG)
+//// Uses the Pentium specific opcode RDTSC (ReaD TimeStamp Counter)
+//#define TIMESNAP_ACTIVE
+//#define TIMESNAP(clock) __asm push eax\
+//	__asm push edx\
+//	__asm _emit 0x0F\
+//	__asm _emit 0x31\
+//	__asm mov clock, eax\
+//	__asm pop edx\
+//	__asm pop eax
+//#endif
 
 // TYPES -------------------------------------------------------------------
 
@@ -270,7 +270,7 @@ while (1)
 		c->_float = !a->vector[0] && !a->vector[1] && !a->vector[2];
 		break;
 	case OP_NOT_S:
-		c->_float = !a->string || !pr_strings[a->string];
+		c->_float = !a->string || !*PR_GetString(a->string);
 		break;
 	case OP_NOT_FNC:
 		c->_float = !a->function;
@@ -288,7 +288,7 @@ while (1)
 			&& (a->vector[2] == b->vector[2]);
 		break;
 	case OP_EQ_S:
-		c->_float = !strcmp(pr_strings+a->string,pr_strings+b->string);
+		c->_float = !strcmp(PR_GetString(a->string), PR_GetString(b->string));
 		break;
 	case OP_EQ_E:
 		c->_float = a->_int == b->_int;
@@ -306,7 +306,7 @@ while (1)
 			|| (a->vector[2] != b->vector[2]);
 		break;
 	case OP_NE_S:
-		c->_float = strcmp(pr_strings+a->string,pr_strings+b->string);
+		c->_float = strcmp(PR_GetString(a->string), PR_GetString(b->string));
 		break;
 	case OP_NE_E:
 		c->_float = a->_int != b->_int;
@@ -894,8 +894,7 @@ static void PrintCallHistory(void)
 		}
 		else
 		{
-			Con_Printf("%12s : %s\n", pr_strings+f->s_file,
-				pr_strings+f->s_name);
+			Con_Printf("%12s : %s\n", PR_GetString(f->s_file), PR_GetString(f->s_name));
 		}
 	}
 }
@@ -1050,17 +1049,17 @@ void PR_Profile_f(void)
 			{
 				if(j < funcCount)
 				{
-					if(*saveName)
+					if (saveFile)
 					{
 						fprintf(saveFile, "%05.2f %s\n",
-							((float)bestFunc->profile/(float)total)*100.0,
-							pr_strings+bestFunc->s_name);
+							((float)bestFunc->profile / (float)total) * 100.0,
+							PR_GetString(bestFunc->s_name));
 					}
 					else
 					{
 						Con_Printf("%05.2f %s\n",
-							((float)bestFunc->profile/(float)total)*100.0,
-							pr_strings+bestFunc->s_name);
+							((float)bestFunc->profile / (float)total) * 100.0,
+							PR_GetString(bestFunc->s_name));
 					}
 				}
 				j++;
@@ -1096,13 +1095,13 @@ void PR_Profile_f(void)
 		currentFile = bestFile;
 		if(tally && currentFile != Q_MAXINT)
 		{
-			if(*saveName)
+			if (saveFile)
 			{
-				fprintf(saveFile, "\"%s\"\n", pr_strings+currentFile);
+				fprintf(saveFile, "\"%s\"\n", PR_GetString(currentFile));
 			}
 			else
 			{
-				Con_Printf("\"%s\"\n", pr_strings+currentFile);
+				Con_Printf("\"%s\"\n", PR_GetString(currentFile));
 			}
 			j = 0;
 			do
@@ -1122,19 +1121,17 @@ void PR_Profile_f(void)
 				{
 					if(j < funcCount)
 					{
-						if(*saveName)
+						if (saveFile)
 						{
 							fprintf(saveFile, "   %05.2f %s\n",
-								((float)bestFunc->profile
-								/(float)total)*100.0,
-								pr_strings+bestFunc->s_name);
+								((float)bestFunc->profile / (float)total) * 100.0,
+								PR_GetString(bestFunc->s_name));
 						}
 						else
 						{
 							Con_Printf("   %05.2f %s\n",
-								((float)bestFunc->profile
-								/(float)total)*100.0,
-								pr_strings+bestFunc->s_name);
+								((float)bestFunc->profile / (float)total) * 100.0,
+								PR_GetString(bestFunc->s_name));
 						}
 					}
 					j++;

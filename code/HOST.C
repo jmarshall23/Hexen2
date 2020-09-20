@@ -1019,8 +1019,8 @@ void Host_Init (quakeparms_t *parms)
 #endif
 
 #endif	// _WIN32
-		CDAudio_Init();
-		MIDI_Init();
+		//CDAudio_Init();
+		//MIDI_Init();
 		SB_Init();
 		CL_Init();
 		IN_Init();

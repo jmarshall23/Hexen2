@@ -896,7 +896,7 @@ void SV_ClipToLinks ( areanode_t *node, moveclip_t *clip )
 		if (touch == clip->passedict)
 			continue;
 		if (touch->v.solid == SOLID_TRIGGER)
-			Sys_Error ("Trigger in clipping list (%s)",touch->v.classname + pr_strings);
+			Sys_Error("Trigger in clipping list (%s)", PR_GetString(touch->v.classname));
 
 		if ((clip->type == MOVE_NOMONSTERS ||
 			 clip->type == MOVE_PHASE) && touch->v.solid != SOLID_BSP)

@@ -812,16 +812,16 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 // take the greater of all the available memory or half the total memory,
 // but at least 8 Mb and no more than 16 Mb, unless they explicitly
 // request otherwise
-	parms.memsize = lpBuffer.dwAvailPhys;
+	parms.memsize = 128 * 1024 * 1024;
 
-	if (parms.memsize < MINIMUM_WIN_MEMORY)
-		parms.memsize = MINIMUM_WIN_MEMORY;
-
-	if (parms.memsize < (lpBuffer.dwTotalPhys >> 1))
-		parms.memsize = lpBuffer.dwTotalPhys >> 1;
-
-	if (parms.memsize > MAXIMUM_WIN_MEMORY)
-		parms.memsize = MAXIMUM_WIN_MEMORY;
+	//if (parms.memsize < MINIMUM_WIN_MEMORY)
+	//	parms.memsize = MINIMUM_WIN_MEMORY;
+	//
+	//if (parms.memsize < (lpBuffer.dwTotalPhys >> 1))
+	//	parms.memsize = lpBuffer.dwTotalPhys >> 1;
+	//
+	//if (parms.memsize > MAXIMUM_WIN_MEMORY)
+	//	parms.memsize = MAXIMUM_WIN_MEMORY;
 
 	if (COM_CheckParm ("-heapsize"))
 	{
