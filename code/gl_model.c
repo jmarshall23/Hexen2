@@ -1264,6 +1264,8 @@ void Mod_LoadBrushModel (model_t *mod, void *buffer)
 	r_pcurrentvertbase = mod->vertexes;
 
 	mod->dxrModel = GL_LoadDXRMesh(mod->surfaces, mod->numsurfaces);
+
+	GL_FinishDXRLoading(); // todo move me!
 }
 
 /*

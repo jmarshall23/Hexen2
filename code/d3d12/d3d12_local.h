@@ -49,6 +49,36 @@ inline void GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAdapte
 	*ppAdapter = adapter.Detach();
 }
 
+struct dxrVertex_t {
+	vec3_t xyz;
+	vec2_t st;
+};
+
+struct dxrSurface_t {
+	int startVertex;
+	int numVertexes;
+
+	int startMegaVertex;
+	int startIndex;
+	int numIndexes;
+};
+
+struct AccelerationStructureBuffers
+{
+	ComPtr<ID3D12Resource> pScratch;      // Scratch memory for AS builder
+	ComPtr<ID3D12Resource> pResult;       // Where the AS is
+	ComPtr<ID3D12Resource> pInstanceDesc; // Hold the matrices of the instances
+};
+
+struct dxrMesh_t {
+	std::vector<dxrVertex_t> meshVertexes;
+	std::vector<dxrVertex_t> meshTriVertexes;
+	std::vector<int> meshIndexes;
+	std::vector<dxrSurface_t> meshSurfaces;
+	ComPtr<ID3D12Resource> m_vertexBuffer;
+	D3D12_VERTEX_BUFFER_VIEW m_vertexBufferView;
+	AccelerationStructureBuffers buffers;
+};
 
 const int FrameCount = 3;
 
@@ -65,3 +95,5 @@ extern ComPtr<ID3D12GraphicsCommandList4> m_commandList;
 extern HANDLE m_fenceEvent;
 extern ComPtr<ID3D12Fence> m_fence;
 extern UINT64 m_fenceValue;
+
+void GL_CreateTopLevelAccelerationStructs(void);

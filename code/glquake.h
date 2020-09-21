@@ -277,6 +277,7 @@ void GL_Bind (int texnum);
 extern byte *playerTranslation;
 
 void BuildSurfaceDisplayList(msurface_t* fa);
+void GL_FinishDXRLoading(void);
 
 /*
  * $Log: /H2 Mission Pack/glquake.h $

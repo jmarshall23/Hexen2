@@ -6,42 +6,20 @@
 #include "nv_helpers_dx12/TopLevelASGenerator.h"
 #include <vector>
 
-struct dxrVertex_t {
-	vec3_t xyz;
-	vec2_t st;
-};
-
-struct dxrSurface_t {
-	int startVertex;
-	int numVertexes;
-
-	int startMegaVertex;
-	int startIndex;
-	int numIndexes;
-};
-
-struct AccelerationStructureBuffers
-{
-	ComPtr<ID3D12Resource> pScratch;      // Scratch memory for AS builder
-	ComPtr<ID3D12Resource> pResult;       // Where the AS is
-	ComPtr<ID3D12Resource> pInstanceDesc; // Hold the matrices of the instances
-};
-
-struct dxrMesh_t {
-	std::vector<dxrVertex_t> meshVertexes;
-	std::vector<dxrVertex_t> meshTriVertexes;
-	std::vector<int> meshIndexes;
-	std::vector<dxrSurface_t> meshSurfaces;
-	ComPtr<ID3D12Resource> m_vertexBuffer;
-	D3D12_VERTEX_BUFFER_VIEW m_vertexBufferView;
-	AccelerationStructureBuffers buffers;
-	AccelerationStructureBuffers m_topLevelASBuffers;
-};
-
 nv_helpers_dx12::TopLevelASGenerator m_topLevelASGenerator;
+std::vector<dxrMesh_t *> dxrMeshList;
 
-void GL_LoadTopAccelStruct(dxrMesh_t * mesh, const DirectX::XMMATRIX &matrix) {
-	m_topLevelASGenerator.AddInstance(mesh->buffers.pResult.Get(), matrix, 0, 0);
+AccelerationStructureBuffers m_topLevelASBuffers;
+
+void GL_CreateTopLevelAccelerationStructs(void) {
+	DirectX::XMMATRIX matrix = DirectX::XMMatrixIdentity();
+
+	ThrowIfFailed(m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get()));
+
+	for (int i = 0; i < dxrMeshList.size(); i++)
+	{
+		m_topLevelASGenerator.AddInstance(dxrMeshList[i]->buffers.pResult.Get(), matrix, i, 0);
+	}
 
 	// As for the bottom-level AS, the building the AS requires some scratch space
 	// to store temporary data in addition to the actual AS. In the case of the
@@ -56,11 +34,11 @@ void GL_LoadTopAccelStruct(dxrMesh_t * mesh, const DirectX::XMMATRIX &matrix) {
 
 	// Create the scratch and result buffers. Since the build is all done on GPU,
 	// those can be allocated on the default heap
-	mesh->m_topLevelASBuffers.pScratch = nv_helpers_dx12::CreateBuffer(
+	m_topLevelASBuffers.pScratch = nv_helpers_dx12::CreateBuffer(
 		m_device.Get(), scratchSize, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS,
 		D3D12_RESOURCE_STATE_UNORDERED_ACCESS,
 		nv_helpers_dx12::kDefaultHeapProps);
-	mesh->m_topLevelASBuffers.pResult = nv_helpers_dx12::CreateBuffer(
+	m_topLevelASBuffers.pResult = nv_helpers_dx12::CreateBuffer(
 		m_device.Get(), resultSize, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS,
 		D3D12_RESOURCE_STATE_RAYTRACING_ACCELERATION_STRUCTURE,
 		nv_helpers_dx12::kDefaultHeapProps);
@@ -68,7 +46,7 @@ void GL_LoadTopAccelStruct(dxrMesh_t * mesh, const DirectX::XMMATRIX &matrix) {
 	// The buffer describing the instances: ID, shader binding information,
 	// matrices ... Those will be copied into the buffer by the helper through
 	// mapping, so the buffer has to be allocated on the upload heap.
-	mesh->m_topLevelASBuffers.pInstanceDesc = nv_helpers_dx12::CreateBuffer(
+	m_topLevelASBuffers.pInstanceDesc = nv_helpers_dx12::CreateBuffer(
 		m_device.Get(), instanceDescsSize, D3D12_RESOURCE_FLAG_NONE,
 		D3D12_RESOURCE_STATE_GENERIC_READ, nv_helpers_dx12::kUploadHeapProps);
 
@@ -77,9 +55,19 @@ void GL_LoadTopAccelStruct(dxrMesh_t * mesh, const DirectX::XMMATRIX &matrix) {
 	// we also pass the existing AS as the 'previous' AS, so that it can be
 	// refitted in place.
 	m_topLevelASGenerator.Generate(m_commandList.Get(),
-		mesh->m_topLevelASBuffers.pScratch.Get(),
-		mesh->m_topLevelASBuffers.pResult.Get(),
-		mesh->m_topLevelASBuffers.pInstanceDesc.Get());
+		m_topLevelASBuffers.pScratch.Get(),
+		m_topLevelASBuffers.pResult.Get(),
+		m_topLevelASBuffers.pInstanceDesc.Get());
+
+	// Flush the command list and wait for it to finish
+	m_commandList->Close();
+	ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
+	m_commandQueue->ExecuteCommandLists(1, ppCommandLists);
+	m_fenceValue++;
+	m_commandQueue->Signal(m_fence.Get(), m_fenceValue);
+
+	m_fence->SetEventOnCompletion(m_fenceValue, m_fenceEvent);
+	WaitForSingleObject(m_fenceEvent, INFINITE);
 }
 
 void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int numSurfaces) {
@@ -217,13 +205,10 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 
 void *GL_LoadDXRMesh(msurface_t *surfaces, int numSurfaces)  {
 	dxrMesh_t* mesh = new dxrMesh_t();
-	
-	DirectX::XMMATRIX m = DirectX::XMMatrixIdentity();
 
 	ThrowIfFailed(m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get()));
 
 	GL_LoadBottomLevelAccelStruct(mesh, surfaces, numSurfaces);
-	GL_LoadTopAccelStruct(mesh, m);
 
 	// Flush the command list and wait for it to finish
 	m_commandList->Close();
@@ -234,6 +219,8 @@ void *GL_LoadDXRMesh(msurface_t *surfaces, int numSurfaces)  {
 
 	m_fence->SetEventOnCompletion(m_fenceValue, m_fenceEvent);
 	WaitForSingleObject(m_fenceEvent, INFINITE);
+
+	dxrMeshList.push_back(mesh);
 
 	return mesh;
 }
