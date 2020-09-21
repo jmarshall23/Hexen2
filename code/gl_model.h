@@ -415,6 +415,8 @@ typedef struct model_s
 	byte		*lightdata;
 	char		*entities;
 
+	void*		dxrModel;
+
 //
 // additional model data
 //

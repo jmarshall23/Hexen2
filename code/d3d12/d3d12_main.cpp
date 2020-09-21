@@ -3,7 +3,6 @@
 
 #include "d3d12_local.h"
 
-const int FrameCount = 3;
 int m_frameIndex = 0;
 
 ComPtr<IDXGISwapChain3> m_swapChain;

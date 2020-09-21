@@ -31,6 +31,9 @@ static vec3_t	mins,maxs;
 
 int entity_file_size;
 
+extern model_t* currentmodel;
+extern mvertex_t* r_pcurrentvertbase;
+
 /*
 ===============
 Mod_Init
@@ -1257,6 +1260,10 @@ void Mod_LoadBrushModel (model_t *mod, void *buffer)
 			mod = loadmodel;
 		}
 	}
+	currentmodel = mod;
+	r_pcurrentvertbase = mod->vertexes;
+
+	mod->dxrModel = GL_LoadDXRMesh(mod->surfaces, mod->numsurfaces);
 }
 
 /*

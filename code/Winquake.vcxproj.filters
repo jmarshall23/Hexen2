@@ -226,6 +226,9 @@
     <ClCompile Include="d3d12\nv_helpers_dx12\TopLevelASGenerator.cpp">
       <Filter>Source Files\d3d12\nv_helpers_dx12</Filter>
     </ClCompile>
+    <ClCompile Include="d3d12\d3d12_raytrace_mesh.cpp">
+      <Filter>Source Files\d3d12</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Adivtab.h">

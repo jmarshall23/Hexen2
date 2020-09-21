@@ -48,3 +48,20 @@ inline void GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAdapte
 
 	*ppAdapter = adapter.Detach();
 }
+
+
+const int FrameCount = 3;
+
+extern ComPtr<IDXGISwapChain3> m_swapChain;
+extern ComPtr<ID3D12Device5> m_device;
+extern ComPtr<ID3D12Resource> m_renderTargets[FrameCount];
+extern ComPtr<ID3D12CommandAllocator> m_commandAllocator;
+extern ComPtr<ID3D12CommandQueue> m_commandQueue;
+extern ComPtr<ID3D12RootSignature> m_rootSignature;
+extern ComPtr<ID3D12DescriptorHeap> m_rtvHeap;
+extern ComPtr<ID3D12PipelineState> m_pipelineState;
+extern ComPtr<ID3D12GraphicsCommandList4> m_commandList;
+
+extern HANDLE m_fenceEvent;
+extern ComPtr<ID3D12Fence> m_fence;
+extern UINT64 m_fenceValue;

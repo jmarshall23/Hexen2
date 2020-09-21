@@ -140,6 +140,7 @@
     <ClCompile Include="crc.c" />
     <ClCompile Include="cvar.c" />
     <ClCompile Include="d3d12\d3d12_main.cpp" />
+    <ClCompile Include="d3d12\d3d12_raytrace_mesh.cpp" />
     <ClCompile Include="d3d12\nv_helpers_dx12\BottomLevelASGenerator.cpp" />
     <ClCompile Include="d3d12\nv_helpers_dx12\RaytracingPipelineGenerator.cpp" />
     <ClCompile Include="d3d12\nv_helpers_dx12\RootSignatureGenerator.cpp" />

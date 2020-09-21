@@ -15,6 +15,7 @@ void GL_EndRendering (void);
 
 
 void GL_Init(HWND hwnd, HINSTANCE hinstance, int width, int height);
+void* GL_LoadDXRMesh(msurface_t* surfaces, int numSurfaces);
 
 extern RECT		WindowRect;
 
@@ -273,7 +274,9 @@ extern	const char *gl_extensions;
 void R_TranslatePlayerSkin (int playernum);
 void GL_Bind (int texnum);
 
-byte *playerTranslation;
+extern byte *playerTranslation;
+
+void BuildSurfaceDisplayList(msurface_t* fa);
 
 /*
  * $Log: /H2 Mission Pack/glquake.h $
