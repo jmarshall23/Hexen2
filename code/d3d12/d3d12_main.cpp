@@ -47,6 +47,9 @@ extern AccelerationStructureBuffers m_topLevelASBuffers;
 
 nv_helpers_dx12::ShaderBindingTableGenerator m_sbtHelper;
 ComPtr<ID3D12Resource> m_sbtStorage;
+ComPtr< ID3D12Resource > m_cameraBuffer;
+ComPtr< ID3D12DescriptorHeap > m_constHeap;
+uint32_t m_cameraBufferSize = 0;
 
 void GL_WaitForPreviousFrame(void) 
 {
@@ -84,9 +87,8 @@ void GL_InitRaytracing(int width, int height) {
 			{ {0 /*u0*/, 1 /*1 descriptor */, 0 /*use the implicit register space 0*/,
 			  D3D12_DESCRIPTOR_RANGE_TYPE_UAV /* UAV representing the output buffer*/,
 			  0 /*heap slot where the UAV is defined*/},
-			 {0 /*t0*/, 1, 0,
-			  D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*Top-level acceleration structure*/,
-			  1} });
+			 {0 /*t0*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*Top-level acceleration structure*/, 1},
+			 {0 /*b0*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_CBV /*Camera parameters*/, 2} });
 
 		m_rayGenSignature = rsc.Generate(m_device.Get(), true);
 	}
@@ -98,6 +100,7 @@ void GL_InitRaytracing(int width, int height) {
 
 	{
 		nv_helpers_dx12::RootSignatureGenerator rsc;
+		rsc.AddRootParameter(D3D12_ROOT_PARAMETER_TYPE_SRV);
 		m_hitSignature = rsc.Generate(m_device.Get(), true);
 	}
 
@@ -199,6 +202,32 @@ void GL_InitRaytracing(int width, int height) {
 			&nv_helpers_dx12::kDefaultHeapProps, D3D12_HEAP_FLAG_NONE, &resDesc,
 			D3D12_RESOURCE_STATE_COPY_SOURCE, nullptr,
 			IID_PPV_ARGS(&m_outputResource)));
+	}
+
+	// Camera matrix stuff.
+	{
+		uint32_t nbMatrix = 4; // view, perspective, viewInv, perspectiveInv
+		m_cameraBufferSize = nbMatrix * sizeof(DirectX::XMMATRIX);
+
+		// Create the constant buffer for all matrices
+		m_cameraBuffer = nv_helpers_dx12::CreateBuffer(
+			m_device.Get(), m_cameraBufferSize, D3D12_RESOURCE_FLAG_NONE,
+			D3D12_RESOURCE_STATE_GENERIC_READ, nv_helpers_dx12::kUploadHeapProps);
+
+		// Create a descriptor heap that will be used by the rasterization shaders
+		m_constHeap = nv_helpers_dx12::CreateDescriptorHeap(
+			m_device.Get(), 1, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, true);
+
+		// Describe and create the constant buffer view.
+		D3D12_CONSTANT_BUFFER_VIEW_DESC cbvDesc = {};
+		cbvDesc.BufferLocation = m_cameraBuffer->GetGPUVirtualAddress();
+		cbvDesc.SizeInBytes = m_cameraBufferSize;
+
+		// Get a handle to the heap memory on the CPU side, to be able to write the
+		// descriptors directly
+		D3D12_CPU_DESCRIPTOR_HANDLE srvHandle =
+			m_constHeap->GetCPUDescriptorHandleForHeapStart();
+		m_device->CreateConstantBufferView(&cbvDesc, srvHandle);
 	}
 }
 
@@ -440,7 +469,7 @@ void GL_FinishDXRLoading(void)
 	// Create a SRV/UAV/CBV descriptor heap. We need 2 entries - 1 UAV for the
 	// raytracing output and 1 SRV for the TLAS
 	m_srvUavHeap = nv_helpers_dx12::CreateDescriptorHeap(
-		m_device.Get(), 2, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, true);
+		m_device.Get(), 3, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, true);
 
 	// Get a handle to the heap memory on the CPU side, to be able to write the
 	// descriptors directly
@@ -466,6 +495,17 @@ void GL_FinishDXRLoading(void)
 	srvDesc.RaytracingAccelerationStructure.Location = m_topLevelASBuffers.pResult->GetGPUVirtualAddress();
 	// Write the acceleration structure view in the heap
 	m_device->CreateShaderResourceView(nullptr, &srvDesc, srvHandle);
+	
+	// #DXR Extra: Perspective Camera
+	// Add the constant buffer for the camera after the TLAS
+	srvHandle.ptr +=
+		m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+
+	// Describe and create a constant buffer view for the camera
+	D3D12_CONSTANT_BUFFER_VIEW_DESC cbvDesc = {};
+	cbvDesc.BufferLocation = m_cameraBuffer->GetGPUVirtualAddress();
+	cbvDesc.SizeInBytes = m_cameraBufferSize;
+	m_device->CreateConstantBufferView(&cbvDesc, srvHandle);
 
 	{
 		// The SBT helper class collects calls to Add*Program.  If called several
@@ -511,4 +551,9 @@ void GL_FinishDXRLoading(void)
 		// Compile the SBT from the shader and parameters info
 		m_sbtHelper.Generate(m_sbtStorage.Get(), m_rtStateObjectProps.Get());
 	}
+}
+
+void GL_Render(float x, float y, float z)
+{
+	
 }

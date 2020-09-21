@@ -3,14 +3,12 @@
 // Note that the payload should be kept as small as possible,
 // and that its size must be declared in the corresponding
 // D3D12_RAYTRACING_SHADER_CONFIG pipeline subobjet.
-struct HitInfo
-{
+struct HitInfo {
   float4 colorAndDistance;
 };
 
 // Attributes output by the raytracing when hitting a surface,
 // here the barycentric coordinates
-struct Attributes
-{
+struct Attributes {
   float2 bary;
 };
