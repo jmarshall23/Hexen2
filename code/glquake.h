@@ -278,6 +278,9 @@ extern byte *playerTranslation;
 
 void BuildSurfaceDisplayList(msurface_t* fa);
 void GL_FinishDXRLoading(void);
+void GL_Render(float x, float y, float z);
+
+extern int g_width, g_height;
 
 /*
  * $Log: /H2 Mission Pack/glquake.h $

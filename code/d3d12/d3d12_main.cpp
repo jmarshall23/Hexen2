@@ -229,6 +229,29 @@ void GL_InitRaytracing(int width, int height) {
 			m_constHeap->GetCPUDescriptorHandleForHeapStart();
 		m_device->CreateConstantBufferView(&cbvDesc, srvHandle);
 	}
+
+	{
+		// #DXR Extra: Perspective Camera
+		// The root signature describes which data is accessed by the shader. The camera matrices are held
+		// in a constant buffer, itself referenced the heap. To do this we reference a range in the heap,
+		// and use that range as the sole parameter of the shader. The camera buffer is associated in the
+		// index 0, making it accessible in the shader in the b0 register.
+		CD3DX12_ROOT_PARAMETER constantParameter;
+		CD3DX12_DESCRIPTOR_RANGE range;
+		range.Init(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, 1, 0);
+		constantParameter.InitAsDescriptorTable(1, &range, D3D12_SHADER_VISIBILITY_ALL);
+
+		CD3DX12_ROOT_SIGNATURE_DESC rootSignatureDesc;
+		rootSignatureDesc.Init(1, &constantParameter, 0, nullptr, D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT);
+
+		ComPtr<ID3DBlob> signature;
+		ComPtr<ID3DBlob> error;
+		ThrowIfFailed(D3D12SerializeRootSignature(
+			&rootSignatureDesc, D3D_ROOT_SIGNATURE_VERSION_1, &signature, &error));
+		ThrowIfFailed(m_device->CreateRootSignature(
+			0, signature->GetBufferPointer(), signature->GetBufferSize(),
+			IID_PPV_ARGS(&m_rootSignature)));
+	}
 }
 
 /*
@@ -404,10 +427,11 @@ void GL_BeginRendering(int* x, int* y, int* width, int* height)
 	// fences to determine GPU execution progress.
 	ThrowIfFailed(m_commandAllocator->Reset());
 
-	// However, when ExecuteCommandList() is called on a particular command 
-	// list, that command list can then be reset at any time and must be before 
+	// However, when ExecuteCommandList() is called on a particular command
+	// list, that command list can then be reset at any time and must be before
 	// re-recording.
-	ThrowIfFailed(m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get()));
+	ThrowIfFailed(
+		m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get()));
 
 	// Set necessary state.
 	m_commandList->SetGraphicsRootSignature(m_rootSignature.Get());
@@ -415,14 +439,15 @@ void GL_BeginRendering(int* x, int* y, int* width, int* height)
 	m_commandList->RSSetScissorRects(1, &m_scissorRect);
 
 	// Indicate that the back buffer will be used as a render target.
-	m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET));
+	m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(
+		m_renderTargets[m_frameIndex].Get(),
+		D3D12_RESOURCE_STATE_PRESENT,
+		D3D12_RESOURCE_STATE_RENDER_TARGET));
 
-	CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), m_frameIndex, m_rtvDescriptorSize);
+	CD3DX12_CPU_DESCRIPTOR_HANDLE rtvHandle(
+		m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), m_frameIndex,
+		m_rtvDescriptorSize);
 	m_commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
-
-	// Record commands.
-	const float clearColor[] = { 0.6f, 0.8f, 0.4f, 1.0f };
-	m_commandList->ClearRenderTargetView(rtvHandle, clearColor, 0, nullptr);
 }
 
 
@@ -438,7 +463,7 @@ void GL_EndRendering(void)
 	m_commandQueue->ExecuteCommandLists(_countof(ppCommandLists), ppCommandLists);
 
 	// Present the frame.
-	ThrowIfFailed(m_swapChain->Present(1, 0));
+	ThrowIfFailed(m_swapChain->Present(0, 0));
 
 	GL_WaitForPreviousFrame();
 }
@@ -521,12 +546,10 @@ void GL_FinishDXRLoading(void)
 		// while DX12 uses the
 		// D3D12_GPU_DESCRIPTOR_HANDLE to define heap pointers. The pointer in this
 		// struct is a UINT64, which then has to be reinterpreted as a pointer.
-		void *heapPointer = (void *)srvUavHeapHandle.ptr;
-		std::vector<void *> heap;
-		heap.push_back(heapPointer);
+		auto heapPointer = reinterpret_cast<UINT64*>(srvUavHeapHandle.ptr);
 
 		// The ray generation only uses heap data
-		m_sbtHelper.AddRayGenerationProgram(L"RayGen", heap);
+		m_sbtHelper.AddRayGenerationProgram(L"RayGen", { heapPointer });
 
 		// The miss and hit shaders do not access any external resources: instead they
 		// communicate their results through the ray payload
@@ -555,5 +578,113 @@ void GL_FinishDXRLoading(void)
 
 void GL_Render(float x, float y, float z)
 {
-	
+	std::vector<DirectX::XMMATRIX> matrices(4);
+
+	// Initialize the view matrix, ideally this should be based on user
+	// interactions The lookat and perspective matrices used for rasterization are
+	// defined to transform world-space vertices into a [0,1]x[0,1]x[0,1] camera
+	// space
+	DirectX::XMVECTOR Eye = DirectX::XMVectorSet(x, y, z, 0.0f);
+	DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+	DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	matrices[0] = DirectX::XMMatrixLookAtRH(Eye, At, Up);
+
+
+	float m_aspectRatio = g_width / g_height;
+	float fovAngleY = 45.0f * DirectX::XM_PI / 180.0f;
+	matrices[1] =
+		DirectX::XMMatrixPerspectiveFovRH(fovAngleY, m_aspectRatio, 0.1f, 1000.0f);
+
+	// Raytracing has to do the contrary of rasterization: rays are defined in
+	// camera space, and are transformed into world space. To do this, we need to
+	// store the inverse matrices as well.
+	DirectX::XMVECTOR det;
+	matrices[2] = XMMatrixInverse(&det, matrices[0]);
+	matrices[3] = XMMatrixInverse(&det, matrices[1]);
+
+	// Copy the matrix contents
+	uint8_t* pData;
+	ThrowIfFailed(m_cameraBuffer->Map(0, nullptr, (void**)&pData));
+	memcpy(pData, matrices.data(), m_cameraBufferSize);
+	m_cameraBuffer->Unmap(0, nullptr);
+
+	// Render!
+	{
+		// #DXR
+   // Bind the descriptor heap giving access to the top-level acceleration
+   // structure, as well as the raytracing output
+		std::vector<ID3D12DescriptorHeap*> heaps = { m_srvUavHeap.Get() };
+		m_commandList->SetDescriptorHeaps(static_cast<UINT>(heaps.size()),
+			heaps.data());
+
+		// On the last frame, the raytracing output was used as a copy source, to
+		// copy its contents into the render target. Now we need to transition it to
+		// a UAV so that the shaders can write in it.
+		CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
+			m_outputResource.Get(), D3D12_RESOURCE_STATE_COPY_SOURCE,
+			D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
+		m_commandList->ResourceBarrier(1, &transition);
+
+		// Setup the raytracing task
+		D3D12_DISPATCH_RAYS_DESC desc = {};
+		// The layout of the SBT is as follows: ray generation shader, miss
+		// shaders, hit groups. As described in the CreateShaderBindingTable method,
+		// all SBT entries of a given type have the same size to allow a fixed
+		// stride.
+
+		// The ray generation shaders are always at the beginning of the SBT.
+		uint32_t rayGenerationSectionSizeInBytes = m_sbtHelper.GetRayGenSectionSize();
+		desc.RayGenerationShaderRecord.StartAddress = m_sbtStorage->GetGPUVirtualAddress();
+		desc.RayGenerationShaderRecord.SizeInBytes = rayGenerationSectionSizeInBytes;
+
+		// The miss shaders are in the second SBT section, right after the ray
+		// generation shader. We have one miss shader for the camera rays and one
+		// for the shadow rays, so this section has a size of 2*m_sbtEntrySize. We
+		// also indicate the stride between the two miss shaders, which is the size
+		// of a SBT entry
+		uint32_t missSectionSizeInBytes = m_sbtHelper.GetMissSectionSize();
+		desc.MissShaderTable.StartAddress = m_sbtStorage->GetGPUVirtualAddress() + rayGenerationSectionSizeInBytes;
+		desc.MissShaderTable.SizeInBytes = missSectionSizeInBytes;
+		desc.MissShaderTable.StrideInBytes = m_sbtHelper.GetMissEntrySize();
+
+		// The hit groups section start after the miss shaders. In this sample we
+		// have one 1 hit group for the triangle
+		uint32_t hitGroupsSectionSize = m_sbtHelper.GetHitGroupSectionSize();
+		desc.HitGroupTable.StartAddress = m_sbtStorage->GetGPUVirtualAddress() + rayGenerationSectionSizeInBytes + missSectionSizeInBytes;
+		desc.HitGroupTable.SizeInBytes = hitGroupsSectionSize;
+		desc.HitGroupTable.StrideInBytes = m_sbtHelper.GetHitGroupEntrySize();
+
+		// Dimensions of the image to render, identical to a kernel launch dimension
+		desc.Width = g_width;
+		desc.Height = g_height;
+		desc.Depth = 1;
+
+		// Bind the raytracing pipeline
+		m_commandList->SetPipelineState1(m_rtStateObject.Get());
+		// Dispatch the rays and write to the raytracing output
+		m_commandList->DispatchRays(&desc);
+
+		// The raytracing output needs to be copied to the actual render target used
+		// for display. For this, we need to transition the raytracing output from a
+		// UAV to a copy source, and the render target buffer to a copy destination.
+		// We can then do the actual copy, before transitioning the render target
+		// buffer into a render target, that will be then used to display the image
+		transition = CD3DX12_RESOURCE_BARRIER::Transition(
+			m_outputResource.Get(), D3D12_RESOURCE_STATE_UNORDERED_ACCESS,
+			D3D12_RESOURCE_STATE_COPY_SOURCE);
+		m_commandList->ResourceBarrier(1, &transition);
+		transition = CD3DX12_RESOURCE_BARRIER::Transition(
+			m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET,
+			D3D12_RESOURCE_STATE_COPY_DEST);
+		m_commandList->ResourceBarrier(1, &transition);
+
+		m_commandList->CopyResource(m_renderTargets[m_frameIndex].Get(),
+			m_outputResource.Get());
+
+		transition = CD3DX12_RESOURCE_BARRIER::Transition(
+			m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_COPY_DEST,
+			D3D12_RESOURCE_STATE_RENDER_TARGET);
+		m_commandList->ResourceBarrier(1, &transition);
+
+	}
 }
