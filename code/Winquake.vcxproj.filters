@@ -23,6 +23,12 @@
     <Filter Include="Source Files\d3d12">
       <UniqueIdentifier>{0c8236f7-1225-4803-8248-f8948d63075b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\d3d12\nv_helpers_dx12">
+      <UniqueIdentifier>{20d83cd8-1324-4579-be2a-72ce28bc18f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\libs">
+      <UniqueIdentifier>{0e1ff46b-cc2e-47ed-9ddb-3bfd0aafb2ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cd_win.c">
@@ -204,6 +210,21 @@
     </ClCompile>
     <ClCompile Include="d3d12\d3d12_main.cpp">
       <Filter>Source Files\d3d12</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d12\nv_helpers_dx12\BottomLevelASGenerator.cpp">
+      <Filter>Source Files\d3d12\nv_helpers_dx12</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d12\nv_helpers_dx12\RaytracingPipelineGenerator.cpp">
+      <Filter>Source Files\d3d12\nv_helpers_dx12</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d12\nv_helpers_dx12\RootSignatureGenerator.cpp">
+      <Filter>Source Files\d3d12\nv_helpers_dx12</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d12\nv_helpers_dx12\ShaderBindingTableGenerator.cpp">
+      <Filter>Source Files\d3d12\nv_helpers_dx12</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d12\nv_helpers_dx12\TopLevelASGenerator.cpp">
+      <Filter>Source Files\d3d12\nv_helpers_dx12</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -390,6 +411,27 @@
     <ClInclude Include="d3d12\d3dx12.h">
       <Filter>Source Files\d3d12</Filter>
     </ClInclude>
+    <ClInclude Include="d3d12\DXRHelper.h">
+      <Filter>Source Files\d3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d12\nv_helpers_dx12\BottomLevelASGenerator.h">
+      <Filter>Source Files\d3d12\nv_helpers_dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d12\nv_helpers_dx12\RaytracingPipelineGenerator.h">
+      <Filter>Source Files\d3d12\nv_helpers_dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d12\nv_helpers_dx12\RootSignatureGenerator.h">
+      <Filter>Source Files\d3d12\nv_helpers_dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d12\nv_helpers_dx12\ShaderBindingTableGenerator.h">
+      <Filter>Source Files\d3d12\nv_helpers_dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d12\nv_helpers_dx12\TopLevelASGenerator.h">
+      <Filter>Source Files\d3d12\nv_helpers_dx12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d12\DXSampleHelper.h">
+      <Filter>Source Files\d3d12</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="qe3.ico">
@@ -412,5 +454,10 @@
       <Filter>Data Files</Filter>
     </Text>
     <Text Include="bugs.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libs\dxcompiler.lib">
+      <Filter>Source Files\libs</Filter>
+    </Library>
   </ItemGroup>
 </Project>

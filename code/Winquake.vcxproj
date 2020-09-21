@@ -86,7 +86,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='GL Debug|x64'">
     <ClCompile>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <Optimization>Disabled</Optimization>
@@ -120,7 +120,7 @@
       <SubSystem>Windows</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <OutputFile>../hexen2.exe</OutputFile>
-      <AdditionalDependencies>dxgi.lib;d3d12.lib;opengl32.lib;winmm.lib;wsock32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dxcompiler.lib;dxgi.lib;d3d12.lib;opengl32.lib;winmm.lib;wsock32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <StackReserveSize>8000000</StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
@@ -140,6 +140,11 @@
     <ClCompile Include="crc.c" />
     <ClCompile Include="cvar.c" />
     <ClCompile Include="d3d12\d3d12_main.cpp" />
+    <ClCompile Include="d3d12\nv_helpers_dx12\BottomLevelASGenerator.cpp" />
+    <ClCompile Include="d3d12\nv_helpers_dx12\RaytracingPipelineGenerator.cpp" />
+    <ClCompile Include="d3d12\nv_helpers_dx12\RootSignatureGenerator.cpp" />
+    <ClCompile Include="d3d12\nv_helpers_dx12\ShaderBindingTableGenerator.cpp" />
+    <ClCompile Include="d3d12\nv_helpers_dx12\TopLevelASGenerator.cpp" />
     <ClCompile Include="gl_draw.c" />
     <ClCompile Include="gl_mesh.c" />
     <ClCompile Include="gl_model.c" />
@@ -202,6 +207,13 @@
     <ClInclude Include="Cvar.h" />
     <ClInclude Include="d3d12\d3d12_local.h" />
     <ClInclude Include="d3d12\d3dx12.h" />
+    <ClInclude Include="d3d12\DXRHelper.h" />
+    <ClInclude Include="d3d12\DXSampleHelper.h" />
+    <ClInclude Include="d3d12\nv_helpers_dx12\BottomLevelASGenerator.h" />
+    <ClInclude Include="d3d12\nv_helpers_dx12\RaytracingPipelineGenerator.h" />
+    <ClInclude Include="d3d12\nv_helpers_dx12\RootSignatureGenerator.h" />
+    <ClInclude Include="d3d12\nv_helpers_dx12\ShaderBindingTableGenerator.h" />
+    <ClInclude Include="d3d12\nv_helpers_dx12\TopLevelASGenerator.h" />
     <ClInclude Include="Dosisms.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="D_iface.h" />
@@ -260,6 +272,9 @@
     <Text Include="portals\infolist.txt" />
     <Text Include="portals\puzzles.txt" />
     <Text Include="portals\strings.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libs\dxcompiler.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

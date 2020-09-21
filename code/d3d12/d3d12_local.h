@@ -3,28 +3,20 @@
 
 #pragma once
 
+#include "d3dx12.h"
+#include <wrl/client.h>
+#include <dxgi1_4.h>
+#include "DXRHelper.h"
+
 extern "C" {
 	#include "../quakedef.h"
 	#include "../winquake.h"
 	#include "../resource.h"
 };
 
-#include "d3dx12.h"
-#include <wrl/client.h>
-#include <dxgi1_4.h>
-
 using namespace Microsoft::WRL;
 
 #include <exception>
-
-inline void ThrowIfFailed(HRESULT hr)
-{
-	if (FAILED(hr))
-	{
-		// Set a breakpoint on this line to catch DirectX API errors
-		throw std::exception();
-	}
-}
 
 // Helper function for acquiring the first available hardware adapter that supports Direct3D 12.
 // If no such adapter can be found, *ppAdapter will be set to nullptr.
