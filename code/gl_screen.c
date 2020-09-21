@@ -688,56 +688,56 @@ SCR_ScreenShot_f
 */  
 void SCR_ScreenShot_f (void) 
 {
-	byte		*buffer;
-	char		pcxname[80]; 
-	char		checkname[MAX_OSPATH];
-	int			i, c, temp;
-
-	sprintf (checkname, "%s/shots", com_gamedir);
-	Sys_mkdir (checkname);
-// 
-// find a file name to save it to 
-// 
-	strcpy(pcxname,"shots/hexen00.tga");
-		
-	for (i=0 ; i<=99 ; i++) 
-	{ 
-		pcxname[11] = i/10 + '0'; 
-		pcxname[12] = i%10 + '0'; 
-		sprintf (checkname, "%s/%s", com_gamedir, pcxname);
-		if (Sys_FileTime(checkname) == -1)
-			break;	// file doesn't exist
-	} 
-	if (i==100) 
-	{
-		Con_Printf ("SCR_ScreenShot_f: Couldn't create a TGA file\n"); 
-		return;
- 	}
-
-
-	buffer = malloc(glwidth*glheight*3 + 18);
-	memset (buffer, 0, 18);
-	buffer[2] = 2;		// uncompressed type
-	buffer[12] = glwidth&255;
-	buffer[13] = glwidth>>8;
-	buffer[14] = glheight&255;
-	buffer[15] = glheight>>8;
-	buffer[16] = 24;	// pixel size
-
-	glReadPixels (glx, gly, glwidth, glheight, GL_RGB, GL_UNSIGNED_BYTE, buffer+18 ); 
-
-	// swap rgb to bgr
-	c = 18+glwidth*glheight*3;
-	for (i=18 ; i<c ; i+=3)
-	{
-		temp = buffer[i];
-		buffer[i] = buffer[i+2];
-		buffer[i+2] = temp;
-	}
-	COM_WriteFile (pcxname, buffer, glwidth*glheight*3 + 18 );
-
-	free (buffer);
-	Con_Printf ("Wrote %s\n", pcxname);
+//	byte		*buffer;
+//	char		pcxname[80]; 
+//	char		checkname[MAX_OSPATH];
+//	int			i, c, temp;
+//
+//	sprintf (checkname, "%s/shots", com_gamedir);
+//	Sys_mkdir (checkname);
+//// 
+//// find a file name to save it to 
+//// 
+//	strcpy(pcxname,"shots/hexen00.tga");
+//		
+//	for (i=0 ; i<=99 ; i++) 
+//	{ 
+//		pcxname[11] = i/10 + '0'; 
+//		pcxname[12] = i%10 + '0'; 
+//		sprintf (checkname, "%s/%s", com_gamedir, pcxname);
+//		if (Sys_FileTime(checkname) == -1)
+//			break;	// file doesn't exist
+//	} 
+//	if (i==100) 
+//	{
+//		Con_Printf ("SCR_ScreenShot_f: Couldn't create a TGA file\n"); 
+//		return;
+// 	}
+//
+//
+//	buffer = malloc(glwidth*glheight*3 + 18);
+//	memset (buffer, 0, 18);
+//	buffer[2] = 2;		// uncompressed type
+//	buffer[12] = glwidth&255;
+//	buffer[13] = glwidth>>8;
+//	buffer[14] = glheight&255;
+//	buffer[15] = glheight>>8;
+//	buffer[16] = 24;	// pixel size
+//
+//	glReadPixels (glx, gly, glwidth, glheight, GL_RGB, GL_UNSIGNED_BYTE, buffer+18 ); 
+//
+//	// swap rgb to bgr
+//	c = 18+glwidth*glheight*3;
+//	for (i=18 ; i<c ; i+=3)
+//	{
+//		temp = buffer[i];
+//		buffer[i] = buffer[i+2];
+//		buffer[i+2] = temp;
+//	}
+//	COM_WriteFile (pcxname, buffer, glwidth*glheight*3 + 18 );
+//
+//	free (buffer);
+//	Con_Printf ("Wrote %s\n", pcxname);
 } 
 
 

@@ -1,7 +1,7 @@
 
 #include "quakedef.h"
 
-#ifdef GLTEST
+#ifdef GLTEST 
 
 typedef struct
 {

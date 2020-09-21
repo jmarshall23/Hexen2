@@ -1361,23 +1361,24 @@ void R_DrawParticles (void)
 	float			vel0, vel1, vel2;
 	vec3_t			save_org;
 
-#ifdef GLQUAKE
+	// jmarshall - particles
+//#ifdef GLQUAKE
 	float			scale;
-
-	GL_Bind(particletexture);
-	glEnable (GL_BLEND);
-	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	glBegin (GL_TRIANGLES);
-
-	VectorScale (vup, 1.5, r_pup);
-	VectorScale (vright, 1.5, r_pright);
-#else
-
-	VectorScale (vright, xscaleshrink, r_pright);
-	VectorScale (vup, yscaleshrink, r_pup);
-	VectorCopy (vpn, r_ppn);
-#endif
+//
+//	GL_Bind(particletexture);
+//	glEnable (GL_BLEND);
+//	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+//	glBegin (GL_TRIANGLES);
+//
+//	VectorScale (vup, 1.5, r_pup);
+//	VectorScale (vright, 1.5, r_pright);
+//#else
+//
+//	VectorScale (vright, xscaleshrink, r_pright);
+//	VectorScale (vup, yscaleshrink, r_pup);
+//	VectorCopy (vpn, r_ppn);
+//#endif
 
 	for ( ;; ) 
 	{
@@ -1562,9 +1563,9 @@ void R_DrawParticles (void)
 	}
 
 #ifdef GLQUAKE
-	glEnd ();
-	glDisable (GL_BLEND);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	//glEnd ();
+	//glDisable (GL_BLEND);
+	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 #endif
 }
 

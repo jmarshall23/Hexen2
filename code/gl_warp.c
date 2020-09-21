@@ -180,25 +180,26 @@ void EmitWaterPolys (msurface_t *fa)
 	float		s, t, os, ot;
 
 
-	for (p=fa->polys ; p ; p=p->next)
-	{
-		glBegin (GL_POLYGON);
-		for (i=0,v=p->verts[0] ; i<p->numverts ; i++, v+=VERTEXSIZE)
-		{
-			os = v[3];
-			ot = v[4];
-
-			s = os + turbsin[(int)((ot*0.125+realtime) * TURBSCALE) & 255];
-			s *= (1.0/64);
-
-			t = ot + turbsin[(int)((os*0.125+realtime) * TURBSCALE) & 255];
-			t *= (1.0/64);
-
-			glTexCoord2f (s, t);
-			glVertex3fv (v);
-		}
-		glEnd ();
-	}
+	// jmarshall - todo
+	//for (p=fa->polys ; p ; p=p->next)
+	//{
+	//	glBegin (GL_POLYGON);
+	//	for (i=0,v=p->verts[0] ; i<p->numverts ; i++, v+=VERTEXSIZE)
+	//	{
+	//		os = v[3];
+	//		ot = v[4];
+	//
+	//		s = os + turbsin[(int)((ot*0.125+realtime) * TURBSCALE) & 255];
+	//		s *= (1.0/64);
+	//
+	//		t = ot + turbsin[(int)((os*0.125+realtime) * TURBSCALE) & 255];
+	//		t *= (1.0/64);
+	//
+	//		glTexCoord2f (s, t);
+	//		glVertex3fv (v);
+	//	}
+	//	glEnd ();
+	//}
 }
 
 
@@ -221,64 +222,64 @@ void EmitSkyPolys (msurface_t *fa, qboolean save)
 	float	s, t;
 	vec3_t	dir,sort;
 	float	length;
-
-	for (p=fa->polys ; p ; p=p->next)
-	{
-		c_sky_polys++;
-
-		glBegin (GL_POLYGON);
-		for (i=0,v=p->verts[0] ; i<p->numverts ; i++, v+=VERTEXSIZE)
-		{
-			if (save || buffer_pos >= MAX_SAVE)
-			{
-				VectorSubtract (v, r_origin, dir);
-				dir[2] *= 3;	// flatten the sphere
-
-	/*			VectorCopy(dir,sort);
-				if (sort[1] > sort[0])
-				{
-					t = sort[1];
-					sort[1] = sort[0];
-					sort[0] = t;
-				}
-				if (sort[2] > sort[0])
-				{
-					t = sort[2];
-					sort[2] = sort[0];
-					sort[0] = t;
-				}
-				length = sort[0] + (sort[1] * .25) + (sort[2] * .25);*/
-
-				length = dir[0]*dir[0] + dir[1]*dir[1] + dir[2]*dir[2];
-				length = sqrt (length);
-
-				length = 6*63/length;
-
-				dir[0] *= length;
-				dir[1] *= length;
-
-				if (buffer_pos < MAX_SAVE)
-				{
-					buffer_s[buffer_pos] = dir[0];
-					buffer_t[buffer_pos] = dir[1];
-					buffer_pos++;
-				}
-			}
-			else
-			{
-				dir[0] = buffer_s[buffer_pos];
-				dir[1] = buffer_t[buffer_pos];
-				buffer_pos++;
-			}
-
-			s = (speedscale + dir[0]) * (1.0/128);
-			t = (speedscale + dir[1]) * (1.0/128);
-
-			glTexCoord2f (s, t);
-			glVertex3fv (v);
-		}
-		glEnd ();
-	}
+	// jmarshall - todo
+	//for (p=fa->polys ; p ; p=p->next)
+	//{
+	//	c_sky_polys++;
+	//
+	//	glBegin (GL_POLYGON);
+	//	for (i=0,v=p->verts[0] ; i<p->numverts ; i++, v+=VERTEXSIZE)
+	//	{
+	//		if (save || buffer_pos >= MAX_SAVE)
+	//		{
+	//			VectorSubtract (v, r_origin, dir);
+	//			dir[2] *= 3;	// flatten the sphere
+	//
+	///*			VectorCopy(dir,sort);
+	//			if (sort[1] > sort[0])
+	//			{
+	//				t = sort[1];
+	//				sort[1] = sort[0];
+	//				sort[0] = t;
+	//			}
+	//			if (sort[2] > sort[0])
+	//			{
+	//				t = sort[2];
+	//				sort[2] = sort[0];
+	//				sort[0] = t;
+	//			}
+	//			length = sort[0] + (sort[1] * .25) + (sort[2] * .25);*/
+	//
+	//			length = dir[0]*dir[0] + dir[1]*dir[1] + dir[2]*dir[2];
+	//			length = sqrt (length);
+	//
+	//			length = 6*63/length;
+	//
+	//			dir[0] *= length;
+	//			dir[1] *= length;
+	//
+	//			if (buffer_pos < MAX_SAVE)
+	//			{
+	//				buffer_s[buffer_pos] = dir[0];
+	//				buffer_t[buffer_pos] = dir[1];
+	//				buffer_pos++;
+	//			}
+	//		}
+	//		else
+	//		{
+	//			dir[0] = buffer_s[buffer_pos];
+	//			dir[1] = buffer_t[buffer_pos];
+	//			buffer_pos++;
+	//		}
+	//
+	//		s = (speedscale + dir[0]) * (1.0/128);
+	//		t = (speedscale + dir[1]) * (1.0/128);
+	//
+	//		glTexCoord2f (s, t);
+	//		glVertex3fv (v);
+	//	}
+	//	glEnd ();
+	//}
 }
 
 /*
@@ -303,7 +304,7 @@ void EmitBothSkyLayers (msurface_t *fa)
 	buffer_pos = 0;
 	EmitSkyPolys (fa,true);
 
-	glEnable (GL_BLEND);
+	//glEnable (GL_BLEND);
 	GL_Bind (alphaskytexture);
 	speedscale = realtime*16;
 	speedscale -= (int)speedscale & ~127 ;
@@ -311,7 +312,7 @@ void EmitBothSkyLayers (msurface_t *fa)
 	buffer_pos = 0;
 	EmitSkyPolys (fa,false);
 
-	glDisable (GL_BLEND);
+	//glDisable (GL_BLEND);
 }
 
 #ifndef QUAKE2
@@ -334,7 +335,7 @@ void R_DrawSkyChain (msurface_t *s)
 	for (fa=s ; fa ; fa=fa->texturechain)
 		EmitSkyPolys (fa,true);
 
-	glEnable (GL_BLEND);
+	//glEnable (GL_BLEND);
 	GL_Bind (alphaskytexture);
 	speedscale = realtime*16;
 	speedscale -= (int)speedscale & ~127 ;
@@ -344,7 +345,7 @@ void R_DrawSkyChain (msurface_t *s)
 	for (fa=s ; fa ; fa=fa->texturechain)
 		EmitSkyPolys (fa,false);
 
-	glDisable (GL_BLEND);
+	//glDisable (GL_BLEND);
 
 	c_sky_polys >>= 1;
 }
@@ -1089,27 +1090,28 @@ void R_InitSky (texture_t *mt)
 
 	if (!solidskytexture)
 		solidskytexture = texture_extension_number++;
-	GL_Bind (solidskytexture );
-	glTexImage2D (GL_TEXTURE_2D, 0, gl_solid_format, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, trans);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-
-	for (i=0 ; i<128 ; i++)
-		for (j=0 ; j<128 ; j++)
-		{
-			p = src[i*256 + j];
-			if (p == 0)
-				trans[(i*128) + j] = transpix;
-			else
-				trans[(i*128) + j] = d_8to24table[p];
-		}
-
-	if (!alphaskytexture)
-		alphaskytexture = texture_extension_number++;
-	GL_Bind(alphaskytexture);
-	glTexImage2D (GL_TEXTURE_2D, 0, gl_alpha_format, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, trans);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// jmarshall - todo
+//	GL_Bind (solidskytexture );
+//	glTexImage2D (GL_TEXTURE_2D, 0, gl_solid_format, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, trans);
+//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//
+//
+//	for (i=0 ; i<128 ; i++)
+//		for (j=0 ; j<128 ; j++)
+//		{
+//			p = src[i*256 + j];
+//			if (p == 0)
+//				trans[(i*128) + j] = transpix;
+//			else
+//				trans[(i*128) + j] = d_8to24table[p];
+//		}
+//
+//	if (!alphaskytexture)
+//		alphaskytexture = texture_extension_number++;
+//	GL_Bind(alphaskytexture);
+//	glTexImage2D (GL_TEXTURE_2D, 0, gl_alpha_format, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, trans);
+//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 

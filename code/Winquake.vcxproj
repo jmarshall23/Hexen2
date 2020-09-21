@@ -120,7 +120,7 @@
       <SubSystem>Windows</SubSystem>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <OutputFile>../hexen2.exe</OutputFile>
-      <AdditionalDependencies>opengl32.lib;winmm.lib;wsock32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>dxgi.lib;d3d12.lib;opengl32.lib;winmm.lib;wsock32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <StackReserveSize>8000000</StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
@@ -139,6 +139,7 @@
     <ClCompile Include="console.c" />
     <ClCompile Include="crc.c" />
     <ClCompile Include="cvar.c" />
+    <ClCompile Include="d3d12\d3d12_main.cpp" />
     <ClCompile Include="gl_draw.c" />
     <ClCompile Include="gl_mesh.c" />
     <ClCompile Include="gl_model.c" />
@@ -199,6 +200,8 @@
     <ClInclude Include="Console.h" />
     <ClInclude Include="Crc.h" />
     <ClInclude Include="Cvar.h" />
+    <ClInclude Include="d3d12\d3d12_local.h" />
+    <ClInclude Include="d3d12\d3dx12.h" />
     <ClInclude Include="Dosisms.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="D_iface.h" />

@@ -20,6 +20,9 @@
       <UniqueIdentifier>{0598df5e-b620-41b0-bcbe-d1a7ccce1c3d}</UniqueIdentifier>
       <Extensions>*.h</Extensions>
     </Filter>
+    <Filter Include="Source Files\d3d12">
+      <UniqueIdentifier>{0c8236f7-1225-4803-8248-f8948d63075b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cd_win.c">
@@ -199,6 +202,9 @@
     <ClCompile Include="zone.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="d3d12\d3d12_main.cpp">
+      <Filter>Source Files\d3d12</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Adivtab.h">
@@ -377,6 +383,12 @@
     </ClInclude>
     <ClInclude Include="scitech\mgraph.h">
       <Filter>Scitech</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d12\d3d12_local.h">
+      <Filter>Source Files\d3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d12\d3dx12.h">
+      <Filter>Source Files\d3d12</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

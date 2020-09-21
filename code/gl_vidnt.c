@@ -65,10 +65,6 @@ static qboolean	windowed, leavecurrentmode;
 static int		windowed_mouse;
 static HICON	hIcon;
 
-FX_DISPLAY_MODE_EXT fxDisplayModeExtension;
-FX_SET_PALETTE_EXT fxSetPaletteExtension;
-//FX_MARK_PAL_TEXTURE_EXT fxMarkPalTextureExtension;
-
 unsigned char inverse_pal[(1<<INVERSE_PAL_TOTAL_BITS)+1];
 
 int			DIBWidth, DIBHeight;
@@ -85,8 +81,8 @@ static int	windowed_default;
 unsigned char	vid_curpal[256*3];
 float RTint[256],GTint[256],BTint[256];
 
-HGLRC	baseRC;
-HDC		maindc;
+//HGLRC	baseRC;
+//HDC		maindc;
 
 glvert_t glv;
 
@@ -112,12 +108,7 @@ void AppActivate(BOOL fActive, BOOL minimize);
 char *VID_GetModeDescription (int mode);
 void ClearAllStates (void);
 void VID_UpdateWindowStatus (void);
-void GL_Init (void);
 
-PROC glArrayElementEXT;
-PROC glColorPointerEXT;
-PROC glTexCoordPointerEXT;
-PROC glVertexPointerEXT;
 
 //====================================
 
@@ -474,296 +465,14 @@ void VID_UpdateWindowStatus (void)
 	IN_UpdateClipCursor ();
 }
 
-
-//====================================
-
-BINDTEXFUNCPTR bindTexFunc;
-
-#define TEXTURE_EXT_STRING "GL_EXT_texture_object"
-
-#define FX_DISPLAY_MODE_EXT_STRING "gl3DfxDisplayModeEXT"
-
-//#define FX_SET_PALETTE_EXT_STRING "gl3DfxSetPaletteEXT"
-#define FX_SET_PALETTE_EXT_STRING "3DFX_set_global_palette"
-#define VR_SET_PALETTE_EXT_STRING "POWERVR_set_global_palette"
-
-//#define FX_MARK_PAL_TEXTURE_EXT_STRING "gl3DfxMarkPalettizedTextureEXT"
-
-void Check3DfxDisplayModeExtension( void )
-{
-	char *tmp;
-	qboolean display_mode_ext = false;
-
-	tmp = ( unsigned char * )glGetString( GL_EXTENSIONS );
-	while( *tmp )
-	{
-		if (strncmp((const char*)tmp, FX_DISPLAY_MODE_EXT_STRING, strlen(FX_DISPLAY_MODE_EXT_STRING)) == 0)
-			display_mode_ext = TRUE;
-		tmp++;
-	}
-
-	fxDisplayModeExtension = NULL;
-	if( !display_mode_ext )
-		return;
-	if ((fxDisplayModeExtension = (FX_DISPLAY_MODE_EXT)
-		wglGetProcAddress((LPCSTR) FX_DISPLAY_MODE_EXT_STRING)) == NULL)
-	{
-		Sys_Error ("GetProcAddress for gl3DfxDisplayModeExt failed");
-		return;
-	}
-}
-
-void CheckSetPaletteExtension( void )
-{
-	char *tmp;
-	qboolean set_palette_ext = false;
-	char *search;
-
-	fxSetPaletteExtension = NULL;
-	
-	search = NULL;
-	if (is_3dfx) search = FX_SET_PALETTE_EXT_STRING;
-	if (is_PowerVR) search = VR_SET_PALETTE_EXT_STRING;
-	if (!search) return;
-
-
-	tmp = ( unsigned char * )glGetString( GL_EXTENSIONS );
-	while( *tmp )
-	{
-		if (strncmp((const char*)tmp, search, strlen(search)) == 0)
-		{
-			Con_Printf("Using palettized textures!\n");
-			set_palette_ext = TRUE;
-		}
-		tmp++;
-	}
-
-	if( !set_palette_ext )
-		return;
-	if ((fxSetPaletteExtension = (FX_SET_PALETTE_EXT)
-		wglGetProcAddress((LPCSTR) search)) == NULL)
-	{
-		Sys_Error ("GetProcAddress for gl3DfxSetPaletteEXT failed");
-		return;
-	}
-}
-
-/*
-void Check3DfxMarkPaletteTextureExtension( void )
-{
-	char *tmp;
-	qboolean found_ext = false;
-
-	tmp = ( unsigned char * )glGetString( GL_EXTENSIONS );
-	while( *tmp )
-	{
-		if (strncmp((const char*)tmp, FX_SET_PALETTE_EXT_STRING, strlen(FX_SET_PALETTE_EXT_STRING)) == 0)
-			found_ext = TRUE;
-		tmp++;
-	}
-
-	fxMarkPalTextureExtension = NULL;
-	if( !found_ext )
-		return;
-	if ((fxMarkPalTextureExtension = (FX_MARK_PAL_TEXTURE_EXT)
-		wglGetProcAddress((LPCSTR) FX_MARK_PAL_TEXTURE_EXT_STRING)) == NULL)
-	{
-		Sys_Error ("GetProcAddress for fxMarkPalTextureExtension failed");
-		return;
-	}
-}
-*/
-
-void CheckTextureExtensions (void)
-{
-	char		*tmp;
-	qboolean	texture_ext;
-	HINSTANCE	hInstGL;
-
-	texture_ext = FALSE;
-	/* check for texture extension */
-	tmp = (unsigned char *)glGetString(GL_EXTENSIONS);
-	while (*tmp)
-	{
-		if (strncmp((const char*)tmp, TEXTURE_EXT_STRING, strlen(TEXTURE_EXT_STRING)) == 0)
-			texture_ext = TRUE;
-		tmp++;
-	}
-
-	if (!texture_ext || COM_CheckParm ("-gl11") )
-	{
-		hInstGL = LoadLibrary("opengl32.dll");
-		
-		if (hInstGL == NULL)
-			Sys_Error ("Couldn't load opengl32.dll\n");
-
-		bindTexFunc = (void *)GetProcAddress(hInstGL,"glBindTexture");
-
-		if (!bindTexFunc)
-			Sys_Error ("No texture objects!");
-		return;
-	}
-
-/* load library and get procedure adresses for texture extension API */
-	if ((bindTexFunc = (BINDTEXFUNCPTR)
-		wglGetProcAddress((LPCSTR) "glBindTextureEXT")) == NULL)
-	{
-		Sys_Error ("GetProcAddress for BindTextureEXT failed");
-		return;
-	}
-}
-
-void CheckArrayExtensions (void)
-{
-	char		*tmp;
-
-	/* check for texture extension */
-	tmp = (unsigned char *)glGetString(GL_EXTENSIONS);
-	while (*tmp)
-	{
-		if (strncmp((const char*)tmp, "GL_EXT_vertex_array", strlen("GL_EXT_vertex_array")) == 0)
-		{
-			if (
-((glArrayElementEXT = wglGetProcAddress("glArrayElementEXT")) == NULL) ||
-((glColorPointerEXT = wglGetProcAddress("glColorPointerEXT")) == NULL) ||
-((glTexCoordPointerEXT = wglGetProcAddress("glTexCoordPointerEXT")) == NULL) ||
-((glVertexPointerEXT = wglGetProcAddress("glVertexPointerEXT")) == NULL) )
-			{
-				Sys_Error ("GetProcAddress for vertex extension failed");
-				return;
-			}
-			return;
-		}
-		tmp++;
-	}
-
-	Sys_Error ("Vertex array extension not present");
-}
-
 //int		texture_mode = GL_NEAREST;
 //int		texture_mode = GL_NEAREST_MIPMAP_NEAREST;
 //int		texture_mode = GL_NEAREST_MIPMAP_LINEAR;
-int		texture_mode = GL_LINEAR;
+int		texture_mode = 0;
 //int		texture_mode = GL_LINEAR_MIPMAP_NEAREST;
 //int		texture_mode = GL_LINEAR_MIPMAP_LINEAR;
 
 int		texture_extension_number = 1;
-
-/*
-===============
-GL_Init
-===============
-*/
-void GL_Init (void)
-{
-	gl_vendor = glGetString (GL_VENDOR);
-	Con_Printf ("GL_VENDOR: %s\n", gl_vendor);
-	gl_renderer = glGetString (GL_RENDERER);
-	Con_Printf ("GL_RENDERER: %s\n", gl_renderer);
-
-	gl_version = glGetString (GL_VERSION);
-	Con_Printf ("GL_VERSION: %s\n", gl_version);
-	gl_extensions = glGetString (GL_EXTENSIONS);
-	Con_Printf ("GL_EXTENSIONS: %s\n", gl_extensions);
-
-	if (!Q_strncasecmp ((char *)gl_renderer, "3dfx",4))
-	{
-		is_3dfx = true;
-	}
-
-	if (!Q_strncasecmp ((char *)gl_renderer, "PowerVR PCX1",12) ||
-		!Q_strncasecmp ((char *)gl_renderer, "PowerVR PCX2",12))
-	{
-		is_PowerVR = true;
-	}
-
-	CheckTextureExtensions ();
-
-    fxDisplayModeExtension = NULL;
-	fxSetPaletteExtension = NULL;
-	//fxMarkPalTextureExtension = NULL;
-	Check3DfxDisplayModeExtension();
-	CheckSetPaletteExtension();
-	//Check3DfxMarkPaletteTextureExtension();	
-
-	glClearColor (1,0,0,0);
-	glCullFace(GL_FRONT);
-	glEnable(GL_TEXTURE_2D);
-
-	glEnable(GL_ALPHA_TEST);
-	glAlphaFunc(GL_GREATER, 0.666);
-
-	glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
-	glShadeModel (GL_FLAT);
-
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-//	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
-#if 0
-	CheckArrayExtensions ();
-
-	glEnable (GL_VERTEX_ARRAY_EXT);
-	glEnable (GL_TEXTURE_COORD_ARRAY_EXT);
-	glVertexPointerEXT (3, GL_FLOAT, 0, 0, &glv.x);
-	glTexCoordPointerEXT (2, GL_FLOAT, 0, 0, &glv.s);
-	glColorPointerEXT (3, GL_FLOAT, 0, 0, &glv.r);
-#endif
-}
-
-/*
-=================
-GL_BeginRendering
-
-=================
-*/
-void GL_BeginRendering (int *x, int *y, int *width, int *height)
-{
-	extern cvar_t gl_clear;
-
-	*x = *y = 0;
-	*width = WindowRect.right - WindowRect.left;
-	*height = WindowRect.bottom - WindowRect.top;
-
-//    if (!wglMakeCurrent( maindc, baseRC ))
-//		Sys_Error ("wglMakeCurrent failed");
-
-//	glViewport (*x, *y, *width, *height);
-}
-
-
-void GL_EndRendering (void)
-{
-	if (!scr_skipupdate)
-		SwapBuffers(maindc);
-
-// handle the mouse state when windowed if that's changed
-	if (modestate == MS_WINDOWED)
-	{
-		if ((int)_windowed_mouse.value != windowed_mouse)
-		{
-			if (_windowed_mouse.value)
-			{
-				IN_ActivateMouse ();
-				IN_HideMouse ();
-			}
-			else
-			{
-				IN_DeactivateMouse ();
-				IN_ShowMouse ();
-			}
-
-			windowed_mouse = (int)_windowed_mouse.value;
-		}
-	}
-}
-
 
 int ColorIndex[16] =
 {
@@ -847,23 +556,6 @@ void	VID_CreateInversePalette( unsigned char *palette )
 #endif
 }
 
-void VID_Download3DfxPalette( void )
-{
-	unsigned long fxPalette[256];
-	int i;
-
-	for( i = 0; i < 256; i++ )
-	{
-		fxPalette[i] = 0xff000000 | 
-			( (  d_8to24table[i] & 0x000000ff ) << 16 ) |
-			( (  d_8to24table[i] & 0x0000ff00 ) ) |
-			( (  d_8to24table[i] & 0x00ff0000 ) >> 16 );
-
-//		fxPalette[i] = i<<16; // 0x00rrggbb
-	}
-	if( fxSetPaletteExtension )
-		fxSetPaletteExtension( fxPalette );
-}
 
 void VID_SetPalette (unsigned char *palette)
 {
@@ -897,8 +589,8 @@ void VID_SetPalette (unsigned char *palette)
 
 	d_8to24table[255] &= 0xffffff;	// 255 is transparent
 
-	if( is_3dfx || is_PowerVR )
-		VID_Download3DfxPalette();
+//	if( is_3dfx || is_PowerVR )
+//		VID_Download3DfxPalette();
 
 	pal = palette;
 	table = d_8to24TranslucentTable;
@@ -962,8 +654,8 @@ void	VID_Shutdown (void)
 		if (modestate == MS_FULLDIB)
 			ChangeDisplaySettings (NULL, 0);
 
-		if (maindc && dibwindow)
-			ReleaseDC (dibwindow, maindc);
+		//if (maindc && dibwindow)
+		//	ReleaseDC (dibwindow, maindc);
 
 		AppActivate(false, false);
 	}
@@ -1408,16 +1100,16 @@ void VID_DescribeMode_f (void)
 
 void VID_Switch_f (void)
 {
-	int newmode;
-
-	newmode = atoi (Cmd_Argv(1));
-	if( !fxDisplayModeExtension )
-		return;
-
-//	fxDisplayModeExtension( newmode );
-	fxDisplayModeExtension( 0 );
-	Sleep( 2 );
-	fxDisplayModeExtension( 1 );
+//	int newmode;
+//
+//	newmode = atoi (Cmd_Argv(1));
+//	if( !fxDisplayModeExtension )
+//		return;
+//
+////	fxDisplayModeExtension( newmode );
+//	fxDisplayModeExtension( 0 );
+//	Sleep( 2 );
+//	fxDisplayModeExtension( 1 );
 }
 
 
@@ -1859,16 +1551,7 @@ void	VID_Init (unsigned char *palette)
 
 	VID_SetMode (vid_default, palette);
 
-    maindc = GetDC(mainwindow);
-	bSetupPixelFormat(maindc);
-
-    baseRC = wglCreateContext( maindc );
-	if (!baseRC)
-		Sys_Error ("wglCreateContect failed");
-    if (!wglMakeCurrent( maindc, baseRC ))
-		Sys_Error ("wglMakeCurrent failed");
-
-	GL_Init ();
+	GL_Init (mainwindow, global_hInstance, width, height);
 
 	sprintf (gldir, "%s/glhexen", com_gamedir);
 	Sys_mkdir (gldir);
@@ -2009,9 +1692,9 @@ void D_ShowLoadingSize(void)
 	if (!vid_initialized)
 		return;
 
-	glDrawBuffer  (GL_FRONT);
+	//glDrawBuffer  (GL_FRONT);
 
 	SCR_DrawLoading();
 
-	glDrawBuffer  (GL_BACK);
+//	glDrawBuffer  (GL_BACK);
 }

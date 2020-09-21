@@ -10,33 +10,13 @@
   
 #include <windows.h>
 
-#include <gl\gl.h>
-#include <gl\glu.h>
-
 void GL_BeginRendering (int *x, int *y, int *width, int *height);
 void GL_EndRendering (void);
 
 
-// Function prototypes for the Texture Object Extension routines
-typedef GLboolean (APIENTRY *ARETEXRESFUNCPTR)(GLsizei, const GLuint *,
-                    const GLboolean *);
-typedef void (APIENTRY *BINDTEXFUNCPTR)(GLenum, GLuint);
-typedef void (APIENTRY *DELTEXFUNCPTR)(GLsizei, const GLuint *);
-typedef void (APIENTRY *GENTEXFUNCPTR)(GLsizei, GLuint *);
-typedef GLboolean (APIENTRY *ISTEXFUNCPTR)(GLuint);
-typedef void (APIENTRY *PRIORTEXFUNCPTR)(GLsizei, const GLuint *,
-                    const GLclampf *);
-typedef void (APIENTRY *TEXSUBIMAGEPTR)(int, int, int, int, int, int, int, int, void *);
-typedef int  (APIENTRY *FX_DISPLAY_MODE_EXT)(int);
-typedef void (APIENTRY *FX_SET_PALETTE_EXT)( unsigned long * );
-typedef void (APIENTRY *FX_MARK_PAL_TEXTURE_EXT)( void );
+void GL_Init(HWND hwnd, HINSTANCE hinstance, int width, int height);
 
-extern	BINDTEXFUNCPTR bindTexFunc;
-extern	DELTEXFUNCPTR delTexFunc;
-extern	TEXSUBIMAGEPTR TexSubImage2DFunc;
-extern  FX_DISPLAY_MODE_EXT fxDisplayModeExtension;
-extern  FX_SET_PALETTE_EXT fxSetPaletteExtension;
-extern  FX_MARK_PAL_TEXTURE_EXT fxMarkPalTextureExtension;
+extern RECT		WindowRect;
 
 #define INVERSE_PAL_R_BITS 6
 #define INVERSE_PAL_G_BITS 6
@@ -59,6 +39,8 @@ void GL_Upload8 (byte *data, int width, int height,  qboolean mipmap, qboolean a
 int GL_LoadTexture (char *identifier, int width, int height, byte *data, int mipmap, int alpha, int mode);
 int GL_LoadTransTexture (char *identifier, int width, int height, byte *data, qboolean mipmap, byte Alpha);
 int GL_FindTexture (char *identifier);
+
+extern int		texture_extension_number;
 
 typedef struct
 {
