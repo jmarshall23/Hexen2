@@ -462,14 +462,17 @@ void Sys_Printf (char *fmt, ...)
 	char		text[1024];
 	DWORD		dummy;
 	
-	if (isDedicated)
+	//if (isDedicated)
 	{
 		va_start (argptr,fmt);
 		vsprintf (text, fmt, argptr);
 		va_end (argptr);
 
-		WriteFile(houtput, text, strlen (text), &dummy, NULL);	
+		//WriteFile(houtput, text, strlen (text), &dummy, NULL);	
+		OutputDebugStringA(text);
 	}
+
+	
 }
 
 void Sys_Quit (void)

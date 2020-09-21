@@ -24,15 +24,6 @@ GL_Init
 */
 void GL_Init(HWND hwnd, HINSTANCE hinstance, int width, int height)
 {
-	gl_vendor = "Unknown";
-	gl_renderer = "Direct3D 12";
-	Con_Printf("GL_RENDERER: %s\n", gl_renderer);
-
-	gl_version = "DX12";
-	Con_Printf("GL_VERSION: %s\n", gl_version);
-	gl_extensions = "";
-	Con_Printf("GL_EXTENSIONS: %s\n", gl_extensions);
-
 	UINT dxgiFactoryFlags = 0;
 
 #if defined(_DEBUG)
@@ -128,6 +119,20 @@ void GL_Init(HWND hwnd, HINSTANCE hinstance, int width, int height)
 		&options5, sizeof(options5)));
 	if (options5.RaytracingTier < D3D12_RAYTRACING_TIER_1_0)
 		throw std::exception();
+
+	DXGI_ADAPTER_DESC adapterDesc;
+	hardwareAdapter->GetDesc(&adapterDesc);
+
+	sprintf(gl_vendor, "%ws", adapterDesc.Description);
+	Con_Printf("GL_GPU: %s\n", gl_vendor);
+
+	gl_renderer = "Direct3D 12";
+	Con_Printf("GL_RENDERER: %s\n", gl_renderer);
+
+	gl_version = "DX12";
+	Con_Printf("GL_VERSION: %s\n", gl_version);
+	gl_extensions = "";
+	Con_Printf("GL_EXTENSIONS: %s\n", gl_extensions);
 }
 
 

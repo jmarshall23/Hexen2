@@ -46,7 +46,7 @@ lmode_t	lowresmodes[] = {
 	{512, 384},
 };
 
-const char *gl_vendor;
+char gl_vendor[512];
 const char *gl_renderer;
 const char *gl_version;
 const char *gl_extensions;
@@ -64,6 +64,8 @@ qboolean	vid_initialized = false;
 static qboolean	windowed, leavecurrentmode;
 static int		windowed_mouse;
 static HICON	hIcon;
+
+int g_width, g_height;
 
 unsigned char inverse_pal[(1<<INVERSE_PAL_TOTAL_BITS)+1];
 
@@ -198,8 +200,8 @@ qboolean VID_SetWindowedMode (int modenum)
 	rect = WindowRect;
 	AdjustWindowRectEx(&rect, WindowStyle, FALSE, 0);
 
-	width = rect.right - rect.left;
-	height = rect.bottom - rect.top;
+	g_width = width = rect.right - rect.left;
+	g_height = height = rect.bottom - rect.top;
 
 	// Create the DIB window
 	dibwindow = CreateWindowEx (
@@ -1551,7 +1553,7 @@ void	VID_Init (unsigned char *palette)
 
 	VID_SetMode (vid_default, palette);
 
-	GL_Init (mainwindow, global_hInstance, width, height);
+	GL_Init (mainwindow, global_hInstance, g_width, g_height);
 
 	sprintf (gldir, "%s/glhexen", com_gamedir);
 	Sys_mkdir (gldir);

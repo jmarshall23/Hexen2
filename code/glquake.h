@@ -265,7 +265,7 @@ extern	mplane_t	*mirror_plane;
 
 extern	float	r_world_matrix[16];
 
-extern	const char *gl_vendor;
+extern	char gl_vendor[512];
 extern	const char *gl_renderer;
 extern	const char *gl_version;
 extern	const char *gl_extensions;
