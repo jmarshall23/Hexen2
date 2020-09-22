@@ -96,6 +96,59 @@ extern struct hostent FAR * (PASCAL FAR *pgethostbyname)(const char FAR * name);
 extern struct hostent FAR * (PASCAL FAR *pgethostbyaddr)(const char FAR * addr,int len, int type);
 extern int (PASCAL FAR *pgetsockname)(SOCKET s, struct sockaddr FAR *name, int FAR * namelen);
 
+inline void vectoangles(vec3_t value1, vec3_t angles) {
+	float	forward;
+	float	yaw, pitch;
+
+	if (value1[1] == 0 && value1[0] == 0) {
+		yaw = 0;
+		if (value1[2] > 0) {
+			pitch = 90;
+		}
+		else {
+			pitch = 270;
+		}
+	}
+	else {
+		if (value1[0]) {
+			yaw = (atan2(value1[1], value1[0]) * 180 / M_PI);
+		}
+		else if (value1[1] > 0) {
+			yaw = 90;
+		}
+		else {
+			yaw = 270;
+		}
+		if (yaw < 0) {
+			yaw += 360;
+		}
+
+		forward = sqrt(value1[0] * value1[0] + value1[1] * value1[1]);
+		pitch = (atan2(value1[2], forward) * 180 / M_PI);
+		if (pitch < 0) {
+			pitch += 360;
+		}
+	}
+
+	angles[PITCH] = -pitch;
+	angles[YAW] = yaw;
+	angles[ROLL] = 0;
+}
+
+
+/*
+=================
+AnglesToAxis
+=================
+*/
+inline void AnglesToAxis(vec3_t angles, vec3_t axis[3]) {
+	vec3_t	right;
+
+	// angle vectors returns "right" instead of "y axis"
+	AngleVectors(angles, axis[0], right, axis[2]);
+	VectorSubtract(vec3_origin, right, axis[1]);
+}
+
 /*
  * $Log: /H3/game/WINQUAKE.H $
  * 

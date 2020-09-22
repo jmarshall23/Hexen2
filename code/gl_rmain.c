@@ -1391,7 +1391,7 @@ void R_RenderScene ()
 
 	R_DrawWorld ();		// adds static entities to the list
 
-	GL_Render(r_refdef.vieworg[0], r_refdef.vieworg[1], r_refdef.vieworg[2]);
+	GL_Render(r_refdef.vieworg[0], r_refdef.vieworg[1], r_refdef.vieworg[2], r_refdef.viewangles);
 
 	S_ExtraUpdate ();	// don't let sound get messed up if going slow
 	

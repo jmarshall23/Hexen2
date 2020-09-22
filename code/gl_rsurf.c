@@ -1117,6 +1117,7 @@ int AllocBlock (int w, int h, int *x, int *y)
 
 
 mvertex_t	*r_pcurrentvertbase;
+medge_t*	r_pcurrentedges;
 model_t		*currentmodel;
 
 int	nColinElim;

@@ -85,41 +85,26 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 		for (p = fa->polys; p; p = p->next) {
 			for (int d = 0; d < p->numverts; d++) {
 				dxrVertex_t v;
-
+		
 				v.xyz[0] = p->verts[d][0];
 				v.xyz[1] = p->verts[d][1];
 				v.xyz[2] = p->verts[d][2];
 				v.st[0] = p->verts[d][0];
 				v.st[1] = p->verts[d][1];
-
+		
 				mesh->meshVertexes.push_back(v);
 				surf.numVertexes++;
 			}
 		}
 
-		//surf.numIndexes = ((surf.numVertexes - 1) * 3) / 2; //(fa->numedges - 2) * 3;
-		surf.startIndex = mesh->meshIndexes.size();
 		surf.numIndexes = 0;
-		//mesh->meshIndexes.resize(mesh->meshIndexes.size() + surf.numIndexes);
-
-		int tristep = 1;
-#define MAX_MESH_INDEXES 2556
-		static int meshIndexes[MAX_MESH_INDEXES];
-
-		for (int d = 1; d < surf.numVertexes - 1; d++)
+		surf.startIndex = mesh->meshIndexes.size();
+		for (int d = 0; d < surf.numVertexes; d++)
 		{
-			meshIndexes[surf.startIndex + (tristep - 1)] = surf.startIndex + 0;
-			meshIndexes[surf.startIndex + (tristep)] = surf.startIndex + d;
-			meshIndexes[surf.startIndex + (tristep + 1)] = surf.startIndex + d + 1;
-			tristep += 3;
-			surf.numIndexes += 3;
-			if (surf.numIndexes >= MAX_MESH_INDEXES)
-				Sys_Error("MAX_MESH_INDEXES");
-		}
-
-		for (int d = 0; d < surf.numIndexes; d++)
-		{
-			mesh->meshIndexes.push_back(meshIndexes[d]);
+			mesh->meshIndexes.push_back(surf.startVertex + 0);
+			mesh->meshIndexes.push_back(surf.startVertex + d + 1);
+			mesh->meshIndexes.push_back(surf.startVertex + d);
+			surf.numIndexes+=3;
 		}
 
 		mesh->meshSurfaces.push_back(surf);

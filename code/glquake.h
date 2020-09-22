@@ -278,9 +278,23 @@ extern byte *playerTranslation;
 
 void BuildSurfaceDisplayList(msurface_t* fa);
 void GL_FinishDXRLoading(void);
-void GL_Render(float x, float y, float z);
+void GL_Render(float x, float y, float z, float *viewAngles);
 
 extern int g_width, g_height;
+
+
+extern model_t* currentmodel;
+extern mvertex_t* r_pcurrentvertbase;
+extern medge_t* r_pcurrentedges;
+extern int* r_currentpsurfedges;
+
+void mult_matrix_vector(float* p, const float* a, const float* b);
+void mult_matrix_matrix(float* p, const float* a, const float* b);
+void inverse(const float* m, float* inv);
+void create_view_matrix(float* matrix, float* vieworg, float* viewangles);
+void create_orthographic_matrix(float matrix[16], float xmin, float xmax, float ymin, float ymax, float znear, float zfar);
+void create_projection_matrix(float matrix[16], float znear, float zfar, float fov_x, float fov_y);
+
 
 /*
  * $Log: /H2 Mission Pack/glquake.h $

@@ -30,9 +30,7 @@ int		mod_numknown;
 static vec3_t	mins,maxs;
 
 int entity_file_size;
-
-extern model_t* currentmodel;
-extern mvertex_t* r_pcurrentvertbase;
+int *r_currentpsurfedges;
 
 /*
 ===============
@@ -1262,7 +1260,8 @@ void Mod_LoadBrushModel (model_t *mod, void *buffer)
 	}
 	currentmodel = mod;
 	r_pcurrentvertbase = mod->vertexes;
-
+	r_pcurrentedges = mod->edges;
+	r_currentpsurfedges = mod->surfedges;
 	mod->dxrModel = GL_LoadDXRMesh(mod->surfaces, mod->numsurfaces);
 
 	GL_FinishDXRLoading(); // todo move me!

@@ -29,6 +29,9 @@
     <Filter Include="Source Files\libs">
       <UniqueIdentifier>{0e1ff46b-cc2e-47ed-9ddb-3bfd0aafb2ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\math">
+      <UniqueIdentifier>{82cfa309-c5d9-466e-a1d6-3958bc1996db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cd_win.c">
@@ -228,6 +231,9 @@
     </ClCompile>
     <ClCompile Include="d3d12\d3d12_raytrace_mesh.cpp">
       <Filter>Source Files\d3d12</Filter>
+    </ClCompile>
+    <ClCompile Include="math\matrix.c">
+      <Filter>Source Files\math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -434,6 +440,9 @@
     </ClInclude>
     <ClInclude Include="d3d12\DXSampleHelper.h">
       <Filter>Source Files\d3d12</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vectormath.h">
+      <Filter>Source Files\math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

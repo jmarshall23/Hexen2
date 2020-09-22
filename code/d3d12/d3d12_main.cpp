@@ -7,6 +7,7 @@
 #include "nv_helpers_dx12/BottomLevelASGenerator.h"
 #include "nv_helpers_dx12/TopLevelASGenerator.h"
 #include "nv_helpers_dx12/ShaderBindingTableGenerator.h"
+#include "../math/vectormath.h"
 
 int m_frameIndex = 0;
 
@@ -576,7 +577,32 @@ void GL_FinishDXRLoading(void)
 	}
 }
 
-void GL_Render(float x, float y, float z)
+void GL_CalcFov(float base_fov, float& fov_x, float& fov_y) {
+	float	x;
+	float	y;
+	float	ratio_x;
+	float	ratio_y;
+
+	// first, calculate the vertical fov based on a 640x480 view
+	x = 640.0f / tan(base_fov / 360.0f * M_PI);
+	y = atan2(480.0f, x);
+	fov_y = y * 360.0f / M_PI;
+
+	// 16:9
+	ratio_x = 16.0f;
+	ratio_y = 9.0f;
+
+	y = ratio_y / tan(fov_y / 360.0f * M_PI);
+	fov_x = atan2(ratio_x, y) * 360.0f / M_PI;
+
+	if (fov_x < base_fov) {
+		fov_x = base_fov;
+		x = ratio_x / tan(fov_x / 360.0f * M_PI);
+		fov_y = atan2(ratio_y, x) * 360.0f / M_PI;
+	}	
+}
+
+void GL_Render(float x, float y, float z, float* viewAngles)
 {
 	std::vector<DirectX::XMMATRIX> matrices(4);
 
@@ -584,16 +610,21 @@ void GL_Render(float x, float y, float z)
 	// interactions The lookat and perspective matrices used for rasterization are
 	// defined to transform world-space vertices into a [0,1]x[0,1]x[0,1] camera
 	// space
-	DirectX::XMVECTOR Eye = DirectX::XMVectorSet(x, y, z, 0.0f);
-	DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
-	DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-	matrices[0] = DirectX::XMMatrixLookAtRH(Eye, At, Up);
+	//DirectX::XMVECTOR Eye = DirectX::XMVectorSet(x, y, z, 0.0f);
+	//DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+	//DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+	//matrices[0] = DirectX::XMMatrixLookAtRH(Eye, At, Up);
+	
+	float vieworg[3] = { x, y, z };
+	create_view_matrix((float*)&matrices[0], vieworg, viewAngles);
 
-
-	float m_aspectRatio = g_width / g_height;
-	float fovAngleY = 45.0f * DirectX::XM_PI / 180.0f;
-	matrices[1] =
-		DirectX::XMMatrixPerspectiveFovRH(fovAngleY, m_aspectRatio, 0.1f, 1000.0f);
+	//float m_aspectRatio = g_width / g_height;
+	//float fovAngleY = 45.0f * DirectX::XM_PI / 180.0f;
+	//matrices[1] =
+	//	DirectX::XMMatrixPerspectiveFovRH(fovAngleY, m_aspectRatio, 0.1f, 1000.0f);
+	float fov_x, fov_y;
+	GL_CalcFov(60.0f, fov_x, fov_y);
+	create_projection_matrix((float *)&matrices[1], 0.1, 1000.0f, fov_x, fov_y);
 
 	// Raytracing has to do the contrary of rasterization: rays are defined in
 	// camera space, and are transformed into world space. To do this, we need to

@@ -163,6 +163,7 @@
     <ClCompile Include="in_win.c" />
     <ClCompile Include="keys.c" />
     <ClCompile Include="mathlib.c" />
+    <ClCompile Include="math\matrix.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="midi.c" />
     <ClCompile Include="mstrconv.c" />
@@ -226,6 +227,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Keys.h" />
     <ClInclude Include="Mathlib.h" />
+    <ClInclude Include="math\vectormath.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="midi.h" />
     <ClInclude Include="midstuff.h" />
