@@ -52,6 +52,7 @@ inline void GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAdapte
 struct dxrVertex_t {
 	vec3_t xyz;
 	vec2_t st;
+	vec3_t normal;
 };
 
 struct dxrSurface_t {
@@ -75,10 +76,14 @@ struct dxrMesh_t {
 	std::vector<dxrVertex_t> meshTriVertexes;
 	std::vector<int> meshIndexes;
 	std::vector<dxrSurface_t> meshSurfaces;
-	ComPtr<ID3D12Resource> m_vertexBuffer;
-	D3D12_VERTEX_BUFFER_VIEW m_vertexBufferView;
+
+	int startSceneVertex;
+	int numSceneVertexes;
+
 	AccelerationStructureBuffers buffers;
 };
+
+void GL_FinishVertexBufferAllocation(void);
 
 const int FrameCount = 3;
 
@@ -95,5 +100,7 @@ extern ComPtr<ID3D12GraphicsCommandList4> m_commandList;
 extern HANDLE m_fenceEvent;
 extern ComPtr<ID3D12Fence> m_fence;
 extern UINT64 m_fenceValue;
+
+extern ComPtr<ID3D12Resource> m_vertexBuffer;
 
 void GL_CreateTopLevelAccelerationStructs(void);

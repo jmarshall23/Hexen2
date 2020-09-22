@@ -101,7 +101,7 @@ void GL_InitRaytracing(int width, int height) {
 
 	{
 		nv_helpers_dx12::RootSignatureGenerator rsc;
-		rsc.AddRootParameter(D3D12_ROOT_PARAMETER_TYPE_SRV);
+		rsc.AddRootParameter(D3D12_ROOT_PARAMETER_TYPE_SRV, 0);
 		m_hitSignature = rsc.Generate(m_device.Get(), true);
 	}
 
@@ -490,6 +490,8 @@ void GL_Bind(int texnum)
 
 void GL_FinishDXRLoading(void) 
 {
+	GL_FinishVertexBufferAllocation();
+
 	GL_CreateTopLevelAccelerationStructs();
 
 	// Create a SRV/UAV/CBV descriptor heap. We need 2 entries - 1 UAV for the
@@ -557,7 +559,7 @@ void GL_FinishDXRLoading(void)
 		m_sbtHelper.AddMissProgram(L"Miss", {});
 
 		// Adding the triangle hit shader
-		m_sbtHelper.AddHitGroup(L"HitGroup", {});
+		m_sbtHelper.AddHitGroup(L"HitGroup", { (void*)m_vertexBuffer->GetGPUVirtualAddress() });
 
 		// Compute the size of the SBT given the number of shaders and their
   // parameters

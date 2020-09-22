@@ -11,6 +11,10 @@ std::vector<dxrMesh_t *> dxrMeshList;
 
 AccelerationStructureBuffers m_topLevelASBuffers;
 
+ComPtr<ID3D12Resource> m_vertexBuffer;
+D3D12_VERTEX_BUFFER_VIEW m_vertexBufferView;
+std::vector<dxrVertex_t> sceneVertexes;
+
 void GL_CreateTopLevelAccelerationStructs(void) {
 	DirectX::XMMATRIX matrix = DirectX::XMMatrixIdentity();
 
@@ -73,6 +77,8 @@ void GL_CreateTopLevelAccelerationStructs(void) {
 void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int numSurfaces) {
 	glpoly_t* p;
 
+	mesh->startSceneVertex = sceneVertexes.size();
+
 	for (int i = 0; i < numSurfaces; i++)
 	{
 		msurface_t* fa = &surfaces[i];
@@ -122,13 +128,49 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 				int idx = mesh->meshIndexes[indexId];
 
 				mesh->meshTriVertexes.push_back(mesh->meshVertexes[idx]);
+				sceneVertexes.push_back(mesh->meshVertexes[idx]);
+				mesh->numSceneVertexes++;
 			}
 		}
 	}
 
+	// Calculate the normals
+	{
+		for(int i = 0; i < mesh->meshTriVertexes.size(); i+=3)
+		{
+			float* v0 = &mesh->meshTriVertexes[i + 0].xyz[0];
+			float* v1 = &mesh->meshTriVertexes[i + 1].xyz[0];
+			float* v2 = &mesh->meshTriVertexes[i + 2].xyz[0];
+
+			vec3_t e1, e2, normal;
+			VectorSubtract(v1, v0, e1);
+			VectorSubtract(v2, v0, e2);
+			CrossProduct(e1, e2, normal);
+			VectorNormalize(normal);
+
+			memcpy(mesh->meshTriVertexes[i + 0].normal, normal, sizeof(float) * 3);
+			memcpy(mesh->meshTriVertexes[i + 1].normal, normal, sizeof(float) * 3);
+			memcpy(mesh->meshTriVertexes[i + 2].normal, normal, sizeof(float) * 3);
+		}
+	}
+}
+
+void *GL_LoadDXRMesh(msurface_t *surfaces, int numSurfaces)  {
+	dxrMesh_t* mesh = new dxrMesh_t();
+
+	GL_LoadBottomLevelAccelStruct(mesh, surfaces, numSurfaces);
+
+	dxrMeshList.push_back(mesh);
+
+	return mesh;
+}
+
+void GL_FinishVertexBufferAllocation(void) {
+	ThrowIfFailed(m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get()));
+
 	// Create the vertex buffer.
 	{
-		const UINT vertexBufferSize = sizeof(dxrVertex_t) * mesh->meshTriVertexes.size();
+		const UINT vertexBufferSize = sizeof(dxrVertex_t) * sceneVertexes.size();
 
 		// Note: using upload heaps to transfer static data like vert buffers is not 
 		// recommended. Every time the GPU needs it, the upload heap will be marshalled 
@@ -140,60 +182,56 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 			&CD3DX12_RESOURCE_DESC::Buffer(vertexBufferSize),
 			D3D12_RESOURCE_STATE_GENERIC_READ,
 			nullptr,
-			IID_PPV_ARGS(&mesh->m_vertexBuffer)));
+			IID_PPV_ARGS(&m_vertexBuffer)));
 
 		// Copy the triangle data to the vertex buffer.
 		UINT8* pVertexDataBegin;
 		CD3DX12_RANGE readRange(0, 0);		// We do not intend to read from this resource on the CPU.
-		ThrowIfFailed(mesh->m_vertexBuffer->Map(0, &readRange, reinterpret_cast<void**>(&pVertexDataBegin)));
-		memcpy(pVertexDataBegin, &mesh->meshTriVertexes[0], sizeof(dxrVertex_t) * mesh->meshTriVertexes.size());
-		mesh->m_vertexBuffer->Unmap(0, nullptr);
+		ThrowIfFailed(m_vertexBuffer->Map(0, &readRange, reinterpret_cast<void**>(&pVertexDataBegin)));
+		memcpy(pVertexDataBegin, &sceneVertexes[0], sizeof(dxrVertex_t) * sceneVertexes.size());
+		m_vertexBuffer->Unmap(0, nullptr);
 
 		// Initialize the vertex buffer view.
-		mesh->m_vertexBufferView.BufferLocation = mesh->m_vertexBuffer->GetGPUVirtualAddress();
-		mesh->m_vertexBufferView.StrideInBytes = sizeof(dxrVertex_t);
-		mesh->m_vertexBufferView.SizeInBytes = vertexBufferSize;
+		m_vertexBufferView.BufferLocation = m_vertexBuffer->GetGPUVirtualAddress();
+		m_vertexBufferView.StrideInBytes = sizeof(dxrVertex_t);
+		m_vertexBufferView.SizeInBytes = vertexBufferSize;
 	}
 
+	for(int i = 0; i < dxrMeshList.size(); i++)
+	{
+		dxrMesh_t* mesh = dxrMeshList[i];
 
-	nv_helpers_dx12::BottomLevelASGenerator bottomLevelAS;
-	bottomLevelAS.AddVertexBuffer(mesh->m_vertexBuffer.Get(), 0, mesh->meshTriVertexes.size(), sizeof(dxrVertex_t), NULL, 0);
+		nv_helpers_dx12::BottomLevelASGenerator bottomLevelAS;
+		bottomLevelAS.AddVertexBuffer(m_vertexBuffer.Get(), mesh->startSceneVertex, mesh->numSceneVertexes, sizeof(dxrVertex_t), NULL, 0);
 
-	// Adding all vertex buffers and not transforming their position.
-	//for (const auto& buffer : vVertexBuffers) {
-	//	bottomLevelAS.AddVertexBuffer(buffer.first.Get(), 0, buffer.second,
-	//		sizeof(Vertex), 0, 0);
-	//}
+		// Adding all vertex buffers and not transforming their position.
+		//for (const auto& buffer : vVertexBuffers) {
+		//	bottomLevelAS.AddVertexBuffer(buffer.first.Get(), 0, buffer.second,
+		//		sizeof(Vertex), 0, 0);
+		//}
 
-	// The AS build requires some scratch space to store temporary information.
-	// The amount of scratch memory is dependent on the scene complexity.
-	UINT64 scratchSizeInBytes = 0;
-	// The final AS also needs to be stored in addition to the existing vertex
-	// buffers. It size is also dependent on the scene complexity.
-	UINT64 resultSizeInBytes = 0;
+		// The AS build requires some scratch space to store temporary information.
+		// The amount of scratch memory is dependent on the scene complexity.
+		UINT64 scratchSizeInBytes = 0;
+		// The final AS also needs to be stored in addition to the existing vertex
+		// buffers. It size is also dependent on the scene complexity.
+		UINT64 resultSizeInBytes = 0;
 
-	bottomLevelAS.ComputeASBufferSizes(m_device.Get(), false, &scratchSizeInBytes,
-		&resultSizeInBytes);
+		bottomLevelAS.ComputeASBufferSizes(m_device.Get(), false, &scratchSizeInBytes,
+			&resultSizeInBytes);
 
-	// Once the sizes are obtained, the application is responsible for allocating
-	// the necessary buffers. Since the entire generation will be done on the GPU,
-	// we can directly allocate those on the default heap	
-	mesh->buffers.pScratch = nv_helpers_dx12::CreateBuffer(m_device.Get(), scratchSizeInBytes, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON, nv_helpers_dx12::kDefaultHeapProps);
-	mesh->buffers.pResult = nv_helpers_dx12::CreateBuffer(m_device.Get(), resultSizeInBytes, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_RAYTRACING_ACCELERATION_STRUCTURE, nv_helpers_dx12::kDefaultHeapProps);
+		// Once the sizes are obtained, the application is responsible for allocating
+		// the necessary buffers. Since the entire generation will be done on the GPU,
+		// we can directly allocate those on the default heap	
+		mesh->buffers.pScratch = nv_helpers_dx12::CreateBuffer(m_device.Get(), scratchSizeInBytes, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_COMMON, nv_helpers_dx12::kDefaultHeapProps);
+		mesh->buffers.pResult = nv_helpers_dx12::CreateBuffer(m_device.Get(), resultSizeInBytes, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS, D3D12_RESOURCE_STATE_RAYTRACING_ACCELERATION_STRUCTURE, nv_helpers_dx12::kDefaultHeapProps);
 
-	// Build the acceleration structure. Note that this call integrates a barrier
-	// on the generated AS, so that it can be used to compute a top-level AS right
-	// after this method.
+		// Build the acceleration structure. Note that this call integrates a barrier
+		// on the generated AS, so that it can be used to compute a top-level AS right
+		// after this method.
 
-	bottomLevelAS.Generate(m_commandList.Get(), mesh->buffers.pScratch.Get(), mesh->buffers.pResult.Get(), false, nullptr);
-}
-
-void *GL_LoadDXRMesh(msurface_t *surfaces, int numSurfaces)  {
-	dxrMesh_t* mesh = new dxrMesh_t();
-
-	ThrowIfFailed(m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get()));
-
-	GL_LoadBottomLevelAccelStruct(mesh, surfaces, numSurfaces);
+		bottomLevelAS.Generate(m_commandList.Get(), mesh->buffers.pScratch.Get(), mesh->buffers.pResult.Get(), false, nullptr);
+	}
 
 	// Flush the command list and wait for it to finish
 	m_commandList->Close();
@@ -204,8 +242,4 @@ void *GL_LoadDXRMesh(msurface_t *surfaces, int numSurfaces)  {
 
 	m_fence->SetEventOnCompletion(m_fenceValue, m_fenceEvent);
 	WaitForSingleObject(m_fenceEvent, INFINITE);
-
-	dxrMeshList.push_back(mesh);
-
-	return mesh;
 }
