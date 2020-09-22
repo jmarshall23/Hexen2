@@ -99,7 +99,7 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 
 		surf.numIndexes = 0;
 		surf.startIndex = mesh->meshIndexes.size();
-		for (int d = 0; d < surf.numVertexes; d++)
+		for (int d = 0; d < surf.numVertexes - 1; d++)
 		{
 			mesh->meshIndexes.push_back(surf.startVertex + 0);
 			mesh->meshIndexes.push_back(surf.startVertex + d + 1);
@@ -121,7 +121,7 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 				int indexId = mesh->meshSurfaces[i].startIndex + d;
 				int idx = mesh->meshIndexes[indexId];
 
-				mesh->meshTriVertexes.push_back(mesh->meshVertexes[mesh->meshIndexes[idx]]);
+				mesh->meshTriVertexes.push_back(mesh->meshVertexes[idx]);
 			}
 		}
 	}
