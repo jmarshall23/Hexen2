@@ -86,6 +86,14 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 
 		BuildSurfaceDisplayList(fa);
 
+		//if (strstr(fa->texinfo->texture->name, "trigger"))	{
+		//	continue;
+		//}
+
+		if (fa->flags & SURF_DRAWSKY) {
+			continue;
+		}
+
 		surf.startVertex = mesh->meshVertexes.size();
 		surf.numVertexes = 0;
 		for (p = fa->polys; p; p = p->next) {
@@ -135,24 +143,24 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 	}
 
 	// Calculate the normals
-	{
-		for(int i = 0; i < mesh->meshTriVertexes.size(); i+=3)
-		{
-			float* v0 = &mesh->meshTriVertexes[i + 0].xyz[0];
-			float* v1 = &mesh->meshTriVertexes[i + 1].xyz[0];
-			float* v2 = &mesh->meshTriVertexes[i + 2].xyz[0];
-
-			vec3_t e1, e2, normal;
-			VectorSubtract(v1, v0, e1);
-			VectorSubtract(v2, v0, e2);
-			CrossProduct(e1, e2, normal);
-			VectorNormalize(normal);
-
-			memcpy(mesh->meshTriVertexes[i + 0].normal, normal, sizeof(float) * 3);
-			memcpy(mesh->meshTriVertexes[i + 1].normal, normal, sizeof(float) * 3);
-			memcpy(mesh->meshTriVertexes[i + 2].normal, normal, sizeof(float) * 3);
-		}
-	}
+	//{
+	//	for(int i = 0; i < mesh->meshTriVertexes.size(); i+=3)
+	//	{
+	//		float* v0 = &mesh->meshTriVertexes[i + 0].xyz[0];
+	//		float* v1 = &mesh->meshTriVertexes[i + 1].xyz[0];
+	//		float* v2 = &mesh->meshTriVertexes[i + 2].xyz[0];
+	//
+	//		vec3_t e1, e2, normal;
+	//		VectorSubtract(v1, v0, e1);
+	//		VectorSubtract(v2, v0, e2);
+	//		CrossProduct(e1, e2, normal);
+	//		VectorNormalize(normal);
+	//
+	//		memcpy(mesh->meshTriVertexes[i + 0].normal, normal, sizeof(float) * 3);
+	//		memcpy(mesh->meshTriVertexes[i + 1].normal, normal, sizeof(float) * 3);
+	//		memcpy(mesh->meshTriVertexes[i + 2].normal, normal, sizeof(float) * 3);
+	//	}
+	//}
 }
 
 void *GL_LoadDXRMesh(msurface_t *surfaces, int numSurfaces)  {
