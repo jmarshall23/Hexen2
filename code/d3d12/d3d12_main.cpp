@@ -492,7 +492,20 @@ void GL_FinishDXRLoading(void)
 {
 	GL_FinishVertexBufferAllocation();
 
-	GL_CreateTopLevelAccelerationStructs();
+	{
+	//	ThrowIfFailed(m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get()));
+		GL_CreateTopLevelAccelerationStructs();
+
+		// Flush the command list and wait for it to finish
+		//m_commandList->Close();
+		//ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
+		//m_commandQueue->ExecuteCommandLists(1, ppCommandLists);
+		//m_fenceValue++;
+		//m_commandQueue->Signal(m_fence.Get(), m_fenceValue);
+		//
+		//m_fence->SetEventOnCompletion(m_fenceValue, m_fenceEvent);
+		//WaitForSingleObject(m_fenceEvent, INFINITE);
+	}
 
 	// Create a SRV/UAV/CBV descriptor heap. We need 2 entries - 1 UAV for the
 	// raytracing output and 1 SRV for the TLAS
@@ -607,6 +620,9 @@ void GL_CalcFov(float base_fov, float& fov_x, float& fov_y) {
 void GL_Render(float x, float y, float z, float* viewAngles)
 {
 	std::vector<DirectX::XMMATRIX> matrices(4);
+
+	// Update the top level acceleration structs based on new scene data. 
+	//GL_CreateTopLevelAccelerationStructs();
 
 	// Initialize the view matrix, ideally this should be based on user
 	// interactions The lookat and perspective matrices used for rasterization are

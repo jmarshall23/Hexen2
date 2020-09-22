@@ -6,73 +6,12 @@
 #include "nv_helpers_dx12/TopLevelASGenerator.h"
 #include <vector>
 
-nv_helpers_dx12::TopLevelASGenerator m_topLevelASGenerator;
 std::vector<dxrMesh_t *> dxrMeshList;
 
-AccelerationStructureBuffers m_topLevelASBuffers;
 
 ComPtr<ID3D12Resource> m_vertexBuffer;
 D3D12_VERTEX_BUFFER_VIEW m_vertexBufferView;
 std::vector<dxrVertex_t> sceneVertexes;
-
-void GL_CreateTopLevelAccelerationStructs(void) {
-	DirectX::XMMATRIX matrix = DirectX::XMMatrixIdentity();
-
-	ThrowIfFailed(m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get()));
-
-	for (int i = 0; i < dxrMeshList.size(); i++)
-	{
-		m_topLevelASGenerator.AddInstance(dxrMeshList[i]->buffers.pResult.Get(), matrix, i, 0);
-	}
-
-	// As for the bottom-level AS, the building the AS requires some scratch space
-	// to store temporary data in addition to the actual AS. In the case of the
-	// top-level AS, the instance descriptors also need to be stored in GPU
-	// memory. This call outputs the memory requirements for each (scratch,
-	// results, instance descriptors) so that the application can allocate the
-	// corresponding memory
-	UINT64 scratchSize, resultSize, instanceDescsSize;
-
-	m_topLevelASGenerator.ComputeASBufferSizes(m_device.Get(), true, &scratchSize,
-		&resultSize, &instanceDescsSize);
-
-	// Create the scratch and result buffers. Since the build is all done on GPU,
-	// those can be allocated on the default heap
-	m_topLevelASBuffers.pScratch = nv_helpers_dx12::CreateBuffer(
-		m_device.Get(), scratchSize, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS,
-		D3D12_RESOURCE_STATE_UNORDERED_ACCESS,
-		nv_helpers_dx12::kDefaultHeapProps);
-	m_topLevelASBuffers.pResult = nv_helpers_dx12::CreateBuffer(
-		m_device.Get(), resultSize, D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS,
-		D3D12_RESOURCE_STATE_RAYTRACING_ACCELERATION_STRUCTURE,
-		nv_helpers_dx12::kDefaultHeapProps);
-
-	// The buffer describing the instances: ID, shader binding information,
-	// matrices ... Those will be copied into the buffer by the helper through
-	// mapping, so the buffer has to be allocated on the upload heap.
-	m_topLevelASBuffers.pInstanceDesc = nv_helpers_dx12::CreateBuffer(
-		m_device.Get(), instanceDescsSize, D3D12_RESOURCE_FLAG_NONE,
-		D3D12_RESOURCE_STATE_GENERIC_READ, nv_helpers_dx12::kUploadHeapProps);
-
-	// After all the buffers are allocated, or if only an update is required, we
-	// can build the acceleration structure. Note that in the case of the update
-	// we also pass the existing AS as the 'previous' AS, so that it can be
-	// refitted in place.
-	m_topLevelASGenerator.Generate(m_commandList.Get(),
-		m_topLevelASBuffers.pScratch.Get(),
-		m_topLevelASBuffers.pResult.Get(),
-		m_topLevelASBuffers.pInstanceDesc.Get());
-
-	// Flush the command list and wait for it to finish
-	m_commandList->Close();
-	ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
-	m_commandQueue->ExecuteCommandLists(1, ppCommandLists);
-	m_fenceValue++;
-	m_commandQueue->Signal(m_fence.Get(), m_fenceValue);
-
-	m_fence->SetEventOnCompletion(m_fenceValue, m_fenceEvent);
-	WaitForSingleObject(m_fenceEvent, INFINITE);
-}
 
 void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int numSurfaces) {
 	glpoly_t* p;
@@ -165,7 +104,9 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 
 void *GL_LoadDXRMesh(msurface_t *surfaces, int numSurfaces)  {
 	dxrMesh_t* mesh = new dxrMesh_t();
-
+	
+	mesh->meshId = dxrMeshList.size();
+	
 	GL_LoadBottomLevelAccelStruct(mesh, surfaces, numSurfaces);
 
 	dxrMeshList.push_back(mesh);
@@ -173,8 +114,55 @@ void *GL_LoadDXRMesh(msurface_t *surfaces, int numSurfaces)  {
 	return mesh;
 }
 
+void GL_AliasVertexToDxrVertex(trivertx_t inVert, dxrVertex_t &vertex) {
+	memset(&vertex, 0, sizeof(dxrVertex_t));
+	vertex.xyz[0] = inVert.v[0];
+	vertex.xyz[1] = inVert.v[1];
+	vertex.xyz[2] = inVert.v[2];
+}
+
+void *GL_LoadDXRAliasMesh(int numVertexes, trivertx_t* vertexes, int numTris, mtriangle_t* triangles) {
+	dxrMesh_t* mesh = new dxrMesh_t();
+	
+	mesh->meshId = dxrMeshList.size();
+	mesh->startSceneVertex = sceneVertexes.size();
+	mesh->numSceneVertexes = 0;
+	
+	// TODO: Use a index buffer here : )
+	for (int d = 0; d < numTris; d++)
+	{
+		{
+			dxrVertex_t v;
+			GL_AliasVertexToDxrVertex(vertexes[triangles[d].vertindex[0]], v);
+			mesh->meshTriVertexes.push_back(v);
+			sceneVertexes.push_back(v);
+			mesh->numSceneVertexes++;
+		}
+
+		{
+			dxrVertex_t v;
+			GL_AliasVertexToDxrVertex(vertexes[triangles[d].vertindex[1]], v);
+			mesh->meshTriVertexes.push_back(v);
+			sceneVertexes.push_back(v);
+			mesh->numSceneVertexes++;
+		}
+
+		{
+			dxrVertex_t v;
+			GL_AliasVertexToDxrVertex(vertexes[triangles[d].vertindex[2]], v);
+			mesh->meshTriVertexes.push_back(v);
+			sceneVertexes.push_back(v);
+			mesh->numSceneVertexes++;
+		}
+	}
+
+	dxrMeshList.push_back(mesh);
+
+	return mesh;
+}
+
 void GL_FinishVertexBufferAllocation(void) {
-	ThrowIfFailed(m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get()));
+//	ThrowIfFailed(m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get()));
 
 	// Create the vertex buffer.
 	{
@@ -210,7 +198,7 @@ void GL_FinishVertexBufferAllocation(void) {
 		dxrMesh_t* mesh = dxrMeshList[i];
 
 		nv_helpers_dx12::BottomLevelASGenerator bottomLevelAS;
-		bottomLevelAS.AddVertexBuffer(m_vertexBuffer.Get(), mesh->startSceneVertex, mesh->numSceneVertexes, sizeof(dxrVertex_t), NULL, 0);
+		bottomLevelAS.AddVertexBuffer(m_vertexBuffer.Get(), mesh->startSceneVertex * sizeof(dxrVertex_t), mesh->numSceneVertexes, sizeof(dxrVertex_t), NULL, 0);
 
 		// Adding all vertex buffers and not transforming their position.
 		//for (const auto& buffer : vVertexBuffers) {
@@ -242,12 +230,12 @@ void GL_FinishVertexBufferAllocation(void) {
 	}
 
 	// Flush the command list and wait for it to finish
-	m_commandList->Close();
-	ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
-	m_commandQueue->ExecuteCommandLists(1, ppCommandLists);
-	m_fenceValue++;
-	m_commandQueue->Signal(m_fence.Get(), m_fenceValue);
-
-	m_fence->SetEventOnCompletion(m_fenceValue, m_fenceEvent);
-	WaitForSingleObject(m_fenceEvent, INFINITE);
+	//m_commandList->Close();
+	//ID3D12CommandList* ppCommandLists[] = { m_commandList.Get() };
+	//m_commandQueue->ExecuteCommandLists(1, ppCommandLists);
+	//m_fenceValue++;
+	//m_commandQueue->Signal(m_fence.Get(), m_fenceValue);
+	//
+	//m_fence->SetEventOnCompletion(m_fenceValue, m_fenceEvent);
+	//WaitForSingleObject(m_fenceEvent, INFINITE);
 }

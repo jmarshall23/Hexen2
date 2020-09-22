@@ -1,6 +1,100 @@
 #include "../quakedef.h"
 #include "../WINQUAKE.H"
 
+void create_entity_matrix(float matrix[16], entity_t* e, qboolean enable_left_hand)
+{
+	vec3_t axis[3];
+	vec3_t origin;
+	origin[0] = e->origin[0]; // (1.f - e->backlerp)* e->origin[0] + e->backlerp * e->oldorigin[0];
+	origin[1] = e->origin[1]; // (1.f - e->backlerp)* e->origin[1] + e->backlerp * e->oldorigin[1];
+	origin[2] = e->origin[2]; // (1.f - e->backlerp)* e->origin[2] + e->backlerp * e->oldorigin[2];
+
+	AnglesToAxis(e->angles, axis);
+
+	aliashdr_t *paliashdr = (aliashdr_t*)Mod_Extradata(e->model);
+
+	float entScale = 1.0f; // (e->scale > 0.f) ? e->scale : 1.f;
+	vec3_t scales;
+	vec3_t translate;
+	float xyfact, zfact;
+
+	if (e->scale != 0 && e->scale != 100)
+	{
+		entScale = (float)e->scale / 100.0;
+		switch (e->drawflags & SCALE_TYPE_MASKIN)
+		{
+		case SCALE_TYPE_UNIFORM:
+			scales[0] = paliashdr->scale[0] * entScale;
+			scales[1] = paliashdr->scale[1] * entScale;
+			scales[2] = paliashdr->scale[2] * entScale;
+			xyfact = zfact = (entScale - 1.0) * 127.95;
+			break;
+		case SCALE_TYPE_XYONLY:
+			scales[0] = paliashdr->scale[0] * entScale;
+			scales[1] = paliashdr->scale[1] * entScale;
+			scales[2] = paliashdr->scale[2];
+			xyfact = (entScale - 1.0) * 127.95;
+			zfact = 1.0;
+			break;
+		case SCALE_TYPE_ZONLY:
+			scales[0] = paliashdr->scale[0];
+			scales[1] = paliashdr->scale[1];
+			scales[2] = paliashdr->scale[2] * entScale;
+			xyfact = 1.0;
+			zfact = (entScale - 1.0) * 127.95;
+			break;
+		}
+		switch (e->drawflags & SCALE_ORIGIN_MASKIN)
+		{
+		case SCALE_ORIGIN_CENTER:
+			translate[0] = paliashdr->scale_origin[0] - paliashdr->scale[0] * xyfact;
+			translate[1] = paliashdr->scale_origin[1] - paliashdr->scale[1] * xyfact;
+			translate[2] = paliashdr->scale_origin[2] - paliashdr->scale[2] * zfact;
+			break;
+		case SCALE_ORIGIN_BOTTOM:
+			translate[0] = paliashdr->scale_origin[0] - paliashdr->scale[0] * xyfact;
+			translate[1] = paliashdr->scale_origin[1] - paliashdr->scale[1] * xyfact;
+			translate[2] = paliashdr->scale_origin[2];
+			break;
+		case SCALE_ORIGIN_TOP:
+			translate[0] = paliashdr->scale_origin[0] - paliashdr->scale[0] * xyfact;
+			translate[1] = paliashdr->scale_origin[1] - paliashdr->scale[1] * xyfact;
+			translate[2] = paliashdr->scale_origin[2] - paliashdr->scale[2] * zfact * 2.0;
+			break;
+		}
+	}
+	else
+	{
+		scales[0] = paliashdr->scale[0];
+		scales[1] = paliashdr->scale[1];
+		scales[2] = paliashdr->scale[2];
+		translate[0] = paliashdr->scale_origin[0];
+		translate[1] = paliashdr->scale_origin[1];
+		translate[2] = paliashdr->scale_origin[2];
+	}
+
+	matrix[0] = axis[0][0] * scales[0];
+	matrix[4] = axis[1][0] * scales[1];
+	matrix[8] = axis[2][0] * scales[2];
+	matrix[12] = origin[0] + translate[0];
+
+	matrix[1] = axis[0][1] * scales[0];
+	matrix[5] = axis[1][1] * scales[1];
+	matrix[9] = axis[2][1] * scales[2];
+	matrix[13] = origin[1] + translate[1];
+
+	matrix[2] = axis[0][2] * scales[0];
+	matrix[6] = axis[1][2] * scales[1];
+	matrix[10] = axis[2][2] * scales[2];
+	matrix[14] = origin[2] + translate[2];
+
+	matrix[3] = 0.0f;
+	matrix[7] = 0.0f;
+	matrix[11] = 0.0f;
+	matrix[15] = 1.0f;
+}
+
+
 void create_projection_matrix(float matrix[16], float znear, float zfar, float fov_x, float fov_y)
 {
 	float xmin, xmax, ymin, ymax;

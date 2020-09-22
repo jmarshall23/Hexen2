@@ -72,6 +72,8 @@ struct AccelerationStructureBuffers
 };
 
 struct dxrMesh_t {
+	int meshId;
+
 	std::vector<dxrVertex_t> meshVertexes;
 	std::vector<dxrVertex_t> meshTriVertexes;
 	std::vector<int> meshIndexes;
@@ -103,4 +105,6 @@ extern UINT64 m_fenceValue;
 
 extern ComPtr<ID3D12Resource> m_vertexBuffer;
 
-void GL_CreateTopLevelAccelerationStructs(void);
+void GL_CreateTopLevelAccelerationStructs();
+
+extern std::vector<dxrMesh_t*> dxrMeshList;

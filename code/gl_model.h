@@ -417,6 +417,10 @@ typedef struct model_s
 
 	void*		dxrModel;
 
+	stvert_t	stverts[MAXALIASVERTS];
+	mtriangle_t	triangles[MAXALIASTRIS];
+	int	numTris;
+
 //
 // additional model data
 //

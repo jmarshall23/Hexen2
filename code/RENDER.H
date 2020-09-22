@@ -50,6 +50,8 @@ typedef struct entity_s
 											
 	int						dlightframe;	// dynamic lighting
 	int						dlightbits;
+
+	float					dxrTransform[16];
 	
 // FIXME: could turn these into a union
 	int						trivial_accept;

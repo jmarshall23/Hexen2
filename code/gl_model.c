@@ -1263,8 +1263,6 @@ void Mod_LoadBrushModel (model_t *mod, void *buffer)
 	r_pcurrentedges = mod->edges;
 	r_currentpsurfedges = mod->surfedges;
 	mod->dxrModel = GL_LoadDXRMesh(mod->surfaces, mod->numsurfaces);
-
-	GL_FinishDXRLoading(); // todo move me!
 }
 
 /*
@@ -1276,9 +1274,6 @@ ALIAS MODELS
 */
 
 aliashdr_t	*pheader;
-
-stvert_t	stverts[MAXALIASVERTS];
-mtriangle_t	triangles[MAXALIASTRIS];
 
 // a pose is a single set of vertexes.  a frame may be
 // an animating sequence of poses
@@ -1671,9 +1666,9 @@ void Mod_LoadAliasModelNew (model_t *mod, void *buffer)
 
 	for (i=0 ; i<pheader->version ; i++)	//version holds num_st_verts
 	{
-		stverts[i].onseam = LittleLong (pinstverts[i].onseam);
-		stverts[i].s = LittleLong (pinstverts[i].s);
-		stverts[i].t = LittleLong (pinstverts[i].t);
+		mod->stverts[i].onseam = LittleLong (pinstverts[i].onseam);
+		mod->stverts[i].s = LittleLong (pinstverts[i].s);
+		mod->stverts[i].t = LittleLong (pinstverts[i].t);
 	}
 
 //
@@ -1683,14 +1678,15 @@ void Mod_LoadAliasModelNew (model_t *mod, void *buffer)
 
 	for (i=0 ; i<pheader->numtris ; i++)
 	{
-		triangles[i].facesfront = LittleLong (pintriangles[i].facesfront);
+		mod->triangles[i].facesfront = LittleLong (pintriangles[i].facesfront);
 
 		for (j=0 ; j<3 ; j++)
 		{
-			triangles[i].vertindex[j] = LittleShort (pintriangles[i].vertindex[j]);
-			triangles[i].stindex[j]	  = LittleShort (pintriangles[i].stindex[j]);
+			mod->triangles[i].vertindex[j] = LittleShort (pintriangles[i].vertindex[j]);
+			mod->triangles[i].stindex[j]	  = LittleShort (pintriangles[i].stindex[j]);
 		}
 	}
+	mod->numTris = pheader->numtris;
 
 //
 // load the frames
@@ -1851,9 +1847,9 @@ void Mod_LoadAliasModel (model_t *mod, void *buffer)
 
 	for (i=0 ; i<pheader->version ; i++)	//version holds num_st_verts
 	{
-		stverts[i].onseam = LittleLong (pinstverts[i].onseam);
-		stverts[i].s = LittleLong (pinstverts[i].s);
-		stverts[i].t = LittleLong (pinstverts[i].t);
+		mod->stverts[i].onseam = LittleLong (pinstverts[i].onseam);
+		mod->stverts[i].s = LittleLong (pinstverts[i].s);
+		mod->stverts[i].t = LittleLong (pinstverts[i].t);
 	}
 
 //
@@ -1863,12 +1859,12 @@ void Mod_LoadAliasModel (model_t *mod, void *buffer)
 
 	for (i=0 ; i<pheader->numtris ; i++)
 	{
-		triangles[i].facesfront = LittleLong (pintriangles[i].facesfront);
+		mod->triangles[i].facesfront = LittleLong (pintriangles[i].facesfront);
 
 		for (j=0 ; j<3 ; j++)
 		{
-			triangles[i].vertindex[j] =	(unsigned short)LittleLong (pintriangles[i].vertindex[j]);
-			triangles[i].stindex[j]	  = triangles[i].vertindex[j];
+			mod->triangles[i].vertindex[j] =	(unsigned short)LittleLong (pintriangles[i].vertindex[j]);
+			mod->triangles[i].stindex[j] = mod->triangles[i].vertindex[j];
 		}
 	}
 
@@ -1898,6 +1894,9 @@ void Mod_LoadAliasModel (model_t *mod, void *buffer)
 					Mod_LoadAliasGroup (pframetype + 1, &pheader->frames[i]);
 		}
 	}
+
+	mod->numTris = pheader->numtris;
+	mod->numvertexes = pheader->numverts;
 
 	//Con_Printf("Model is %s\n",mod->name);
 	//Con_Printf("   Mins is %5.2f, %5.2f, %5.2f\n",mins[0],mins[1],mins[2]);

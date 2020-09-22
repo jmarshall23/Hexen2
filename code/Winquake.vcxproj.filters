@@ -235,6 +235,9 @@
     <ClCompile Include="math\matrix.c">
       <Filter>Source Files\math</Filter>
     </ClCompile>
+    <ClCompile Include="d3d12\d3d12_raytrace_entities.cpp">
+      <Filter>Source Files\d3d12</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Adivtab.h">

@@ -73,7 +73,7 @@ cvar_t	r_shadows = {"r_shadows","0"};
 cvar_t	r_mirroralpha = {"r_mirroralpha","1"};
 cvar_t	r_wateralpha = {"r_wateralpha",".4", true};
 cvar_t	r_dynamic = {"r_dynamic","1"};
-cvar_t	r_novis = {"r_novis","0"};
+cvar_t	r_novis = {"r_novis","1"};
 cvar_t	r_wholeframe = {"r_wholeframe", "1", true};
 
 cvar_t	gl_clear = {"gl_clear","0"};
@@ -1381,6 +1381,12 @@ r_refdef must be set before the first call
 */
 void R_RenderScene ()
 {
+	static int firstFrameHack = 1;
+	if(firstFrameHack) {
+		GL_FinishDXRLoading(); // todo move me!
+		firstFrameHack = 0;
+	}
+
 	R_SetupFrame ();
 
 	R_SetFrustum ();

@@ -4,6 +4,8 @@
  * $Header: /H2 Mission Pack/CLIENT.H 4     3/12/98 6:31p Mgummelt $
  */
 
+#pragma once
+
 typedef struct
 {
 	vec3_t	viewangles;
