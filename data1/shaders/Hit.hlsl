@@ -14,7 +14,7 @@ StructuredBuffer<STriVertex> BTriVertex : register(t0);
       float3(1.f - attrib.bary.x - attrib.bary.y, attrib.bary.x, attrib.bary.y);
 
   uint vertId = 3 * PrimitiveIndex();
-  float3 hitColor = normalize(BTriVertex[vertId + 0].vertex) * 4;
+  float3 hitColor = normalize(float3(abs(BTriVertex[vertId + 0].st.x), abs(BTriVertex[vertId + 0].st.y), 0.0)) * 0.5;
 
   payload.colorAndDistance = float4(hitColor, RayTCurrent());
 }

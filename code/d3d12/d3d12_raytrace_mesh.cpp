@@ -95,8 +95,8 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 				v.xyz[0] = p->verts[d][0];
 				v.xyz[1] = p->verts[d][1];
 				v.xyz[2] = p->verts[d][2];
-				v.st[0] = p->verts[d][0];
-				v.st[1] = p->verts[d][1];
+				v.st[0] = p->verts[d][3];
+				v.st[1] = p->verts[d][4];
 		
 				mesh->meshVertexes.push_back(v);
 				surf.numVertexes++;
