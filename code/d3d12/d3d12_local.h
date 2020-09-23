@@ -108,3 +108,5 @@ extern ComPtr<ID3D12Resource> m_vertexBuffer;
 void GL_CreateTopLevelAccelerationStructs(bool forceUpdate);
 
 extern std::vector<dxrMesh_t*> dxrMeshList;
+
+void GL_LoadMegaXML(const char* path);

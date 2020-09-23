@@ -142,6 +142,7 @@
     <ClCompile Include="cvar.c" />
     <ClCompile Include="d3d12\d3d12_main.cpp" />
     <ClCompile Include="d3d12\d3d12_raytrace_entities.cpp" />
+    <ClCompile Include="d3d12\d3d12_raytrace_mega.cpp" />
     <ClCompile Include="d3d12\d3d12_raytrace_mesh.cpp" />
     <ClCompile Include="d3d12\nv_helpers_dx12\BottomLevelASGenerator.cpp" />
     <ClCompile Include="d3d12\nv_helpers_dx12\RaytracingPipelineGenerator.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="host_cmd.c" />
     <ClCompile Include="in_win.c" />
     <ClCompile Include="keys.c" />
+    <ClCompile Include="libs\xml\tinyxml2.cpp" />
     <ClCompile Include="mathlib.c" />
     <ClCompile Include="math\matrix.c" />
     <ClCompile Include="menu.c" />
@@ -229,6 +231,7 @@
     <ClInclude Include="gl_warp_sin.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Keys.h" />
+    <ClInclude Include="libs\xml\tinyxml2.h" />
     <ClInclude Include="Mathlib.h" />
     <ClInclude Include="math\vectormath.h" />
     <ClInclude Include="Menu.h" />

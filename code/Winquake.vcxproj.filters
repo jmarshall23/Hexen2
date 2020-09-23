@@ -32,6 +32,9 @@
     <Filter Include="Source Files\math">
       <UniqueIdentifier>{82cfa309-c5d9-466e-a1d6-3958bc1996db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\libs\xml">
+      <UniqueIdentifier>{168ab5ea-f340-4f7b-9067-7c04e7d06f85}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cd_win.c">
@@ -237,6 +240,12 @@
     </ClCompile>
     <ClCompile Include="d3d12\d3d12_raytrace_entities.cpp">
       <Filter>Source Files\d3d12</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d12\d3d12_raytrace_mega.cpp">
+      <Filter>Source Files\d3d12</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\xml\tinyxml2.cpp">
+      <Filter>Source Files\libs\xml</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -449,6 +458,9 @@
     </ClInclude>
     <ClInclude Include="exports.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\xml\tinyxml2.h">
+      <Filter>Source Files\libs\xml</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
