@@ -107,7 +107,7 @@ void TopLevelASGenerator::ComputeASBufferSizes(
   prebuildDesc = {};
   prebuildDesc.Type = D3D12_RAYTRACING_ACCELERATION_STRUCTURE_TYPE_TOP_LEVEL;
   prebuildDesc.DescsLayout = D3D12_ELEMENTS_LAYOUT_ARRAY;
-  prebuildDesc.NumDescs = static_cast<UINT>(m_instances.size());
+  prebuildDesc.NumDescs = static_cast<UINT>(50000 /*m_instances.size()*/);
   prebuildDesc.Flags = m_flags;
 
   // This structure is used to hold the sizes of the required scratch memory and
@@ -131,7 +131,7 @@ void TopLevelASGenerator::ComputeASBufferSizes(
   // The instance descriptors are stored as-is in GPU memory, so we can deduce
   // the required size from the instance count
   m_instanceDescsSizeInBytes =
-      ROUND_UP(sizeof(D3D12_RAYTRACING_INSTANCE_DESC) * static_cast<UINT64>(m_instances.size()),
+      ROUND_UP(sizeof(D3D12_RAYTRACING_INSTANCE_DESC) * static_cast<UINT64>(50000),
                D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT);
 
   *scratchSizeInBytes = m_scratchSizeInBytes;

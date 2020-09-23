@@ -297,6 +297,7 @@ void create_projection_matrix(float matrix[16], float znear, float zfar, float f
 
 void* GL_LoadDXRAliasMesh(int numVertexes, trivertx_t* vertexes, int numTris, mtriangle_t* triangles);
 void create_entity_matrix(float matrix[16], entity_t* e, qboolean enable_left_hand);
+void create_brush_matrix(float matrix[16], entity_t* e, qboolean enable_left_hand);
 
 /*
  * $Log: /H2 Mission Pack/glquake.h $

@@ -25,9 +25,9 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 
 		BuildSurfaceDisplayList(fa);
 
-		//if (strstr(fa->texinfo->texture->name, "trigger"))	{
-		//	continue;
-		//}
+		if(fa->bmodelindex > 0 && currentmodel->name[0] != '*') {
+			continue;
+		}
 
 		if (fa->flags & SURF_DRAWSKY) {
 			continue;

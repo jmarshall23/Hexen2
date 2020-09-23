@@ -1,6 +1,39 @@
 #include "../quakedef.h"
 #include "../WINQUAKE.H"
 
+
+void create_brush_matrix(float matrix[16], entity_t* e, qboolean enable_left_hand)
+{
+	vec3_t axis[3];
+	vec3_t origin;
+	origin[0] = e->origin[0]; // (1.f - e->backlerp)* e->origin[0] + e->backlerp * e->oldorigin[0];
+	origin[1] = e->origin[1]; // (1.f - e->backlerp)* e->origin[1] + e->backlerp * e->oldorigin[1];
+	origin[2] = e->origin[2]; // (1.f - e->backlerp)* e->origin[2] + e->backlerp * e->oldorigin[2];
+
+	AnglesToAxis(e->angles, axis);
+
+	matrix[0] = axis[0][0];
+	matrix[4] = axis[1][0];
+	matrix[8] = axis[2][0];
+	matrix[12] = origin[0];
+
+	matrix[1] = axis[0][1];
+	matrix[5] = axis[1][1];
+	matrix[9] = axis[2][1];
+	matrix[13] = origin[1];
+
+	matrix[2]  = axis[0][2];
+	matrix[6]  = axis[1][2];
+	matrix[10] = axis[2][2];
+	matrix[14] = origin[2];
+
+	matrix[3] = 0.0f;
+	matrix[7] = 0.0f;
+	matrix[11] = 0.0f;
+	matrix[15] = 1.0f;
+}
+
+
 void create_entity_matrix(float matrix[16], entity_t* e, qboolean enable_left_hand)
 {
 	vec3_t axis[3];

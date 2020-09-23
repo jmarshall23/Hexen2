@@ -494,7 +494,7 @@ void GL_FinishDXRLoading(void)
 
 	{
 	//	ThrowIfFailed(m_commandList->Reset(m_commandAllocator.Get(), m_pipelineState.Get()));
-		GL_CreateTopLevelAccelerationStructs();
+		GL_CreateTopLevelAccelerationStructs(true);
 
 		// Flush the command list and wait for it to finish
 		//m_commandList->Close();
@@ -622,7 +622,7 @@ void GL_Render(float x, float y, float z, float* viewAngles)
 	std::vector<DirectX::XMMATRIX> matrices(4);
 
 	// Update the top level acceleration structs based on new scene data. 
-	//GL_CreateTopLevelAccelerationStructs();
+	GL_CreateTopLevelAccelerationStructs(false);
 
 	// Initialize the view matrix, ideally this should be based on user
 	// interactions The lookat and perspective matrices used for rasterization are

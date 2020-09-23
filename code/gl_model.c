@@ -1223,6 +1223,38 @@ void Mod_LoadBrushModel (model_t *mod, void *buffer)
 	
 	mod->numframes = 2;		// regular and alternate animation
 	
+	r_pcurrentvertbase = mod->vertexes;
+	r_pcurrentedges = mod->edges;
+	r_currentpsurfedges = mod->surfedges;
+
+	model_t* bspMod = mod;
+	currentmodel = bspMod;
+
+	// Mark Surfaces 
+	for (i = 0; i < mod->numsubmodels; i++)
+	{
+		bm = &mod->submodels[i];
+
+		mod->hulls[0].firstclipnode = bm->headnode[0];
+		for (j = 1; j < MAX_MAP_HULLS; j++)
+		{
+			mod->hulls[j].firstclipnode = bm->headnode[j];
+			mod->hulls[j].lastclipnode = mod->numclipnodes - 1;
+		}
+
+		mod->firstmodelsurface = bm->firstface;
+		mod->nummodelsurfaces = bm->numfaces;
+
+		if (i > 0)
+		{
+			for (int d = 0; d < mod->nummodelsurfaces; d++)
+			{
+				mod->surfaces[mod->firstmodelsurface + d].bmodelindex = i + 1;
+			}
+		}	
+	}
+
+	bspMod->dxrModel = GL_LoadDXRMesh(bspMod->surfaces, bspMod->numsurfaces);
 //
 // set up the submodels (FIXME: this is confusing)
 //
@@ -1239,6 +1271,16 @@ void Mod_LoadBrushModel (model_t *mod, void *buffer)
 		
 		mod->firstmodelsurface = bm->firstface;
 		mod->nummodelsurfaces = bm->numfaces;
+
+// jmarshall
+	//	if (i > 0)
+		{
+			for (int d = 0; d < mod->nummodelsurfaces; d++)
+			{
+				mod->surfaces[mod->firstmodelsurface + d].bmodelindex = i + 1;
+			}
+		}
+// jmarshall end
 		
 		VectorCopy (bm->maxs, mod->maxs);
 		VectorCopy (bm->mins, mod->mins);
@@ -1254,15 +1296,15 @@ void Mod_LoadBrushModel (model_t *mod, void *buffer)
 			sprintf (name, "*%i", i+1);
 			loadmodel = Mod_FindName (name);
 			*loadmodel = *mod;
+			loadmodel->dxrModel = NULL;
+			{
+				currentmodel = loadmodel;
+				loadmodel->dxrModel = GL_LoadDXRMesh(&mod->surfaces[mod->firstmodelsurface], mod->nummodelsurfaces);
+			}
 			strcpy (loadmodel->name, name);
 			mod = loadmodel;
 		}
 	}
-	currentmodel = mod;
-	r_pcurrentvertbase = mod->vertexes;
-	r_pcurrentedges = mod->edges;
-	r_currentpsurfedges = mod->surfedges;
-	mod->dxrModel = GL_LoadDXRMesh(mod->surfaces, mod->numsurfaces);
 }
 
 /*
