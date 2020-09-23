@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
-<!-- $TexturePacker:SmartUpdate:a31609a3822d12131d9790c031b551b0:516b1671e9375e437045054e62c548d6:c29ac8879a708f426c0ae22c4e938e61$ -->
+<!-- $TexturePacker:SmartUpdate:a6d06c0e652b9f47ba253cecdfda808d:516b1671e9375e437045054e62c548d6:c29ac8879a708f426c0ae22c4e938e61$ -->
 <!--Format:
 n  => name of the sprite
 x  => sprite x pos in texture
@@ -20,962 +20,962 @@ verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
 <TextureAtlas imagePath="mega.png" width="4096" height="4096">
-    <sprite n="+0air.png" x="3062" y="3098" w="48" h="48"/>
-    <sprite n="+0eye.png" x="3526" y="4033" w="48" h="48"/>
-    <sprite n="+0fire.png" x="3576" y="4033" w="48" h="48"/>
-    <sprite n="+0pen.png" x="2691" y="1888" w="48" h="48"/>
-    <sprite n="+0pyr.png" x="2607" y="2313" w="48" h="48"/>
-    <sprite n="+0rune1.png" x="2993" y="1972" w="64" h="64"/>
-    <sprite n="+0rune2.png" x="3067" y="1870" w="64" h="64"/>
-    <sprite n="+0steam.png" x="2657" y="2313" w="48" h="48"/>
-    <sprite n="+0sun.png" x="2707" y="2305" w="48" h="48"/>
-    <sprite n="+0tri.png" x="3044" y="1936" w="32" h="32"/>
-    <sprite n="+0tria.png" x="3110" y="1098" w="48" h="48"/>
-    <sprite n="+0wat.png" x="3160" y="1097" w="48" h="48"/>
-    <sprite n="+1rune1.png" x="3233" y="1506" w="64" h="64"/>
-    <sprite n="+1rune2.png" x="3479" y="1144" w="64" h="64"/>
-    <sprite n="+1tri.png" x="3505" y="1340" w="32" h="32"/>
-    <sprite n="+2rune1.png" x="3817" y="632" w="64" h="64"/>
-    <sprite n="+2rune2.png" x="3059" y="1970" w="64" h="64"/>
-    <sprite n="+2tri.png" x="3510" y="1094" w="32" h="32"/>
-    <sprite n="+3rune1.png" x="3125" y="1970" w="64" h="64"/>
-    <sprite n="+3rune2.png" x="3133" y="1862" w="64" h="64"/>
-    <sprite n="+3tri.png" x="3544" y="1094" w="32" h="32"/>
-    <sprite n="+4rune1.png" x="3199" y="1857" w="64" h="64"/>
-    <sprite n="+4rune2.png" x="3074" y="2466" w="64" h="64"/>
-    <sprite n="+4tri.png" x="3578" y="1094" w="32" h="32"/>
-    <sprite n="+aair.png" x="3210" y="1097" w="48" h="48"/>
-    <sprite n="+aeye.png" x="3260" y="1097" w="48" h="48"/>
-    <sprite n="+afire.png" x="3310" y="1094" w="48" h="48"/>
-    <sprite n="+apen.png" x="3360" y="1094" w="48" h="48"/>
-    <sprite n="+apyr.png" x="3410" y="1094" w="48" h="48"/>
-    <sprite n="+asteam.png" x="3525" y="521" w="48" h="48"/>
-    <sprite n="+asun.png" x="3575" y="521" w="48" h="48"/>
-    <sprite n="+atria.png" x="3625" y="521" w="48" h="48"/>
-    <sprite n="+awat.png" x="3460" y="1094" w="48" h="48"/>
-    <sprite n="a_blast.mdl_0.tga" x="3037" y="2629" w="101" h="76" r="y"/>
-    <sprite n="a_cube.mdl_0.tga" x="3351" y="1279" w="72" h="100"/>
-    <sprite n="a_glyph.mdl_0.tga" x="3727" y="3931" w="104" h="95"/>
-    <sprite n="a_haste.mdl_0.tga" x="2266" y="3175" w="188" h="72"/>
-    <sprite n="a_hboost.mdl_0.tga" x="2315" y="1954" w="88" h="41"/>
-    <sprite n="a_invinc.mdl_0.tga" x="2606" y="1420" w="120" h="116" r="y"/>
-    <sprite n="a_invis.mdl_0.tga" x="3236" y="827" w="152" h="135"/>
-    <sprite n="a_mboost.mdl_0.tga" x="790" y="3223" w="156" h="37"/>
-    <sprite n="a_poly.mdl_0.tga" x="1640" y="1645" w="104" h="50"/>
-    <sprite n="a_shbost.mdl_0.tga" x="3377" y="3781" w="88" h="34"/>
-    <sprite n="a_summon.mdl_0.tga" x="2688" y="3108" w="88" h="56"/>
-    <sprite n="a_telprt.mdl_0.tga" x="3041" y="593" w="88" h="57"/>
-    <sprite n="a_tome.mdl_0.tga" x="786" y="1292" w="27" h="88" r="y"/>
-    <sprite n="a_torch.mdl_0.tga" x="2953" y="277" w="134" h="108" r="y"/>
-    <sprite n="akarrow.mdl_0.tga" x="872" y="2922" w="101" h="56" r="y"/>
-    <sprite n="akarrow.mdl_1.tga" x="2301" y="3793" w="101" h="56" r="y"/>
-    <sprite n="akarrow.mdl_2.tga" x="2404" y="3793" w="101" h="56" r="y"/>
-    <sprite n="anglstat.mdl_0.tga" x="1" y="274" w="392" h="383"/>
-    <sprite n="archer.mdl_0.tga" x="264" y="2396" w="227" h="440" r="y"/>
-    <sprite n="archer.mdl_1.tga" x="256" y="2838" w="227" h="440" r="y"/>
-    <sprite n="archerhd.mdl_0.tga" x="733" y="1856" w="49" h="204" r="y"/>
-    <sprite n="archerhd.mdl_1.tga" x="663" y="2098" w="49" h="204" r="y"/>
-    <sprite n="arrow.mdl_0.tga" x="2282" y="1270" w="101" h="36" r="y"/>
-    <sprite n="arrowhit.mdl_0.tga" x="1123" y="2818" w="204" h="94"/>
-    <sprite n="assassin.mdl_0.tga" x="958" y="2457" w="368" h="245"/>
-    <sprite n="assgren.mdl_0.tga" x="591" y="3272" w="152" h="46"/>
-    <sprite n="athena.mdl_0.tga" x="1125" y="378" w="452" h="257"/>
-    <sprite n="axblade.mdl_0.tga" x="2275" y="2784" w="156" h="86"/>
-    <sprite n="axblade.mdl_1.tga" x="2411" y="2872" w="156" h="86"/>
-    <sprite n="axe.mdl_0.tga" x="974" y="853" w="173" h="492" r="y"/>
-    <sprite n="axtail.mdl_0.tga" x="648" y="1036" w="104" h="19"/>
-    <sprite n="bag.mdl_0.tga" x="1218" y="3568" w="204" h="97"/>
-    <sprite n="balbolt.mdl_0.tga" x="2507" y="3793" w="100" h="56" r="y"/>
-    <sprite n="ball.mdl_0.tga" x="1403" y="2699" w="204" h="94"/>
-    <sprite n="ballista.mdl_0.tga" x="493" y="2686" w="141" h="296" r="y"/>
-    <sprite n="barrel.mdl_0.tga" x="2362" y="740" w="132" h="96"/>
-    <sprite n="barrel.mdl_1.tga" x="2496" y="740" w="132" h="96"/>
-    <sprite n="barrel.mdl_2.tga" x="3081" y="718" w="132" h="96"/>
-    <sprite n="beefslab.mdl_0.tga" x="3028" y="3290" w="155" h="204" r="y"/>
-    <sprite n="bellring.mdl_0.tga" x="1021" y="259" w="440" h="117"/>
-    <sprite n="bench.mdl_0.tga" x="2256" y="538" w="104" h="300" r="y"/>
-    <sprite n="biessman.png" x="2256" y="840" w="256" h="128"/>
-    <sprite n="birdmisl.mdl_0.tga" x="3314" y="4037" w="84" h="57"/>
-    <sprite n="birdmsl2.mdl_0.tga" x="786" y="1166" w="22" h="124" r="y"/>
-    <sprite n="blast.mdl_0.tga" x="1429" y="637" w="147" h="320" r="y"/>
-    <sprite n="bonefx.mdl_0.tga" x="1746" y="1645" w="104" h="49"/>
-    <sprite n="bonefx.mdl_1.tga" x="1852" y="1645" w="104" h="49"/>
-    <sprite n="bonefx.mdl_2.tga" x="2719" y="602" w="104" h="49"/>
-    <sprite n="bonelump.mdl_0.tga" x="1811" y="2698" w="173" h="92" r="y"/>
-    <sprite n="bonepile.mdl_0.tga" x="3077" y="1" w="172" h="196"/>
-    <sprite n="boneshot.mdl_0.tga" x="3425" y="1340" w="40" h="35"/>
-    <sprite n="boneshrd.mdl_0.tga" x="2719" y="3788" w="100" h="56" r="y"/>
-    <sprite n="booberry.mdl_0.tga" x="1535" y="2795" w="200" h="94"/>
-    <sprite n="bookclos.mdl_0.tga" x="2395" y="1921" w="88" h="31"/>
-    <sprite n="bookopen.mdl_0.tga" x="2263" y="2332" w="88" h="49"/>
-    <sprite n="brains.mdl_0.tga" x="2042" y="3556" w="200" h="94"/>
-    <sprite n="bush1.mdl_0.tga" x="3185" y="3288" w="148" h="196"/>
-    <sprite n="caesar.mdl_0.tga" x="190" y="3335" w="372" h="257"/>
-    <sprite n="cart.mdl_0.tga" x="1427" y="1309" w="118" h="344" r="y"/>
-    <sprite n="castrch.mdl_0.tga" x="3089" y="265" w="124" h="116" r="y"/>
-    <sprite n="cattest.mdl_0.tga" x="395" y="274" w="214" h="584" r="y"/>
-    <sprite n="cauldron.mdl_0.tga" x="3107" y="1507" w="124" h="65"/>
-    <sprite n="celt2.png" x="3612" y="1087" w="32" h="32"/>
-    <sprite n="celtbrown.png" x="3675" y="512" w="48" h="48"/>
-    <sprite n="cflmtrch.mdl_0.tga" x="2613" y="277" w="184" h="124"/>
-    <sprite n="chair.mdl_0.tga" x="2925" y="2710" w="96" h="67"/>
-    <sprite n="chest1.mdl_0.tga" x="736" y="1452" w="46" h="200" r="y"/>
-    <sprite n="chest1.mdl_1.tga" x="736" y="1654" w="46" h="200" r="y"/>
-    <sprite n="chest2.mdl_0.tga" x="923" y="3262" w="204" h="65"/>
-    <sprite n="chest2.mdl_1.tga" x="1129" y="3262" w="204" h="65"/>
-    <sprite n="chest2.mdl_2.tga" x="1302" y="3193" w="204" h="65"/>
-    <sprite n="chest3.mdl_0.tga" x="199" y="2563" w="58" h="204" r="y"/>
-    <sprite n="clip.png" x="3042" y="2202" w="64" h="64"/>
-    <sprite n="clshard1.mdl_0.tga" x="754" y="1036" w="60" h="18"/>
-    <sprite n="clshard2.mdl_0.tga" x="3282" y="3486" w="60" h="37"/>
-    <sprite n="clshard3.mdl_0.tga" x="2411" y="2327" w="56" h="52"/>
-    <sprite n="clshard4.mdl_0.tga" x="255" y="2001" w="15" h="60" r="y"/>
-    <sprite n="clthchk1.mdl_0.tga" x="2821" y="3788" w="104" h="52"/>
-    <sprite n="clthchk2.mdl_0.tga" x="2959" y="2845" w="104" h="76"/>
-    <sprite n="clthchk3.mdl_0.tga" x="2337" y="1888" w="104" h="31"/>
-    <sprite n="corps1.mdl_0.tga" x="2266" y="3325" w="252" h="224"/>
-    <sprite n="corps1.mdl_1.tga" x="2520" y="3315" w="252" h="224"/>
-    <sprite n="corps1.mdl_2.tga" x="1828" y="2449" w="252" h="224"/>
-    <sprite n="corps1.mdl_3.tga" x="2774" y="3310" w="252" h="224"/>
-    <sprite n="corps2.mdl_0.tga" x="1328" y="2455" w="248" h="242"/>
-    <sprite n="corps2.mdl_1.tga" x="2312" y="3851" w="248" h="242"/>
-    <sprite n="corps2.mdl_2.tga" x="2562" y="3851" w="248" h="242"/>
-    <sprite n="corps2.mdl_3.tga" x="2812" y="3846" w="242" h="248" r="y"/>
-    <sprite n="corps2.mdl_4.tga" x="1578" y="2454" w="248" h="242"/>
-    <sprite n="cross.mdl_0.tga" x="3202" y="1574" w="108" h="69"/>
-    <sprite n="crossbow.mdl_0.tga" x="1672" y="3874" w="344" h="208"/>
-    <sprite n="crusader.mdl_0.tga" x="1" y="659" w="245" h="600" r="y"/>
-    <sprite n="cube.mdl_0.tga" x="3408" y="1381" w="100" h="72" r="y"/>
-    <sprite n="drgnball.mdl_0.tga" x="2585" y="2054" w="144" h="149"/>
-    <sprite n="dthball.mdl_0.tga" x="1691" y="1961" w="104" h="52"/>
-    <sprite n="eflmtrch.mdl_0.tga" x="3413" y="3623" w="188" h="148"/>
-    <sprite n="egtorch.mdl_0.tga" x="2731" y="2048" w="136" h="143"/>
-    <sprite n="eidoball.mdl_0.tga" x="3390" y="813" w="144" h="149"/>
-    <sprite n="eviltex.png" x="2433" y="2783" w="128" h="80"/>
-    <sprite n="fablade.mdl_0.tga" x="2405" y="1954" w="72" h="40" r="y"/>
-    <sprite n="fambeam.mdl_0.tga" x="3400" y="4037" w="60" h="57"/>
-    <sprite n="famshot.mdl_0.tga" x="2169" y="1162" w="88" h="61"/>
-    <sprite n="fangel.mdl_0.tga" x="1968" y="538" w="286" h="440" r="y"/>
-    <sprite n="fangel.mdl_1.tga" x="273" y="1810" w="440" h="286"/>
-    <sprite n="faspell.mdl_0.tga" x="1797" y="1961" w="104" h="52"/>
-    <sprite n="fence.mdl_0.tga" x="785" y="2420" w="171" h="300" r="y"/>
-    <sprite n="fether.mdl_0.tga" x="2469" y="2327" w="62" h="44" r="y"/>
-    <sprite n="fireball.mdl_0.tga" x="3007" y="1936" w="35" h="32" r="y"/>
-    <sprite n="fish.mdl_0.tga" x="3427" y="379" w="230" h="140" r="y"/>
-    <sprite n="flag.mdl_0.tga" x="663" y="2304" w="41" h="200" r="y"/>
-    <sprite n="flag.mdl_1.tga" x="192" y="3133" w="41" h="200" r="y"/>
-    <sprite n="flag.mdl_2.tga" x="235" y="3280" w="200" h="41"/>
-    <sprite n="flame.mdl_0.tga" x="2370" y="2970" w="296" h="140"/>
-    <sprite n="flame1.mdl_0.tga" x="2964" y="2473" w="108" h="72"/>
-    <sprite n="flame2.mdl_0.tga" x="1999" y="3655" w="300" h="194"/>
-    <sprite n="flaming.mdl_0.tga" x="2630" y="736" w="148" h="100" r="y"/>
-    <sprite n="flesh1.mdl_0.tga" x="1578" y="1275" w="108" h="39"/>
-    <sprite n="flesh1.mdl_1.tga" x="1688" y="1275" w="108" h="39"/>
-    <sprite n="flesh2.mdl_0.tga" x="2585" y="1118" w="108" h="31"/>
-    <sprite n="flesh2.mdl_1.tga" x="2227" y="1888" w="108" h="31"/>
-    <sprite n="flesh3.mdl_0.tga" x="2932" y="2218" w="108" h="70"/>
-    <sprite n="flesh3.mdl_1.tga" x="3298" y="1408" w="108" h="70"/>
-    <sprite n="fountain.mdl_0.tga" x="3251" y="1" w="168" h="196"/>
-    <sprite n="funnal.mdl_0.tga" x="1855" y="927" w="100" h="300" r="y"/>
-    <sprite n="g-head.mdl_0.tga" x="1082" y="3213" w="108" h="47"/>
-    <sprite n="g-head.mdl_1.tga" x="1192" y="3213" w="108" h="47"/>
-    <sprite n="g-head.mdl_2.tga" x="2931" y="593" w="108" h="47"/>
-    <sprite n="gauntlet.mdl_0.tga" x="1149" y="1099" w="203" h="500" r="y"/>
-    <sprite n="gemlight.mdl_0.tga" x="2472" y="1438" w="132" h="100"/>
-    <sprite n="glowball.mdl_0.tga" x="1957" y="980" w="193" h="200" r="y"/>
-    <sprite n="glyph.mdl_0.tga" x="905" y="2820" w="216" h="92"/>
-    <sprite n="glyphwir.mdl_0.tga" x="2988" y="1411" w="104" h="95"/>
-    <sprite n="glyphwir.mdl_1.tga" x="3094" y="1410" w="104" h="95"/>
-    <sprite n="goarm.mdl_0.tga" x="2822" y="2227" w="108" h="75"/>
-    <sprite n="goarm.mdl_1.tga" x="2744" y="2485" w="108" h="75"/>
-    <sprite n="goarm.mdl_2.tga" x="2795" y="2562" w="108" h="75"/>
-    <sprite n="golegs.mdl_0.tga" x="968" y="1347" w="178" h="368" r="y"/>
-    <sprite n="golegs.mdl_1.tga" x="962" y="1717" w="178" h="368" r="y"/>
-    <sprite n="golegs.mdl_2.tga" x="962" y="2087" w="178" h="368" r="y"/>
-    <sprite n="golem_b.mdl_0.tga" x="564" y="3331" w="392" h="237"/>
-    <sprite n="golem_i.mdl_0.tga" x="485" y="2984" w="392" h="237"/>
-    <sprite n="golem_s.mdl_0.tga" x="958" y="3329" w="392" h="237"/>
-    <sprite n="golemmis.mdl_0.tga" x="2809" y="2639" w="112" h="72" r="y"/>
-    <sprite n="goodsphr.mdl_0.tga" x="2370" y="3112" w="104" h="52"/>
-    <sprite n="goop.mdl_0.tga" x="3659" y="361" w="144" h="149"/>
-    <sprite n="h_ass.mdl_0.tga" x="420" y="3594" w="204" h="87"/>
-    <sprite n="h_cru.mdl_0.tga" x="201" y="2325" w="61" h="236" r="y"/>
-    <sprite n="h_fangel.mdl_0.tga" x="2221" y="1957" w="92" h="42"/>
-    <sprite n="h_imp.mdl_0.tga" x="1537" y="2891" w="176" h="81"/>
-    <sprite n="h_imp.mdl_1.tga" x="1715" y="2891" w="176" h="81"/>
-    <sprite n="h_imp.mdl_2.tga" x="1893" y="2887" w="176" h="81"/>
-    <sprite n="h_imp.mdl_3.tga" x="1939" y="2792" w="176" h="81"/>
-    <sprite n="h_mez.mdl_0.tga" x="1335" y="3260" w="204" h="65"/>
-    <sprite n="h_mez.mdl_1.tga" x="1508" y="3193" w="204" h="65"/>
-    <sprite n="h_nec.mdl_0.tga" x="636" y="2922" w="104" h="60"/>
-    <sprite n="h_pal.mdl_0.tga" x="437" y="3280" w="152" h="49"/>
-    <sprite n="hamthrow.mdl_0.tga" x="3431" y="710" w="104" h="94"/>
-    <sprite n="handfx.mdl_0.tga" x="2244" y="3556" w="200" h="94"/>
-    <sprite n="hay1.mdl_0.tga" x="3462" y="4037" w="62" h="48" r="y"/>
-    <sprite n="hay2.mdl_0.tga" x="2691" y="2746" w="68" h="33"/>
-    <sprite n="hay3.mdl_0.tga" x="2549" y="2756" w="62" h="24" r="y"/>
-    <sprite n="hedge1.mdl_0.tga" x="3261" y="379" w="164" h="197"/>
-    <sprite n="hedge2.mdl_0.tga" x="2148" y="2661" w="200" h="121"/>
-    <sprite n="hedge3.mdl_0.tga" x="2350" y="2661" w="197" h="120" r="y"/>
-    <sprite n="hydra.mdl_0.tga" x="1" y="2795" w="189" h="444" r="y"/>
-    <sprite n="i_amulet.mdl_0.tga" x="2683" y="654" w="108" h="77"/>
-    <sprite n="i_bmana.mdl_0.tga" x="2173" y="2334" w="88" h="47"/>
-    <sprite n="i_bplate.mdl_0.tga" x="2271" y="3249" w="144" h="68"/>
-    <sprite n="i_bracer.mdl_0.tga" x="1957" y="1182" w="104" h="43"/>
-    <sprite n="i_btmana.mdl_0.tga" x="1601" y="1961" w="88" h="62"/>
-    <sprite n="i_gmana.mdl_0.tga" x="2588" y="2593" w="81" h="60" r="y"/>
-    <sprite n="i_hboost.mdl_0.tga" x="2212" y="2284" w="88" h="46"/>
-    <sprite n="i_helmet.mdl_0.tga" x="2609" y="3788" w="108" h="61"/>
-    <sprite n="iceshot1.mdl_0.tga" x="2476" y="3112" w="104" h="52"/>
-    <sprite n="iceshot2.mdl_0.tga" x="1961" y="1227" w="104" h="46"/>
-    <sprite n="icestaff.mdl_0.tga" x="1855" y="609" w="104" h="316" r="y"/>
-    <sprite n="imp.mdl_0.tga" x="1283" y="3667" w="356" h="211"/>
-    <sprite n="imp.mdl_1.tga" x="1314" y="3880" w="356" h="211"/>
-    <sprite n="imp.mdl_2.tga" x="1277" y="2980" w="356" h="211"/>
-    <sprite n="imp.mdl_3.tga" x="1641" y="3661" w="356" h="211"/>
-    <sprite n="king.mdl_0.tga" x="1578" y="829" w="275" h="444" r="y"/>
-    <sprite n="larm.mdl_0.tga" x="2799" y="277" w="152" h="120"/>
-    <sprite n="lavaball.mdl_0.tga" x="3573" y="637" w="120" h="68"/>
-    <sprite n="lavaball.mdl_1.tga" x="3695" y="637" w="120" h="68"/>
-    <sprite n="lavaball.mdl_2.tga" x="3765" y="562" w="120" h="68"/>
-    <sprite n="leafchk1.mdl_0.tga" x="4035" y="67" w="60" h="32"/>
-    <sprite n="leafchk2.mdl_0.tga" x="2353" y="2327" w="56" h="53"/>
-    <sprite n="leafchk3.mdl_0.tga" x="3055" y="1098" w="53" h="48" r="y"/>
-    <sprite n="leg.mdl_0.tga" x="3135" y="965" w="156" h="130"/>
-    <sprite n="lion.mdl_0.tga" x="1714" y="3326" w="296" h="229"/>
-    <sprite n="marble.png" x="3639" y="707" w="96" h="96"/>
-    <sprite n="marbleseam.png" x="3805" y="413" w="96" h="96"/>
-    <sprite n="mars.mdl_0.tga" x="1" y="3683" w="444" h="223"/>
-    <sprite n="medhead.mdl_0.tga" x="1424" y="3563" w="204" h="96"/>
-    <sprite n="medhead.mdl_1.tga" x="1630" y="3563" w="204" h="96"/>
-    <sprite n="medsnake.mdl_0.tga" x="786" y="1056" w="27" h="108" r="y"/>
-    <sprite n="medusa.mdl_0.tga" x="502" y="3884" w="392" h="210"/>
-    <sprite n="medusa2.mdl_0.tga" x="889" y="3671" w="392" h="210"/>
-    <sprite n="megaweb.mdl_0.tga" x="1579" y="367" w="274" h="460" r="y"/>
-    <sprite n="mesotrch.mdl_0.tga" x="1836" y="3557" w="204" h="96"/>
-    <sprite n="meteor.mdl_0.tga" x="2018" y="3851" w="292" h="220" r="y"/>
-    <sprite n="metlchk1.mdl_0.tga" x="2443" y="1888" w="56" h="30"/>
-    <sprite n="metlchk2.mdl_0.tga" x="3017" y="3098" w="43" h="56" r="y"/>
-    <sprite n="metlchk3.mdl_0.tga" x="3224" y="3486" w="56" h="40"/>
-    <sprite n="metlchk4.mdl_0.tga" x="2671" y="2593" w="48" h="53"/>
-    <sprite n="mezzoman.mdl_0.tga" x="248" y="1057" w="536" h="199"/>
-    <sprite n="mezzoman.mdl_1.tga" x="2077" y="1" w="536" h="199"/>
-    <sprite n="mflmtrch.mdl_0.tga" x="626" y="3570" w="296" h="99"/>
-    <sprite n="mhdstatu.mdl_0.tga" x="706" y="2634" w="69" h="204" r="y"/>
-    <sprite n="mtex402.png" x="3046" y="2268" w="64" h="64"/>
-    <sprite n="mtex405.png" x="3037" y="2168" w="32" h="32"/>
-    <sprite n="mtex407.png" x="1473" y="2025" w="128" h="64" r="y"/>
-    <sprite n="mtex408.png" x="3108" y="2202" w="64" h="64"/>
-    <sprite n="mtex409.png" x="3112" y="2268" w="64" h="64"/>
-    <sprite n="mtex411.png" x="3117" y="2532" w="64" h="64"/>
-    <sprite n="mtex424.png" x="3140" y="2464" w="64" h="64"/>
-    <sprite n="mtex425.png" x="3174" y="2200" w="64" h="64"/>
-    <sprite n="mtex434.png" x="2569" y="654" w="112" h="80"/>
-    <sprite n="mtex435.png" x="2485" y="1920" w="64" h="32"/>
-    <sprite n="mtex436.png" x="3178" y="2266" w="64" h="64"/>
-    <sprite n="mtex437.png" x="3014" y="1650" w="128" h="128"/>
-    <sprite n="mtex438.png" x="2744" y="2355" w="128" h="128"/>
-    <sprite n="mtex439.png" x="2874" y="2343" w="128" h="128"/>
-    <sprite n="mtex441.png" x="3240" y="2200" w="64" h="64"/>
-    <sprite n="mtex443.png" x="3244" y="2266" w="64" h="64"/>
-    <sprite n="mtex444.png" x="1693" y="2349" w="128" h="32" r="y"/>
-    <sprite n="mtex446.png" x="1823" y="2349" w="128" h="32" r="y"/>
-    <sprite n="mtex447.png" x="2417" y="3249" w="128" h="64" r="y"/>
-    <sprite n="mtex448.png" x="3191" y="1962" w="64" h="64"/>
-    <sprite n="mtex449.png" x="3265" y="1857" w="64" h="64"/>
-    <sprite n="mtex450.png" x="3257" y="1957" w="64" h="64"/>
-    <sprite n="mtex451.png" x="1603" y="2025" w="128" h="64" r="y"/>
-    <sprite n="mtex452.png" x="1908" y="1275" w="128" h="32" r="y"/>
-    <sprite n="mtex453.png" x="3267" y="1775" w="64" h="64"/>
-    <sprite n="mtex454.png" x="3331" y="1841" w="64" h="64"/>
-    <sprite n="mtex455.png" x="1704" y="2383" w="128" h="64" r="y"/>
-    <sprite n="mtex456.png" x="1733" y="2015" w="128" h="64" r="y"/>
-    <sprite n="mtex457.png" x="1863" y="2015" w="128" h="64" r="y"/>
-    <sprite n="mtex458.png" x="1834" y="2383" w="128" h="64" r="y"/>
-    <sprite n="mtex460.png" x="2869" y="2042" w="128" h="128"/>
-    <sprite n="mtex461.png" x="3333" y="1775" w="64" h="64"/>
-    <sprite n="mtex462.png" x="3312" y="1552" w="64" h="64"/>
-    <sprite n="mtex463.png" x="3378" y="1552" w="64" h="64"/>
-    <sprite n="mtex464.png" x="3409" y="1455" w="64" h="64"/>
-    <sprite n="mtex465.png" x="3323" y="1957" w="64" h="64"/>
-    <sprite n="mtex466.png" x="3397" y="1841" w="64" h="64"/>
-    <sprite n="mtex467.png" x="3399" y="1775" w="64" h="64"/>
-    <sprite n="mtex468.png" x="3306" y="2187" w="64" h="64"/>
-    <sprite n="mtex469.png" x="3444" y="1521" w="64" h="64"/>
-    <sprite n="mtex470.png" x="3475" y="1455" w="64" h="64"/>
-    <sprite n="mtex471.png" x="3510" y="1374" w="64" h="64"/>
-    <sprite n="mtex472.png" x="1433" y="2091" w="256" h="256"/>
-    <sprite n="mtex474.png" x="3144" y="1645" w="128" h="128"/>
-    <sprite n="mtex475.png" x="3425" y="1210" w="128" h="128"/>
-    <sprite n="mtex476.png" x="3585" y="957" w="128" h="128"/>
-    <sprite n="mtex478.png" x="3682" y="805" w="128" h="128"/>
-    <sprite n="mtex481.png" x="1777" y="209" w="192" h="48" r="y"/>
-    <sprite n="mtex482.png" x="736" y="1258" w="48" h="192"/>
-    <sprite n="mtex483.png" x="2999" y="2038" w="128" h="128"/>
-    <sprite n="mtex484.png" x="3510" y="1521" w="64" h="64"/>
-    <sprite n="mtex485.png" x="2547" y="3244" w="128" h="64" r="y"/>
-    <sprite n="mtex486.png" x="2677" y="3244" w="128" h="64" r="y"/>
-    <sprite n="mtex487.png" x="3541" y="1440" w="64" h="64"/>
-    <sprite n="mtex488.png" x="3576" y="1374" w="64" h="64"/>
-    <sprite n="mtex489.png" x="3627" y="1121" w="64" h="64"/>
-    <sprite n="mtex491.png" x="1964" y="2383" w="128" h="64" r="y"/>
-    <sprite n="mtex495.png" x="742" y="2922" w="128" h="48" r="y"/>
-    <sprite n="mtex496.png" x="3019" y="2547" w="96" h="80"/>
-    <sprite n="mtex497.png" x="2094" y="2383" w="128" h="64" r="y"/>
-    <sprite n="mtex501.png" x="3098" y="2776" w="64" h="64"/>
-    <sprite n="mtex502.png" x="3121" y="2707" w="64" h="64"/>
-    <sprite n="mtex504.png" x="3154" y="3530" w="128" h="96" r="y"/>
-    <sprite n="mtex510.png" x="3164" y="2773" w="64" h="64"/>
-    <sprite n="muhead.mdl_0.tga" x="1331" y="2902" w="204" h="69"/>
-    <sprite n="muhead.mdl_1.tga" x="1498" y="2383" w="204" h="69"/>
-    <sprite n="mummy.mdl_0.tga" x="1" y="1803" w="198" h="536" r="y"/>
-    <sprite n="mummy.mdl_1.tga" x="2369" y="202" w="198" h="536" r="y"/>
-    <sprite n="mumshot.mdl_0.tga" x="2569" y="202" w="42" h="200" r="y"/>
-    <sprite n="mumstatu.mdl_0.tga" x="2905" y="3644" w="300" h="137"/>
-    <sprite n="necro.mdl_0.tga" x="388" y="860" w="584" h="174"/>
-    <sprite n="neptune.mdl_0.tga" x="1971" y="209" w="396" h="327"/>
-    <sprite n="NFarrow.mdl_0.tga" x="639" y="3223" w="149" h="40" r="y"/>
-    <sprite n="olmec1.mdl_0.tga" x="1" y="2341" w="196" h="452" r="y"/>
-    <sprite n="origin.png" x="3140" y="2598" w="64" h="64"/>
-    <sprite n="paladin.mdl_0.tga" x="879" y="2980" w="396" h="231"/>
-    <sprite n="pestshot.mdl_0.tga" x="2259" y="1162" w="88" h="61"/>
-    <sprite n="pew.mdl_0.tga" x="1" y="3908" w="252" h="178"/>
-    <sprite n="plantgen.mdl_0.tga" x="2021" y="1442" w="149" h="116" r="y"/>
-    <sprite n="plantmez.mdl_0.tga" x="1859" y="1696" w="146" h="232" r="y"/>
-    <sprite n="plantrom.mdl_0.tga" x="2143" y="2973" w="225" h="200" r="y"/>
-    <sprite n="pot1.mdl_0.tga" x="2365" y="1118" w="108" h="38"/>
-    <sprite n="pot1.mdl_1.tga" x="2007" y="1890" w="108" h="38"/>
-    <sprite n="pot1.mdl_2.tga" x="2117" y="1890" w="108" h="38"/>
-    <sprite n="pot1.mdl_3.tga" x="2475" y="1118" w="108" h="38"/>
-    <sprite n="pot2.mdl_0.tga" x="1420" y="1655" w="108" h="46"/>
-    <sprite n="pot2.mdl_1.tga" x="1530" y="1655" w="108" h="46"/>
-    <sprite n="pot2.mdl_2.tga" x="1953" y="2335" w="108" h="46"/>
-    <sprite n="pot2.mdl_3.tga" x="2063" y="2335" w="108" h="46"/>
-    <sprite n="pot3.mdl_0.tga" x="2063" y="1182" w="104" h="43"/>
-    <sprite n="pot3.mdl_1.tga" x="2067" y="1227" w="104" h="43"/>
-    <sprite n="pot3.mdl_2.tga" x="2173" y="1225" w="104" h="43"/>
-    <sprite n="pot3.mdl_3.tga" x="2279" y="1225" w="104" h="43"/>
-    <sprite n="punchdgr.mdl_0.tga" x="248" y="659" w="138" h="396" r="y"/>
-    <sprite n="purfir1.mdl_0.tga" x="2349" y="1162" w="88" h="61"/>
-    <sprite n="purifier.mdl_0.tga" x="1352" y="3327" w="360" h="234"/>
-    <sprite n="rat.mdl_0.tga" x="2842" y="3536" w="156" h="106"/>
-    <sprite n="raven.mdl_0.tga" x="1861" y="259" w="105" h="348" r="y"/>
-    <sprite n="ravenstf.mdl_0.tga" x="447" y="3683" w="440" h="199"/>
-    <sprite n="ravproj.mdl_0.tga" x="2152" y="980" w="211" h="180" r="y"/>
-    <sprite n="rflmtrch.mdl_0.tga" x="715" y="2062" w="80" h="320" r="y"/>
-    <sprite n="ring.mdl_0.tga" x="1958" y="1645" w="104" h="49"/>
-    <sprite n="ring.mdl_1.tga" x="1903" y="1961" w="104" h="49"/>
-    <sprite n="ring.mdl_2.tga" x="2009" y="1960" w="104" h="49"/>
-    <sprite n="ring.mdl_3.tga" x="2064" y="1645" w="104" h="49"/>
-    <sprite n="ring.mdl_4.tga" x="2115" y="1957" w="104" h="49"/>
-    <sprite n="ringft.mdl_0.tga" x="192" y="2975" w="57" h="156" r="y"/>
-    <sprite n="ringre.mdl_0.tga" x="2854" y="2485" w="108" h="75"/>
-    <sprite n="ringtn.mdl_0.tga" x="2117" y="2789" w="156" h="81"/>
-    <sprite n="ringwb.mdl_0.tga" x="485" y="3223" w="152" h="47"/>
-    <sprite n="rometrch.mdl_0.tga" x="190" y="3594" w="228" h="78"/>
-    <sprite n="rosearch.png" x="2082" y="2449" w="256" h="160" r="y"/>
-    <sprite n="rtex001.png" x="3004" y="2336" w="128" h="128"/>
-    <sprite n="rtex002.png" x="3183" y="2530" w="64" h="64"/>
-    <sprite n="rtex003.png" x="3206" y="2464" w="64" h="64"/>
-    <sprite n="rtex004.png" x="3206" y="2596" w="64" h="64"/>
-    <sprite n="rtex005.png" x="3249" y="2530" w="64" h="64"/>
-    <sprite n="rtex006.png" x="3187" y="2698" w="64" h="64"/>
-    <sprite n="rtex008.png" x="3272" y="2596" w="64" h="64"/>
-    <sprite n="rtex009.png" x="3272" y="2462" w="64" h="64"/>
-    <sprite n="rtex010.png" x="3315" y="2528" w="64" h="64"/>
-    <sprite n="rtex011.png" x="3338" y="2462" w="64" h="64"/>
-    <sprite n="rtex012.png" x="3310" y="2253" w="64" h="64"/>
-    <sprite n="rtex013.png" x="3134" y="2334" w="128" h="128"/>
-    <sprite n="rtex014.png" x="3129" y="2036" w="128" h="128"/>
-    <sprite n="rtex015.png" x="1343" y="1703" w="256" h="320" r="y"/>
-    <sprite n="rtex018.png" x="1354" y="1445" w="64" h="256"/>
-    <sprite n="rtex019.png" x="1993" y="2012" w="128" h="64" r="y"/>
-    <sprite n="rtex020.png" x="2067" y="1560" w="128" h="64" r="y"/>
-    <sprite n="rtex021.png" x="2170" y="1626" w="128" h="64" r="y"/>
-    <sprite n="rtex022.png" x="745" y="3265" w="176" h="64" r="y"/>
-    <sprite n="rtex023.png" x="2197" y="1556" w="128" h="64" r="y"/>
-    <sprite n="rtex028.png" x="2385" y="1225" w="128" h="64" r="y"/>
-    <sprite n="rtex029.png" x="2439" y="1158" w="128" h="64" r="y"/>
-    <sprite n="rtex030.png" x="2515" y="1224" w="128" h="64" r="y"/>
-    <sprite n="rtex031.png" x="2569" y="1158" w="128" h="64" r="y"/>
-    <sprite n="rtex032.png" x="2793" y="653" w="128" h="64" r="y"/>
-    <sprite n="rtex033.png" x="2923" y="653" w="128" h="64" r="y"/>
-    <sprite n="rtex034.png" x="3053" y="652" w="128" h="64" r="y"/>
-    <sprite n="rtex036.png" x="3131" y="581" w="128" h="64" r="y"/>
-    <sprite n="rtex038.png" x="3077" y="199" w="128" h="64" r="y"/>
-    <sprite n="rtex039.png" x="3207" y="199" w="128" h="64" r="y"/>
-    <sprite n="rtex040.png" x="3337" y="199" w="128" h="64" r="y"/>
-    <sprite n="rtex041.png" x="3421" y="131" w="128" h="64" r="y"/>
-    <sprite n="rtex042.png" x="2300" y="1622" w="128" h="64" r="y"/>
-    <sprite n="rtex043.png" x="2185" y="1822" w="128" h="64" r="y"/>
-    <sprite n="rtex044.png" x="2430" y="1610" w="128" h="64" r="y"/>
-    <sprite n="rtex045.png" x="2457" y="1544" w="128" h="64" r="y"/>
-    <sprite n="rtex047.png" x="2728" y="1420" w="128" h="96" r="y"/>
-    <sprite n="rtex050.png" x="2645" y="1224" w="128" h="64" r="y"/>
-    <sprite n="rtex052.png" x="3372" y="2187" w="64" h="64"/>
-    <sprite n="rtex053.png" x="3376" y="2253" w="64" h="64"/>
-    <sprite n="rtex054.png" x="3065" y="2975" w="64" h="64"/>
-    <sprite n="rtex058.png" x="2699" y="1149" w="128" h="64" r="y"/>
-    <sprite n="rtex059.png" x="2775" y="1215" w="128" h="64" r="y"/>
-    <sprite n="rtex060.png" x="2829" y="1148" w="128" h="64" r="y"/>
-    <sprite n="rtex062.png" x="3274" y="1645" w="128" h="128"/>
-    <sprite n="rtex063.png" x="3259" y="2023" w="128" h="128"/>
-    <sprite n="rtex065.png" x="3404" y="1618" w="128" h="128"/>
-    <sprite n="rtex066.png" x="3555" y="1210" w="128" h="128"/>
-    <sprite n="rtex067.png" x="3065" y="2845" w="128" h="128"/>
-    <sprite n="rtex068.png" x="3264" y="2332" w="128" h="128"/>
-    <sprite n="rtex070.png" x="3183" y="647" w="128" h="64" r="y"/>
-    <sprite n="rtex072.png" x="3131" y="2975" w="64" h="64"/>
-    <sprite n="rtex073.png" x="3112" y="3075" w="64" h="64"/>
-    <sprite n="rtex074.png" x="3154" y="3141" w="64" h="64"/>
-    <sprite n="rtex075.png" x="3178" y="3075" w="64" h="64"/>
-    <sprite n="rtex076.png" x="3197" y="3207" w="64" h="64"/>
-    <sprite n="rtex077.png" x="3220" y="3141" w="64" h="64"/>
-    <sprite n="rtex080.png" x="3263" y="3207" w="64" h="64"/>
-    <sprite n="rtex081.png" x="3261" y="578" w="128" h="64" r="y"/>
-    <sprite n="rtex082.png" x="3215" y="265" w="128" h="112"/>
-    <sprite n="rtex083.png" x="3263" y="2969" w="64" h="64"/>
-    <sprite n="rtex085.png" x="255" y="1803" w="16" h="64"/>
-    <sprite n="rtex086.png" x="3078" y="1936" w="32" h="32"/>
-    <sprite n="rtex087.png" x="3112" y="1936" w="32" h="32"/>
-    <sprite n="rtex088.png" x="3293" y="964" w="144" h="128" r="y"/>
-    <sprite n="rtex089.png" x="3889" y="1" w="144" h="128" r="y"/>
-    <sprite n="rtex090.png" x="1986" y="2675" w="160" h="112" r="y"/>
-    <sprite n="rtex091.png" x="3313" y="644" w="128" h="64" r="y"/>
-    <sprite n="rtex092.png" x="2827" y="2713" w="96" h="64" r="y"/>
-    <sprite n="rtex094.png" x="3244" y="3069" w="64" h="64"/>
-    <sprite n="rtex095.png" x="3286" y="3135" w="64" h="64"/>
-    <sprite n="rtex096.png" x="3310" y="3069" w="64" h="64"/>
-    <sprite n="rtex097.png" x="3230" y="2764" w="64" h="64"/>
-    <sprite n="rtex099.png" x="3253" y="2696" w="64" h="64"/>
-    <sprite n="rtex100.png" x="3338" y="2594" w="64" h="64"/>
-    <sprite n="rtex102.png" x="3381" y="2528" w="64" h="64"/>
-    <sprite n="rtex103.png" x="3404" y="2449" w="64" h="64"/>
-    <sprite n="rtex104.png" x="3296" y="2762" w="64" h="64"/>
-    <sprite n="rtex105.png" x="3319" y="2696" w="64" h="64"/>
-    <sprite n="rtex106.png" x="3146" y="1928" w="32" h="32"/>
-    <sprite n="rtex107.png" x="3180" y="1928" w="32" h="32"/>
-    <sprite n="rtex108.png" x="3012" y="2290" w="32" h="32"/>
-    <sprite n="rtex109.png" x="3071" y="2168" w="32" h="32"/>
-    <sprite n="rtex110.png" x="784" y="1539" w="16" h="64"/>
-    <sprite n="rtex111.png" x="3404" y="2594" w="64" h="64"/>
-    <sprite n="rtex112.png" x="3447" y="2515" w="64" h="64"/>
-    <sprite n="rtex113.png" x="3470" y="2449" w="64" h="64"/>
-    <sprite n="rtex114.png" x="3329" y="3201" w="64" h="64"/>
-    <sprite n="rtex116.png" x="3352" y="3135" w="64" h="64"/>
-    <sprite n="rtex117.png" x="3362" y="2762" w="64" h="64"/>
-    <sprite n="rtex118.png" x="3385" y="2694" w="64" h="64"/>
-    <sprite n="rtex119.png" x="3428" y="2760" w="64" h="64"/>
-    <sprite n="rtex120.png" x="3451" y="2694" w="64" h="64"/>
-    <sprite n="rtex121.png" x="3470" y="2581" w="64" h="64"/>
-    <sprite n="rtex122.png" x="3513" y="2515" w="64" h="64"/>
-    <sprite n="rtex123.png" x="3329" y="2958" w="64" h="64"/>
-    <sprite n="rtex124.png" x="3376" y="3024" w="64" h="64"/>
-    <sprite n="rtex125.png" x="3395" y="2958" w="64" h="64"/>
-    <sprite n="rtex126.png" x="3494" y="2760" w="64" h="64"/>
-    <sprite n="rtex127.png" x="3517" y="2647" w="64" h="64"/>
-    <sprite n="rtex128.png" x="3536" y="2581" w="64" h="64"/>
-    <sprite n="rtex129.png" x="3560" y="2713" w="64" h="64"/>
-    <sprite n="rtex130.png" x="3583" y="2647" w="64" h="64"/>
-    <sprite n="rtex131.png" x="3389" y="2071" w="64" h="64"/>
-    <sprite n="rtex133.png" x="3463" y="1841" w="64" h="64"/>
-    <sprite n="rtex135.png" x="3465" y="1748" w="64" h="64"/>
-    <sprite n="rtex137.png" x="3391" y="578" w="128" h="64" r="y"/>
-    <sprite n="rtex145.png" x="3438" y="2137" w="64" h="64"/>
-    <sprite n="rtex146.png" x="2801" y="1098" w="96" h="48" r="y"/>
-    <sprite n="rtex147.png" x="2899" y="1098" w="96" h="48" r="y"/>
-    <sprite n="rtex148.png" x="3455" y="2071" w="64" h="64"/>
-    <sprite n="rtex149.png" x="2957" y="1938" w="48" h="32" r="y"/>
-    <sprite n="rtex150.png" x="2424" y="2608" w="80" h="48"/>
-    <sprite n="rtex151.png" x="3427" y="521" w="96" h="48" r="y"/>
-    <sprite n="rtex152.png" x="2114" y="2284" w="96" h="48" r="y"/>
-    <sprite n="rtex154.png" x="3028" y="3496" w="96" h="32"/>
-    <sprite n="rtex156.png" x="3105" y="2168" w="32" h="32"/>
-    <sprite n="rtex158.png" x="2082" y="2611" w="112" h="48" r="y"/>
-    <sprite n="rtex160.png" x="3394" y="2319" w="128" h="128"/>
-    <sprite n="rtex161.png" x="3195" y="2839" w="128" h="128"/>
-    <sprite n="rtex162.png" x="2858" y="1411" w="128" h="96" r="y"/>
-    <sprite n="rtex163.png" x="3442" y="2203" w="64" h="64"/>
-    <sprite n="rtex164.png" x="3504" y="2137" w="64" h="64"/>
-    <sprite n="rtex165.png" x="3467" y="197" w="128" h="64" r="y"/>
-    <sprite n="rtex166.png" x="255" y="2063" w="16" h="32"/>
-    <sprite n="rtex173.png" x="3508" y="2203" w="64" h="64"/>
-    <sprite n="rtex174.png" x="3551" y="131" w="128" h="64" r="y"/>
-    <sprite n="rtex175.png" x="3325" y="2828" w="128" h="128"/>
-    <sprite n="rtex176.png" x="3139" y="2166" w="32" h="32"/>
-    <sprite n="rtex177.png" x="3173" y="2166" w="32" h="32"/>
-    <sprite n="rtex178.png" x="3207" y="2166" w="32" h="32"/>
-    <sprite n="rtex179.png" x="3241" y="2166" w="32" h="32"/>
-    <sprite n="rtex180.png" x="3214" y="1923" w="32" h="32"/>
-    <sprite n="rtex182.png" x="3248" y="1923" w="32" h="32"/>
-    <sprite n="rtex183.png" x="3282" y="1923" w="32" h="32"/>
-    <sprite n="rtex184.png" x="3316" y="1923" w="32" h="32"/>
-    <sprite n="rtex185.png" x="3275" y="2153" w="32" h="32"/>
-    <sprite n="rtex186.png" x="3350" y="1907" w="32" h="32"/>
-    <sprite n="rtex187.png" x="3384" y="1907" w="32" h="32"/>
-    <sprite n="rtex188.png" x="3309" y="2153" w="32" h="32"/>
-    <sprite n="rtex189.png" x="3343" y="2153" w="32" h="32"/>
-    <sprite n="rtex190.png" x="3539" y="1340" w="32" h="32"/>
-    <sprite n="rtex191.png" x="3573" y="1340" w="32" h="32"/>
-    <sprite n="rtex192.png" x="3607" y="1340" w="32" h="32"/>
-    <sprite n="rtex193.png" x="3641" y="1340" w="32" h="32"/>
-    <sprite n="rtex194.png" x="3646" y="1087" w="32" h="32"/>
-    <sprite n="rtex196.png" x="3680" y="1087" w="32" h="32"/>
-    <sprite n="rtex197.png" x="3140" y="2664" w="32" h="32"/>
-    <sprite n="rtex198.png" x="3174" y="2664" w="32" h="32"/>
-    <sprite n="rtex199.png" x="3208" y="2662" w="32" h="32"/>
-    <sprite n="rtex200.png" x="2761" y="2746" w="64" h="32"/>
-    <sprite n="rtex201.png" x="784" y="1605" w="16" h="64" r="y"/>
-    <sprite n="rtex204.png" x="3242" y="2662" w="32" h="32"/>
-    <sprite n="rtex205.png" x="3377" y="2153" w="32" h="32"/>
-    <sprite n="rtex206.png" x="3065" y="3041" w="32" h="32"/>
-    <sprite n="rtex207.png" x="3099" y="3041" w="32" h="32"/>
-    <sprite n="rtex208.png" x="3529" y="1814" w="64" h="64"/>
-    <sprite n="rtex211.png" x="2435" y="2213" w="64" h="32"/>
-    <sprite n="rtex212.png" x="3531" y="1748" w="64" h="64"/>
-    <sprite n="rtex213.png" x="3595" y="1814" w="64" h="64"/>
-    <sprite n="rtex214.png" x="3521" y="2037" w="64" h="64"/>
-    <sprite n="rtex215.png" x="3570" y="2103" w="64" h="64"/>
-    <sprite n="rtex216.png" x="3587" y="2037" w="64" h="64"/>
-    <sprite n="rtex217.png" x="3576" y="1506" w="64" h="64"/>
-    <sprite n="rtex218.png" x="3607" y="1440" w="64" h="64"/>
-    <sprite n="rtex220.png" x="3642" y="1374" w="64" h="64"/>
-    <sprite n="rtex221.png" x="3642" y="1506" w="64" h="64"/>
-    <sprite n="rtex222.png" x="3597" y="197" w="128" h="64" r="y"/>
-    <sprite n="rtex223.png" x="3681" y="131" w="128" h="64" r="y"/>
-    <sprite n="rtex224.png" x="2224" y="2383" w="128" h="64" r="y"/>
-    <sprite n="rtex225.png" x="2123" y="2008" w="128" h="64" r="y"/>
-    <sprite n="rtex226.png" x="2315" y="1822" w="128" h="64" r="y"/>
-    <sprite n="rtex227.png" x="2253" y="2001" w="128" h="64" r="y"/>
-    <sprite n="rtex228.png" x="2560" y="1610" w="128" h="64" r="y"/>
-    <sprite n="rtex229.png" x="3673" y="1440" w="64" h="64"/>
-    <sprite n="rtex230.png" x="4035" y="1" w="32" h="64"/>
-    <sprite n="rtex231.png" x="255" y="2097" w="16" h="32"/>
-    <sprite n="rtex233.png" x="3597" y="1717" w="64" h="64"/>
-    <sprite n="rtex234.png" x="2902" y="2779" w="96" h="64" r="y"/>
-    <sprite n="rtex235.png" x="3661" y="1783" w="64" h="64"/>
-    <sprite n="rtex236.png" x="3663" y="1717" w="64" h="64"/>
-    <sprite n="rtex237.png" x="3727" y="1783" w="64" h="64"/>
-    <sprite n="rtex238.png" x="3708" y="1506" w="64" h="64"/>
-    <sprite n="rtex239.png" x="3729" y="1702" w="64" h="64"/>
-    <sprite n="rtex240.png" x="2501" y="2213" w="64" h="32"/>
-    <sprite n="rtex241.png" x="3693" y="1121" w="64" h="64"/>
-    <sprite n="rtex242.png" x="3708" y="1317" w="64" h="64"/>
-    <sprite n="rtex243.png" x="3739" y="1383" w="64" h="64"/>
-    <sprite n="rtex245.png" x="2561" y="1951" w="64" h="32"/>
-    <sprite n="rtex246.png" x="2625" y="1914" w="64" h="32"/>
-    <sprite n="rtex248.png" x="2627" y="1948" w="64" h="32"/>
-    <sprite n="rtex249.png" x="3215" y="713" w="112" h="112"/>
-    <sprite n="rtex250.png" x="3000" y="2779" w="96" h="64" r="y"/>
-    <sprite n="rtex251.png" x="2679" y="2648" w="128" h="96" r="y"/>
-    <sprite n="rtex252.png" x="2587" y="1540" w="128" h="64" r="y"/>
-    <sprite n="rtex253.png" x="2445" y="1822" w="128" h="64" r="y"/>
-    <sprite n="rtex254.png" x="2764" y="3166" w="128" h="64" r="y"/>
-    <sprite n="rtex255.png" x="2807" y="3232" w="128" h="64" r="y"/>
-    <sprite n="rtex256.png" x="3774" y="1317" w="64" h="64"/>
-    <sprite n="rtex257.png" x="2567" y="2213" w="64" h="32"/>
-    <sprite n="rtex258.png" x="2633" y="2205" w="64" h="32"/>
-    <sprite n="rtex259.png" x="3774" y="1449" w="64" h="64"/>
-    <sprite n="rtex261.png" x="2699" y="2205" w="64" h="32"/>
-    <sprite n="rtex262.png" x="3133" y="3041" w="32" h="32"/>
-    <sprite n="rtex263.png" x="3167" y="3041" w="32" h="32"/>
-    <sprite n="rtex264.png" x="3201" y="3035" w="32" h="32"/>
-    <sprite n="rtex265.png" x="2894" y="3158" w="128" h="64" r="y"/>
-    <sprite n="rtex266.png" x="3805" y="1383" w="64" h="64"/>
-    <sprite n="rtex267.png" x="3840" y="1449" w="64" h="64"/>
-    <sprite n="rtex270.png" x="784" y="1671" w="16" h="64" r="y"/>
-    <sprite n="rtex272.png" x="2937" y="3224" w="128" h="64" r="y"/>
-    <sprite n="rtex273.png" x="2383" y="1997" w="128" h="64" r="y"/>
-    <sprite n="rtex274.png" x="2575" y="1822" w="128" h="64" r="y"/>
-    <sprite n="rtex275.png" x="3887" y="545" w="64" h="64"/>
-    <sprite n="rtex276.png" x="3953" y="543" w="64" h="64"/>
-    <sprite n="rtex277.png" x="2302" y="2261" w="128" h="64" r="y"/>
-    <sprite n="rtex278.png" x="2354" y="2382" w="128" h="64" r="y"/>
-    <sprite n="rtex279.png" x="3235" y="3035" w="32" h="32"/>
-    <sprite n="rtex280.png" x="3269" y="3035" w="32" h="32"/>
-    <sprite n="rtex281.png" x="3651" y="571" w="112" h="64" r="y"/>
-    <sprite n="rtex282.png" x="3759" y="1065" w="64" h="64"/>
-    <sprite n="rtex285.png" x="3825" y="1065" w="64" h="64"/>
-    <sprite n="rtex286.png" x="4013" y="609" w="64" h="64"/>
-    <sprite n="rtex287.png" x="4019" y="543" w="64" h="64"/>
-    <sprite n="rtex292.png" x="4013" y="675" w="64" h="64"/>
-    <sprite n="rtex295.png" x="3891" y="1049" w="64" h="64"/>
-    <sprite n="rtex296.png" x="3957" y="1049" w="64" h="64"/>
-    <sprite n="rtex297.png" x="2693" y="1938" w="64" h="32"/>
-    <sprite n="rtex298.png" x="4023" y="892" w="64" h="64"/>
-    <sprite n="rtex301.png" x="2432" y="2261" w="128" h="64" r="y"/>
-    <sprite n="rtex305.png" x="3975" y="958" w="64" h="64"/>
-    <sprite n="rtex306.png" x="4023" y="1024" w="64" h="64"/>
-    <sprite n="rtex307.png" x="3245" y="3781" w="64" h="48" r="y"/>
-    <sprite n="rtex308.png" x="3906" y="1391" w="64" h="64"/>
-    <sprite n="rtex309.png" x="784" y="1737" w="16" h="64" r="y"/>
-    <sprite n="rtex310.png" x="784" y="1803" w="16" h="64" r="y"/>
-    <sprite n="rtex311.png" x="2871" y="1872" w="96" h="64"/>
-    <sprite n="rtex312.png" x="3574" y="2169" w="64" h="64"/>
-    <sprite n="rtex313.png" x="1719" y="3259" w="144" h="64"/>
-    <sprite n="rtex314.png" x="3023" y="2710" w="96" h="64" r="y"/>
-    <sprite n="rtex316.png" x="3311" y="3781" w="64" h="48" r="y"/>
-    <sprite n="rtex317.png" x="3725" y="512" w="48" h="48"/>
-    <sprite n="rtex318.png" x="3303" y="3035" w="32" h="32"/>
-    <sprite n="rtex319.png" x="3276" y="2662" w="32" h="32"/>
-    <sprite n="rtex320.png" x="640" y="2506" w="64" h="208"/>
-    <sprite n="rtex321.png" x="2484" y="2373" w="128" h="64" r="y"/>
-    <sprite n="rtex322.png" x="3636" y="2103" w="64" h="64"/>
-    <sprite n="rtex323.png" x="2829" y="2846" w="128" h="96" r="y"/>
-    <sprite n="rtex324.png" x="2690" y="1606" w="128" h="64" r="y"/>
-    <sprite n="rtex326.png" x="2038" y="1275" w="128" h="32" r="y"/>
-    <sprite n="rtex328.png" x="3653" y="2010" w="64" h="64"/>
-    <sprite n="rtex329.png" x="3640" y="2169" w="64" h="64"/>
-    <sprite n="rtex330.png" x="3702" y="2076" w="64" h="64"/>
-    <sprite n="rtex331.png" x="2717" y="1538" w="128" h="64" r="y"/>
-    <sprite n="rtex332.png" x="2820" y="1604" w="128" h="64" r="y"/>
-    <sprite n="rtex333.png" x="3719" y="2010" w="64" h="64"/>
-    <sprite n="rtex334.png" x="3793" y="1768" w="64" h="64"/>
-    <sprite n="rtex335.png" x="2847" y="1518" w="128" h="64" r="y"/>
-    <sprite n="rtex336.png" x="2905" y="1214" w="128" h="64" r="y"/>
-    <sprite n="rtex337.png" x="2959" y="1148" w="128" h="64" r="y"/>
-    <sprite n="rtex338.png" x="2772" y="2780" w="128" h="64" r="y"/>
-    <sprite n="rtex339.png" x="3859" y="1775" w="64" h="64"/>
-    <sprite n="rtex340.png" x="4001" y="1245" w="64" h="64"/>
-    <sprite n="rtex341.png" x="4001" y="1311" w="64" h="64"/>
-    <sprite n="rtex342.png" x="1547" y="1563" w="128" h="80"/>
-    <sprite n="rtex343.png" x="1677" y="1563" w="128" h="80"/>
-    <sprite n="rtex344.png" x="3455" y="2826" w="128" h="128"/>
-    <sprite n="rtex345.png" x="2514" y="838" w="256" h="128"/>
-    <sprite n="rtex347.png" x="3389" y="1941" w="128" h="128"/>
-    <sprite n="rtex348.png" x="3536" y="2399" w="64" h="64"/>
-    <sprite n="rtex349.png" x="3579" y="2465" w="64" h="64"/>
-    <sprite n="rtex350.png" x="1021" y="1" w="512" h="256"/>
-    <sprite n="rtex351.png" x="2011" y="3259" w="128" h="64"/>
-    <sprite n="rtex352.png" x="3087" y="1780" w="96" h="80"/>
-    <sprite n="rtex353.png" x="1807" y="1563" w="128" h="80"/>
-    <sprite n="rtex354.png" x="3573" y="263" w="128" h="96"/>
-    <sprite n="rtex355.png" x="3345" y="265" w="112" h="112"/>
-    <sprite n="rtex356.png" x="2265" y="2872" w="144" h="96" r="y"/>
-    <sprite n="rtex357.png" x="3067" y="3222" w="128" h="64" r="y"/>
-    <sprite n="rtex358.png" x="2196" y="2611" w="112" h="48" r="y"/>
-    <sprite n="rtex359.png" x="3545" y="1128" w="80" h="80"/>
-    <sprite n="rtex360.png" x="975" y="2914" w="176" h="64" r="y"/>
-    <sprite n="rtex361.png" x="3679" y="1" w="208" h="128"/>
-    <sprite n="rtex362.png" x="3602" y="2399" w="64" h="64"/>
-    <sprite n="rtex363.png" x="1865" y="3259" w="144" h="64" r="y"/>
-    <sprite n="rtex364.png" x="3645" y="2465" w="64" h="64"/>
-    <sprite n="rtex365.png" x="2891" y="1938" w="64" h="32" r="y"/>
-    <sprite n="rtex366.png" x="3310" y="2662" w="32" h="32"/>
-    <sprite n="rtex367.png" x="2172" y="1442" w="144" h="112" r="y"/>
-    <sprite n="rtex368.png" x="3685" y="1187" w="128" h="128"/>
-    <sprite n="rtex369.png" x="2007" y="1696" w="176" h="192" r="y"/>
-    <sprite n="rtex370.png" x="3459" y="265" w="112" h="112"/>
-    <sprite n="rtex376.png" x="3344" y="2660" w="32" h="32"/>
-    <sprite n="rtex377.png" x="3756" y="4028" w="128" h="64" r="y"/>
-    <sprite n="rtex378.png" x="3031" y="1280" w="160" h="128"/>
-    <sprite n="rtex379.png" x="3378" y="2660" w="32" h="32"/>
-    <sprite n="rtex380.png" x="3768" y="2076" w="64" h="64"/>
-    <sprite n="rtex381.png" x="3772" y="2142" w="64" h="64"/>
-    <sprite n="rtex382.png" x="3785" y="1979" w="64" h="64"/>
-    <sprite n="rtex383.png" x="3851" y="1979" w="64" h="64"/>
-    <sprite n="rtex384.png" x="3925" y="1775" w="64" h="64"/>
-    <sprite n="rtex385.png" x="2705" y="1806" w="128" h="64" r="y"/>
-    <sprite n="rtex386.png" x="3989" y="1587" w="64" h="64"/>
-    <sprite n="rtex387.png" x="3715" y="935" w="128" h="128"/>
-    <sprite n="rtex389.png" x="3991" y="1719" w="64" h="64"/>
-    <sprite n="rtex390.png" x="3395" y="3201" w="64" h="64"/>
-    <sprite n="rtex391.png" x="3418" y="3090" w="64" h="64"/>
-    <sprite n="rtex392.png" x="2905" y="399" w="176" h="192" r="y"/>
-    <sprite n="rtex393.png" x="3812" y="789" w="128" h="128"/>
-    <sprite n="rtex394.png" x="3442" y="3024" w="64" h="64"/>
-    <sprite n="rtex395.png" x="3775" y="512" w="48" h="48"/>
-    <sprite n="rtex399.png" x="2562" y="2247" w="128" h="64" r="y"/>
-    <sprite n="rtex400.png" x="2614" y="2363" w="128" h="64" r="y"/>
-    <sprite n="rtex401.png" x="3461" y="2956" w="64" h="64"/>
-    <sprite n="rtex403.png" x="3461" y="3156" w="64" h="64"/>
-    <sprite n="rtex404.png" x="3484" y="3090" w="64" h="64"/>
-    <sprite n="rtex405.png" x="3527" y="2956" w="64" h="64"/>
-    <sprite n="rtex406.png" x="2692" y="2239" w="128" h="64" r="y"/>
-    <sprite n="rtex407.png" x="3903" y="413" w="128" h="128"/>
-    <sprite n="rtex408.png" x="2309" y="1308" w="256" h="128"/>
-    <sprite n="rtex409.png" x="3626" y="2713" w="64" h="64"/>
-    <sprite n="rtex410.png" x="3649" y="2597" w="64" h="64"/>
-    <sprite n="rtex411.png" x="3815" y="1131" w="128" h="128"/>
-    <sprite n="rtex413.png" x="3845" y="919" w="128" h="128"/>
-    <sprite n="rtex414.png" x="1320" y="2389" w="176" h="64" r="y"/>
-    <sprite n="rtex415.png" x="3412" y="2660" w="32" h="32"/>
-    <sprite n="rtex416.png" x="3871" y="1261" w="128" h="128"/>
-    <sprite n="rtex417.png" x="2835" y="1806" w="128" h="64" r="y"/>
-    <sprite n="rtex418.png" x="2759" y="1938" w="64" h="32"/>
-    <sprite n="rtex419.png" x="1343" y="2025" w="128" h="64"/>
-    <sprite n="rtex420.png" x="255" y="1935" w="16" h="64" r="y"/>
-    <sprite n="rtex421.png" x="3524" y="2269" w="128" h="128"/>
-    <sprite n="rtex422.png" x="3983" y="1971" w="64" h="64"/>
-    <sprite n="rtex424.png" x="1535" y="209" w="240" h="48"/>
-    <sprite n="rtex425.png" x="3089" y="1148" w="128" h="64" r="y"/>
-    <sprite n="rtex426.png" x="2861" y="3108" w="80" h="48" r="y"/>
-    <sprite n="rtex427.png" x="3859" y="1645" w="128" h="128"/>
-    <sprite n="rtex428.png" x="1433" y="2349" w="128" h="32"/>
-    <sprite n="rtex429.png" x="3715" y="2597" w="64" h="64"/>
-    <sprite n="rtex0430.png" x="2327" y="1544" w="128" h="64" r="y"/>
-    <sprite n="rtex430.png" x="3777" y="2431" w="64" h="64"/>
-    <sprite n="rtex431.png" x="3401" y="3397" w="64" h="64"/>
-    <sprite n="rtex433.png" x="3465" y="3222" w="64" h="64"/>
-    <sprite n="rtex435.png" x="1563" y="2349" w="128" h="32"/>
-    <sprite n="rtex436.png" x="518" y="1036" w="128" h="16"/>
-    <sprite n="rtex437.png" x="3527" y="3156" w="64" h="64"/>
-    <sprite n="rtex439.png" x="3550" y="3088" w="64" h="64"/>
-    <sprite n="rtex440.png" x="3574" y="3022" w="64" h="64"/>
-    <sprite n="rtex441.png" x="3593" y="2909" w="64" h="64"/>
-    <sprite n="rtex442.png" x="2648" y="3541" w="192" h="96"/>
-    <sprite n="rtex444.png" x="2825" y="1938" w="64" h="32"/>
-    <sprite n="rtex446.png" x="3165" y="1214" w="128" h="64" r="y"/>
-    <sprite n="rtex447.png" x="3219" y="1147" w="128" h="64" r="y"/>
-    <sprite n="rtex448.png" x="3465" y="3288" w="64" h="64"/>
-    <sprite n="rtex449.png" x="3467" y="3354" w="64" h="64"/>
-    <sprite n="rtex451.png" x="3531" y="3222" w="64" h="64"/>
-    <sprite n="rtex452.png" x="3593" y="3154" w="64" h="64"/>
-    <sprite n="rtex454.png" x="3924" y="1457" w="128" h="128"/>
-    <sprite n="rtex455.png" x="2831" y="2193" w="48" h="32"/>
-    <sprite n="rtex456.png" x="3616" y="3088" w="64" h="64"/>
-    <sprite n="rtex457.png" x="2895" y="1972" w="96" h="64" r="y"/>
-    <sprite n="rtex458.png" x="2969" y="1870" w="96" h="64" r="y"/>
-    <sprite n="rtex459.png" x="2273" y="2067" w="160" h="192"/>
-    <sprite n="rtex460.png" x="2877" y="968" w="256" h="128" r="y"/>
-    <sprite n="rtex461.png" x="3439" y="964" w="144" h="128" r="y"/>
-    <sprite n="rtex462.png" x="3126" y="3496" w="96" h="32" r="y"/>
-    <sprite n="rtex464.png" x="2310" y="2611" w="112" h="48" r="y"/>
-    <sprite n="rtex465.png" x="3446" y="2660" w="32" h="32"/>
-    <sprite n="rtex466.png" x="3531" y="3288" w="64" h="64"/>
-    <sprite n="rtex467.png" x="3640" y="2975" w="64" h="64"/>
-    <sprite n="rtex468.png" x="3659" y="2909" w="64" h="64"/>
-    <sprite n="rtex469.png" x="3715" y="2729" w="64" h="64"/>
-    <sprite n="rtex470.png" x="3857" y="197" w="80" h="64"/>
-    <sprite n="rtex473.png" x="3758" y="2663" w="64" h="64"/>
-    <sprite n="rtex474.png" x="1003" y="2704" w="192" h="112"/>
-    <sprite n="rtex475.png" x="2569" y="2872" w="128" h="96"/>
-    <sprite n="rtex476.png" x="3654" y="2235" w="128" h="128"/>
-    <sprite n="rtex479.png" x="3909" y="1841" w="128" h="128"/>
-    <sprite n="rtex480.png" x="3335" y="3267" w="128" h="128"/>
-    <sprite n="rtex481.png" x="3295" y="1213" w="128" h="64" r="y"/>
-    <sprite n="rtex482.png" x="3349" y="1144" w="128" h="64" r="y"/>
-    <sprite n="rtex483.png" x="3443" y="644" w="128" h="64" r="y"/>
-    <sprite n="rtex484.png" x="3521" y="571" w="128" h="64" r="y"/>
-    <sprite n="rtex485.png" x="3727" y="197" w="128" h="64" r="y"/>
-    <sprite n="rtex486.png" x="3811" y="131" w="128" h="64" r="y"/>
-    <sprite n="rtex495.png" x="2699" y="2868" w="128" h="96"/>
-    <sprite n="rtex496.png" x="3941" y="131" w="144" h="128" r="y"/>
-    <sprite n="rtex497.png" x="3781" y="2563" w="64" h="64"/>
-    <sprite n="rtex498.png" x="3585" y="2779" w="128" h="128"/>
-    <sprite n="rtex499.png" x="3056" y="3837" w="256" h="256"/>
-    <sprite n="rtex500.png" x="3800" y="2497" w="64" h="64"/>
-    <sprite n="rtex501.png" x="3843" y="2404" w="64" h="64"/>
-    <sprite n="rtex502.png" x="3597" y="3931" w="128" h="96" r="y"/>
-    <sprite n="rtex508.png" x="3480" y="2647" w="32" h="32"/>
-    <sprite n="rtex509.png" x="1937" y="1563" w="128" h="80" r="y"/>
-    <sprite n="rtex510.png" x="3866" y="2338" w="64" h="64"/>
-    <sprite n="rtex511.png" x="3784" y="2208" w="128" h="128"/>
-    <sprite n="rtex512.png" x="3737" y="707" w="80" h="80"/>
-    <sprite n="rtex513.png" x="3185" y="1775" w="80" h="80"/>
-    <sprite n="rtex514.png" x="3914" y="2177" w="64" h="64"/>
-    <sprite n="rtex0800.png" x="3197" y="2969" w="64" h="64"/>
-    <sprite n="rtex3390.png" x="3972" y="1391" w="64" h="64"/>
-    <sprite n="rtex3400.png" x="3024" y="3156" w="128" h="64" r="y"/>
-    <sprite n="rtex3411.png" x="1714" y="3193" w="160" h="64" r="y"/>
-    <sprite n="rtex3420.png" x="1876" y="3193" w="128" h="64"/>
-    <sprite n="rtex3430.png" x="2006" y="3193" w="128" h="64"/>
-    <sprite n="rtex3490.png" x="611" y="387" w="512" h="256"/>
-    <sprite n="rtex3510.png" x="1601" y="1703" w="256" h="256"/>
-    <sprite n="rtex3520.png" x="1691" y="2091" w="256" h="256"/>
-    <sprite n="rtex3530.png" x="3519" y="1907" w="128" h="128"/>
-    <sprite n="rtex3540.png" x="3649" y="1880" w="128" h="128"/>
-    <sprite n="rtex3561.png" x="3534" y="1587" w="128" h="128"/>
-    <sprite n="rtex3570.png" x="3467" y="3773" w="128" h="192" r="y"/>
-    <sprite n="rtex3580.png" x="3467" y="3967" w="128" h="64" r="y"/>
-    <sprite n="rtex3590.png" x="2852" y="1670" w="160" h="128"/>
-    <sprite n="rtex3600.png" x="777" y="2722" w="224" h="96" r="y"/>
-    <sprite n="rtex3610.png" x="3626" y="4029" w="128" h="64" r="y"/>
-    <sprite n="rtex3620.png" x="3664" y="1572" w="128" h="128"/>
-    <sprite n="rtex3630.png" x="3602" y="2531" w="64" h="64"/>
-    <sprite n="rtex3650.png" x="3706" y="2142" w="64" h="64"/>
-    <sprite n="rtex3660.png" x="1153" y="2914" w="176" h="64" r="y"/>
-    <sprite n="rtex3670.png" x="1541" y="3260" w="176" h="64" r="y"/>
-    <sprite n="rtex3680.png" x="1142" y="2389" w="176" h="64" r="y"/>
-    <sprite n="rtex3790.png" x="2136" y="3193" w="128" h="64"/>
-    <sprite n="rtex3800.png" x="3794" y="1515" w="128" h="128"/>
-    <sprite n="rtex3820.png" x="3834" y="2045" w="64" h="64"/>
-    <sprite n="rtex3830.png" x="2642" y="1676" w="208" h="128"/>
-    <sprite n="rtex3840.png" x="2513" y="1988" w="128" h="64" r="y"/>
-    <sprite n="rtex3870.png" x="3989" y="1653" w="64" h="64"/>
-    <sprite n="rtex3890.png" x="3668" y="2365" w="64" h="64"/>
-    <sprite n="rtex3900.png" x="3335" y="3397" w="64" h="64"/>
-    <sprite n="rtex3910.png" x="2506" y="2608" w="80" h="48" r="y"/>
-    <sprite n="rtex3940.png" x="3883" y="632" w="128" h="128"/>
-    <sprite n="rtex3950.png" x="2141" y="3259" w="128" h="64"/>
-    <sprite n="rtex4040.png" x="3508" y="3022" w="64" h="64"/>
-    <sprite n="rtex4100.png" x="3951" y="261" w="128" h="128"/>
-    <sprite n="rtex4110.png" x="3083" y="387" w="176" h="192" r="y"/>
-    <sprite n="rtex4120.png" x="2643" y="1982" w="128" h="64" r="y"/>
-    <sprite n="rtex4121.png" x="255" y="1869" w="16" h="64" r="y"/>
-    <sprite n="rtex4130.png" x="2741" y="1872" w="128" h="64" r="y"/>
-    <sprite n="rtex4133.png" x="3668" y="2531" w="64" h="64"/>
-    <sprite n="rtex4140.png" x="3942" y="762" w="128" h="128"/>
-    <sprite n="rtex4143.png" x="3711" y="2431" w="64" h="64"/>
-    <sprite n="rtex4150.png" x="3734" y="2365" w="64" h="64"/>
-    <sprite n="rtex4151.png" x="3838" y="2111" w="64" h="64"/>
-    <sprite n="rtex4160.png" x="3900" y="2045" w="64" h="64"/>
-    <sprite n="rtex4161.png" x="3945" y="1115" w="128" h="128"/>
-    <sprite n="rtex4162.png" x="3917" y="1971" w="64" h="64"/>
-    <sprite n="rtex4170.png" x="2950" y="1584" w="128" h="64" r="y"/>
-    <sprite n="rtex4180.png" x="2549" y="2658" w="128" h="96"/>
-    <sprite n="rtex4190.png" x="3825" y="511" w="64" h="32"/>
-    <sprite n="rtex4191.png" x="3904" y="2111" w="64" h="64"/>
-    <sprite n="rtex4200.png" x="2977" y="1509" w="128" h="64" r="y"/>
-    <sprite n="rtex4210.png" x="3966" y="2037" w="64" h="64"/>
-    <sprite n="rtex4211.png" x="3284" y="3525" w="128" h="96" r="y"/>
-    <sprite n="rtex4220.png" x="3779" y="1849" w="128" h="128"/>
-    <sprite n="rtex4221.png" x="3035" y="1214" w="128" h="64" r="y"/>
-    <sprite n="rtex4230.png" x="3692" y="2663" w="64" h="64"/>
-    <sprite n="rtex4240.png" x="2071" y="2875" w="192" h="96"/>
-    <sprite n="rtex4250.png" x="2168" y="1272" w="112" h="32"/>
-    <sprite n="rtex4260.png" x="2765" y="2193" w="64" h="32"/>
-    <sprite n="rtex4270.png" x="388" y="1036" w="128" h="16"/>
-    <sprite n="rtex4290.png" x="3734" y="2497" w="64" h="64"/>
-    <sprite n="rtex4300.png" x="3800" y="2338" w="64" h="64"/>
-    <sprite n="rtex4310.png" x="3414" y="3463" w="64" h="64"/>
-    <sprite n="rtex4320.png" x="3414" y="3529" w="64" h="64"/>
-    <sprite n="scarabst.mdl_0.tga" x="1" y="3241" w="187" h="440" r="y"/>
-    <sprite n="schunk1.mdl_0.tga" x="1551" y="1255" w="25" h="60" r="y"/>
-    <sprite n="schunk1.mdl_1.tga" x="2099" y="1930" w="60" h="25"/>
-    <sprite n="schunk2.mdl_0.tga" x="1859" y="1930" w="60" h="29"/>
-    <sprite n="schunk2.mdl_1.tga" x="1921" y="1930" w="60" h="29"/>
-    <sprite n="schunk3.mdl_0.tga" x="2161" y="1930" w="60" h="25"/>
-    <sprite n="schunk3.mdl_1.tga" x="2223" y="1930" w="60" h="25"/>
-    <sprite n="schunk4.mdl_0.tga" x="1983" y="1930" w="56" h="28"/>
-    <sprite n="schunk4.mdl_1.tga" x="2041" y="1930" w="56" h="28"/>
-    <sprite n="scorpion.mdl_0.tga" x="2114" y="2078" w="157" h="204" r="y"/>
-    <sprite n="scorpion.mdl_1.tga" x="2340" y="2449" w="204" h="157"/>
-    <sprite n="scrbpbdy.mdl_0.tga" x="1197" y="2704" w="204" h="97"/>
-    <sprite n="scrbpwng.mdl_0.tga" x="636" y="2716" w="68" h="204" r="y"/>
-    <sprite n="scrbstp1.mdl_0.tga" x="1329" y="2803" w="204" h="97"/>
-    <sprite n="seaweed.mdl_0.tga" x="786" y="1382" w="20" h="81"/>
-    <sprite n="sflesh1.mdl_0.tga" x="1798" y="1275" w="108" h="39"/>
-    <sprite n="sflesh2.mdl_0.tga" x="2285" y="1921" w="108" h="31"/>
-    <sprite n="sflesh3.mdl_0.tga" x="3299" y="1480" w="108" h="70"/>
-    <sprite n="shard.mdl_0.tga" x="2773" y="1972" w="120" h="68"/>
-    <sprite n="shard.mdl_1.tga" x="2965" y="1800" w="120" h="68"/>
-    <sprite n="shard.mdl_2.tga" x="3080" y="1575" w="120" h="68"/>
-    <sprite n="shard1.mdl_0.tga" x="2551" y="1914" w="72" h="35"/>
-    <sprite n="shard1.mdl_1.tga" x="2533" y="2327" w="72" h="35"/>
-    <sprite n="shard1.mdl_2.tga" x="2721" y="2593" w="72" h="35"/>
-    <sprite n="shard1.mdl_3.tga" x="2943" y="3098" w="72" h="35"/>
-    <sprite n="shard2.mdl_0.tga" x="2757" y="2305" w="52" h="37"/>
-    <sprite n="shard2.mdl_1.tga" x="2811" y="2305" w="52" h="37"/>
-    <sprite n="shard2.mdl_2.tga" x="2865" y="2304" w="52" h="37"/>
-    <sprite n="shard2.mdl_3.tga" x="2919" y="2304" w="52" h="37"/>
-    <sprite n="shard3.mdl_0.tga" x="1551" y="959" w="22" h="72" r="y"/>
-    <sprite n="shard3.mdl_1.tga" x="1551" y="1033" w="22" h="72" r="y"/>
-    <sprite n="shard3.mdl_2.tga" x="1551" y="1107" w="22" h="72" r="y"/>
-    <sprite n="shard3.mdl_3.tga" x="1551" y="1181" w="22" h="72" r="y"/>
-    <sprite n="shard4.mdl_0.tga" x="2881" y="2172" w="37" h="44" r="y"/>
-    <sprite n="shard4.mdl_1.tga" x="2920" y="2172" w="37" h="44" r="y"/>
-    <sprite n="shard4.mdl_2.tga" x="2959" y="2172" w="37" h="44" r="y"/>
-    <sprite n="shard4.mdl_3.tga" x="2998" y="2172" w="37" h="44" r="y"/>
-    <sprite n="shard5.mdl_0.tga" x="2613" y="2756" w="37" h="24" r="y"/>
-    <sprite n="shard5.mdl_1.tga" x="2652" y="2756" w="37" h="24" r="y"/>
-    <sprite n="shard5.mdl_2.tga" x="2540" y="1888" w="37" h="24" r="y"/>
-    <sprite n="shard5.mdl_3.tga" x="2579" y="1888" w="37" h="24" r="y"/>
-    <sprite n="shardice.mdl_0.tga" x="2905" y="2562" w="112" h="72" r="y"/>
-    <sprite n="sheep.mdl_0.tga" x="808" y="1426" w="152" h="344" r="y"/>
-    <sprite n="sickle.mdl_0.tga" x="1142" y="2091" w="289" h="296" r="y"/>
-    <sprite n="skllstk1.mdl_0.tga" x="2443" y="1676" w="197" h="144" r="y"/>
-    <sprite n="skllstk2.mdl_0.tga" x="2569" y="404" w="148" h="248" r="y"/>
-    <sprite n="skulbook.mdl_0.tga" x="199" y="2769" w="55" h="204" r="y"/>
-    <sprite n="skulhead.mdl_0.tga" x="802" y="1772" w="153" h="300" r="y"/>
-    <sprite n="skull.mdl_0.tga" x="2780" y="733" w="148" h="101"/>
-    <sprite n="skullwiz.mdl_0.tga" x="611" y="645" w="540" h="206"/>
-    <sprite n="skullwiz.mdl_1.tga" x="1535" y="1" w="540" h="206"/>
-    <sprite n="skulshot.mdl_0.tga" x="2546" y="2439" w="196" h="152" r="y"/>
-    <sprite n="skulshot.mdl_1.tga" x="2867" y="2944" w="196" h="152" r="y"/>
-    <sprite n="sky000.png" x="2619" y="968" w="256" h="128"/>
-    <sprite n="sky0000.png" x="2772" y="838" w="256" h="128"/>
-    <sprite n="sky0001.png" x="3421" y="1" w="256" h="128"/>
-    <sprite n="sky001.png" x="2185" y="1692" w="256" h="128"/>
-    <sprite n="sky0010.png" x="2567" y="1290" w="256" h="128"/>
-    <sprite n="snake.mdl_0.tga" x="1" y="1261" w="271" h="540" r="y"/>
-    <sprite n="snakearr.mdl_0.tga" x="2563" y="2782" w="104" h="88"/>
-    <sprite n="snkstatu.mdl_0.tga" x="797" y="2074" w="163" h="344" r="y"/>
-    <sprite n="snout.mdl_0.tga" x="493" y="2396" w="145" h="288" r="y"/>
-    <sprite n="soulball.mdl_0.tga" x="2582" y="3112" w="104" h="52"/>
-    <sprite n="soulskul.mdl_0.tga" x="3000" y="3536" w="152" h="105"/>
-    <sprite n="spider.mdl_0.tga" x="3207" y="3628" w="204" h="151"/>
-    <sprite n="spider.mdl_1.tga" x="3314" y="3831" w="151" h="204" r="y"/>
-    <sprite n="spike.mdl_0.tga" x="784" y="1465" w="20" h="72" r="y"/>
-    <sprite n="spit.mdl_0.tga" x="2923" y="2636" w="112" h="72" r="y"/>
+    <sprite n="+0air.png" x="1" y="3231" w="48" h="48"/>
+    <sprite n="+0eye.png" x="51" y="3231" w="48" h="48"/>
+    <sprite n="+0fire.png" x="101" y="3231" w="48" h="48"/>
+    <sprite n="+0pen.png" x="363" y="3231" w="48" h="48"/>
+    <sprite n="+0pyr.png" x="413" y="3231" w="48" h="48"/>
+    <sprite n="+0rune1.png" x="619" y="4001" w="64" h="64"/>
+    <sprite n="+0rune2.png" x="685" y="4001" w="64" h="64"/>
+    <sprite n="+0steam.png" x="463" y="3231" w="48" h="48"/>
+    <sprite n="+0sun.png" x="513" y="3231" w="48" h="48"/>
+    <sprite n="+0tri.png" x="3901" y="882" w="32" h="32"/>
+    <sprite n="+0tria.png" x="485" y="3177" w="48" h="48"/>
+    <sprite n="+0wat.png" x="563" y="3231" w="48" h="48"/>
+    <sprite n="+1rune1.png" x="751" y="4001" w="64" h="64"/>
+    <sprite n="+1rune2.png" x="817" y="4001" w="64" h="64"/>
+    <sprite n="+1tri.png" x="3901" y="916" w="32" h="32"/>
+    <sprite n="+2rune1.png" x="883" y="4001" w="64" h="64"/>
+    <sprite n="+2rune2.png" x="949" y="4001" w="64" h="64"/>
+    <sprite n="+2tri.png" x="3405" y="653" w="32" h="32"/>
+    <sprite n="+3rune1.png" x="1015" y="4001" w="64" h="64"/>
+    <sprite n="+3rune2.png" x="1081" y="4001" w="64" h="64"/>
+    <sprite n="+3tri.png" x="3405" y="687" w="32" h="32"/>
+    <sprite n="+4rune1.png" x="1147" y="4001" w="64" h="64"/>
+    <sprite n="+4rune2.png" x="1213" y="4001" w="64" h="64"/>
+    <sprite n="+4tri.png" x="3405" y="721" w="32" h="32"/>
+    <sprite n="+aair.png" x="613" y="3231" w="48" h="48"/>
+    <sprite n="+aeye.png" x="663" y="3231" w="48" h="48"/>
+    <sprite n="+afire.png" x="713" y="3231" w="48" h="48"/>
+    <sprite n="+apen.png" x="763" y="3231" w="48" h="48"/>
+    <sprite n="+apyr.png" x="813" y="3231" w="48" h="48"/>
+    <sprite n="+asteam.png" x="863" y="3231" w="48" h="48"/>
+    <sprite n="+asun.png" x="1729" y="2633" w="48" h="48"/>
+    <sprite n="+atria.png" x="1729" y="2683" w="48" h="48"/>
+    <sprite n="+awat.png" x="2183" y="2776" w="48" h="48"/>
+    <sprite n="a_blast.mdl_0.tga" x="2755" y="1178" w="76" h="101"/>
+    <sprite n="a_cube.mdl_0.tga" x="2751" y="1395" w="72" h="100"/>
+    <sprite n="a_glyph.mdl_0.tga" x="2251" y="662" w="104" h="95"/>
+    <sprite n="a_haste.mdl_0.tga" x="2751" y="1653" w="188" h="72"/>
+    <sprite n="a_hboost.mdl_0.tga" x="1129" y="1093" w="88" h="41"/>
+    <sprite n="a_invinc.mdl_0.tga" x="2597" y="2688" w="116" h="120"/>
+    <sprite n="a_invis.mdl_0.tga" x="2865" y="3066" w="152" h="135"/>
+    <sprite n="a_mboost.mdl_0.tga" x="2865" y="3027" w="156" h="37"/>
+    <sprite n="a_poly.mdl_0.tga" x="313" y="3175" w="104" h="50"/>
+    <sprite n="a_shbost.mdl_0.tga" x="1039" y="1102" w="88" h="34"/>
+    <sprite n="a_summon.mdl_0.tga" x="1129" y="935" w="88" h="56"/>
+    <sprite n="a_telprt.mdl_0.tga" x="1129" y="876" w="88" h="57"/>
+    <sprite n="a_tome.mdl_0.tga" x="1039" y="1138" w="88" h="27"/>
+    <sprite n="a_torch.mdl_0.tga" x="2247" y="953" w="108" h="134"/>
+    <sprite n="akarrow.mdl_0.tga" x="981" y="1336" w="56" h="101"/>
+    <sprite n="akarrow.mdl_1.tga" x="981" y="1439" w="56" h="101"/>
+    <sprite n="akarrow.mdl_2.tga" x="981" y="1542" w="56" h="101"/>
+    <sprite n="anglstat.mdl_0.tga" x="2357" y="1318" w="392" h="383"/>
+    <sprite n="archer.mdl_0.tga" x="2391" y="748" w="440" h="227"/>
+    <sprite n="archer.mdl_1.tga" x="1805" y="932" w="440" h="227"/>
+    <sprite n="archerhd.mdl_0.tga" x="3201" y="2533" w="204" h="49"/>
+    <sprite n="archerhd.mdl_1.tga" x="3407" y="2547" w="204" h="49"/>
+    <sprite n="arrow.mdl_0.tga" x="1771" y="328" w="36" h="101"/>
+    <sprite n="arrowhit.mdl_0.tga" x="3883" y="1340" w="204" h="94"/>
+    <sprite n="assassin.mdl_0.tga" x="1" y="1296" w="368" h="245"/>
+    <sprite n="assgren.mdl_0.tga" x="3567" y="3149" w="152" h="46"/>
+    <sprite n="athena.mdl_0.tga" x="1809" y="385" w="452" h="257"/>
+    <sprite n="axblade.mdl_0.tga" x="2707" y="3021" w="156" h="86"/>
+    <sprite n="axblade.mdl_1.tga" x="3193" y="2981" w="156" h="86"/>
+    <sprite n="axe.mdl_0.tga" x="3445" y="1" w="492" h="173"/>
+    <sprite n="axtail.mdl_0.tga" x="549" y="3010" w="104" h="19"/>
+    <sprite n="bag.mdl_0.tga" x="2929" y="2191" w="204" h="97"/>
+    <sprite n="balbolt.mdl_0.tga" x="2115" y="1728" w="56" h="100"/>
+    <sprite n="ball.mdl_0.tga" x="2719" y="2393" w="204" h="94"/>
+    <sprite n="ballista.mdl_0.tga" x="1" y="2656" w="296" h="141"/>
+    <sprite n="barrel.mdl_0.tga" x="3683" y="2029" w="132" h="96"/>
+    <sprite n="barrel.mdl_1.tga" x="3683" y="2127" w="132" h="96"/>
+    <sprite n="barrel.mdl_2.tga" x="3683" y="2225" w="132" h="96"/>
+    <sprite n="beefslab.mdl_0.tga" x="2723" y="1886" w="204" h="155"/>
+    <sprite n="bellring.mdl_0.tga" x="621" y="761" w="440" h="117"/>
+    <sprite n="bench.mdl_0.tga" x="1777" y="2203" w="300" h="104"/>
+    <sprite n="biessman.png" x="359" y="1827" w="256" h="128"/>
+    <sprite n="birdmisl.mdl_0.tga" x="539" y="377" w="84" h="57"/>
+    <sprite n="birdmsl2.mdl_0.tga" x="2597" y="2244" w="124" h="22"/>
+    <sprite n="blast.mdl_0.tga" x="1" y="2134" w="320" h="147"/>
+    <sprite n="bonefx.mdl_0.tga" x="151" y="3230" w="104" h="49"/>
+    <sprite n="bonefx.mdl_1.tga" x="257" y="3230" w="104" h="49"/>
+    <sprite n="bonefx.mdl_2.tga" x="549" y="3036" w="104" h="49"/>
+    <sprite n="bonelump.mdl_0.tga" x="2263" y="385" w="92" h="173"/>
+    <sprite n="bonepile.mdl_0.tga" x="2173" y="1858" w="172" h="196"/>
+    <sprite n="boneshot.mdl_0.tga" x="1771" y="291" w="40" h="35"/>
+    <sprite n="boneshrd.mdl_0.tga" x="2115" y="1830" w="56" h="100"/>
+    <sprite n="booberry.mdl_0.tga" x="3399" y="2598" w="200" h="94"/>
+    <sprite n="bookclos.mdl_0.tga" x="1129" y="1136" w="88" h="31"/>
+    <sprite n="bookopen.mdl_0.tga" x="1129" y="993" w="88" h="49"/>
+    <sprite n="brains.mdl_0.tga" x="3601" y="2625" w="200" h="94"/>
+    <sprite n="bush1.mdl_0.tga" x="3567" y="3197" w="148" h="196"/>
+    <sprite n="caesar.mdl_0.tga" x="619" y="1077" w="372" h="257"/>
+    <sprite n="cart.mdl_0.tga" x="1217" y="1849" w="344" h="118"/>
+    <sprite n="castrch.mdl_0.tga" x="395" y="1083" w="116" h="124"/>
+    <sprite n="cattest.mdl_0.tga" x="1229" y="1" w="584" h="214"/>
+    <sprite n="cauldron.mdl_0.tga" x="2597" y="2177" w="124" h="65"/>
+    <sprite n="celt2.png" x="3405" y="755" w="32" h="32"/>
+    <sprite n="celtbrown.png" x="2183" y="2826" w="48" h="48"/>
+    <sprite n="cflmtrch.mdl_0.tga" x="2313" y="2664" w="184" h="124"/>
+    <sprite n="chair.mdl_0.tga" x="331" y="3533" w="96" h="67"/>
+    <sprite n="chest1.mdl_0.tga" x="3601" y="2721" w="200" h="46"/>
+    <sprite n="chest1.mdl_1.tga" x="3803" y="2757" w="200" h="46"/>
+    <sprite n="chest2.mdl_0.tga" x="2719" y="2560" w="204" h="65"/>
+    <sprite n="chest2.mdl_1.tga" x="2065" y="2510" w="204" h="65"/>
+    <sprite n="chest2.mdl_2.tga" x="2333" y="2530" w="204" h="65"/>
+    <sprite n="chest3.mdl_0.tga" x="3201" y="2473" w="204" h="58"/>
+    <sprite n="clip.png" x="1279" y="4001" w="64" h="64"/>
+    <sprite n="clshard1.mdl_0.tga" x="967" y="1645" w="60" h="18"/>
+    <sprite n="clshard2.mdl_0.tga" x="1165" y="390" w="60" h="37"/>
+    <sprite n="clshard3.mdl_0.tga" x="851" y="2732" w="56" h="52"/>
+    <sprite n="clshard4.mdl_0.tga" x="1553" y="2088" w="60" h="15"/>
+    <sprite n="clthchk1.mdl_0.tga" x="513" y="1132" w="104" h="52"/>
+    <sprite n="clthchk2.mdl_0.tga" x="513" y="992" w="104" h="76"/>
+    <sprite n="clthchk3.mdl_0.tga" x="2453" y="3225" w="104" h="31"/>
+    <sprite n="corps1.mdl_0.tga" x="2343" y="2163" w="252" h="224"/>
+    <sprite n="corps1.mdl_1.tga" x="2079" y="2284" w="252" h="224"/>
+    <sprite n="corps1.mdl_2.tga" x="1777" y="2309" w="252" h="224"/>
+    <sprite n="corps1.mdl_3.tga" x="1499" y="2365" w="252" h="224"/>
+    <sprite n="corps2.mdl_0.tga" x="967" y="1665" w="248" h="242"/>
+    <sprite n="corps2.mdl_1.tga" x="299" y="2867" w="248" h="242"/>
+    <sprite n="corps2.mdl_2.tga" x="1" y="2932" w="248" h="242"/>
+    <sprite n="corps2.mdl_3.tga" x="3433" y="2029" w="248" h="242"/>
+    <sprite n="corps2.mdl_4.tga" x="3817" y="2211" w="248" h="242"/>
+    <sprite n="cross.mdl_0.tga" x="221" y="3533" w="108" h="69"/>
+    <sprite n="crossbow.mdl_0.tga" x="617" y="1801" w="344" h="208"/>
+    <sprite n="crusader.mdl_0.tga" x="627" y="1" w="600" h="245"/>
+    <sprite n="cube.mdl_0.tga" x="2649" y="1883" w="72" h="100"/>
+    <sprite n="drgnball.mdl_0.tga" x="3153" y="3337" w="144" h="149"/>
+    <sprite n="dthball.mdl_0.tga" x="513" y="1186" w="104" h="52"/>
+    <sprite n="eflmtrch.mdl_0.tga" x="2751" y="1503" w="188" h="148"/>
+    <sprite n="egtorch.mdl_0.tga" x="1667" y="1066" w="136" h="143"/>
+    <sprite n="eidoball.mdl_0.tga" x="3299" y="3382" w="144" h="149"/>
+    <sprite n="eviltex.png" x="1" y="4001" w="128" h="80"/>
+    <sprite n="fablade.mdl_0.tga" x="1771" y="217" w="40" h="72"/>
+    <sprite n="fambeam.mdl_0.tga" x="1165" y="331" w="60" h="57"/>
+    <sprite n="famshot.mdl_0.tga" x="1135" y="643" w="88" h="61"/>
+    <sprite n="fangel.mdl_0.tga" x="1225" y="626" w="440" h="286"/>
+    <sprite n="fangel.mdl_1.tga" x="1809" y="644" w="440" h="286"/>
+    <sprite n="faspell.mdl_0.tga" x="513" y="1240" w="104" h="52"/>
+    <sprite n="fence.mdl_0.tga" x="1797" y="2030" w="300" h="171"/>
+    <sprite n="fether.mdl_0.tga" x="993" y="1077" w="44" h="62"/>
+    <sprite n="fireball.mdl_0.tga" x="3901" y="845" w="32" h="35"/>
+    <sprite n="fish.mdl_0.tga" x="1667" y="635" w="140" h="230"/>
+    <sprite n="flag.mdl_0.tga" x="3803" y="2805" w="200" h="41"/>
+    <sprite n="flag.mdl_1.tga" x="3399" y="2790" w="200" h="41"/>
+    <sprite n="flag.mdl_2.tga" x="3601" y="2813" w="200" h="41"/>
+    <sprite n="flame.mdl_0.tga" x="299" y="2725" w="296" h="140"/>
+    <sprite n="flame1.mdl_0.tga" x="2479" y="3019" w="108" h="72"/>
+    <sprite n="flame2.mdl_0.tga" x="1797" y="1834" w="300" h="194"/>
+    <sprite n="flaming.mdl_0.tga" x="3337" y="1486" w="100" h="148"/>
+    <sprite n="flesh1.mdl_0.tga" x="1" y="3411" w="108" h="39"/>
+    <sprite n="flesh1.mdl_1.tga" x="111" y="3411" w="108" h="39"/>
+    <sprite n="flesh2.mdl_0.tga" x="2567" y="3112" w="108" h="31"/>
+    <sprite n="flesh2.mdl_1.tga" x="2457" y="3141" w="108" h="31"/>
+    <sprite n="flesh3.mdl_0.tga" x="2589" y="3040" w="108" h="70"/>
+    <sprite n="flesh3.mdl_1.tga" x="1" y="3533" w="108" h="70"/>
+    <sprite n="fountain.mdl_0.tga" x="2173" y="2056" w="168" h="196"/>
+    <sprite n="funnal.mdl_0.tga" x="1197" y="2265" w="300" h="100"/>
+    <sprite n="g-head.mdl_0.tga" x="2053" y="2906" w="108" h="47"/>
+    <sprite n="g-head.mdl_1.tga" x="2183" y="3009" w="108" h="47"/>
+    <sprite n="g-head.mdl_2.tga" x="2347" y="3036" w="108" h="47"/>
+    <sprite n="gauntlet.mdl_0.tga" x="2943" y="1" w="500" h="203"/>
+    <sprite n="gemlight.mdl_0.tga" x="1667" y="1211" w="132" h="100"/>
+    <sprite n="glowball.mdl_0.tga" x="2719" y="2627" w="200" h="193"/>
+    <sprite n="glyph.mdl_0.tga" x="1587" y="1313" w="216" h="92"/>
+    <sprite n="glyphwir.mdl_0.tga" x="2251" y="759" w="104" h="95"/>
+    <sprite n="glyphwir.mdl_1.tga" x="2251" y="856" w="104" h="95"/>
+    <sprite n="goarm.mdl_0.tga" x="2247" y="1089" w="108" h="75"/>
+    <sprite n="goarm.mdl_1.tga" x="2833" y="1110" w="108" h="75"/>
+    <sprite n="goarm.mdl_2.tga" x="2833" y="1187" w="108" h="75"/>
+    <sprite n="golegs.mdl_0.tga" x="1217" y="1243" w="368" h="178"/>
+    <sprite n="golegs.mdl_1.tga" x="1805" y="1394" w="368" h="178"/>
+    <sprite n="golegs.mdl_2.tga" x="2357" y="1703" w="368" h="178"/>
+    <sprite n="golem_b.mdl_0.tga" x="3439" y="1339" w="392" h="237"/>
+    <sprite n="golem_i.mdl_0.tga" x="3439" y="1578" w="392" h="237"/>
+    <sprite n="golem_s.mdl_0.tga" x="2941" y="1718" w="392" h="237"/>
+    <sprite n="golemmis.mdl_0.tga" x="2755" y="1281" w="72" h="112"/>
+    <sprite n="goodsphr.mdl_0.tga" x="513" y="1294" w="104" h="52"/>
+    <sprite n="goop.mdl_0.tga" x="3775" y="3124" w="144" h="149"/>
+    <sprite n="h_ass.mdl_0.tga" x="2925" y="2487" w="204" h="87"/>
+    <sprite n="h_cru.mdl_0.tga" x="371" y="1506" w="236" h="61"/>
+    <sprite n="h_fangel.mdl_0.tga" x="1129" y="832" w="92" h="42"/>
+    <sprite n="h_imp.mdl_0.tga" x="1039" y="1416" w="176" h="81"/>
+    <sprite n="h_imp.mdl_1.tga" x="1039" y="1499" w="176" h="81"/>
+    <sprite n="h_imp.mdl_2.tga" x="1039" y="1582" w="176" h="81"/>
+    <sprite n="h_imp.mdl_3.tga" x="2173" y="1775" w="176" h="81"/>
+    <sprite n="h_mez.mdl_0.tga" x="2325" y="2597" w="204" h="65"/>
+    <sprite n="h_mez.mdl_1.tga" x="3407" y="2423" w="204" h="65"/>
+    <sprite n="h_nec.mdl_0.tga" x="513" y="1070" w="104" h="60"/>
+    <sprite n="h_pal.mdl_0.tga" x="3173" y="3183" w="152" h="49"/>
+    <sprite n="hamthrow.mdl_0.tga" x="515" y="806" w="104" h="94"/>
+    <sprite n="handfx.mdl_0.tga" x="3399" y="2694" w="200" h="94"/>
+    <sprite n="hay1.mdl_0.tga" x="251" y="3112" w="48" h="62"/>
+    <sprite n="hay2.mdl_0.tga" x="1063" y="761" w="68" h="33"/>
+    <sprite n="hay3.mdl_0.tga" x="2175" y="1394" w="24" h="62"/>
+    <sprite n="hedge1.mdl_0.tga" x="2711" y="2822" w="164" h="197"/>
+    <sprite n="hedge2.mdl_0.tga" x="3197" y="2584" w="200" h="121"/>
+    <sprite n="hedge3.mdl_0.tga" x="391" y="1209" w="120" h="197"/>
+    <sprite n="hydra.mdl_0.tga" x="3439" y="1148" w="444" h="189"/>
+    <sprite n="i_amulet.mdl_0.tga" x="2833" y="1031" w="108" h="77"/>
+    <sprite n="i_bmana.mdl_0.tga" x="1129" y="1044" w="88" h="47"/>
+    <sprite n="i_bplate.mdl_0.tga" x="3543" y="3395" w="144" h="68"/>
+    <sprite n="i_bracer.mdl_0.tga" x="1" y="3488" w="104" h="43"/>
+    <sprite n="i_btmana.mdl_0.tga" x="1135" y="579" w="88" h="62"/>
+    <sprite n="i_gmana.mdl_0.tga" x="1165" y="248" w="60" h="81"/>
+    <sprite n="i_hboost.mdl_0.tga" x="1039" y="1054" w="88" h="46"/>
+    <sprite n="i_helmet.mdl_0.tga" x="301" y="3112" w="108" h="61"/>
+    <sprite n="iceshot1.mdl_0.tga" x="513" y="1348" w="104" h="52"/>
+    <sprite n="iceshot2.mdl_0.tga" x="2563" y="3178" w="104" h="46"/>
+    <sprite n="icestaff.mdl_0.tga" x="1797" y="1728" w="316" h="104"/>
+    <sprite n="imp.mdl_0.tga" x="1" y="1543" w="356" h="211"/>
+    <sprite n="imp.mdl_1.tga" x="1" y="1756" w="356" h="211"/>
+    <sprite n="imp.mdl_2.tga" x="1217" y="1423" w="356" h="211"/>
+    <sprite n="imp.mdl_3.tga" x="1217" y="1636" w="356" h="211"/>
+    <sprite n="king.mdl_0.tga" x="2943" y="758" w="444" h="275"/>
+    <sprite n="larm.mdl_0.tga" x="2699" y="3109" w="152" h="120"/>
+    <sprite n="lavaball.mdl_0.tga" x="2597" y="2268" w="120" h="68"/>
+    <sprite n="lavaball.mdl_1.tga" x="2597" y="2338" w="120" h="68"/>
+    <sprite n="lavaball.mdl_2.tga" x="2597" y="2408" w="120" h="68"/>
+    <sprite n="leafchk1.mdl_0.tga" x="1165" y="429" w="60" h="32"/>
+    <sprite n="leafchk2.mdl_0.tga" x="1587" y="1256" w="56" h="53"/>
+    <sprite n="leafchk3.mdl_0.tga" x="1" y="3176" w="48" h="53"/>
+    <sprite n="leg.mdl_0.tga" x="3939" y="149" w="156" h="130"/>
+    <sprite n="lion.mdl_0.tga" x="299" y="2494" w="296" h="229"/>
+    <sprite n="marble.png" x="359" y="3606" w="96" h="96"/>
+    <sprite n="marbleseam.png" x="391" y="3755" w="96" h="96"/>
+    <sprite n="mars.mdl_0.tga" x="3439" y="923" w="444" h="223"/>
+    <sprite n="medhead.mdl_0.tga" x="2719" y="2295" w="204" h="96"/>
+    <sprite n="medhead.mdl_1.tga" x="3201" y="2304" w="204" h="96"/>
+    <sprite n="medsnake.mdl_0.tga" x="949" y="2850" w="108" h="27"/>
+    <sprite n="medusa.mdl_0.tga" x="3433" y="1817" w="392" h="210"/>
+    <sprite n="medusa2.mdl_0.tga" x="1" y="932" w="392" h="210"/>
+    <sprite n="megaweb.mdl_0.tga" x="2943" y="206" w="460" h="274"/>
+    <sprite n="mesotrch.mdl_0.tga" x="2925" y="2389" w="204" h="96"/>
+    <sprite n="meteor.mdl_0.tga" x="1575" y="1646" w="220" h="292"/>
+    <sprite n="metlchk1.mdl_0.tga" x="2539" y="2526" w="56" h="30"/>
+    <sprite n="metlchk2.mdl_0.tga" x="2539" y="2439" w="56" h="43"/>
+    <sprite n="metlchk3.mdl_0.tga" x="2539" y="2484" w="56" h="40"/>
+    <sprite n="metlchk4.mdl_0.tga" x="51" y="3176" w="48" h="53"/>
+    <sprite n="mezzoman.mdl_0.tga" x="627" y="248" w="536" h="199"/>
+    <sprite n="mezzoman.mdl_1.tga" x="1227" y="425" w="536" h="199"/>
+    <sprite n="mflmtrch.mdl_0.tga" x="2929" y="2090" w="296" h="99"/>
+    <sprite n="mhdstatu.mdl_0.tga" x="3201" y="2402" w="204" h="69"/>
+    <sprite n="mtex402.png" x="1345" y="4001" w="64" h="64"/>
+    <sprite n="mtex405.png" x="2357" y="328" w="32" h="32"/>
+    <sprite n="mtex407.png" x="2247" y="2749" w="64" h="128"/>
+    <sprite n="mtex408.png" x="1411" y="4001" w="64" h="64"/>
+    <sprite n="mtex409.png" x="1477" y="4001" w="64" h="64"/>
+    <sprite n="mtex411.png" x="1543" y="4001" w="64" h="64"/>
+    <sprite n="mtex424.png" x="1609" y="4001" w="64" h="64"/>
+    <sprite n="mtex425.png" x="1675" y="4001" w="64" h="64"/>
+    <sprite n="mtex434.png" x="2593" y="2924" w="112" h="80"/>
+    <sprite n="mtex435.png" x="229" y="3453" w="64" h="32"/>
+    <sprite n="mtex436.png" x="1741" y="4001" w="64" h="64"/>
+    <sprite n="mtex437.png" x="3885" y="3625" w="128" h="128"/>
+    <sprite n="mtex438.png" x="1" y="3871" w="128" h="128"/>
+    <sprite n="mtex439.png" x="1" y="3281" w="128" h="128"/>
+    <sprite n="mtex441.png" x="1807" y="4001" w="64" h="64"/>
+    <sprite n="mtex443.png" x="1873" y="4001" w="64" h="64"/>
+    <sprite n="mtex444.png" x="3405" y="245" w="32" h="128"/>
+    <sprite n="mtex446.png" x="3405" y="375" w="32" h="128"/>
+    <sprite n="mtex447.png" x="3505" y="3011" w="64" h="128"/>
+    <sprite n="mtex448.png" x="1939" y="4001" w="64" h="64"/>
+    <sprite n="mtex449.png" x="2005" y="4001" w="64" h="64"/>
+    <sprite n="mtex450.png" x="2071" y="4001" w="64" h="64"/>
+    <sprite n="mtex451.png" x="3501" y="3141" w="64" h="128"/>
+    <sprite n="mtex452.png" x="3901" y="371" w="32" h="128"/>
+    <sprite n="mtex453.png" x="2137" y="4001" w="64" h="64"/>
+    <sprite n="mtex454.png" x="2203" y="4001" w="64" h="64"/>
+    <sprite n="mtex455.png" x="3477" y="3271" w="64" h="128"/>
+    <sprite n="mtex456.png" x="3689" y="3476" w="64" h="128"/>
+    <sprite n="mtex457.png" x="4027" y="3481" w="64" h="128"/>
+    <sprite n="mtex458.png" x="4027" y="3611" w="64" h="128"/>
+    <sprite n="mtex460.png" x="131" y="3281" w="128" h="128"/>
+    <sprite n="mtex461.png" x="2269" y="4001" w="64" h="64"/>
+    <sprite n="mtex462.png" x="2335" y="4001" w="64" h="64"/>
+    <sprite n="mtex463.png" x="2401" y="4001" w="64" h="64"/>
+    <sprite n="mtex464.png" x="2467" y="4001" w="64" h="64"/>
+    <sprite n="mtex465.png" x="2533" y="4001" w="64" h="64"/>
+    <sprite n="mtex466.png" x="2599" y="4001" w="64" h="64"/>
+    <sprite n="mtex467.png" x="2665" y="4001" w="64" h="64"/>
+    <sprite n="mtex468.png" x="2731" y="4001" w="64" h="64"/>
+    <sprite n="mtex469.png" x="2797" y="4001" w="64" h="64"/>
+    <sprite n="mtex470.png" x="2863" y="4001" w="64" h="64"/>
+    <sprite n="mtex471.png" x="2929" y="4001" w="64" h="64"/>
+    <sprite n="mtex472.png" x="3833" y="1437" w="256" h="256"/>
+    <sprite n="mtex474.png" x="261" y="3281" w="128" h="128"/>
+    <sprite n="mtex475.png" x="391" y="3281" w="128" h="128"/>
+    <sprite n="mtex476.png" x="549" y="3093" w="128" h="128"/>
+    <sprite n="mtex478.png" x="549" y="2880" w="128" h="128"/>
+    <sprite n="mtex481.png" x="3389" y="789" w="48" h="192"/>
+    <sprite n="mtex482.png" x="3389" y="983" w="48" h="192"/>
+    <sprite n="mtex483.png" x="679" y="2880" w="128" h="128"/>
+    <sprite n="mtex484.png" x="2995" y="4001" w="64" h="64"/>
+    <sprite n="mtex485.png" x="4015" y="3741" w="64" h="128"/>
+    <sprite n="mtex486.png" x="1663" y="2591" w="64" h="128"/>
+    <sprite n="mtex487.png" x="3061" y="4001" w="64" h="64"/>
+    <sprite n="mtex488.png" x="3135" y="3488" w="64" h="64"/>
+    <sprite n="mtex489.png" x="3127" y="4001" w="64" h="64"/>
+    <sprite n="mtex491.png" x="2277" y="3871" w="64" h="128"/>
+    <sprite n="mtex495.png" x="3885" y="950" w="48" h="128"/>
+    <sprite n="mtex496.png" x="915" y="3010" w="96" h="80"/>
+    <sprite n="mtex497.png" x="2281" y="3717" w="64" h="128"/>
+    <sprite n="mtex501.png" x="3193" y="4001" w="64" h="64"/>
+    <sprite n="mtex502.png" x="3259" y="4001" w="64" h="64"/>
+    <sprite n="mtex504.png" x="3335" y="1885" w="96" h="128"/>
+    <sprite n="mtex510.png" x="3325" y="4001" w="64" h="64"/>
+    <sprite n="muhead.mdl_0.tga" x="2333" y="2389" w="204" h="69"/>
+    <sprite n="muhead.mdl_1.tga" x="2719" y="2489" w="204" h="69"/>
+    <sprite n="mummy.mdl_0.tga" x="1" y="274" w="536" h="198"/>
+    <sprite n="mummy.mdl_1.tga" x="1" y="474" w="536" h="198"/>
+    <sprite n="mumshot.mdl_0.tga" x="3601" y="2769" w="200" h="42"/>
+    <sprite n="mumstatu.mdl_0.tga" x="2347" y="2024" w="300" h="137"/>
+    <sprite n="necro.mdl_0.tga" x="1815" y="1" w="584" h="174"/>
+    <sprite n="neptune.mdl_0.tga" x="1219" y="914" w="396" h="327"/>
+    <sprite n="NFarrow.mdl_0.tga" x="2357" y="177" w="40" h="149"/>
+    <sprite n="olmec1.mdl_0.tga" x="2391" y="550" w="452" h="196"/>
+    <sprite n="origin.png" x="3391" y="4001" w="64" h="64"/>
+    <sprite n="paladin.mdl_0.tga" x="1805" y="1161" w="396" h="231"/>
+    <sprite n="pestshot.mdl_0.tga" x="1135" y="706" w="88" h="61"/>
+    <sprite n="pew.mdl_0.tga" x="1191" y="2586" w="252" h="178"/>
+    <sprite n="plantgen.mdl_0.tga" x="395" y="932" w="116" h="149"/>
+    <sprite n="plantmez.mdl_0.tga" x="1563" y="1940" w="232" h="146"/>
+    <sprite n="plantrom.mdl_0.tga" x="2925" y="2576" w="200" h="225"/>
+    <sprite n="pot1.mdl_0.tga" x="331" y="3411" w="108" h="38"/>
+    <sprite n="pot1.mdl_1.tga" x="441" y="3411" w="108" h="38"/>
+    <sprite n="pot1.mdl_2.tga" x="551" y="3411" w="108" h="38"/>
+    <sprite n="pot1.mdl_3.tga" x="661" y="3411" w="108" h="38"/>
+    <sprite n="pot2.mdl_0.tga" x="371" y="1408" w="108" h="46"/>
+    <sprite n="pot2.mdl_1.tga" x="2347" y="3085" w="108" h="46"/>
+    <sprite n="pot2.mdl_2.tga" x="2457" y="3093" w="108" h="46"/>
+    <sprite n="pot2.mdl_3.tga" x="2347" y="3133" w="108" h="46"/>
+    <sprite n="pot3.mdl_0.tga" x="107" y="3488" w="104" h="43"/>
+    <sprite n="pot3.mdl_1.tga" x="319" y="3488" w="104" h="43"/>
+    <sprite n="pot3.mdl_2.tga" x="557" y="3488" w="104" h="43"/>
+    <sprite n="pot3.mdl_3.tga" x="663" y="3488" w="104" h="43"/>
+    <sprite n="punchdgr.mdl_0.tga" x="2357" y="1178" w="396" h="138"/>
+    <sprite n="purfir1.mdl_0.tga" x="1133" y="769" w="88" h="61"/>
+    <sprite n="purifier.mdl_0.tga" x="619" y="1336" w="360" h="234"/>
+    <sprite n="rat.mdl_0.tga" x="3035" y="2903" w="156" h="106"/>
+    <sprite n="raven.mdl_0.tga" x="617" y="1694" w="348" h="105"/>
+    <sprite n="ravenstf.mdl_0.tga" x="2391" y="977" w="440" h="199"/>
+    <sprite n="ravproj.mdl_0.tga" x="2175" y="1562" w="180" h="211"/>
+    <sprite n="rflmtrch.mdl_0.tga" x="1" y="2283" w="320" h="80"/>
+    <sprite n="ring.mdl_0.tga" x="655" y="3036" w="104" h="49"/>
+    <sprite n="ring.mdl_1.tga" x="131" y="3704" w="104" h="49"/>
+    <sprite n="ring.mdl_2.tga" x="237" y="3704" w="104" h="49"/>
+    <sprite n="ring.mdl_3.tga" x="343" y="3704" w="104" h="49"/>
+    <sprite n="ring.mdl_4.tga" x="449" y="3704" w="104" h="49"/>
+    <sprite n="ringft.mdl_0.tga" x="3035" y="3011" w="156" h="57"/>
+    <sprite n="ringre.mdl_0.tga" x="2833" y="1264" w="108" h="75"/>
+    <sprite n="ringtn.mdl_0.tga" x="3935" y="993" w="156" h="81"/>
+    <sprite n="ringwb.mdl_0.tga" x="3571" y="3100" w="152" h="47"/>
+    <sprite n="rometrch.mdl_0.tga" x="1575" y="1566" w="228" h="78"/>
+    <sprite n="rosearch.png" x="3935" y="281" w="160" h="256"/>
+    <sprite n="rtex001.png" x="131" y="3871" w="128" h="128"/>
+    <sprite n="rtex002.png" x="3457" y="4001" w="64" h="64"/>
+    <sprite n="rtex003.png" x="3523" y="4001" w="64" h="64"/>
+    <sprite n="rtex004.png" x="3197" y="3618" w="64" h="64"/>
+    <sprite n="rtex005.png" x="3263" y="3618" w="64" h="64"/>
+    <sprite n="rtex006.png" x="3271" y="3533" w="64" h="64"/>
+    <sprite n="rtex008.png" x="3589" y="3531" w="64" h="64"/>
+    <sprite n="rtex009.png" x="3589" y="3597" w="64" h="64"/>
+    <sprite n="rtex010.png" x="3655" y="3606" w="64" h="64"/>
+    <sprite n="rtex011.png" x="3589" y="3663" w="64" h="64"/>
+    <sprite n="rtex012.png" x="3655" y="3672" w="64" h="64"/>
+    <sprite n="rtex013.png" x="521" y="3281" w="128" h="128"/>
+    <sprite n="rtex014.png" x="651" y="3281" w="128" h="128"/>
+    <sprite n="rtex015.png" x="617" y="2084" w="320" h="256"/>
+    <sprite n="rtex018.png" x="1063" y="796" w="64" h="256"/>
+    <sprite n="rtex019.png" x="2343" y="3871" w="64" h="128"/>
+    <sprite n="rtex020.png" x="2347" y="3717" w="64" h="128"/>
+    <sprite n="rtex021.png" x="2409" y="3871" w="64" h="128"/>
+    <sprite n="rtex022.png" x="3135" y="2191" w="64" h="176"/>
+    <sprite n="rtex023.png" x="2413" y="3717" w="64" h="128"/>
+    <sprite n="rtex028.png" x="2475" y="3871" w="64" h="128"/>
+    <sprite n="rtex029.png" x="2479" y="3717" w="64" h="128"/>
+    <sprite n="rtex030.png" x="2541" y="3871" w="64" h="128"/>
+    <sprite n="rtex031.png" x="2545" y="3717" w="64" h="128"/>
+    <sprite n="rtex032.png" x="2611" y="3226" w="64" h="128"/>
+    <sprite n="rtex033.png" x="2607" y="3871" w="64" h="128"/>
+    <sprite n="rtex034.png" x="2611" y="3717" w="64" h="128"/>
+    <sprite n="rtex036.png" x="2673" y="3871" w="64" h="128"/>
+    <sprite n="rtex038.png" x="2677" y="3717" w="64" h="128"/>
+    <sprite n="rtex039.png" x="2739" y="3871" w="64" h="128"/>
+    <sprite n="rtex040.png" x="2743" y="3717" w="64" h="128"/>
+    <sprite n="rtex041.png" x="2805" y="3871" w="64" h="128"/>
+    <sprite n="rtex042.png" x="2809" y="3717" w="64" h="128"/>
+    <sprite n="rtex043.png" x="2871" y="3871" w="64" h="128"/>
+    <sprite n="rtex044.png" x="2937" y="3411" w="64" h="128"/>
+    <sprite n="rtex045.png" x="2875" y="3717" w="64" h="128"/>
+    <sprite n="rtex047.png" x="3997" y="2906" w="96" h="128"/>
+    <sprite n="rtex050.png" x="2937" y="3871" w="64" h="128"/>
+    <sprite n="rtex052.png" x="3589" y="3729" w="64" h="64"/>
+    <sprite n="rtex053.png" x="3469" y="3795" w="64" h="64"/>
+    <sprite n="rtex054.png" x="3329" y="3599" w="64" h="64"/>
+    <sprite n="rtex058.png" x="2941" y="3717" w="64" h="128"/>
+    <sprite n="rtex059.png" x="3003" y="3871" w="64" h="128"/>
+    <sprite n="rtex060.png" x="3069" y="3453" w="64" h="128"/>
+    <sprite n="rtex062.png" x="679" y="3093" w="128" h="128"/>
+    <sprite n="rtex063.png" x="809" y="2880" w="128" h="128"/>
+    <sprite n="rtex065.png" x="809" y="3093" w="128" h="128"/>
+    <sprite n="rtex066.png" x="939" y="2879" w="128" h="128"/>
+    <sprite n="rtex067.png" x="261" y="3871" w="128" h="128"/>
+    <sprite n="rtex068.png" x="391" y="3871" w="128" h="128"/>
+    <sprite n="rtex070.png" x="3003" y="3453" w="64" h="128"/>
+    <sprite n="rtex072.png" x="3337" y="3533" w="64" h="64"/>
+    <sprite n="rtex073.png" x="3395" y="3599" w="64" h="64"/>
+    <sprite n="rtex074.png" x="3403" y="3533" w="64" h="64"/>
+    <sprite n="rtex075.png" x="3461" y="3599" w="64" h="64"/>
+    <sprite n="rtex076.png" x="3469" y="3531" w="64" h="64"/>
+    <sprite n="rtex077.png" x="3469" y="3665" w="64" h="64"/>
+    <sprite n="rtex080.png" x="3531" y="3871" w="64" h="64"/>
+    <sprite n="rtex081.png" x="689" y="3583" w="64" h="128"/>
+    <sprite n="rtex082.png" x="1" y="3755" w="128" h="112"/>
+    <sprite n="rtex083.png" x="3589" y="3937" w="64" h="64"/>
+    <sprite n="rtex085.png" x="515" y="674" w="16" h="64"/>
+    <sprite n="rtex086.png" x="2357" y="362" w="32" h="32"/>
+    <sprite n="rtex087.png" x="2357" y="396" w="32" h="32"/>
+    <sprite n="rtex088.png" x="3913" y="3333" w="128" h="144"/>
+    <sprite n="rtex089.png" x="3767" y="3425" w="128" h="144"/>
+    <sprite n="rtex090.png" x="2829" y="1341" w="112" h="160"/>
+    <sprite n="rtex091.png" x="755" y="3583" w="64" h="128"/>
+    <sprite n="rtex092.png" x="489" y="3755" w="64" h="96"/>
+    <sprite n="rtex094.png" x="3597" y="3871" w="64" h="64"/>
+    <sprite n="rtex095.png" x="3601" y="3795" w="64" h="64"/>
+    <sprite n="rtex096.png" x="3589" y="4003" w="64" h="64"/>
+    <sprite n="rtex097.png" x="3655" y="3937" w="64" h="64"/>
+    <sprite n="rtex099.png" x="3663" y="3871" w="64" h="64"/>
+    <sprite n="rtex100.png" x="3655" y="4003" w="64" h="64"/>
+    <sprite n="rtex102.png" x="3667" y="3755" w="64" h="64"/>
+    <sprite n="rtex103.png" x="3733" y="3717" w="64" h="64"/>
+    <sprite n="rtex104.png" x="3799" y="3717" w="64" h="64"/>
+    <sprite n="rtex105.png" x="3865" y="3755" w="64" h="64"/>
+    <sprite n="rtex106.png" x="2357" y="430" w="32" h="32"/>
+    <sprite n="rtex107.png" x="2357" y="464" w="32" h="32"/>
+    <sprite n="rtex108.png" x="2357" y="498" w="32" h="32"/>
+    <sprite n="rtex109.png" x="2357" y="532" w="32" h="32"/>
+    <sprite n="rtex110.png" x="515" y="740" w="16" h="64"/>
+    <sprite n="rtex111.png" x="3931" y="3755" w="64" h="64"/>
+    <sprite n="rtex112.png" x="3733" y="3783" w="64" h="64"/>
+    <sprite n="rtex113.png" x="3799" y="3783" w="64" h="64"/>
+    <sprite n="rtex114.png" x="3865" y="3821" w="64" h="64"/>
+    <sprite n="rtex116.png" x="3931" y="3821" w="64" h="64"/>
+    <sprite n="rtex117.png" x="3997" y="3871" w="64" h="64"/>
+    <sprite n="rtex118.png" x="3729" y="3849" w="64" h="64"/>
+    <sprite n="rtex119.png" x="3795" y="3849" w="64" h="64"/>
+    <sprite n="rtex120.png" x="3861" y="3887" w="64" h="64"/>
+    <sprite n="rtex121.png" x="3927" y="3887" w="64" h="64"/>
+    <sprite n="rtex122.png" x="3993" y="3937" w="64" h="64"/>
+    <sprite n="rtex123.png" x="3721" y="4003" w="64" h="64"/>
+    <sprite n="rtex124.png" x="3721" y="3937" w="64" h="64"/>
+    <sprite n="rtex125.png" x="3787" y="3915" w="64" h="64"/>
+    <sprite n="rtex126.png" x="3787" y="4003" w="64" h="64"/>
+    <sprite n="rtex127.png" x="3853" y="4003" w="64" h="64"/>
+    <sprite n="rtex128.png" x="3919" y="3953" w="64" h="64"/>
+    <sprite n="rtex129.png" x="3919" y="4019" w="64" h="64"/>
+    <sprite n="rtex130.png" x="3985" y="4003" w="64" h="64"/>
+    <sprite n="rtex131.png" x="1499" y="2591" w="64" h="64"/>
+    <sprite n="rtex133.png" x="1565" y="2591" w="64" h="64"/>
+    <sprite n="rtex135.png" x="887" y="3411" w="64" h="64"/>
+    <sprite n="rtex137.png" x="821" y="3583" w="64" h="128"/>
+    <sprite n="rtex145.png" x="887" y="3477" w="64" h="64"/>
+    <sprite n="rtex146.png" x="3833" y="1339" w="48" h="96"/>
+    <sprite n="rtex147.png" x="3725" y="3100" w="48" h="96"/>
+    <sprite n="rtex148.png" x="911" y="3281" w="64" h="64"/>
+    <sprite n="rtex149.png" x="3901" y="795" w="32" h="48"/>
+    <sprite n="rtex150.png" x="2079" y="2234" w="80" h="48"/>
+    <sprite n="rtex151.png" x="3717" y="3198" w="48" h="96"/>
+    <sprite n="rtex152.png" x="3717" y="3296" w="48" h="96"/>
+    <sprite n="rtex154.png" x="131" y="3453" w="96" h="32"/>
+    <sprite n="rtex156.png" x="1765" y="431" w="32" h="32"/>
+    <sprite n="rtex158.png" x="1617" y="914" w="48" h="112"/>
+    <sprite n="rtex160.png" x="521" y="3871" w="128" h="128"/>
+    <sprite n="rtex161.png" x="781" y="3281" w="128" h="128"/>
+    <sprite n="rtex162.png" x="2499" y="2775" w="96" h="128"/>
+    <sprite n="rtex163.png" x="939" y="3092" w="64" h="64"/>
+    <sprite n="rtex164.png" x="939" y="3158" w="64" h="64"/>
+    <sprite n="rtex165.png" x="887" y="3583" w="64" h="128"/>
+    <sprite n="rtex166.png" x="1039" y="880" w="16" h="32"/>
+    <sprite n="rtex173.png" x="2677" y="3315" w="64" h="64"/>
+    <sprite n="rtex174.png" x="953" y="3583" w="64" h="128"/>
+    <sprite n="rtex175.png" x="651" y="3871" w="128" h="128"/>
+    <sprite n="rtex176.png" x="1765" y="465" w="32" h="32"/>
+    <sprite n="rtex177.png" x="1765" y="499" w="32" h="32"/>
+    <sprite n="rtex178.png" x="1765" y="533" w="32" h="32"/>
+    <sprite n="rtex179.png" x="1765" y="567" w="32" h="32"/>
+    <sprite n="rtex180.png" x="1765" y="601" w="32" h="32"/>
+    <sprite n="rtex182.png" x="2357" y="566" w="32" h="32"/>
+    <sprite n="rtex183.png" x="2357" y="600" w="32" h="32"/>
+    <sprite n="rtex184.png" x="2357" y="634" w="32" h="32"/>
+    <sprite n="rtex185.png" x="2357" y="668" w="32" h="32"/>
+    <sprite n="rtex186.png" x="2357" y="702" w="32" h="32"/>
+    <sprite n="rtex187.png" x="2357" y="736" w="32" h="32"/>
+    <sprite n="rtex188.png" x="2357" y="770" w="32" h="32"/>
+    <sprite n="rtex189.png" x="2357" y="804" w="32" h="32"/>
+    <sprite n="rtex190.png" x="2357" y="838" w="32" h="32"/>
+    <sprite n="rtex191.png" x="2357" y="872" w="32" h="32"/>
+    <sprite n="rtex192.png" x="2357" y="906" w="32" h="32"/>
+    <sprite n="rtex193.png" x="2357" y="940" w="32" h="32"/>
+    <sprite n="rtex194.png" x="2357" y="974" w="32" h="32"/>
+    <sprite n="rtex196.png" x="2357" y="1008" w="32" h="32"/>
+    <sprite n="rtex197.png" x="2357" y="1042" w="32" h="32"/>
+    <sprite n="rtex198.png" x="2357" y="1076" w="32" h="32"/>
+    <sprite n="rtex199.png" x="2357" y="1110" w="32" h="32"/>
+    <sprite n="rtex200.png" x="295" y="3453" w="64" h="32"/>
+    <sprite n="rtex201.png" x="2277" y="2254" w="64" h="16"/>
+    <sprite n="rtex204.png" x="2357" y="1144" w="32" h="32"/>
+    <sprite n="rtex205.png" x="587" y="765" w="32" h="32"/>
+    <sprite n="rtex206.png" x="3341" y="1224" w="32" h="32"/>
+    <sprite n="rtex207.png" x="1519" y="1969" w="32" h="32"/>
+    <sprite n="rtex208.png" x="2743" y="3315" w="64" h="64"/>
+    <sprite n="rtex211.png" x="361" y="3453" w="64" h="32"/>
+    <sprite n="rtex212.png" x="953" y="3381" w="64" h="64"/>
+    <sprite n="rtex213.png" x="977" y="3276" w="64" h="64"/>
+    <sprite n="rtex214.png" x="953" y="3447" w="64" h="64"/>
+    <sprite n="rtex215.png" x="953" y="3513" w="64" h="64"/>
+    <sprite n="rtex216.png" x="1005" y="3092" w="64" h="64"/>
+    <sprite n="rtex217.png" x="1013" y="3009" w="64" h="64"/>
+    <sprite n="rtex218.png" x="1069" y="2909" w="64" h="64"/>
+    <sprite n="rtex220.png" x="1005" y="3158" w="64" h="64"/>
+    <sprite n="rtex221.png" x="1019" y="3381" w="64" h="64"/>
+    <sprite n="rtex222.png" x="1019" y="3583" w="64" h="128"/>
+    <sprite n="rtex223.png" x="1085" y="3583" w="64" h="128"/>
+    <sprite n="rtex224.png" x="1151" y="3583" w="64" h="128"/>
+    <sprite n="rtex225.png" x="1217" y="3583" w="64" h="128"/>
+    <sprite n="rtex226.png" x="1283" y="3583" w="64" h="128"/>
+    <sprite n="rtex227.png" x="1349" y="3583" w="64" h="128"/>
+    <sprite n="rtex228.png" x="1415" y="3583" w="64" h="128"/>
+    <sprite n="rtex229.png" x="1043" y="3276" w="64" h="64"/>
+    <sprite n="rtex230.png" x="3405" y="587" w="32" h="64"/>
+    <sprite n="rtex231.png" x="1039" y="914" w="16" h="32"/>
+    <sprite n="rtex233.png" x="1019" y="3447" w="64" h="64"/>
+    <sprite n="rtex234.png" x="555" y="3755" w="64" h="96"/>
+    <sprite n="rtex235.png" x="1019" y="3513" w="64" h="64"/>
+    <sprite n="rtex236.png" x="1071" y="3086" w="64" h="64"/>
+    <sprite n="rtex237.png" x="1079" y="2975" w="64" h="64"/>
+    <sprite n="rtex238.png" x="1135" y="2909" w="64" h="64"/>
+    <sprite n="rtex239.png" x="1071" y="3152" w="64" h="64"/>
+    <sprite n="rtex240.png" x="557" y="3453" w="64" h="32"/>
+    <sprite n="rtex241.png" x="1085" y="3381" w="64" h="64"/>
+    <sprite n="rtex242.png" x="1109" y="3276" w="64" h="64"/>
+    <sprite n="rtex243.png" x="1085" y="3447" w="64" h="64"/>
+    <sprite n="rtex245.png" x="623" y="3453" w="64" h="32"/>
+    <sprite n="rtex246.png" x="555" y="3717" w="64" h="32"/>
+    <sprite n="rtex248.png" x="689" y="3453" w="64" h="32"/>
+    <sprite n="rtex249.png" x="1947" y="2535" w="112" h="112"/>
+    <sprite n="rtex250.png" x="555" y="3606" w="64" h="96"/>
+    <sprite n="rtex251.png" x="3445" y="3401" w="96" h="128"/>
+    <sprite n="rtex252.png" x="1481" y="3583" w="64" h="128"/>
+    <sprite n="rtex253.png" x="1547" y="3583" w="64" h="128"/>
+    <sprite n="rtex254.png" x="1613" y="3583" w="64" h="128"/>
+    <sprite n="rtex255.png" x="1679" y="3583" w="64" h="128"/>
+    <sprite n="rtex256.png" x="1085" y="3513" w="64" h="64"/>
+    <sprite n="rtex257.png" x="755" y="3453" w="64" h="32"/>
+    <sprite n="rtex258.png" x="771" y="3411" w="64" h="32"/>
+    <sprite n="rtex259.png" x="1137" y="3086" w="64" h="64"/>
+    <sprite n="rtex261.png" x="621" y="3717" w="64" h="32"/>
+    <sprite n="rtex262.png" x="1519" y="2003" w="32" h="32"/>
+    <sprite n="rtex263.png" x="1519" y="2037" w="32" h="32"/>
+    <sprite n="rtex264.png" x="1519" y="2071" w="32" h="32"/>
+    <sprite n="rtex265.png" x="1745" y="3583" w="64" h="128"/>
+    <sprite n="rtex266.png" x="1145" y="2975" w="64" h="64"/>
+    <sprite n="rtex267.png" x="1201" y="2909" w="64" h="64"/>
+    <sprite n="rtex270.png" x="3601" y="2601" w="64" h="16"/>
+    <sprite n="rtex272.png" x="1811" y="3583" w="64" h="128"/>
+    <sprite n="rtex273.png" x="1877" y="3583" w="64" h="128"/>
+    <sprite n="rtex274.png" x="1943" y="3583" w="64" h="128"/>
+    <sprite n="rtex275.png" x="1137" y="3152" w="64" h="64"/>
+    <sprite n="rtex276.png" x="1209" y="2784" w="64" h="64"/>
+    <sprite n="rtex277.png" x="2009" y="3583" w="64" h="128"/>
+    <sprite n="rtex278.png" x="2075" y="3583" w="64" h="128"/>
+    <sprite n="rtex279.png" x="2031" y="2309" w="32" h="32"/>
+    <sprite n="rtex280.png" x="2031" y="2343" w="32" h="32"/>
+    <sprite n="rtex281.png" x="419" y="3112" w="64" h="112"/>
+    <sprite n="rtex282.png" x="1151" y="3381" w="64" h="64"/>
+    <sprite n="rtex285.png" x="1175" y="3276" w="64" h="64"/>
+    <sprite n="rtex286.png" x="1151" y="3447" w="64" h="64"/>
+    <sprite n="rtex287.png" x="1151" y="3513" w="64" h="64"/>
+    <sprite n="rtex292.png" x="1203" y="3086" w="64" h="64"/>
+    <sprite n="rtex295.png" x="1211" y="2975" w="64" h="64"/>
+    <sprite n="rtex296.png" x="1267" y="2909" w="64" h="64"/>
+    <sprite n="rtex297.png" x="687" y="3717" w="64" h="32"/>
+    <sprite n="rtex298.png" x="1203" y="3152" w="64" h="64"/>
+    <sprite n="rtex301.png" x="2141" y="3583" w="64" h="128"/>
+    <sprite n="rtex305.png" x="1275" y="2766" w="64" h="64"/>
+    <sprite n="rtex306.png" x="1275" y="2832" w="64" h="64"/>
+    <sprite n="rtex307.png" x="4043" y="3415" w="48" h="64"/>
+    <sprite n="rtex308.png" x="1217" y="3381" w="64" h="64"/>
+    <sprite n="rtex309.png" x="1059" y="2850" w="64" h="16"/>
+    <sprite n="rtex310.png" x="1165" y="2766" w="64" h="16"/>
+    <sprite n="rtex311.png" x="521" y="4001" w="96" h="64"/>
+    <sprite n="rtex312.png" x="1241" y="3276" w="64" h="64"/>
+    <sprite n="rtex313.png" x="3543" y="3465" w="144" h="64"/>
+    <sprite n="rtex314.png" x="621" y="3755" w="64" h="96"/>
+    <sprite n="rtex316.png" x="485" y="3111" w="48" h="64"/>
+    <sprite n="rtex317.png" x="2293" y="3036" w="48" h="48"/>
+    <sprite n="rtex318.png" x="2031" y="2377" w="32" h="32"/>
+    <sprite n="rtex319.png" x="2031" y="2411" w="32" h="32"/>
+    <sprite n="rtex320.png" x="4019" y="2534" w="64" h="208"/>
+    <sprite n="rtex321.png" x="2207" y="3583" w="64" h="128"/>
+    <sprite n="rtex322.png" x="1217" y="3447" w="64" h="64"/>
+    <sprite n="rtex323.png" x="2081" y="3871" w="96" h="128"/>
+    <sprite n="rtex324.png" x="2273" y="3583" w="64" h="128"/>
+    <sprite n="rtex326.png" x="3901" y="501" w="32" h="128"/>
+    <sprite n="rtex328.png" x="1217" y="3513" w="64" h="64"/>
+    <sprite n="rtex329.png" x="1269" y="3086" w="64" h="64"/>
+    <sprite n="rtex330.png" x="1277" y="2975" w="64" h="64"/>
+    <sprite n="rtex331.png" x="2339" y="3583" w="64" h="128"/>
+    <sprite n="rtex332.png" x="2405" y="3583" w="64" h="128"/>
+    <sprite n="rtex333.png" x="1333" y="2909" w="64" h="64"/>
+    <sprite n="rtex334.png" x="1269" y="3152" w="64" h="64"/>
+    <sprite n="rtex335.png" x="2471" y="3583" w="64" h="128"/>
+    <sprite n="rtex336.png" x="2537" y="3583" w="64" h="128"/>
+    <sprite n="rtex337.png" x="2603" y="3583" w="64" h="128"/>
+    <sprite n="rtex338.png" x="2669" y="3583" w="64" h="128"/>
+    <sprite n="rtex339.png" x="1341" y="2766" w="64" h="64"/>
+    <sprite n="rtex340.png" x="1283" y="3381" w="64" h="64"/>
+    <sprite n="rtex341.png" x="1307" y="3276" w="64" h="64"/>
+    <sprite n="rtex342.png" x="131" y="4001" w="128" h="80"/>
+    <sprite n="rtex343.png" x="427" y="3451" w="128" h="80"/>
+    <sprite n="rtex344.png" x="753" y="3717" w="128" h="128"/>
+    <sprite n="rtex345.png" x="359" y="1957" w="256" h="128"/>
+    <sprite n="rtex347.png" x="781" y="3871" w="128" h="128"/>
+    <sprite n="rtex348.png" x="1283" y="3447" w="64" h="64"/>
+    <sprite n="rtex349.png" x="1283" y="3513" w="64" h="64"/>
+    <sprite n="rtex350.png" x="1" y="674" w="512" h="256"/>
+    <sprite n="rtex351.png" x="429" y="3533" w="128" h="64"/>
+    <sprite n="rtex352.png" x="851" y="2786" w="96" h="80"/>
+    <sprite n="rtex353.png" x="785" y="3010" w="128" h="80"/>
+    <sprite n="rtex354.png" x="99" y="3606" w="128" h="96"/>
+    <sprite n="rtex355.png" x="2597" y="2810" w="112" h="112"/>
+    <sprite n="rtex356.png" x="3335" y="1739" w="96" h="144"/>
+    <sprite n="rtex357.png" x="2801" y="3583" w="64" h="128"/>
+    <sprite n="rtex358.png" x="1617" y="1028" w="48" h="112"/>
+    <sprite n="rtex359.png" x="2861" y="274" w="80" h="80"/>
+    <sprite n="rtex360.png" x="3135" y="2369" w="64" h="176"/>
+    <sprite n="rtex361.png" x="3885" y="1080" w="208" h="128"/>
+    <sprite n="rtex362.png" x="1335" y="3086" w="64" h="64"/>
+    <sprite n="rtex363.png" x="2247" y="2603" w="64" h="144"/>
+    <sprite n="rtex364.png" x="1399" y="2909" w="64" h="64"/>
+    <sprite n="rtex365.png" x="3901" y="729" w="32" h="64"/>
+    <sprite n="rtex366.png" x="2031" y="2445" w="32" h="32"/>
+    <sprite n="rtex367.png" x="3969" y="3036" w="112" h="144"/>
+    <sprite n="rtex368.png" x="1143" y="3717" w="128" h="128"/>
+    <sprite n="rtex369.png" x="3803" y="2848" w="192" h="176"/>
+    <sprite n="rtex370.png" x="2479" y="2905" w="112" h="112"/>
+    <sprite n="rtex376.png" x="2031" y="2479" w="32" h="32"/>
+    <sprite n="rtex377.png" x="2933" y="3541" w="64" h="128"/>
+    <sprite n="rtex378.png" x="3935" y="863" w="160" h="128"/>
+    <sprite n="rtex379.png" x="1451" y="2367" w="32" h="32"/>
+    <sprite n="rtex380.png" x="1407" y="2766" w="64" h="64"/>
+    <sprite n="rtex381.png" x="1407" y="2832" w="64" h="64"/>
+    <sprite n="rtex382.png" x="1445" y="2657" w="64" h="64"/>
+    <sprite n="rtex383.png" x="1577" y="2657" w="64" h="64"/>
+    <sprite n="rtex384.png" x="1643" y="2721" w="64" h="64"/>
+    <sprite n="rtex385.png" x="2999" y="3583" w="64" h="128"/>
+    <sprite n="rtex386.png" x="1709" y="2733" w="64" h="64"/>
+    <sprite n="rtex387.png" x="1273" y="3717" w="128" h="128"/>
+    <sprite n="rtex389.png" x="1539" y="2723" w="64" h="64"/>
+    <sprite n="rtex390.png" x="1671" y="2799" w="64" h="64"/>
+    <sprite n="rtex391.png" x="1539" y="2789" w="64" h="64"/>
+    <sprite n="rtex392.png" x="3193" y="2803" w="192" h="176"/>
+    <sprite n="rtex393.png" x="1301" y="3871" w="128" h="128"/>
+    <sprite n="rtex394.png" x="1605" y="2853" w="64" h="64"/>
+    <sprite n="rtex395.png" x="2559" y="3226" w="48" h="48"/>
+    <sprite n="rtex399.png" x="821" y="3445" w="64" h="128"/>
+    <sprite n="rtex400.png" x="3007" y="3717" w="64" h="128"/>
+    <sprite n="rtex401.png" x="1671" y="2865" w="64" h="64"/>
+    <sprite n="rtex403.png" x="1473" y="2855" w="64" h="64"/>
+    <sprite n="rtex404.png" x="1539" y="2855" w="64" h="64"/>
+    <sprite n="rtex405.png" x="1465" y="2921" w="64" h="64"/>
+    <sprite n="rtex406.png" x="3065" y="3583" w="64" h="128"/>
+    <sprite n="rtex407.png" x="1431" y="3871" w="128" h="128"/>
+    <sprite n="rtex408.png" x="347" y="2087" w="256" h="128"/>
+    <sprite n="rtex409.png" x="1531" y="2921" w="64" h="64"/>
+    <sprite n="rtex410.png" x="1737" y="2893" w="64" h="64"/>
+    <sprite n="rtex411.png" x="1561" y="3871" w="128" h="128"/>
+    <sprite n="rtex413.png" x="1663" y="3717" w="128" h="128"/>
+    <sprite n="rtex414.png" x="3127" y="2725" w="64" h="176"/>
+    <sprite n="rtex415.png" x="1451" y="2401" w="32" h="32"/>
+    <sprite n="rtex416.png" x="1923" y="2649" w="128" h="128"/>
+    <sprite n="rtex417.png" x="3131" y="3583" w="64" h="128"/>
+    <sprite n="rtex418.png" x="2677" y="3281" w="64" h="32"/>
+    <sprite n="rtex419.png" x="559" y="3533" w="128" h="64"/>
+    <sprite n="rtex420.png" x="327" y="3853" w="64" h="16"/>
+    <sprite n="rtex421.png" x="1691" y="3871" w="128" h="128"/>
+    <sprite n="rtex422.png" x="2001" y="2955" w="64" h="64"/>
+    <sprite n="rtex424.png" x="371" y="1456" w="240" h="48"/>
+    <sprite n="rtex425.png" x="3201" y="3871" w="64" h="128"/>
+    <sprite n="rtex426.png" x="4043" y="3333" w="48" h="80"/>
+    <sprite n="rtex427.png" x="1821" y="3871" w="128" h="128"/>
+    <sprite n="rtex428.png" x="1" y="3717" w="128" h="32"/>
+    <sprite n="rtex429.png" x="1869" y="2975" w="64" h="64"/>
+    <sprite n="rtex0430.png" x="2937" y="3281" w="64" h="128"/>
+    <sprite n="rtex430.png" x="1729" y="3025" w="64" h="64"/>
+    <sprite n="rtex431.png" x="2001" y="3021" w="64" h="64"/>
+    <sprite n="rtex433.png" x="1927" y="3041" w="64" h="64"/>
+    <sprite n="rtex435.png" x="1" y="3453" w="128" h="32"/>
+    <sprite n="rtex436.png" x="131" y="3853" w="128" h="16"/>
+    <sprite n="rtex437.png" x="2133" y="3058" w="64" h="64"/>
+    <sprite n="rtex439.png" x="2199" y="3058" w="64" h="64"/>
+    <sprite n="rtex440.png" x="2265" y="3086" w="64" h="64"/>
+    <sprite n="rtex441.png" x="1993" y="3087" w="64" h="64"/>
+    <sprite n="rtex442.png" x="1753" y="2535" w="192" h="96"/>
+    <sprite n="rtex444.png" x="2933" y="3671" w="64" h="32"/>
+    <sprite n="rtex446.png" x="3205" y="3717" w="64" h="128"/>
+    <sprite n="rtex447.png" x="3267" y="3871" w="64" h="128"/>
+    <sprite n="rtex448.png" x="2059" y="3087" w="64" h="64"/>
+    <sprite n="rtex449.png" x="2125" y="3124" w="64" h="64"/>
+    <sprite n="rtex451.png" x="2191" y="3124" w="64" h="64"/>
+    <sprite n="rtex452.png" x="2257" y="3152" w="64" h="64"/>
+    <sprite n="rtex454.png" x="1923" y="3717" w="128" h="128"/>
+    <sprite n="rtex455.png" x="2875" y="3281" w="48" h="32"/>
+    <sprite n="rtex456.png" x="1409" y="2987" w="64" h="64"/>
+    <sprite n="rtex457.png" x="621" y="3606" w="64" h="96"/>
+    <sprite n="rtex458.png" x="687" y="3755" w="64" h="96"/>
+    <sprite n="rtex459.png" x="3935" y="539" w="160" h="192"/>
+    <sprite n="rtex460.png" x="3683" y="2367" w="128" h="256"/>
+    <sprite n="rtex461.png" x="3897" y="3479" w="128" h="144"/>
+    <sprite n="rtex462.png" x="3901" y="631" w="32" h="96"/>
+    <sprite n="rtex464.png" x="1617" y="1142" w="48" h="112"/>
+    <sprite n="rtex465.png" x="1451" y="2435" w="32" h="32"/>
+    <sprite n="rtex466.png" x="1475" y="2987" w="64" h="64"/>
+    <sprite n="rtex467.png" x="1541" y="3051" w="64" h="64"/>
+    <sprite n="rtex468.png" x="1607" y="3063" w="64" h="64"/>
+    <sprite n="rtex469.png" x="1401" y="3053" w="64" h="64"/>
+    <sprite n="rtex470.png" x="2861" y="520" w="80" h="64"/>
+    <sprite n="rtex473.png" x="1467" y="3053" w="64" h="64"/>
+    <sprite n="rtex474.png" x="3581" y="2986" w="192" h="112"/>
+    <sprite n="rtex475.png" x="229" y="3606" w="128" h="96"/>
+    <sprite n="rtex476.png" x="1951" y="3871" w="128" h="128"/>
+    <sprite n="rtex479.png" x="2053" y="3717" w="128" h="128"/>
+    <sprite n="rtex480.png" x="2183" y="2879" w="128" h="128"/>
+    <sprite n="rtex481.png" x="3271" y="3717" w="64" h="128"/>
+    <sprite n="rtex482.png" x="3333" y="3871" w="64" h="128"/>
+    <sprite n="rtex483.png" x="3337" y="3717" w="64" h="128"/>
+    <sprite n="rtex484.png" x="3399" y="3871" w="64" h="128"/>
+    <sprite n="rtex485.png" x="3403" y="3717" w="64" h="128"/>
+    <sprite n="rtex486.png" x="3465" y="3871" w="64" h="128"/>
+    <sprite n="rtex495.png" x="261" y="3755" w="128" h="96"/>
+    <sprite n="rtex496.png" x="3755" y="3571" w="128" h="144"/>
+    <sprite n="rtex497.png" x="1533" y="3117" w="64" h="64"/>
+    <sprite n="rtex498.png" x="2053" y="2776" w="128" h="128"/>
+    <sprite n="rtex499.png" x="359" y="1569" w="256" h="256"/>
+    <sprite n="rtex500.png" x="1401" y="3119" w="64" h="64"/>
+    <sprite n="rtex501.png" x="1467" y="3119" w="64" h="64"/>
+    <sprite n="rtex502.png" x="2183" y="3717" w="96" h="128"/>
+    <sprite n="rtex508.png" x="1451" y="2469" w="32" h="32"/>
+    <sprite n="rtex509.png" x="539" y="635" w="80" h="128"/>
+    <sprite n="rtex510.png" x="1673" y="3091" w="64" h="64"/>
+    <sprite n="rtex511.png" x="1923" y="2779" w="128" h="128"/>
+    <sprite n="rtex512.png" x="2861" y="356" w="80" h="80"/>
+    <sprite n="rtex513.png" x="2861" y="438" w="80" h="80"/>
+    <sprite n="rtex514.png" x="1599" y="3129" w="64" h="64"/>
+    <sprite n="rtex0800.png" x="3535" y="3795" w="64" h="64"/>
+    <sprite n="rtex3390.png" x="1341" y="2832" w="64" h="64"/>
+    <sprite n="rtex3400.png" x="2735" y="3583" w="64" h="128"/>
+    <sprite n="rtex3411.png" x="4005" y="2744" w="64" h="160"/>
+    <sprite n="rtex3420.png" x="949" y="2784" w="128" h="64"/>
+    <sprite n="rtex3430.png" x="1079" y="2784" w="128" h="64"/>
+    <sprite n="rtex3490.png" x="621" y="503" w="512" h="256"/>
+    <sprite n="rtex3510.png" x="3833" y="1695" w="256" h="256"/>
+    <sprite n="rtex3520.png" x="3827" y="1953" w="256" h="256"/>
+    <sprite n="rtex3530.png" x="883" y="3717" w="128" h="128"/>
+    <sprite n="rtex3540.png" x="911" y="3871" w="128" h="128"/>
+    <sprite n="rtex3561.png" x="1013" y="3717" w="128" h="128"/>
+    <sprite n="rtex3570.png" x="3581" y="2856" w="192" h="128"/>
+    <sprite n="rtex3580.png" x="2867" y="3315" w="64" h="128"/>
+    <sprite n="rtex3590.png" x="3935" y="733" w="160" h="128"/>
+    <sprite n="rtex3600.png" x="3341" y="1260" w="96" h="224"/>
+    <sprite n="rtex3610.png" x="2867" y="3445" w="64" h="128"/>
+    <sprite n="rtex3620.png" x="1041" y="3871" w="128" h="128"/>
+    <sprite n="rtex3630.png" x="1343" y="2975" w="64" h="64"/>
+    <sprite n="rtex3650.png" x="1335" y="3152" w="64" h="64"/>
+    <sprite n="rtex3660.png" x="2531" y="2597" w="64" h="176"/>
+    <sprite n="rtex3670.png" x="3613" y="2423" w="64" h="176"/>
+    <sprite n="rtex3680.png" x="3131" y="2547" w="64" h="176"/>
+    <sprite n="rtex3790.png" x="261" y="4001" w="128" h="64"/>
+    <sprite n="rtex3800.png" x="1171" y="3871" w="128" h="128"/>
+    <sprite n="rtex3820.png" x="1511" y="2657" w="64" h="64"/>
+    <sprite n="rtex3830.png" x="3885" y="1210" w="208" h="128"/>
+    <sprite n="rtex3840.png" x="2867" y="3575" w="64" h="128"/>
+    <sprite n="rtex3870.png" x="1473" y="2723" w="64" h="64"/>
+    <sprite n="rtex3890.png" x="1605" y="2787" w="64" h="64"/>
+    <sprite n="rtex3900.png" x="1473" y="2789" w="64" h="64"/>
+    <sprite n="rtex3910.png" x="3717" y="3394" w="48" h="80"/>
+    <sprite n="rtex3940.png" x="1403" y="3717" w="128" h="128"/>
+    <sprite n="rtex3950.png" x="391" y="4001" w="128" h="64"/>
+    <sprite n="rtex4040.png" x="1605" y="2919" w="64" h="64"/>
+    <sprite n="rtex4100.png" x="1533" y="3717" w="128" h="128"/>
+    <sprite n="rtex4110.png" x="3387" y="2833" w="192" h="176"/>
+    <sprite n="rtex4120.png" x="3069" y="3871" w="64" h="128"/>
+    <sprite n="rtex4121.png" x="261" y="3853" w="64" h="16"/>
+    <sprite n="rtex4130.png" x="3073" y="3717" w="64" h="128"/>
+    <sprite n="rtex4133.png" x="1671" y="2931" w="64" h="64"/>
+    <sprite n="rtex4140.png" x="1793" y="2633" w="128" h="128"/>
+    <sprite n="rtex4143.png" x="1597" y="2985" w="64" h="64"/>
+    <sprite n="rtex4150.png" x="1803" y="2893" w="64" h="64"/>
+    <sprite n="rtex4151.png" x="1869" y="2909" w="64" h="64"/>
+    <sprite n="rtex4160.png" x="1935" y="2909" w="64" h="64"/>
+    <sprite n="rtex4161.png" x="1793" y="2763" w="128" h="128"/>
+    <sprite n="rtex4162.png" x="1737" y="2959" w="64" h="64"/>
+    <sprite n="rtex4170.png" x="3135" y="3871" w="64" h="128"/>
+    <sprite n="rtex4180.png" x="131" y="3755" w="128" h="96"/>
+    <sprite n="rtex4190.png" x="2743" y="3281" w="64" h="32"/>
+    <sprite n="rtex4191.png" x="1803" y="2959" w="64" h="64"/>
+    <sprite n="rtex4200.png" x="3139" y="3717" w="64" h="128"/>
+    <sprite n="rtex4210.png" x="1663" y="2997" w="64" h="64"/>
+    <sprite n="rtex4211.png" x="2179" y="3871" w="96" h="128"/>
+    <sprite n="rtex4220.png" x="1793" y="3717" w="128" h="128"/>
+    <sprite n="rtex4221.png" x="3205" y="3488" w="64" h="128"/>
+    <sprite n="rtex4230.png" x="2067" y="2955" w="64" h="64"/>
+    <sprite n="rtex4240.png" x="3775" y="3026" w="192" h="96"/>
+    <sprite n="rtex4250.png" x="2593" y="3006" w="112" h="32"/>
+    <sprite n="rtex4260.png" x="2809" y="3281" w="64" h="32"/>
+    <sprite n="rtex4270.png" x="655" y="3010" w="128" h="16"/>
+    <sprite n="rtex4290.png" x="1935" y="2975" w="64" h="64"/>
+    <sprite n="rtex4300.png" x="1795" y="3025" w="64" h="64"/>
+    <sprite n="rtex4310.png" x="2067" y="3021" w="64" h="64"/>
+    <sprite n="rtex4320.png" x="1861" y="3041" w="64" h="64"/>
+    <sprite n="scarabst.mdl_0.tga" x="2943" y="1035" w="440" h="187"/>
+    <sprite n="schunk1.mdl_0.tga" x="1165" y="525" w="60" h="25"/>
+    <sprite n="schunk1.mdl_1.tga" x="1165" y="552" w="60" h="25"/>
+    <sprite n="schunk2.mdl_0.tga" x="1165" y="463" w="60" h="29"/>
+    <sprite n="schunk2.mdl_1.tga" x="1165" y="494" w="60" h="29"/>
+    <sprite n="schunk3.mdl_0.tga" x="2271" y="2510" w="60" h="25"/>
+    <sprite n="schunk3.mdl_1.tga" x="2271" y="2537" w="60" h="25"/>
+    <sprite n="schunk4.mdl_0.tga" x="2161" y="2254" w="56" h="28"/>
+    <sprite n="schunk4.mdl_1.tga" x="2219" y="2254" w="56" h="28"/>
+    <sprite n="scorpion.mdl_0.tga" x="1587" y="1407" w="204" h="157"/>
+    <sprite n="scorpion.mdl_1.tga" x="2727" y="1727" w="204" h="157"/>
+    <sprite n="scrbpbdy.mdl_0.tga" x="2723" y="2196" w="204" h="97"/>
+    <sprite n="scrbpwng.mdl_0.tga" x="2333" y="2460" w="204" h="68"/>
+    <sprite n="scrbstp1.mdl_0.tga" x="2929" y="2290" w="204" h="97"/>
+    <sprite n="seaweed.mdl_0.tga" x="1143" y="449" w="20" h="81"/>
+    <sprite n="sflesh1.mdl_0.tga" x="221" y="3411" w="108" h="39"/>
+    <sprite n="sflesh2.mdl_0.tga" x="2567" y="3145" w="108" h="31"/>
+    <sprite n="sflesh3.mdl_0.tga" x="111" y="3533" w="108" h="70"/>
+    <sprite n="shard.mdl_0.tga" x="2597" y="2478" w="120" h="68"/>
+    <sprite n="shard.mdl_1.tga" x="2597" y="2548" w="120" h="68"/>
+    <sprite n="shard.mdl_2.tga" x="2597" y="2618" w="120" h="68"/>
+    <sprite n="shard1.mdl_0.tga" x="2649" y="1985" w="72" h="35"/>
+    <sprite n="shard1.mdl_1.tga" x="2649" y="2022" w="72" h="35"/>
+    <sprite n="shard1.mdl_2.tga" x="2099" y="2160" w="72" h="35"/>
+    <sprite n="shard1.mdl_3.tga" x="2099" y="2197" w="72" h="35"/>
+    <sprite n="shard2.mdl_0.tga" x="533" y="765" w="52" h="37"/>
+    <sprite n="shard2.mdl_1.tga" x="1445" y="2586" w="52" h="37"/>
+    <sprite n="shard2.mdl_2.tga" x="2539" y="2558" w="52" h="37"/>
+    <sprite n="shard2.mdl_3.tga" x="2271" y="2564" w="52" h="37"/>
+    <sprite n="shard3.mdl_0.tga" x="2649" y="2059" w="72" h="22"/>
+    <sprite n="shard3.mdl_1.tga" x="2649" y="2083" w="72" h="22"/>
+    <sprite n="shard3.mdl_2.tga" x="2649" y="2107" w="72" h="22"/>
+    <sprite n="shard3.mdl_3.tga" x="2649" y="2131" w="72" h="22"/>
+    <sprite n="shard4.mdl_0.tga" x="993" y="1141" w="44" h="37"/>
+    <sprite n="shard4.mdl_1.tga" x="993" y="1180" w="44" h="37"/>
+    <sprite n="shard4.mdl_2.tga" x="993" y="1219" w="44" h="37"/>
+    <sprite n="shard4.mdl_3.tga" x="993" y="1258" w="44" h="37"/>
+    <sprite n="shard5.mdl_0.tga" x="2175" y="1458" w="24" h="37"/>
+    <sprite n="shard5.mdl_1.tga" x="2175" y="1497" w="24" h="37"/>
+    <sprite n="shard5.mdl_2.tga" x="481" y="1408" w="24" h="37"/>
+    <sprite n="shard5.mdl_3.tga" x="911" y="2342" w="24" h="37"/>
+    <sprite n="shardice.mdl_0.tga" x="2099" y="1932" w="72" h="112"/>
+    <sprite n="sheep.mdl_0.tga" x="1805" y="1574" w="344" h="152"/>
+    <sprite n="sickle.mdl_0.tga" x="1" y="2365" w="296" h="289"/>
+    <sprite n="skllstk1.mdl_0.tga" x="3007" y="3254" w="144" h="197"/>
+    <sprite n="skllstk2.mdl_0.tga" x="3433" y="2273" w="248" h="148"/>
+    <sprite n="skulbook.mdl_0.tga" x="3407" y="2490" w="204" h="55"/>
+    <sprite n="skulhead.mdl_0.tga" x="1217" y="1969" w="300" h="153"/>
+    <sprite n="skull.mdl_0.tga" x="3173" y="3234" w="148" h="101"/>
+    <sprite n="skullwiz.mdl_0.tga" x="1815" y="177" w="540" h="206"/>
+    <sprite n="skullwiz.mdl_1.tga" x="1229" y="217" w="540" h="206"/>
+    <sprite n="skulshot.mdl_0.tga" x="2203" y="1166" w="152" h="196"/>
+    <sprite n="skulshot.mdl_1.tga" x="2203" y="1364" w="152" h="196"/>
+    <sprite n="sky000.png" x="1519" y="2105" w="256" h="128"/>
+    <sprite n="sky0000.png" x="939" y="2140" w="256" h="128"/>
+    <sprite n="sky0001.png" x="1519" y="2235" w="256" h="128"/>
+    <sprite n="sky001.png" x="939" y="2270" w="256" h="128"/>
+    <sprite n="sky0010.png" x="323" y="2364" w="256" h="128"/>
+    <sprite n="snake.mdl_0.tga" x="2401" y="1" w="540" h="271"/>
+    <sprite n="snakearr.mdl_0.tga" x="515" y="902" w="104" h="88"/>
+    <sprite n="snkstatu.mdl_0.tga" x="1" y="1969" w="344" h="163"/>
+    <sprite n="snout.mdl_0.tga" x="323" y="2217" w="288" h="145"/>
+    <sprite n="soulball.mdl_0.tga" x="513" y="1402" w="104" h="52"/>
+    <sprite n="soulskul.mdl_0.tga" x="3347" y="3125" w="152" h="105"/>
+    <sprite n="spider.mdl_0.tga" x="2723" y="2043" w="204" h="151"/>
+    <sprite n="spider.mdl_1.tga" x="3227" y="2015" w="204" h="151"/>
+    <sprite n="spike.mdl_0.tga" x="2649" y="2155" w="72" h="20"/>
+    <sprite n="spit.mdl_0.tga" x="2099" y="2046" w="72" h="112"/>
     <sprite n="spllbook.mdl_0.tga" x="1" y="1" w="624" h="271"/>
-    <sprite n="splnter1.mdl_0.tga" x="2501" y="1888" w="37" h="28" r="y"/>
-    <sprite n="splnter2.mdl_0.tga" x="2618" y="1888" w="37" h="24" r="y"/>
-    <sprite n="splnter3.mdl_0.tga" x="3467" y="1340" w="36" h="37"/>
-    <sprite n="splnter4.mdl_0.tga" x="2973" y="2290" w="37" h="44" r="y"/>
-    <sprite n="star.mdl_0.tga" x="2446" y="3551" w="200" h="94"/>
-    <sprite n="star.mdl_1.tga" x="1609" y="2698" w="200" h="94"/>
-    <sprite n="stchain.mdl_0.tga" x="2997" y="1098" w="56" h="48"/>
-    <sprite n="stclrbm.mdl_0.tga" x="715" y="1810" w="16" h="16"/>
-    <sprite n="stclrbm.mdl_1.tga" x="715" y="1828" w="16" h="16"/>
-    <sprite n="stclrbm.mdl_2.tga" x="715" y="1846" w="16" h="16"/>
-    <sprite n="stclrbm.mdl_3.tga" x="784" y="1869" w="16" h="16"/>
-    <sprite n="stclrbm.mdl_4.tga" x="784" y="1887" w="16" h="16"/>
-    <sprite n="stice.mdl_0.tga" x="3805" y="263" w="144" h="148"/>
-    <sprite n="stlghtng.mdl_0.tga" x="3537" y="710" w="100" h="92" r="y"/>
-    <sprite n="stmedgaz.mdl_0.tga" x="3030" y="829" w="204" h="134"/>
-    <sprite n="stool.mdl_0.tga" x="948" y="3213" w="132" h="42"/>
-    <sprite n="stsunsf1.mdl_0.tga" x="2930" y="719" w="149" h="108" r="y"/>
-    <sprite n="stsunsf2.mdl_0.tga" x="1713" y="1449" w="152" h="112"/>
-    <sprite n="stsunsf3.mdl_0.tga" x="2456" y="3166" w="152" h="76"/>
-    <sprite n="stsunsf4.mdl_0.tga" x="2610" y="3166" w="152" h="76"/>
-    <sprite n="stsunsf5.mdl_0.tga" x="1867" y="1449" w="152" h="112"/>
-    <sprite n="sunstaff.mdl_0.tga" x="273" y="2098" w="388" h="296" r="y"/>
-    <sprite n="sword.mdl_0.tga" x="2778" y="3108" w="81" h="52" r="y"/>
-    <sprite n="teleport.mdl_0.tga" x="1635" y="2974" w="252" h="217"/>
-    <sprite n="teleport.mdl_1.tga" x="1889" y="2974" w="252" h="217"/>
-    <sprite n="tempmetr.mdl_0.tga" x="2927" y="3783" w="104" h="52"/>
-    <sprite n="test.mdl_0.tga" x="3033" y="3783" w="104" h="52"/>
-    <sprite n="test.mdl_1.tga" x="3139" y="3783" w="104" h="52"/>
-    <sprite n="thronetex1.png" x="3200" y="1408" w="96" h="96"/>
-    <sprite n="tombstn1.mdl_0.tga" x="2719" y="403" w="184" h="197"/>
-    <sprite n="tombstn2.mdl_0.tga" x="2825" y="1281" w="204" h="128"/>
-    <sprite n="tornato.mdl_0.tga" x="1463" y="259" w="396" h="106"/>
-    <sprite n="tree.mdl_0.tga" x="816" y="1036" w="150" h="388" r="y"/>
-    <sprite n="tree2.mdl_0.tga" x="627" y="1" w="392" h="384"/>
-    <sprite n="trimtex.png" x="2479" y="1954" w="80" h="32" r="y"/>
-    <sprite n="tutstatu.mdl_0.tga" x="1429" y="959" w="120" h="348" r="y"/>
-    <sprite n="twspike.mdl_0.tga" x="3703" y="263" w="100" h="96" r="y"/>
-    <sprite n="v_assgr.mdl_0.tga" x="1949" y="2081" w="163" h="252" r="y"/>
-    <sprite n="vindsht1.mdl_0.tga" x="3329" y="710" w="100" h="101"/>
-    <sprite n="vorpal.mdl_0.tga" x="896" y="3883" w="416" h="195"/>
-    <sprite n="vorpshk2.mdl_0.tga" x="2695" y="1098" w="104" h="49"/>
-    <sprite n="vorpshk2.mdl_1.tga" x="2825" y="602" w="104" h="49"/>
-    <sprite n="vorpshok.mdl_0.tga" x="2301" y="3652" w="300" h="139"/>
-    <sprite n="vorpshok.mdl_1.tga" x="2603" y="3647" w="300" h="139"/>
-    <sprite n="vorpshot.mdl_0.tga" x="1713" y="1316" w="296" h="131"/>
-    <sprite n="vorpshot.mdl_1.tga" x="2011" y="1309" w="296" h="131"/>
-    <sprite n="vorpswip.mdl_0.tga" x="1855" y="1229" w="104" h="44"/>
-    <sprite n="w_l2_c1.mdl_0.tga" x="2668" y="2970" w="197" h="136" r="y"/>
-    <sprite n="w_l2_c2.mdl_0.tga" x="2669" y="2782" w="101" h="84" r="y"/>
-    <sprite n="w_l2_c3.mdl_0.tga" x="2318" y="1438" w="152" h="104"/>
-    <sprite n="w_l2_c4.mdl_0.tga" x="3193" y="1280" w="156" h="126"/>
-    <sprite n="w_l3_c1.mdl_0.tga" x="1737" y="2794" w="200" h="91"/>
-    <sprite n="w_l3_c2.mdl_0.tga" x="255" y="3908" w="245" h="176" r="y"/>
-    <sprite n="w_l3_c3.mdl_0.tga" x="3597" y="3773" w="146" h="156" r="y"/>
-    <sprite n="w_l3_c4.mdl_0.tga" x="2365" y="970" w="252" h="146"/>
-    <sprite n="w_l41_c1.mdl_0.tga" x="3536" y="806" w="144" h="149"/>
-    <sprite n="w_l41_c2.mdl_0.tga" x="706" y="2840" w="197" h="80" r="y"/>
-    <sprite n="w_l41_c3.mdl_0.tga" x="706" y="2384" w="77" h="248" r="y"/>
-    <sprite n="w_l41_c4.mdl_0.tga" x="1354" y="1099" w="71" h="344" r="y"/>
-    <sprite n="w_l42_c1.mdl_0.tga" x="2012" y="3325" w="252" h="229"/>
-    <sprite n="w_l42_c2.mdl_0.tga" x="2435" y="2063" w="148" h="148"/>
-    <sprite n="w_l42_c3.mdl_0.tga" x="924" y="3570" w="292" h="96" r="y"/>
-    <sprite n="w_l42_c4.mdl_0.tga" x="1547" y="1317" w="164" h="244"/>
-    <sprite n="warhamer.mdl_0.tga" x="1148" y="1601" w="193" h="488" r="y"/>
-    <sprite n="webs.mdl_0.tga" x="1153" y="637" w="274" h="460" r="y"/>
-    <sprite n="webs.mdl_1.tga" x="274" y="1258" w="460" h="274"/>
-    <sprite n="webs.mdl_2.tga" x="274" y="1534" w="460" h="274"/>
-    <sprite n="webs.mdl_3.tga" x="2615" y="1" w="460" h="274"/>
-    <sprite n="xhair.mdl_0.tga" x="201" y="1803" w="52" h="520" r="y"/>
+    <sprite n="splnter1.mdl_0.tga" x="1135" y="532" w="28" h="37"/>
+    <sprite n="splnter2.mdl_0.tga" x="911" y="2381" w="24" h="37"/>
+    <sprite n="splnter3.mdl_0.tga" x="3405" y="206" w="36" h="37"/>
+    <sprite n="splnter4.mdl_0.tga" x="993" y="1297" w="44" h="37"/>
+    <sprite n="star.mdl_0.tga" x="3197" y="2707" w="200" h="94"/>
+    <sprite n="star.mdl_1.tga" x="2921" y="2803" w="200" h="94"/>
+    <sprite n="stchain.mdl_0.tga" x="2539" y="2389" w="56" h="48"/>
+    <sprite n="stclrbm.mdl_0.tga" x="1039" y="948" w="16" h="16"/>
+    <sprite n="stclrbm.mdl_1.tga" x="1039" y="966" w="16" h="16"/>
+    <sprite n="stclrbm.mdl_2.tga" x="1039" y="984" w="16" h="16"/>
+    <sprite n="stclrbm.mdl_3.tga" x="1039" y="1002" w="16" h="16"/>
+    <sprite n="stclrbm.mdl_4.tga" x="1039" y="1020" w="16" h="16"/>
+    <sprite n="stice.mdl_0.tga" x="3767" y="3275" w="144" h="148"/>
+    <sprite n="stlghtng.mdl_0.tga" x="2263" y="560" w="92" h="100"/>
+    <sprite n="stmedgaz.mdl_0.tga" x="3227" y="2168" w="204" h="134"/>
+    <sprite n="stool.mdl_0.tga" x="3683" y="2323" w="132" h="42"/>
+    <sprite n="stsunsf1.mdl_0.tga" x="2833" y="880" w="108" h="149"/>
+    <sprite n="stsunsf2.mdl_0.tga" x="3351" y="3011" w="152" h="112"/>
+    <sprite n="stsunsf3.mdl_0.tga" x="3019" y="3176" w="152" h="76"/>
+    <sprite n="stsunsf4.mdl_0.tga" x="2853" y="3203" w="152" h="76"/>
+    <sprite n="stsunsf5.mdl_0.tga" x="3193" y="3069" w="152" h="112"/>
+    <sprite n="sunstaff.mdl_0.tga" x="613" y="2342" w="296" h="388"/>
+    <sprite n="sword.mdl_0.tga" x="3385" y="1177" w="52" h="81"/>
+    <sprite n="teleport.mdl_0.tga" x="1197" y="2367" w="252" h="217"/>
+    <sprite n="teleport.mdl_1.tga" x="937" y="2400" w="252" h="217"/>
+    <sprite n="tempmetr.mdl_0.tga" x="3227" y="1957" w="104" h="52"/>
+    <sprite n="test.mdl_0.tga" x="101" y="3176" w="104" h="52"/>
+    <sprite n="test.mdl_1.tga" x="207" y="3176" w="104" h="52"/>
+    <sprite n="thronetex1.png" x="457" y="3606" w="96" h="96"/>
+    <sprite n="tombstn1.mdl_0.tga" x="2061" y="2577" w="184" h="197"/>
+    <sprite n="tombstn2.mdl_0.tga" x="3813" y="2534" w="204" h="128"/>
+    <sprite n="tornato.mdl_0.tga" x="2943" y="1224" w="396" h="106"/>
+    <sprite n="tree.mdl_0.tga" x="1" y="1144" w="388" h="150"/>
+    <sprite n="tree2.mdl_0.tga" x="2943" y="1332" w="392" h="384"/>
+    <sprite n="trimtex.png" x="3405" y="505" w="32" h="80"/>
+    <sprite n="tutstatu.mdl_0.tga" x="617" y="1572" w="348" h="120"/>
+    <sprite n="twspike.mdl_0.tga" x="1" y="3606" w="96" h="100"/>
+    <sprite n="v_assgr.mdl_0.tga" x="911" y="2619" w="252" h="163"/>
+    <sprite n="vindsht1.mdl_0.tga" x="3337" y="1636" w="100" h="101"/>
+    <sprite n="vorpal.mdl_0.tga" x="621" y="880" w="416" h="195"/>
+    <sprite n="vorpshk2.mdl_0.tga" x="2457" y="3174" w="104" h="49"/>
+    <sprite n="vorpshk2.mdl_1.tga" x="2347" y="3181" w="104" h="49"/>
+    <sprite n="vorpshok.mdl_0.tga" x="1217" y="2124" w="300" h="139"/>
+    <sprite n="vorpshok.mdl_1.tga" x="2347" y="1883" w="300" h="139"/>
+    <sprite n="vorpshot.mdl_0.tga" x="1" y="2799" w="296" h="131"/>
+    <sprite n="vorpshot.mdl_1.tga" x="2929" y="1957" w="296" h="131"/>
+    <sprite n="vorpswip.mdl_0.tga" x="213" y="3487" w="104" h="44"/>
+    <sprite n="w_l2_c1.mdl_0.tga" x="1667" y="867" w="136" h="197"/>
+    <sprite n="w_l2_c2.mdl_0.tga" x="539" y="274" w="84" h="101"/>
+    <sprite n="w_l2_c3.mdl_0.tga" x="3019" y="3070" w="152" h="104"/>
+    <sprite n="w_l2_c4.mdl_0.tga" x="2877" y="2899" w="156" h="126"/>
+    <sprite n="w_l3_c1.mdl_0.tga" x="3803" y="2664" w="200" h="91"/>
+    <sprite n="w_l3_c2.mdl_0.tga" x="1039" y="1169" w="176" h="245"/>
+    <sprite n="w_l3_c3.mdl_0.tga" x="3939" y="1" w="156" h="146"/>
+    <sprite n="w_l3_c4.mdl_0.tga" x="597" y="2732" w="252" h="146"/>
+    <sprite n="w_l41_c1.mdl_0.tga" x="3921" y="3182" w="144" h="149"/>
+    <sprite n="w_l41_c2.mdl_0.tga" x="539" y="436" w="80" h="197"/>
+    <sprite n="w_l41_c3.mdl_0.tga" x="3813" y="2455" w="248" h="77"/>
+    <sprite n="w_l41_c4.mdl_0.tga" x="617" y="2011" w="344" h="71"/>
+    <sprite n="w_l42_c1.mdl_0.tga" x="963" y="1909" w="252" h="229"/>
+    <sprite n="w_l42_c2.mdl_0.tga" x="3327" y="3232" w="148" h="148"/>
+    <sprite n="w_l42_c3.mdl_0.tga" x="2845" y="586" w="96" h="292"/>
+    <sprite n="w_l42_c4.mdl_0.tga" x="2313" y="2790" w="164" h="244"/>
+    <sprite n="warhamer.mdl_0.tga" x="3445" y="176" w="488" h="193"/>
+    <sprite n="webs.mdl_0.tga" x="3439" y="371" w="460" h="274"/>
+    <sprite n="webs.mdl_1.tga" x="2399" y="274" w="460" h="274"/>
+    <sprite n="webs.mdl_2.tga" x="2943" y="482" w="460" h="274"/>
+    <sprite n="webs.mdl_3.tga" x="3439" y="647" w="460" h="274"/>
+    <sprite n="xhair.mdl_0.tga" x="621" y="449" w="520" h="52"/>
 </TextureAtlas>
