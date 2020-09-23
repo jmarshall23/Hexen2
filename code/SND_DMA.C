@@ -449,7 +449,7 @@ void S_StartSound(int entnum, int entchannel, sfx_t *sfx, vec3_t origin, float f
 	int		vol;
 	int		ch_idx;
 	int		skip;
-	qboolean skip_dist_check;
+	qboolean skip_dist_check = false;
 
 	if (!sound_started)
 		return;

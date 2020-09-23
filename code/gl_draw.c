@@ -48,6 +48,7 @@ int		texels;
 
 qboolean is_3dfx = false;
 qboolean is_PowerVR = false;
+qboolean export_models = false;
 //qboolean is_3dfx = true;
 //qboolean is_PowerVR = true;
 
@@ -1160,7 +1161,52 @@ void GL_MipMap (byte *in, int width, int height)
 	}
 }
 
-static	unsigned	trans[640*480]; 	// FIXME, temporary
+static	unsigned	trans[640*480 * 5]; 	// FIXME, temporary
+
+const char* export_file_name;
+
+
+/*
+================
+R_WriteTGA
+================
+*/
+void R_WriteTGA(const char* filename, const byte* data, int width, int height) {
+	byte* buffer;
+	int		i;
+	int		bufferSize = width * height * 4 + 18;
+	int     imgStart = 18;
+
+	buffer = (byte*)malloc(bufferSize);
+	memset(buffer, 0, 18);
+	buffer[2] = 2;		// uncompressed type
+	buffer[12] = width & 255;
+	buffer[13] = width >> 8;
+	buffer[14] = height & 255;
+	buffer[15] = height >> 8;
+	buffer[16] = 32;	// pixel size
+	//if (!flipVertical) {
+	//	buffer[17] = (1 << 5);	// flip bit, for normal top to bottom raster order
+	//}
+
+	// swap rgb to bgr
+	for (i = imgStart; i < bufferSize; i += 4) {
+		buffer[i] = data[i - imgStart + 2];		// blue
+		buffer[i + 1] = data[i - imgStart + 1];		// green
+		buffer[i + 2] = data[i - imgStart + 0];		// red
+		buffer[i + 3] = 255;
+	}
+
+	//fileSystem->WriteFile(filename, buffer, bufferSize);
+	char fixedFileName[512];
+	sprintf(fixedFileName, "image_dump/%s.tga", filename);
+	FILE* f = fopen(fixedFileName, "wb");
+	fwrite(buffer, 1, bufferSize, f);
+	fclose(f);
+
+	free(buffer);
+}
+
 
 /*
 ===============
@@ -1308,8 +1354,14 @@ void GL_Upload8 (byte *data, int width, int height,  qboolean mipmap, qboolean a
 		}
 	}
 
+	if(export_file_name != NULL) {
+		R_WriteTGA(export_file_name, &trans[0], width, height);
+	}
+
 	GL_Upload32 (trans, width, height, mipmap, alpha);
 }
+
+
 
 /*
 ================
@@ -1325,6 +1377,20 @@ int GL_LoadTexture (char *identifier, int width, int height, byte *data, qboolea
 
 	if (!vid_initialized)
 		return -1;
+
+	if (export_models)
+	{
+		if (strstr(identifier, "alias_")) {
+			export_file_name = identifier;
+		}
+		else {
+			export_file_name = NULL;
+		}
+	}
+	else
+	{
+		export_file_name = NULL;
+	}
 
 	sprintf (search, "%s%d%d",identifier,width,height);
 

@@ -99,6 +99,7 @@
       <ObjectFileName>.\debug_gl\</ObjectFileName>
       <ProgramDataBaseFileName>.\debug_gl\</ProgramDataBaseFileName>
       <SmallerTypeCheck>false</SmallerTypeCheck>
+      <BasicRuntimeChecks>UninitializedLocalUsageCheck</BasicRuntimeChecks>
     </ClCompile>
     <Midl>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -221,6 +222,7 @@
     <ClInclude Include="Draw.h" />
     <ClInclude Include="D_iface.h" />
     <ClInclude Include="D_local.h" />
+    <ClInclude Include="exports.h" />
     <ClInclude Include="genmodel.h" />
     <ClInclude Include="glquake.h" />
     <ClInclude Include="gl_model.h" />

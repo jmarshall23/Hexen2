@@ -8,6 +8,7 @@
  */
 
 #include "quakedef.h"
+#include "exports.h"
 
 extern qboolean	vid_initialized;
 
@@ -31,6 +32,8 @@ static vec3_t	mins,maxs;
 
 int entity_file_size;
 int *r_currentpsurfedges;
+
+extern qboolean export_models;
 
 /*
 ===============
@@ -300,6 +303,14 @@ Loads in a model for the given name
 model_t *Mod_ForName (char *name, qboolean crash)
 {
 	model_t	*mod;
+
+	if (export_models) {
+		for(int i = 0; i < numExports; i++) {
+			mod = Mod_FindName(mesh_exports[i]);
+			Mod_LoadModel(mod, crash);
+		}
+		Sys_Error("export_models is complete\n");
+	}
 	
 	mod = Mod_FindName (name);
 	
@@ -1594,7 +1605,7 @@ void *Mod_LoadAllSkins (int numskins, daliasskintype_t *pskintype, int mdl_flags
 			memcpy (player_8bit_texels[4], (byte *)(pskintype + 1), s);
 		}
 
-		sprintf (name, "%s_%i", loadmodel->name, i);
+		sprintf (name, "alias_%s_%i", loadmodel->name, i);
 		if( mdl_flags & EF_HOLEY )
 			texture_mode = 2;
 		else if( mdl_flags & EF_TRANSPARENT )
@@ -1604,8 +1615,7 @@ void *Mod_LoadAllSkins (int numskins, daliasskintype_t *pskintype, int mdl_flags
 		else
 			texture_mode = 0;
 
-		pheader->gl_texturenum[i] = GL_LoadTexture (name, pheader->skinwidth, 
-			pheader->skinheight, (byte *)(pskintype + 1), true, false, texture_mode);
+		pheader->gl_texturenum[i] = GL_LoadTexture (name, pheader->skinwidth, pheader->skinheight, (byte *)(pskintype + 1), true, false, texture_mode);
 		pskintype = (daliasskintype_t *)((byte *)(pskintype+1) + s);
 	}
 
