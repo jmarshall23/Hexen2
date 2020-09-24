@@ -1,4 +1,4 @@
-78
+54
 lens Lens of Seeing
 takey Tailor's Key
 trkey Treasury Key
@@ -53,27 +53,4 @@ r7 Sunstone
 r8 Shadowstone
 soul Soul Key
 mage Mage's Tome
-chalice Chalice of St. Eric
-mask Burial Mask of King Lazarus
-dagger Ajanti Dagger
-vial Oil of Anointment
-goldgem Jewel of Buddha
-greengem Sangha Gem
-redgem Dharma Jewel
-lbudda Jade Buddha
-dtongue Jar of Dragon Tongue
-scroll Scroll of Enchantment
-dukeseal Duke's Seal
-prayer2 Prayer Wheel
-crosskey Cross Key
-headkey Staff of Emperor Lo Pan
-tbtmask Eyes of Buddha
-scepter Vajra Scepter
-orb Orb of Dakini
-magekey Mage's Key
-tienkey Tien's Key
-incense Incense of Enlightenment
-tbtkey Emperor's Key
-orb2 Sphere of Order
-bell Bell of Ghanta
-stonet Stone of Seldoot
+

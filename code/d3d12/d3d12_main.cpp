@@ -40,6 +40,7 @@ ComPtr<ID3D12StateObject> m_rtStateObject;
 
 ComPtr<ID3D12Resource> m_outputResource;
 ComPtr<ID3D12DescriptorHeap> m_srvUavHeap;
+
 // Ray tracing pipeline state properties, retaining the shader identifiers
 // to use in the Shader Binding Table
 ComPtr<ID3D12StateObjectProperties> m_rtStateObjectProps;
@@ -89,7 +90,9 @@ void GL_InitRaytracing(int width, int height) {
 			  D3D12_DESCRIPTOR_RANGE_TYPE_UAV /* UAV representing the output buffer*/,
 			  0 /*heap slot where the UAV is defined*/},
 			 {0 /*t0*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*Top-level acceleration structure*/, 1},
-			 {0 /*b0*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_CBV /*Camera parameters*/, 2} });
+			 {0 /*b0*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_CBV /*Camera parameters*/, 2},			
+			 {1 /*t1*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 3}
+			});
 
 		m_rayGenSignature = rsc.Generate(m_device.Get(), true);
 	}
@@ -102,6 +105,8 @@ void GL_InitRaytracing(int width, int height) {
 	{
 		nv_helpers_dx12::RootSignatureGenerator rsc;
 		rsc.AddRootParameter(D3D12_ROOT_PARAMETER_TYPE_SRV, 0);
+		rsc.AddHeapRangesParameter(
+			{ {1 /*t1*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 3} });
 		m_hitSignature = rsc.Generate(m_device.Get(), true);
 	}
 
@@ -511,8 +516,7 @@ void GL_FinishDXRLoading(void)
 
 	// Create a SRV/UAV/CBV descriptor heap. We need 2 entries - 1 UAV for the
 	// raytracing output and 1 SRV for the TLAS
-	m_srvUavHeap = nv_helpers_dx12::CreateDescriptorHeap(
-		m_device.Get(), 3, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, true);
+	m_srvUavHeap = nv_helpers_dx12::CreateDescriptorHeap( m_device.Get(), 4, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, true);
 
 	// Get a handle to the heap memory on the CPU side, to be able to write the
 	// descriptors directly
@@ -550,6 +554,11 @@ void GL_FinishDXRLoading(void)
 	cbvDesc.SizeInBytes = m_cameraBufferSize;
 	m_device->CreateConstantBufferView(&cbvDesc, srvHandle);
 
+	srvHandle.ptr +=
+		m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	
+	GL_LoadMegaTexture(srvHandle);
+
 	{
 		// The SBT helper class collects calls to Add*Program.  If called several
 		// times, the helper must be emptied before re-adding shaders.
@@ -574,7 +583,7 @@ void GL_FinishDXRLoading(void)
 		m_sbtHelper.AddMissProgram(L"Miss", {});
 
 		// Adding the triangle hit shader
-		m_sbtHelper.AddHitGroup(L"HitGroup", { (void*)m_vertexBuffer->GetGPUVirtualAddress() });
+		m_sbtHelper.AddHitGroup(L"HitGroup", { (void*)m_vertexBuffer->GetGPUVirtualAddress(), (UINT64 *) m_srvUavHeap->GetGPUDescriptorHandleForHeapStart().ptr });
 
 		// Compute the size of the SBT given the number of shaders and their
   // parameters
