@@ -85,10 +85,36 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
 	return shadowPayload.isHit;
 }
 
+
 [shader("closesthit")] void ClosestHit(inout HitInfo payload,
                                        Attributes attrib) {
   float3 barycentrics =
       float3(1.f - attrib.bary.x - attrib.bary.y, attrib.bary.x, attrib.bary.y);
+	  
+	  
+	float4 lightpositions[9] = {
+		float4(-891.667, 469.175, 1863.288, 2000),
+		float4(224.627, 296.664, 1944.997, 300),
+		float4(224.627, 296.664, 1690.184, 300),
+		float4(-1952.994, 193.610, 1863.288, 300),
+		float4(-1952.994, 112.598, 1425.305, 300),
+		float4(-1952.994, 211.580, 666.719, 900),
+		float4(-1810.802, -1.523, 863.279, 300),
+		float4(-2163.917, -1.523, 863.279, 300),
+		float4(-1917.619, -1.523, 329.545, 300),
+	};
+	
+	float4 lightcolor[9] = {
+		float4(	1, 1, 1, 1.5f ),
+		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+		float4(	1, 1, 1, 1.5f ),
+		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+	};
 
   uint vertId = BInstanceProperties[InstanceID()].startVertex + (3 * PrimitiveIndex());
   float3 hitColor = float3(1, 0, 0);
@@ -96,37 +122,28 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
   // Find the world - space hit position
   float3 worldOrigin = WorldRayOrigin() + RayTCurrent() * WorldRayDirection();
   
-  float ndotl = 1;
+  float3 ndotl = 0;
   float3 debug = float3(1, 1, 1);
-  //if(InstanceID() == 0) // For now only light the world geometry
+  for(int i = 0; i < 9; i++)
   {	  
 	  float3 normal = BTriVertex[vertId + 0].normal;
 	  
-	  bool isBackFacing = dot(normal, WorldRayDirection()) > 0.f;
-	  if (isBackFacing)
-			normal = -normal;
+	//  bool isBackFacing = dot(normal, WorldRayDirection()) > 0.f;
+	//  if (isBackFacing)
+	//		normal = -normal;
 	  
-	  float3 lightPos = QuakeCoords(float3(-891.667, 469.175, 1863.288 ));
+	  float3 lightPos = QuakeCoords(lightpositions[i].xyz);
 	  float3 centerLightDir = lightPos - worldOrigin;
 	  float lightDistance = length(centerLightDir);
-	  float falloff = attenuation(2000, 1.0, lightDistance);
+	  float falloff = attenuation(lightpositions[i].w, 1.0, lightDistance);  
 	  
-	  
-	  bool isShadowed = dot(normal, centerLightDir) < 0;	  
-	  if(!isShadowed)
+	  //bool isShadowed = dot(normal, centerLightDir) < 0;	  
+	  //if(!isShadowed)
 	  {
-		    if(IsLightShadowed(worldOrigin, normalize(centerLightDir), lightDistance))
+		    if(!IsLightShadowed(worldOrigin, normalize(centerLightDir), lightDistance))
 			{
-				ndotl = 0.0f;
+				ndotl += lightcolor[i].xyz * falloff * lightcolor[i].w; // normalize(centerLightDir); //max(0.f, dot(normal, normalize(centerLightDir))); 
 			}
-			else
-			{
-				ndotl = falloff * 1.5f; // normalize(centerLightDir); //max(0.f, dot(normal, normalize(centerLightDir))); 
-			}
-	  }
-	  else
-	  {
-		 ndotl = 0;
 	  }
 	//  debug = normal;
   }
@@ -170,7 +187,7 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
   }
 
   //hitColor = float3(InstanceID(), 0, 0);
-  ndotl = max(0.2, ndotl);
+  ndotl = max(0.25, ndotl);
 
   payload.colorAndDistance = float4(hitColor * ndotl * debug, RayTCurrent());
 }
