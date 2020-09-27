@@ -30,9 +30,11 @@ UINT64 m_fenceValue;
 ComPtr<IDxcBlob> m_rayGenLibrary;
 ComPtr<IDxcBlob> m_hitLibrary;
 ComPtr<IDxcBlob> m_missLibrary;
+ComPtr<IDxcBlob> m_shadowLibrary;
 
 ComPtr<ID3D12RootSignature> m_rayGenSignature;
 ComPtr<ID3D12RootSignature> m_hitSignature;
+ComPtr<ID3D12RootSignature> m_shadowSignature;
 ComPtr<ID3D12RootSignature> m_missSignature;
 
 // Ray tracing pipeline state
@@ -107,8 +109,21 @@ void GL_InitRaytracing(int width, int height) {
 		rsc.AddRootParameter(D3D12_ROOT_PARAMETER_TYPE_SRV, 0);
 		rsc.AddHeapRangesParameter(
 			{ {1 /*t1*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 3},
-			  {2 /*t2*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 4} });
+			  {2 /*t2*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 4},
+			  {3 /*t3*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*Top-level acceleration structure*/, 1},
+			});
 		m_hitSignature = rsc.Generate(m_device.Get(), true);
+	}
+
+	{
+		nv_helpers_dx12::RootSignatureGenerator rsc;
+		rsc.AddRootParameter(D3D12_ROOT_PARAMETER_TYPE_SRV, 0);
+		rsc.AddHeapRangesParameter(
+			{ {1 /*t1*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 3},
+			  {2 /*t2*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 4},
+			  {3 /*t3*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*Top-level acceleration structure*/, 1},
+			});
+		m_shadowSignature = rsc.Generate(m_device.Get(), true);
 	}
 
 	nv_helpers_dx12::RayTracingPipelineGenerator pipeline(m_device.Get());
@@ -121,6 +136,9 @@ void GL_InitRaytracing(int width, int height) {
 	m_rayGenLibrary = nv_helpers_dx12::CompileShaderLibrary(L"data1/shaders/RayGen.hlsl");
 	m_missLibrary = nv_helpers_dx12::CompileShaderLibrary(L"data1/shaders/Miss.hlsl");
 	m_hitLibrary = nv_helpers_dx12::CompileShaderLibrary(L"data1/shaders/Hit.hlsl");
+	// #DXR Extra - Another ray type
+	m_shadowLibrary = nv_helpers_dx12::CompileShaderLibrary(L"data1/shaders/ShadowRay.hlsl");
+	pipeline.AddLibrary(m_shadowLibrary.Get(),{ L"ShadowClosestHit", L"ShadowMiss" });
 
 	// In a way similar to DLLs, each library is associated with a number of
 	// exported symbols. This
@@ -149,6 +167,8 @@ void GL_InitRaytracing(int width, int height) {
 	// Hit group for the triangles, with a shader simply interpolating vertex
 	// colors
 	pipeline.AddHitGroup(L"HitGroup", L"ClosestHit");
+	// Hit group for all geometry when hit by a shadow ray
+	pipeline.AddHitGroup(L"ShadowHitGroup", L"ShadowClosestHit");
 
 	// The following section associates the root signature to each shader. Note
 	// that we can explicitly show that some shaders share the same root signature
@@ -159,7 +179,11 @@ void GL_InitRaytracing(int width, int height) {
 	pipeline.AddRootSignatureAssociation(m_rayGenSignature.Get(), { L"RayGen" });
 	pipeline.AddRootSignatureAssociation(m_missSignature.Get(), { L"Miss" });
 	pipeline.AddRootSignatureAssociation(m_hitSignature.Get(), { L"HitGroup" });
-
+	// #DXR Extra - Another ray type
+	pipeline.AddRootSignatureAssociation(m_shadowSignature.Get(),{ L"ShadowHitGroup" });
+	// #DXR Extra - Another ray type
+	pipeline.AddRootSignatureAssociation(m_missSignature.Get(), { L"Miss", L"ShadowMiss" });
+	
 	// The payload size defines the maximum size of the data carried by the rays,
 	// ie. the the data
 	// exchanged between shaders, such as the HitInfo structure in the HLSL code.
@@ -178,7 +202,7 @@ void GL_InitRaytracing(int width, int height) {
 	// then requires a trace depth of 1. Note that this recursion depth should be
 	// kept to a minimum for best performance. Path tracing algorithms can be
 	// easily flattened into a simple loop in the ray generation.
-	pipeline.SetMaxRecursionDepth(1);
+	pipeline.SetMaxRecursionDepth(2);
 
 	// Compile the pipeline for execution on the GPU
 	Con_Printf("Compiling Raytracing Pipeline...\n");
@@ -259,6 +283,17 @@ void GL_InitRaytracing(int width, int height) {
 			0, signature->GetBufferPointer(), signature->GetBufferSize(),
 			IID_PPV_ARGS(&m_rootSignature)));
 	}
+
+	//{
+	//	ComPtr<ID3D12DeviceRemovedExtendedDataSettings> pDredSettings;
+	//	ThrowIfFailed(D3D12GetDebugInterface(IID_PPV_ARGS(&pDredSettings)));
+	//
+	//	// Turn on AutoBreadcrumbs and Page Fault reporting
+	//	pDredSettings->SetAutoBreadcrumbsEnablement(D3D12_DRED_ENABLEMENT_FORCED_ON);
+	//	pDredSettings->SetAutoBreadcrumbsEnablement(D3D12_DRED_ENABLEMENT_FORCED_ON);
+	//	//pDredSettings->SetBreadcrumbContextEnablement(D3D12_DRED_ENABLEMENT_FORCED_ON);
+	//	pDredSettings->SetPageFaultEnablement(D3D12_DRED_ENABLEMENT_FORCED_ON);
+	//}
 }
 
 /*
@@ -582,9 +617,11 @@ void GL_FinishDXRLoading(void)
 		// The miss and hit shaders do not access any external resources: instead they
 		// communicate their results through the ray payload
 		m_sbtHelper.AddMissProgram(L"Miss", {});
+		m_sbtHelper.AddMissProgram(L"ShadowMiss", {});
 
 		// Adding the triangle hit shader
 		m_sbtHelper.AddHitGroup(L"HitGroup", { (void*)m_vertexBuffer->GetGPUVirtualAddress(), (UINT64 *) m_srvUavHeap->GetGPUDescriptorHandleForHeapStart().ptr });
+		m_sbtHelper.AddHitGroup(L"ShadowHitGroup", {});
 
 		// Compute the size of the SBT given the number of shaders and their
   // parameters

@@ -1126,6 +1126,12 @@ void ED_LoadFromFile (char *data)
 			continue;
 		}
 
+		//if (!strcmp("light", pr_strings + ent->v.classname)) {
+		//	ED_Free(ent);
+		//	inhibit++;
+		//	continue;
+		//}
+
 //
 // immediately call spawn function
 //
