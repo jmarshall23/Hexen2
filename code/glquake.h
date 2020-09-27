@@ -295,7 +295,7 @@ void create_view_matrix(float* matrix, float* vieworg, float* viewangles);
 void create_orthographic_matrix(float matrix[16], float xmin, float xmax, float ymin, float ymax, float znear, float zfar);
 void create_projection_matrix(float matrix[16], float znear, float zfar, float fov_x, float fov_y);
 
-void* GL_LoadDXRAliasMesh(int numVertexes, trivertx_t* vertexes, int numTris, mtriangle_t* triangles);
+void* GL_LoadDXRAliasMesh(const char *name, int numVertexes, trivertx_t* vertexes, int numTris, mtriangle_t* triangles, stvert_t *stverts);
 void create_entity_matrix(float matrix[16], entity_t* e, qboolean enable_left_hand);
 void create_brush_matrix(float matrix[16], entity_t* e, qboolean enable_left_hand);
 

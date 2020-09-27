@@ -22,7 +22,7 @@ GL_MakeAliasModelDisplayLists
 */
 void GL_MakeAliasModelDisplayLists (model_t *m, aliashdr_t *hdr)
 {
-	m->dxrModel = GL_LoadDXRAliasMesh(m->numvertexes, poseverts[0], m->numTris, m->triangles);
+	m->dxrModel = GL_LoadDXRAliasMesh(m->name, m->numvertexes, poseverts[0], m->numTris, m->triangles, m->stverts);
 
 	// Write Obj test
 	//if (m->numTris > 300)

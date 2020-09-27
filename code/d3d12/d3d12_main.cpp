@@ -106,7 +106,8 @@ void GL_InitRaytracing(int width, int height) {
 		nv_helpers_dx12::RootSignatureGenerator rsc;
 		rsc.AddRootParameter(D3D12_ROOT_PARAMETER_TYPE_SRV, 0);
 		rsc.AddHeapRangesParameter(
-			{ {1 /*t1*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 3} });
+			{ {1 /*t1*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 3},
+			  {2 /*t2*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 4} });
 		m_hitSignature = rsc.Generate(m_device.Get(), true);
 	}
 
@@ -516,7 +517,7 @@ void GL_FinishDXRLoading(void)
 
 	// Create a SRV/UAV/CBV descriptor heap. We need 2 entries - 1 UAV for the
 	// raytracing output and 1 SRV for the TLAS
-	m_srvUavHeap = nv_helpers_dx12::CreateDescriptorHeap( m_device.Get(), 4, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, true);
+	m_srvUavHeap = nv_helpers_dx12::CreateDescriptorHeap( m_device.Get(), 5, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, true);
 
 	// Get a handle to the heap memory on the CPU side, to be able to write the
 	// descriptors directly
@@ -554,10 +555,10 @@ void GL_FinishDXRLoading(void)
 	cbvDesc.SizeInBytes = m_cameraBufferSize;
 	m_device->CreateConstantBufferView(&cbvDesc, srvHandle);
 
-	srvHandle.ptr +=
-		m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	
+	srvHandle.ptr += m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);	
 	GL_LoadMegaTexture(srvHandle);
+	srvHandle.ptr += m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	GL_CreateInstanceInfo(srvHandle);
 
 	{
 		// The SBT helper class collects calls to Add*Program.  If called several

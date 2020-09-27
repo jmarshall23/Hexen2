@@ -13,6 +13,33 @@ std::vector<entity_t*> r_dxrEntities;
 
 int r_currentDxrEntities = -1;
 
+struct dxrMeshIntance_t {
+	int startVertex;
+};
+
+dxrMeshIntance_t meshInstanceData[MAX_VISEDICTS];
+
+ComPtr<ID3D12Resource> m_instanceProperties;
+
+D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+void GL_CreateInstanceInfo(D3D12_CPU_DESCRIPTOR_HANDLE& srvPtr) {
+	uint32_t bufferSize = ROUND_UP( static_cast<uint32_t>(MAX_VISEDICTS) * sizeof(dxrMeshIntance_t), D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT);
+
+	// Create the constant buffer for all matrices
+	m_instanceProperties = nv_helpers_dx12::CreateBuffer( m_device.Get(), bufferSize, D3D12_RESOURCE_FLAG_NONE, D3D12_RESOURCE_STATE_GENERIC_READ, nv_helpers_dx12::kUploadHeapProps);
+
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
+	srvDesc.Buffer.FirstElement = 0;
+	srvDesc.Buffer.NumElements = MAX_VISEDICTS;
+	srvDesc.Buffer.StructureByteStride = sizeof(dxrMeshIntance_t);
+	srvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
+	// Write the per-instance properties buffer view in the heap
+	m_device->CreateShaderResourceView(m_instanceProperties.Get(), &srvDesc, srvPtr);
+
+}
+
 void GL_CreateTopLevelAccelerationStructs(bool forceUpdate) {
 	// Add in the entities.
 	int numProcessedEntities = 1;
@@ -60,6 +87,8 @@ void GL_CreateTopLevelAccelerationStructs(bool forceUpdate) {
 			if (mesh == NULL)
 				continue;
 
+			meshInstanceData[i + 1].startVertex = mesh->startSceneVertex;
+
 			switch (currententity->model->type)
 			{
 			case mod_brush:
@@ -67,6 +96,22 @@ void GL_CreateTopLevelAccelerationStructs(bool forceUpdate) {
 				m_topLevelASGenerator.AddInstance(mesh->buffers.pResult.Get(), (DirectX::XMMATRIX&)currententity->dxrTransform, i + 1, 0);
 				break;
 			}
+		}
+
+		// Update our instance info.
+		if (m_instanceProperties != nullptr)
+		{
+			dxrMeshIntance_t* current = nullptr;
+
+			CD3DX12_RANGE readRange(0, 0); // We do not intend to read from this resource on the CPU.
+			ThrowIfFailed(m_instanceProperties->Map(0, &readRange, reinterpret_cast<void**>(&current)));
+
+			for(int d = 0; d < MAX_VISEDICTS; d++)
+			{
+				memcpy(current, &meshInstanceData[d], sizeof(dxrMeshIntance_t));
+				current++;
+			}
+			m_instanceProperties->Unmap(0, nullptr);
 		}
 
 		if (forceUpdate)

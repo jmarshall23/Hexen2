@@ -53,6 +53,7 @@ struct dxrVertex_t {
 	vec3_t xyz;
 	vec2_t st;
 	vec3_t normal;
+	vec4_t vtinfo;
 };
 
 struct dxrSurface_t {
@@ -111,3 +112,5 @@ extern std::vector<dxrMesh_t*> dxrMeshList;
 
 void GL_LoadMegaXML(const char* path);
 void GL_LoadMegaTexture(D3D12_CPU_DESCRIPTOR_HANDLE &srvPtr);
+void GL_CreateInstanceInfo(D3D12_CPU_DESCRIPTOR_HANDLE& srvPtr);
+void GL_FindMegaTile(const char* name, float& x, float& y, float& width, float& height);

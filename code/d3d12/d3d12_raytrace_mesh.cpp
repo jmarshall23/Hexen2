@@ -23,6 +23,9 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 		msurface_t* fa = &surfaces[i];
 		dxrSurface_t surf;
 
+		float x, y, w, h;
+		GL_FindMegaTile(fa->texinfo->texture->name, x, y, w, h);
+
 		BuildSurfaceDisplayList(fa);
 
 		if(fa->bmodelindex > 0 && currentmodel->name[0] != '*') {
@@ -44,6 +47,10 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 				v.xyz[2] = p->verts[d][2];
 				v.st[0] = p->verts[d][3];
 				v.st[1] = p->verts[d][4];
+				v.vtinfo[0] = x;
+				v.vtinfo[1] = y;
+				v.vtinfo[2] = w;
+				v.vtinfo[3] = h;
 		
 				mesh->meshVertexes.push_back(v);
 				surf.numVertexes++;
@@ -114,26 +121,46 @@ void *GL_LoadDXRMesh(msurface_t *surfaces, int numSurfaces)  {
 	return mesh;
 }
 
-void GL_AliasVertexToDxrVertex(trivertx_t inVert, dxrVertex_t &vertex) {
+void GL_AliasVertexToDxrVertex(trivertx_t inVert, stvert_t stvert, dxrVertex_t &vertex, float x, float y, float w, float h) {
 	memset(&vertex, 0, sizeof(dxrVertex_t));
 	vertex.xyz[0] = inVert.v[0];
 	vertex.xyz[1] = inVert.v[1];
 	vertex.xyz[2] = inVert.v[2];
+	vertex.st[0] = (stvert.s + 0.5) / w;
+	vertex.st[1] = (stvert.t + 0.5) / h;
+
+	//assert(vertex.st[0] > 1 || vertex.st[1] > 0);
+	if(vertex.st[0] > 1 || vertex.st[1] > 1 || w == -1 || h == -1) {
+		vertex.vtinfo[0] = -1;
+		vertex.vtinfo[1] = -1;
+		vertex.vtinfo[2] = -1;
+		vertex.vtinfo[3] = -1;
+	}
+	else
+	{
+		vertex.vtinfo[0] = w;
+		vertex.vtinfo[1] = h;
+		vertex.vtinfo[2] = x;
+		vertex.vtinfo[3] = y;
+	}
 }
 
-void *GL_LoadDXRAliasMesh(int numVertexes, trivertx_t* vertexes, int numTris, mtriangle_t* triangles) {
+void *GL_LoadDXRAliasMesh(const char* name, int numVertexes, trivertx_t* vertexes, int numTris, mtriangle_t* triangles, stvert_t* stverts) {
 	dxrMesh_t* mesh = new dxrMesh_t();
 	
 	mesh->meshId = dxrMeshList.size();
 	mesh->startSceneVertex = sceneVertexes.size();
 	mesh->numSceneVertexes = 0;
+
+	float x, y, w, h;
+	GL_FindMegaTile(COM_SkipPath((char *)name), x, y, w, h);
 	
 	// TODO: Use a index buffer here : )
 	for (int d = 0; d < numTris; d++)
 	{
 		{
 			dxrVertex_t v;
-			GL_AliasVertexToDxrVertex(vertexes[triangles[d].vertindex[0]], v);
+			GL_AliasVertexToDxrVertex(vertexes[triangles[d].vertindex[0]], stverts[triangles[d].vertindex[0]], v, x, y, w, h);
 			mesh->meshTriVertexes.push_back(v);
 			sceneVertexes.push_back(v);
 			mesh->numSceneVertexes++;
@@ -141,7 +168,7 @@ void *GL_LoadDXRAliasMesh(int numVertexes, trivertx_t* vertexes, int numTris, mt
 
 		{
 			dxrVertex_t v;
-			GL_AliasVertexToDxrVertex(vertexes[triangles[d].vertindex[1]], v);
+			GL_AliasVertexToDxrVertex(vertexes[triangles[d].vertindex[1]], stverts[triangles[d].vertindex[1]], v, x, y, w, h);
 			mesh->meshTriVertexes.push_back(v);
 			sceneVertexes.push_back(v);
 			mesh->numSceneVertexes++;
@@ -149,7 +176,7 @@ void *GL_LoadDXRAliasMesh(int numVertexes, trivertx_t* vertexes, int numTris, mt
 
 		{
 			dxrVertex_t v;
-			GL_AliasVertexToDxrVertex(vertexes[triangles[d].vertindex[2]], v);
+			GL_AliasVertexToDxrVertex(vertexes[triangles[d].vertindex[2]], stverts[triangles[d].vertindex[2]], v, x, y, w, h);
 			mesh->meshTriVertexes.push_back(v);
 			sceneVertexes.push_back(v);
 			mesh->numSceneVertexes++;
