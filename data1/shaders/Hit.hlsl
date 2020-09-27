@@ -98,7 +98,7 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
   
   float ndotl = 1;
   float3 debug = float3(1, 1, 1);
-  if(InstanceID() == 0) // For now only light the world geometry
+  //if(InstanceID() == 0) // For now only light the world geometry
   {	  
 	  float3 normal = BTriVertex[vertId + 0].normal;
 	  
@@ -121,7 +121,7 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
 			}
 			else
 			{
-				ndotl = falloff; // normalize(centerLightDir); //max(0.f, dot(normal, normalize(centerLightDir))); 
+				ndotl = falloff * 1.5f; // normalize(centerLightDir); //max(0.f, dot(normal, normalize(centerLightDir))); 
 			}
 	  }
 	  else
@@ -170,6 +170,7 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
   }
 
   //hitColor = float3(InstanceID(), 0, 0);
+  ndotl = max(0.2, ndotl);
 
   payload.colorAndDistance = float4(hitColor * ndotl * debug, RayTCurrent());
 }
