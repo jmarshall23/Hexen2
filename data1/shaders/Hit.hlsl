@@ -16,6 +16,14 @@ StructuredBuffer<STriVertex> BTriVertex : register(t0);
 Texture2D<float4> MegaTexture : register(t1);
 StructuredBuffer<SInstanceProperties> BInstanceProperties : register(t2);
 
+float3 QuakeCoords(float3 xyz) {
+	return float3(xyz.x, -xyz.z, xyz.y);
+}
+
+float attenuation(float r, float f, float d) {
+	return pow(max(0.0, 1.0 - (d / r)), f + 1.0);
+}
+
 [shader("closesthit")] void ClosestHit(inout HitInfo payload,
                                        Attributes attrib) {
   float3 barycentrics =
@@ -23,6 +31,37 @@ StructuredBuffer<SInstanceProperties> BInstanceProperties : register(t2);
 
   uint vertId = BInstanceProperties[InstanceID()].startVertex + (3 * PrimitiveIndex());
   float3 hitColor = float3(1, 0, 0);
+  
+  // Find the world - space hit position
+  float3 worldOrigin = WorldRayOrigin() + RayTCurrent() * WorldRayDirection();
+  
+  float ndotl = 1;
+  float3 debug = float3(1, 1, 1);
+  if(InstanceID() == 0) // For now only light the world geometry
+  {	  
+	  float3 normal = BTriVertex[vertId + 0].normal;
+	  
+	  bool isBackFacing = dot(normal, WorldRayDirection()) > 0.f;
+	  if (isBackFacing)
+			normal = -normal;
+	  
+	  float3 lightPos = QuakeCoords(float3(-891.667, 469.175, 1863.288 ));
+	  float3 centerLightDir = lightPos - worldOrigin;
+	  float lightDistance = length(centerLightDir);
+	  float falloff = attenuation(2000, 1.0, lightDistance);
+	  
+	  
+	  bool isShadowed = dot(normal, centerLightDir) < 0;	  
+	  if(!isShadowed)
+	  {
+		ndotl = falloff; // normalize(centerLightDir); //max(0.f, dot(normal, normalize(centerLightDir))); 
+	  }
+	  else
+	  {
+		 ndotl = 0;
+	  }
+	//  debug = normal;
+  }
   
   if(BTriVertex[vertId + 0].vtinfo.x != -1)
   {
@@ -64,5 +103,5 @@ StructuredBuffer<SInstanceProperties> BInstanceProperties : register(t2);
 
   //hitColor = float3(InstanceID(), 0, 0);
 
-  payload.colorAndDistance = float4(hitColor, RayTCurrent());
+  payload.colorAndDistance = float4(hitColor * ndotl * debug, RayTCurrent());
 }

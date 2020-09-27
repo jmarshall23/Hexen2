@@ -88,25 +88,45 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 		}
 	}
 
-	// Calculate the normals
+	// Write Obj test
+	//if (m->numTris > 300)
 	//{
-	//	for(int i = 0; i < mesh->meshTriVertexes.size(); i+=3)
-	//	{
-	//		float* v0 = &mesh->meshTriVertexes[i + 0].xyz[0];
-	//		float* v1 = &mesh->meshTriVertexes[i + 1].xyz[0];
-	//		float* v2 = &mesh->meshTriVertexes[i + 2].xyz[0];
+	//	FILE* f = fopen("test.obj", "wb");
 	//
-	//		vec3_t e1, e2, normal;
-	//		VectorSubtract(v1, v0, e1);
-	//		VectorSubtract(v2, v0, e2);
-	//		CrossProduct(e1, e2, normal);
-	//		VectorNormalize(normal);
-	//
-	//		memcpy(mesh->meshTriVertexes[i + 0].normal, normal, sizeof(float) * 3);
-	//		memcpy(mesh->meshTriVertexes[i + 1].normal, normal, sizeof(float) * 3);
-	//		memcpy(mesh->meshTriVertexes[i + 2].normal, normal, sizeof(float) * 3);
+	//	for (int i = 0; i < mesh->numSceneVertexes; i++) {
+	//		fprintf(f, "v %f %f %f\n", sceneVertexes[mesh->startSceneVertex + i].xyz[0], sceneVertexes[mesh->startSceneVertex + i].xyz[2], -sceneVertexes[mesh->startSceneVertex + i].xyz[1]);
 	//	}
+	//
+	//	for (int i = 0; i < mesh->numSceneVertexes; i += 3) {
+	//		int idx1 = i + 0;
+	//		int idx2 = i + 1;
+	//		int idx3 = i + 2;
+	//
+	//		fprintf(f, "f %d %d %d\n", idx1 + 1, idx2 + 1, idx3 + 1);
+	//	}
+	//
+	//	fclose(f);
 	//}
+
+	// Calculate the normals
+	{
+		for(int i = 0; i < mesh->numSceneVertexes; i+=3)
+		{
+			float* v0 = &sceneVertexes[mesh->startSceneVertex + i + 0].xyz[0];
+			float* v1 = &sceneVertexes[mesh->startSceneVertex + i + 1].xyz[0];
+			float* v2 = &sceneVertexes[mesh->startSceneVertex + i + 2].xyz[0];
+	
+			vec3_t e1, e2, normal;
+			VectorSubtract(v1, v0, e1);
+			VectorSubtract(v2, v0, e2);
+			CrossProduct(e1, e2, normal);
+			VectorNormalize(normal);
+	
+			memcpy(sceneVertexes[mesh->startSceneVertex + i + 0].normal, normal, sizeof(float) * 3);
+			memcpy(sceneVertexes[mesh->startSceneVertex + i + 1].normal, normal, sizeof(float) * 3);
+			memcpy(sceneVertexes[mesh->startSceneVertex + i + 2].normal, normal, sizeof(float) * 3);
+		}
+	}
 }
 
 void *GL_LoadDXRMesh(msurface_t *surfaces, int numSurfaces)  {
