@@ -158,10 +158,10 @@ void GL_AliasVertexToDxrVertex(trivertx_t inVert, stvert_t stvert, dxrVertex_t &
 	}
 	else
 	{
-		vertex.vtinfo[0] = w;
-		vertex.vtinfo[1] = h;
-		vertex.vtinfo[2] = x;
-		vertex.vtinfo[3] = y;
+		vertex.vtinfo[0] = x;
+		vertex.vtinfo[1] = y;
+		vertex.vtinfo[2] = w;
+		vertex.vtinfo[3] = h;
 	}
 }
 
