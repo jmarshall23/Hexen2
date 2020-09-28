@@ -63,6 +63,12 @@ void GL_CreateTopLevelAccelerationStructs(bool forceUpdate) {
 				numProcessedEntities++;
 				break;
 		}
+
+		if (currententity->model->flags & EF_ROTATE)
+		{ // Floating motion
+			currententity->dxrTransform[14] += sin(currententity->origin[0]
+				+ currententity->origin[1] + (cl.time * 3)) * 5.5;
+		}
 	}
 
 	bool onlyUpdate = (numProcessedEntities == r_currentDxrEntities);
