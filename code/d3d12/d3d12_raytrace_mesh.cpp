@@ -26,6 +26,11 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 		float x, y, w, h;
 		GL_FindMegaTile(fa->texinfo->texture->name, x, y, w, h);
 
+		// HACK! 
+		if(x == -1) {
+			GL_FindMegaTile("rtex080", x, y, w, h);
+		}
+
 		BuildSurfaceDisplayList(fa);
 
 		if(fa->bmodelindex > 0 && currentmodel->name[0] != '*') {

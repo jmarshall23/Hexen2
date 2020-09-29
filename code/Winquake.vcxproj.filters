@@ -235,9 +235,6 @@
     <ClCompile Include="d3d12\d3d12_raytrace_mesh.cpp">
       <Filter>Source Files\d3d12</Filter>
     </ClCompile>
-    <ClCompile Include="math\matrix.c">
-      <Filter>Source Files\math</Filter>
-    </ClCompile>
     <ClCompile Include="d3d12\d3d12_raytrace_entities.cpp">
       <Filter>Source Files\d3d12</Filter>
     </ClCompile>
@@ -246,6 +243,9 @@
     </ClCompile>
     <ClCompile Include="libs\xml\tinyxml2.cpp">
       <Filter>Source Files\libs\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="math\matrix.cpp">
+      <Filter>Source Files\math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,8 @@
+extern "C" {
 #include "../quakedef.h"
 #include "../WINQUAKE.H"
+};
+#include "vectormath.h"
 
 
 void create_brush_matrix(float matrix[16], entity_t* e, qboolean enable_left_hand)
@@ -106,25 +109,33 @@ void create_entity_matrix(float matrix[16], entity_t* e, qboolean enable_left_ha
 		translate[2] = paliashdr->scale_origin[2];
 	}
 
-	matrix[0] = axis[0][0] * scales[0];
-	matrix[4] = axis[1][0] * scales[1];
-	matrix[8] = axis[2][0] * scales[2];
-	matrix[12] = origin[0] + translate[0];
+	float4x4 _matrix;
+	float* _m = (float *)&_matrix;
 
-	matrix[1] = axis[0][1] * scales[0];
-	matrix[5] = axis[1][1] * scales[1];
-	matrix[9] = axis[2][1] * scales[2];
-	matrix[13] = origin[1] + translate[1];
+	_m[0] = axis[0][0];
+	_m[4] = axis[1][0];
+	_m[8] = axis[2][0];
+	_m[12] = origin[0];
 
-	matrix[2] = axis[0][2] * scales[0];
-	matrix[6] = axis[1][2] * scales[1];
-	matrix[10] = axis[2][2] * scales[2];
-	matrix[14] = origin[2] + translate[2];
+	_m[1] = axis[0][1];
+	_m[5] = axis[1][1];
+	_m[9] = axis[2][1];
+	_m[13] = origin[1];
 
-	matrix[3] = 0.0f;
-	matrix[7] = 0.0f;
-	matrix[11] = 0.0f;
-	matrix[15] = 1.0f;
+	_m[2] = axis[0][2];
+	_m[6] = axis[1][2];
+	_m[10] = axis[2][2];
+	_m[14] = origin[2];
+
+	_m[3] = 0.0f;
+	_m[7] = 0.0f;
+	_m[11] = 0.0f;
+	_m[15] = 1.0f;
+
+	_matrix = _matrix * float4x4Translation(translate[0], translate[1], translate[2]);
+	_matrix = _matrix * float4x4Scale(scales[0], scales[1], scales[2]);
+
+	memcpy(matrix, _m, sizeof(float) * 16);
 }
 
 

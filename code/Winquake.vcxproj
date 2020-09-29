@@ -167,7 +167,7 @@
     <ClCompile Include="keys.c" />
     <ClCompile Include="libs\xml\tinyxml2.cpp" />
     <ClCompile Include="mathlib.c" />
-    <ClCompile Include="math\matrix.c" />
+    <ClCompile Include="math\matrix.cpp" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="midi.c" />
     <ClCompile Include="mstrconv.c" />
