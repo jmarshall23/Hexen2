@@ -7,6 +7,7 @@
 #include <wrl/client.h>
 #include <dxgi1_4.h>
 #include "DXRHelper.h"
+#include "tinydx.h"
 
 extern "C" {
 	#include "../quakedef.h"
@@ -114,3 +115,7 @@ void GL_LoadMegaXML(const char* path);
 void GL_LoadMegaTexture(D3D12_CPU_DESCRIPTOR_HANDLE &srvPtr);
 void GL_CreateInstanceInfo(D3D12_CPU_DESCRIPTOR_HANDLE& srvPtr);
 void GL_FindMegaTile(const char* name, float& x, float& y, float& width, float& height);
+
+void GL_InitCompositePass(tr_texture *albedoPass, tr_texture *lightPass, tr_texture* compositeStagingPass, tr_texture *compositePass);
+void GL_CompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_texture* compositeStagingPass, tr_texture* compositePas, ID3D12GraphicsCommandList4* cmdList, ID3D12CommandAllocator *commandAllocator);
+extern tr_renderer *renderer;

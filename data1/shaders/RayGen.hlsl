@@ -11,6 +11,7 @@ cbuffer CameraParams : register(b0)
 
 // Raytracing output texture, accessed as a UAV
 RWTexture2D<float4> gOutput : register(u0);
+RWTexture2D<float4> gLightOutput : register(u1);
 
 // Raytracing acceleration structure, accessed as a SRV
 RaytracingAccelerationStructure SceneBVH : register(t0);
@@ -92,4 +93,5 @@ RaytracingAccelerationStructure SceneBVH : register(t0);
       // between the hit/miss shaders and the raygen
       payload);
   gOutput[launchIndex] = float4(payload.colorAndDistance.rgb, 1.f);
+  gLightOutput[launchIndex] = float4(payload.lightColor.rgb, 1.f);
 }

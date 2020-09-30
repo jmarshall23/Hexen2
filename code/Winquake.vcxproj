@@ -140,6 +140,7 @@
     <ClCompile Include="console.c" />
     <ClCompile Include="crc.c" />
     <ClCompile Include="cvar.c" />
+    <ClCompile Include="d3d12\d3d12_composite.cpp" />
     <ClCompile Include="d3d12\d3d12_main.cpp" />
     <ClCompile Include="d3d12\d3d12_raytrace_entities.cpp" />
     <ClCompile Include="d3d12\d3d12_raytrace_mega.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="d3d12\nv_helpers_dx12\RootSignatureGenerator.cpp" />
     <ClCompile Include="d3d12\nv_helpers_dx12\ShaderBindingTableGenerator.cpp" />
     <ClCompile Include="d3d12\nv_helpers_dx12\TopLevelASGenerator.cpp" />
+    <ClCompile Include="d3d12\tinydx.cpp" />
     <ClCompile Include="gl_draw.c" />
     <ClCompile Include="gl_mesh.c" />
     <ClCompile Include="gl_model.c" />
@@ -220,6 +222,7 @@
     <ClInclude Include="d3d12\nv_helpers_dx12\RootSignatureGenerator.h" />
     <ClInclude Include="d3d12\nv_helpers_dx12\ShaderBindingTableGenerator.h" />
     <ClInclude Include="d3d12\nv_helpers_dx12\TopLevelASGenerator.h" />
+    <ClInclude Include="d3d12\tinydx.h" />
     <ClInclude Include="Dosisms.h" />
     <ClInclude Include="Draw.h" />
     <ClInclude Include="D_iface.h" />

@@ -247,6 +247,12 @@
     <ClCompile Include="math\matrix.cpp">
       <Filter>Source Files\math</Filter>
     </ClCompile>
+    <ClCompile Include="d3d12\d3d12_composite.cpp">
+      <Filter>Source Files\d3d12</Filter>
+    </ClCompile>
+    <ClCompile Include="d3d12\tinydx.cpp">
+      <Filter>Source Files\d3d12</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Adivtab.h">
@@ -461,6 +467,9 @@
     </ClInclude>
     <ClInclude Include="libs\xml\tinyxml2.h">
       <Filter>Source Files\libs\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="d3d12\tinydx.h">
+      <Filter>Source Files\d3d12</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
