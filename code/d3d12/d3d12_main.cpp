@@ -595,7 +595,7 @@ void GL_EndRendering(void)
 		// We can then do the actual copy, before transitioning the render target
 		// buffer into a render target, that will be then used to display the image
 		CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
-			compositeTexture->dx_resource, D3D12_RESOURCE_STATE_UNORDERED_ACCESS,
+			compositeTexture->dx_resource, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE | D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE,
 			D3D12_RESOURCE_STATE_COPY_SOURCE);
 		m_commandList->ResourceBarrier(1, &transition);
 		transition = CD3DX12_RESOURCE_BARRIER::Transition(
@@ -610,6 +610,13 @@ void GL_EndRendering(void)
 			m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_COPY_DEST,
 			D3D12_RESOURCE_STATE_RENDER_TARGET);
 		m_commandList->ResourceBarrier(1, &transition);
+
+		{
+			CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
+				compositeTexture->dx_resource, D3D12_RESOURCE_STATE_COPY_SOURCE,
+				D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE | D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE);
+			m_commandList->ResourceBarrier(1, &transition);
+		}
 	}
 
 
