@@ -249,4 +249,10 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
 
   payload.colorAndDistance = float4(hitColor, 1.0);//float4(hitColor * ndotl * debug, RayTCurrent());
   payload.lightColor = float4(ndotl, 1.0);
+  payload.worldOrigin.xyz = worldOrigin.xyz;
+  
+  float3 normal = BTriVertex[vertId + 0].normal;
+  payload.worldNormal.x = normal.x;
+  payload.worldNormal.y = normal.y;
+  payload.worldNormal.z = normal.z;
 }

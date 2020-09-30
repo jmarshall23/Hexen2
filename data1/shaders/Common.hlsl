@@ -6,6 +6,8 @@
 struct HitInfo {
   float4 colorAndDistance;
   float4 lightColor;
+  float4 worldOrigin;
+  float4 worldNormal;
 };
 
 // Attributes output by the raytracing when hitting a surface,
