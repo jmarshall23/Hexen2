@@ -31,6 +31,8 @@ cbuffer UniformBlock0 : register(b3)
 	int yoffset;
 };
 
+Texture2D<float4>   uiTextureBuffer  : register(t4);
+
 groupshared float4  g_shared_input[NUM_THREADS_X];
 
 //! @fn hblur_main
@@ -86,5 +88,9 @@ void vblur_main(uint3 gid : SV_GroupID, uint gindex : SV_GroupIndex)
     }    
   }
 
-  BufferOut[coord] = value * AlbedoBufferIn.Load(int3(coord, 0));
+  float4 uiTexture = uiTextureBuffer.Load(int3(coord, 0));
+  float4 albeodTexture = AlbedoBufferIn.Load(int3(coord, 0));
+  
+  BufferOut[coord] = (value * AlbedoBufferIn.Load(int3(coord, 0)) * (1.0 - uiTexture.w)) + (uiTexture * uiTexture.w);
+
 }

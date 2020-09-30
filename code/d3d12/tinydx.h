@@ -1121,6 +1121,30 @@ void tr_create_renderer(const char *app_name, const tr_renderer_settings* settin
 					"D3D12CreateVersionedRootSignatureDeserializer");
 		}
 
+        p_renderer->dx_device = device;
+
+		// Queues
+		{
+			TINY_RENDERER_DECLARE_ZERO(D3D12_COMMAND_QUEUE_DESC, desc);
+			desc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
+			desc.Priority = D3D12_COMMAND_QUEUE_PRIORITY_NORMAL;
+			HRESULT hres = p_renderer->dx_device->CreateCommandQueue(&desc,
+				__uuidof(p_renderer->graphics_queue->dx_queue),
+				(void**)&(p_renderer->graphics_queue->dx_queue));
+			assert(SUCCEEDED(hres));
+		}
+
+		// Create fence
+		{
+            HRESULT hres = p_renderer->dx_device->CreateFence(0, D3D12_FENCE_FLAG_NONE,
+				__uuidof(p_renderer->graphics_queue->dx_wait_idle_fence), (void**)&(p_renderer->graphics_queue->dx_wait_idle_fence));
+			assert(SUCCEEDED(hres));
+			p_renderer->graphics_queue->dx_wait_idle_fence_value = 1;
+
+			p_renderer->graphics_queue->dx_wait_idle_fence_event = CreateEvent(NULL, FALSE, FALSE, NULL);
+			assert(NULL != p_renderer->graphics_queue->dx_wait_idle_fence_event);
+		}
+
 		p_renderer->dx_device = device;
         p_renderer->dx_swapchain = swapChain;
 
@@ -1499,7 +1523,7 @@ void tr_create_texture(
     p_texture->format             = format;
     p_texture->mip_levels         = mip_levels;
     p_texture->sample_count       = sample_count;
-    p_texture->host_visible       = false;
+    p_texture->host_visible       = host_visible;
     p_texture->cpu_mapped_address = NULL;
     p_texture->owns_image         = false;
     if (NULL != p_clear_value) {
@@ -2761,28 +2785,6 @@ void tr_internal_dx_create_device(tr_renderer* p_renderer)
     assert(SUCCEEDED(hres));
 
     p_renderer->settings.dx_feature_level = target_feature_level;
-
-    // Queues
-    {
-        TINY_RENDERER_DECLARE_ZERO(D3D12_COMMAND_QUEUE_DESC, desc);
-        desc.Type     = D3D12_COMMAND_LIST_TYPE_DIRECT;
-        desc.Priority = D3D12_COMMAND_QUEUE_PRIORITY_NORMAL;
-        hres = p_renderer->dx_device->CreateCommandQueue(&desc, 
-                                                         __uuidof(p_renderer->graphics_queue->dx_queue), 
-                                                         (void**)&(p_renderer->graphics_queue->dx_queue));
-        assert(SUCCEEDED(hres));
-    }
-
-    // Create fence
-    {
-        hres = p_renderer->dx_device->CreateFence(0, D3D12_FENCE_FLAG_NONE, 
-                                                  __uuidof(p_renderer->graphics_queue->dx_wait_idle_fence), (void**)&(p_renderer->graphics_queue->dx_wait_idle_fence));
-        assert(SUCCEEDED(hres));
-        p_renderer->graphics_queue->dx_wait_idle_fence_value = 1;
-
-        p_renderer->graphics_queue->dx_wait_idle_fence_event = CreateEvent(NULL, FALSE, FALSE, NULL);
-        assert(NULL != p_renderer->graphics_queue->dx_wait_idle_fence_event);
-    }
 }
 
 void tr_internal_dx_create_swapchain(tr_renderer* p_renderer)
@@ -3319,14 +3321,24 @@ void tr_internal_dx_create_texture(tr_renderer* p_renderer, tr_texture* p_textur
         }
         assert(D3D12_RESOURCE_DIMENSION_UNKNOWN != res_dim);
 
-        TINY_RENDERER_DECLARE_ZERO(D3D12_HEAP_PROPERTIES, heap_props);
-        heap_props.Type                 = D3D12_HEAP_TYPE_DEFAULT;
-        heap_props.CPUPageProperty      = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;
-        heap_props.MemoryPoolPreference = D3D12_MEMORY_POOL_UNKNOWN;
+        TINY_RENDERER_DECLARE_ZERO(D3D12_HEAP_PROPERTIES, heap_props);        
+        if (p_texture->host_visible) {
+            heap_props.Type = D3D12_HEAP_TYPE_CUSTOM;
+            heap_props.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+            heap_props.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+        }
+        else {
+            heap_props.Type = D3D12_HEAP_TYPE_DEFAULT;
+            heap_props.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_UNKNOWN;
+            heap_props.MemoryPoolPreference = D3D12_MEMORY_POOL_UNKNOWN;
+        }        
         heap_props.CreationNodeMask     = 1;
         heap_props.VisibleNodeMask      = 1;
 
         D3D12_HEAP_FLAGS heap_flags     = D3D12_HEAP_FLAG_NONE;
+        //if (p_texture->host_visible) {
+        //    heap_flags = D3D12_HEAP_FLAG_SHARED;
+        //}
 
         TINY_RENDERER_DECLARE_ZERO(D3D12_RESOURCE_DESC, desc);
         desc.Dimension                  = res_dim;
@@ -3338,7 +3350,7 @@ void tr_internal_dx_create_texture(tr_renderer* p_renderer, tr_texture* p_textur
         desc.Format                     = tr_util_to_dx_format(p_texture->format);
         desc.SampleDesc.Count           = (UINT)p_texture->sample_count;
         desc.SampleDesc.Quality         = (UINT)p_texture->sample_quality;
-        desc.Layout                     = D3D12_TEXTURE_LAYOUT_UNKNOWN;
+        desc.Layout = D3D12_TEXTURE_LAYOUT_UNKNOWN;
         desc.Flags                      = D3D12_RESOURCE_FLAG_NONE;
         if (p_texture->usage & tr_texture_usage_color_attachment) {
             desc.Flags |= D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
@@ -3346,7 +3358,7 @@ void tr_internal_dx_create_texture(tr_renderer* p_renderer, tr_texture* p_textur
         if (p_texture->usage & tr_texture_usage_depth_stencil_attachment) {
             desc.Flags |= D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
         }
-        if (p_texture->usage & tr_texture_usage_storage_image) {
+        if (p_texture->usage & tr_texture_usage_storage_image && !p_texture->host_visible) {
             desc.Flags |= D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
         }
 

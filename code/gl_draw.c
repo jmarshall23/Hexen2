@@ -503,6 +503,7 @@ void Draw_Character (int x, int y, unsigned int num)
 	ysize = 0.0625;
 	fcol = col*xsize;
 	frow = row*ysize;
+	GL_BlitUIImageUV(char_texture, fcol, frow, x, y, 8, 8);
 
 // jmarshall - todo
 	//GL_Bind (char_texture);
@@ -587,8 +588,8 @@ void Draw_SmallCharacter (int x, int y, int num)
 	fcol = col*xsize;
 	frow = row*ysize;
 
-	GL_Bind (char_smalltexture);
-
+	//GL_Bind (char_smalltexture);
+	GL_BlitUIImageUV(char_smalltexture, fcol, frow, x, y, 8, 8);
 // jmarshall - todo
 	//glBegin (GL_QUADS);
 	//glTexCoord2f (fcol, frow);
@@ -645,6 +646,7 @@ void Draw_Pic (int x, int y, qpic_t *pic)
 	if (scrap_dirty)
 		Scrap_Upload ();
 	gl = (glpic_t *)pic->data;
+	GL_BlitUIImage(gl->texnum, 0, 0, x, y);	
 	// jmarshall - todo
 //	glColor4f (1,1,1,1);
 //	GL_Bind (gl->texnum);
@@ -710,8 +712,10 @@ void Draw_PicCropped(int x, int y, qpic_t *pic)
 		th = gl->th;//(height-0.01)/pic->height;
 	}
 
+	GL_BlitUIImage(gl->texnum, 0, 0, x, y);
+	//GL_BlitUIImageUV(gl->texnum, tl, th, x, y, pic->width  //gl->texnum, 0, 0, x, y);
 
-	glColor4f (1,1,1,1);
+	//glColor4f (1,1,1,1);
 	GL_Bind (gl->texnum);
 // jmarshall - todo
 	//glBegin (GL_QUADS);
@@ -856,7 +860,8 @@ int M_DrawBigCharacter (int x, int y, int num, int numNext)
 	fcol = col*xsize;
 	frow = row*ysize;
 
-	GL_Bind (char_menufonttexture);
+	//GL_Bind (char_menufonttexture);
+	GL_BlitUIImageUV(char_menufonttexture, fcol, frow, x, y, 20, 20);
 
 	// jmarshall - todo
 	//glBegin (GL_QUADS);
@@ -1358,7 +1363,7 @@ void GL_Upload8 (byte *data, int width, int height,  qboolean mipmap, qboolean a
 		R_WriteTGA(export_file_name, &trans[0], width, height);
 	}
 
-	GL_Upload32 (trans, width, height, mipmap, alpha);
+	GL_Upload32 (trans, texture_extension_number, width, height, mipmap, alpha);
 }
 
 

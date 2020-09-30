@@ -25,7 +25,7 @@ struct PostUniformBuffer_t {
 
 tr_buffer* m_uniform_buffer[20];
 
-void GL_InitCompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_texture* compositeStagingPass, tr_texture* compositePass) {
+void GL_InitCompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_texture* compositeStagingPass, tr_texture* compositePass, tr_texture *uiTexturePass) {
 	Con_Printf("Init Composite Pass...\n");
 
 	// Load the blur compute shader pass.
@@ -46,7 +46,7 @@ void GL_InitCompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_text
 
 		for (int i = 0; i < 20; i++)
 		{
-			std::vector<tr_descriptor> descriptors(4);
+			std::vector<tr_descriptor> descriptors(5);
 			descriptors[0].type = tr_descriptor_type_texture_srv;
 			descriptors[0].count = 1;
 			descriptors[0].binding = 0;
@@ -67,6 +67,11 @@ void GL_InitCompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_text
 			descriptors[3].binding = 3;
 			descriptors[3].shader_stages = tr_shader_stage_comp;
 
+			descriptors[4].type = tr_descriptor_type_texture_srv;
+			descriptors[4].count = 1;
+			descriptors[4].binding = 4;
+			descriptors[4].shader_stages = tr_shader_stage_comp;
+
 			tr_create_descriptor_set(renderer, (uint32_t)descriptors.size(), descriptors.data(), &g_compute_desc_set_hblur[i]);
 			tr_create_descriptor_set(renderer, (uint32_t)descriptors.size(), descriptors.data(), &g_compute_desc_set_vblur[i]);
 
@@ -84,12 +89,14 @@ void GL_InitCompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_text
 				g_compute_desc_set_hblur[i]->descriptors[1].textures[0] = albedoPass;
 				g_compute_desc_set_hblur[i]->descriptors[2].textures[0] = compositeStagingPass;
 				g_compute_desc_set_hblur[i]->descriptors[3].uniform_buffers[0] = m_uniform_buffer[i];
+				g_compute_desc_set_hblur[i]->descriptors[4].textures[0] = uiTexturePass;
 				tr_update_descriptor_set(renderer, g_compute_desc_set_hblur[i]);
 				// vblur
 				g_compute_desc_set_vblur[i]->descriptors[0].textures[0] = compositeStagingPass;
 				g_compute_desc_set_vblur[i]->descriptors[1].textures[0] = albedoPass;
 				g_compute_desc_set_vblur[i]->descriptors[2].textures[0] = compositePass;
 				g_compute_desc_set_vblur[i]->descriptors[3].uniform_buffers[0] = m_uniform_buffer[i];
+				g_compute_desc_set_vblur[i]->descriptors[4].textures[0] = uiTexturePass;
 				tr_update_descriptor_set(renderer, g_compute_desc_set_vblur[i]);
 			}
 		}
@@ -97,7 +104,7 @@ void GL_InitCompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_text
 
 }
 
-void GL_CompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_texture* compositeStagingPass, tr_texture* compositePas, ID3D12GraphicsCommandList4 *cmdList, ID3D12CommandAllocator* commandAllocator) {
+void GL_CompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_texture* compositeStagingPass, tr_texture* compositePas, ID3D12GraphicsCommandList4* cmdList, ID3D12CommandAllocator* commandAllocator) {
 	tr_cmd cmd = { };
 	tr_cmd_pool pool = { };
 

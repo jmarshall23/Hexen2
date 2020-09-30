@@ -46,6 +46,7 @@ ComPtr<ID3D12StateObject> m_rtStateObject;
 //ComPtr<ID3D12Resource> m_outputLightResource;
 tr_texture* albedoTexture;
 tr_texture* lightTexture;
+tr_texture* uiTexture;
 tr_texture* compositeTexture;
 tr_texture* compositeStagingTexture;
 ComPtr<ID3D12DescriptorHeap> m_srvUavHeap;
@@ -61,6 +62,8 @@ ComPtr<ID3D12Resource> m_sbtStorage;
 ComPtr< ID3D12Resource > m_cameraBuffer;
 ComPtr< ID3D12DescriptorHeap > m_constHeap;
 uint32_t m_cameraBufferSize = 0;
+
+byte* uiTextureBuffer = nullptr;
 
 void GL_WaitForPreviousFrame(void) 
 {
@@ -228,6 +231,9 @@ void GL_InitRaytracing(int width, int height) {
 	tr_create_texture_2d(renderer, width, height, tr_sample_count_1, tr_format_r8g8b8a8_unorm, 1, NULL, false, tr_texture_usage_sampled_image | tr_texture_usage_storage_image, &lightTexture);
 	tr_create_texture_2d(renderer, width, height, tr_sample_count_1, tr_format_r8g8b8a8_unorm, 1, NULL, false, tr_texture_usage_sampled_image | tr_texture_usage_storage_image, &compositeTexture);
 	tr_create_texture_2d(renderer, width, height, tr_sample_count_1, tr_format_r8g8b8a8_unorm, 1, NULL, false, tr_texture_usage_sampled_image | tr_texture_usage_storage_image, &compositeStagingTexture);
+	tr_create_texture_2d(renderer, width, height, tr_sample_count_1, tr_format_r8g8b8a8_unorm, 1, NULL, true, tr_texture_usage_sampled_image | tr_texture_usage_storage_image, &uiTexture);
+
+	uiTextureBuffer = new byte[width * height * 4];
 
 	//{
 	//	D3D12_RESOURCE_DESC resDesc = {};
@@ -480,7 +486,7 @@ void GL_Init(HWND hwnd, HINSTANCE hinstance, int width, int height)
 
 	GL_InitRaytracing(width, height);
 
-	GL_InitCompositePass(albedoTexture, lightTexture, compositeStagingTexture, compositeTexture);
+	GL_InitCompositePass(albedoTexture, lightTexture, compositeStagingTexture, compositeTexture, uiTexture);
 
 	GL_LoadMegaXML("data1/mega/mega.xml");
 
@@ -544,11 +550,69 @@ void GL_BeginRendering(int* x, int* y, int* width, int* height)
 		m_rtvHeap->GetCPUDescriptorHandleForHeapStart(), m_frameIndex,
 		m_rtvDescriptorSize);
 	m_commandList->OMSetRenderTargets(1, &rtvHandle, FALSE, nullptr);
+
+	memset(uiTextureBuffer, 0, sizeof(byte) * 4 * g_width * g_height);
 }
 
 
 void GL_EndRendering(void)
 {
+	//tr_util_update_texture_uint8(renderer->graphics_queue, g_width, g_height, g_width * 4, uiTextureBuffer, 4, uiTexture, NULL, NULL);	
+	{
+		{
+			CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
+				lightTexture->dx_resource, D3D12_RESOURCE_STATE_UNORDERED_ACCESS,
+				D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);
+			m_commandList->ResourceBarrier(1, &transition);
+		}
+
+		{
+			CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
+				albedoTexture->dx_resource, D3D12_RESOURCE_STATE_UNORDERED_ACCESS,
+				D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);
+			m_commandList->ResourceBarrier(1, &transition);
+		}
+
+		GL_CompositePass(albedoTexture, lightTexture, compositeStagingTexture, compositeTexture, m_commandList.Get(), m_commandAllocator.Get());
+
+		{
+			CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
+				lightTexture->dx_resource, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,
+				D3D12_RESOURCE_STATE_COPY_SOURCE);
+			m_commandList->ResourceBarrier(1, &transition);
+		}
+
+		{
+			CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
+				albedoTexture->dx_resource, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,
+				D3D12_RESOURCE_STATE_COPY_SOURCE);
+			m_commandList->ResourceBarrier(1, &transition);
+		}
+
+		// The raytracing output needs to be copied to the actual render target used
+		// for display. For this, we need to transition the raytracing output from a
+		// UAV to a copy source, and the render target buffer to a copy destination.
+		// We can then do the actual copy, before transitioning the render target
+		// buffer into a render target, that will be then used to display the image
+		CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
+			compositeTexture->dx_resource, D3D12_RESOURCE_STATE_UNORDERED_ACCESS,
+			D3D12_RESOURCE_STATE_COPY_SOURCE);
+		m_commandList->ResourceBarrier(1, &transition);
+		transition = CD3DX12_RESOURCE_BARRIER::Transition(
+			m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET,
+			D3D12_RESOURCE_STATE_COPY_DEST);
+		m_commandList->ResourceBarrier(1, &transition);
+
+		m_commandList->CopyResource(m_renderTargets[m_frameIndex].Get(),
+			compositeTexture->dx_resource);
+
+		transition = CD3DX12_RESOURCE_BARRIER::Transition(
+			m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_COPY_DEST,
+			D3D12_RESOURCE_STATE_RENDER_TARGET);
+		m_commandList->ResourceBarrier(1, &transition);
+	}
+
+
 	// Indicate that the back buffer will now be used to present.
 	m_commandList->ResourceBarrier(1, &CD3DX12_RESOURCE_BARRIER::Transition(m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT));
 
@@ -561,18 +625,8 @@ void GL_EndRendering(void)
 	// Present the frame.
 	ThrowIfFailed(m_swapChain->Present(0, 0));
 
+	uiTexture->dx_resource->WriteToSubresource(0, NULL, uiTextureBuffer, g_width * 4, 1);
 	GL_WaitForPreviousFrame();
-}
-
-
-/*
-===============
-GL_Upload32
-===============
-*/
-void GL_Upload32(unsigned* data, int width, int height, qboolean mipmap, qboolean alpha)
-{	
-	
 }
 
 void GL_Bind(int texnum)
@@ -765,122 +819,66 @@ void GL_Render(float x, float y, float z, float* viewAngles)
 	memcpy(pData, matrices.data(), m_cameraBufferSize);
 	m_cameraBuffer->Unmap(0, nullptr);
 
-	// Render!
-	{
-		// #DXR
+	// #DXR
    // Bind the descriptor heap giving access to the top-level acceleration
    // structure, as well as the raytracing output
-		std::vector<ID3D12DescriptorHeap*> heaps = { m_srvUavHeap.Get() };
-		m_commandList->SetDescriptorHeaps(static_cast<UINT>(heaps.size()),
-			heaps.data());
+	std::vector<ID3D12DescriptorHeap*> heaps = { m_srvUavHeap.Get() };
+	m_commandList->SetDescriptorHeaps(static_cast<UINT>(heaps.size()),
+		heaps.data());
 
-		// On the last frame, the raytracing output was used as a copy source, to
-		// copy its contents into the render target. Now we need to transition it to
-		// a UAV so that the shaders can write in it.
-		{
-			CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
-				albedoTexture->dx_resource, D3D12_RESOURCE_STATE_COPY_SOURCE,
-				D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
-			m_commandList->ResourceBarrier(1, &transition);
-		}
-
-		{
-			CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
-				lightTexture->dx_resource, D3D12_RESOURCE_STATE_COPY_SOURCE,
-				D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
-			m_commandList->ResourceBarrier(1, &transition);
-		}
-
-		// Setup the raytracing task
-		D3D12_DISPATCH_RAYS_DESC desc = {};
-		// The layout of the SBT is as follows: ray generation shader, miss
-		// shaders, hit groups. As described in the CreateShaderBindingTable method,
-		// all SBT entries of a given type have the same size to allow a fixed
-		// stride.
-
-		// The ray generation shaders are always at the beginning of the SBT.
-		uint32_t rayGenerationSectionSizeInBytes = m_sbtHelper.GetRayGenSectionSize();
-		desc.RayGenerationShaderRecord.StartAddress = m_sbtStorage->GetGPUVirtualAddress();
-		desc.RayGenerationShaderRecord.SizeInBytes = rayGenerationSectionSizeInBytes;
-
-		// The miss shaders are in the second SBT section, right after the ray
-		// generation shader. We have one miss shader for the camera rays and one
-		// for the shadow rays, so this section has a size of 2*m_sbtEntrySize. We
-		// also indicate the stride between the two miss shaders, which is the size
-		// of a SBT entry
-		uint32_t missSectionSizeInBytes = m_sbtHelper.GetMissSectionSize();
-		desc.MissShaderTable.StartAddress = m_sbtStorage->GetGPUVirtualAddress() + rayGenerationSectionSizeInBytes;
-		desc.MissShaderTable.SizeInBytes = missSectionSizeInBytes;
-		desc.MissShaderTable.StrideInBytes = m_sbtHelper.GetMissEntrySize();
-
-		// The hit groups section start after the miss shaders. In this sample we
-		// have one 1 hit group for the triangle
-		uint32_t hitGroupsSectionSize = m_sbtHelper.GetHitGroupSectionSize();
-		desc.HitGroupTable.StartAddress = m_sbtStorage->GetGPUVirtualAddress() + rayGenerationSectionSizeInBytes + missSectionSizeInBytes;
-		desc.HitGroupTable.SizeInBytes = hitGroupsSectionSize;
-		desc.HitGroupTable.StrideInBytes = m_sbtHelper.GetHitGroupEntrySize();
-
-		// Dimensions of the image to render, identical to a kernel launch dimension
-		desc.Width = g_width;
-		desc.Height = g_height;
-		desc.Depth = 1;
-
-		// Bind the raytracing pipeline
-		m_commandList->SetPipelineState1(m_rtStateObject.Get());
-		// Dispatch the rays and write to the raytracing output
-		m_commandList->DispatchRays(&desc);
-
-		{
-			CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
-				lightTexture->dx_resource, D3D12_RESOURCE_STATE_UNORDERED_ACCESS,
-				D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);
-			m_commandList->ResourceBarrier(1, &transition);
-		}
-
-		{
-			CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
-				albedoTexture->dx_resource, D3D12_RESOURCE_STATE_UNORDERED_ACCESS,
-				D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE);
-			m_commandList->ResourceBarrier(1, &transition);
-		}
-
-		GL_CompositePass(albedoTexture, lightTexture, compositeStagingTexture, compositeTexture, m_commandList.Get(), m_commandAllocator.Get());
-
-		{
-			CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
-				lightTexture->dx_resource, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,
-				D3D12_RESOURCE_STATE_COPY_SOURCE);
-			m_commandList->ResourceBarrier(1, &transition);
-		}
-
-		{
-			CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
-				albedoTexture->dx_resource, D3D12_RESOURCE_STATE_NON_PIXEL_SHADER_RESOURCE,
-				D3D12_RESOURCE_STATE_COPY_SOURCE);
-			m_commandList->ResourceBarrier(1, &transition);
-		}
-
-		// The raytracing output needs to be copied to the actual render target used
-		// for display. For this, we need to transition the raytracing output from a
-		// UAV to a copy source, and the render target buffer to a copy destination.
-		// We can then do the actual copy, before transitioning the render target
-		// buffer into a render target, that will be then used to display the image
+	// On the last frame, the raytracing output was used as a copy source, to
+	// copy its contents into the render target. Now we need to transition it to
+	// a UAV so that the shaders can write in it.
+	{
 		CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
-			compositeTexture->dx_resource, D3D12_RESOURCE_STATE_UNORDERED_ACCESS,
-			D3D12_RESOURCE_STATE_COPY_SOURCE);
+			albedoTexture->dx_resource, D3D12_RESOURCE_STATE_COPY_SOURCE,
+			D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
 		m_commandList->ResourceBarrier(1, &transition);
-		transition = CD3DX12_RESOURCE_BARRIER::Transition(
-			m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_RENDER_TARGET,
-			D3D12_RESOURCE_STATE_COPY_DEST);
-		m_commandList->ResourceBarrier(1, &transition);
-
-		m_commandList->CopyResource(m_renderTargets[m_frameIndex].Get(),
-			compositeTexture->dx_resource);
-
-		transition = CD3DX12_RESOURCE_BARRIER::Transition(
-			m_renderTargets[m_frameIndex].Get(), D3D12_RESOURCE_STATE_COPY_DEST,
-			D3D12_RESOURCE_STATE_RENDER_TARGET);
-		m_commandList->ResourceBarrier(1, &transition);
-
 	}
+
+	{
+		CD3DX12_RESOURCE_BARRIER transition = CD3DX12_RESOURCE_BARRIER::Transition(
+			lightTexture->dx_resource, D3D12_RESOURCE_STATE_COPY_SOURCE,
+			D3D12_RESOURCE_STATE_UNORDERED_ACCESS);
+		m_commandList->ResourceBarrier(1, &transition);
+	}
+
+	// Setup the raytracing task
+	D3D12_DISPATCH_RAYS_DESC desc = {};
+	// The layout of the SBT is as follows: ray generation shader, miss
+	// shaders, hit groups. As described in the CreateShaderBindingTable method,
+	// all SBT entries of a given type have the same size to allow a fixed
+	// stride.
+
+	// The ray generation shaders are always at the beginning of the SBT.
+	uint32_t rayGenerationSectionSizeInBytes = m_sbtHelper.GetRayGenSectionSize();
+	desc.RayGenerationShaderRecord.StartAddress = m_sbtStorage->GetGPUVirtualAddress();
+	desc.RayGenerationShaderRecord.SizeInBytes = rayGenerationSectionSizeInBytes;
+
+	// The miss shaders are in the second SBT section, right after the ray
+	// generation shader. We have one miss shader for the camera rays and one
+	// for the shadow rays, so this section has a size of 2*m_sbtEntrySize. We
+	// also indicate the stride between the two miss shaders, which is the size
+	// of a SBT entry
+	uint32_t missSectionSizeInBytes = m_sbtHelper.GetMissSectionSize();
+	desc.MissShaderTable.StartAddress = m_sbtStorage->GetGPUVirtualAddress() + rayGenerationSectionSizeInBytes;
+	desc.MissShaderTable.SizeInBytes = missSectionSizeInBytes;
+	desc.MissShaderTable.StrideInBytes = m_sbtHelper.GetMissEntrySize();
+
+	// The hit groups section start after the miss shaders. In this sample we
+	// have one 1 hit group for the triangle
+	uint32_t hitGroupsSectionSize = m_sbtHelper.GetHitGroupSectionSize();
+	desc.HitGroupTable.StartAddress = m_sbtStorage->GetGPUVirtualAddress() + rayGenerationSectionSizeInBytes + missSectionSizeInBytes;
+	desc.HitGroupTable.SizeInBytes = hitGroupsSectionSize;
+	desc.HitGroupTable.StrideInBytes = m_sbtHelper.GetHitGroupEntrySize();
+
+	// Dimensions of the image to render, identical to a kernel launch dimension
+	desc.Width = g_width;
+	desc.Height = g_height;
+	desc.Depth = 1;
+
+	// Bind the raytracing pipeline
+	m_commandList->SetPipelineState1(m_rtStateObject.Get());
+	// Dispatch the rays and write to the raytracing output
+	m_commandList->DispatchRays(&desc);
 }
