@@ -108,9 +108,11 @@ void GL_CompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_texture*
 
 
 	int section = 0;
-	for (int x = 0; x < 2; x++)
+	int numhsection = ceil(((float)g_width) / 1024.0f);
+	int numvsection = ceil(((float)g_height) / 1024.0f);
+	for (int x = 0; x < numhsection; x++)
 	{
-		for (int y = 0; y < 1; y++)
+		for (int y = 0; y < numvsection; y++)
 		{
 			PostUniformBuffer_t buffer;
 			buffer.xoffset = x * 1024;
