@@ -52,7 +52,7 @@ inline void GetHardwareAdapter(IDXGIFactory2* pFactory, IDXGIAdapter1** ppAdapte
 
 struct dxrVertex_t {
 	vec3_t xyz;
-	vec2_t st;
+	vec3_t st;
 	vec3_t normal;
 	vec4_t vtinfo;
 };

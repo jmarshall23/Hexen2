@@ -26,9 +26,16 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 		float x, y, w, h;
 		GL_FindMegaTile(fa->texinfo->texture->name, x, y, w, h);
 
+		int materialInfo = 1;
+
+		//if(strstr(fa->texinfo->texture->name, "rtex018")) {
+		//	materialInfo = 0;
+		//}
+
 		// HACK! 
 		if(x == -1) {
 			GL_FindMegaTile("rtex080", x, y, w, h);
+			materialInfo = 0; 
 		}
 
 		BuildSurfaceDisplayList(fa);
@@ -52,6 +59,7 @@ void GL_LoadBottomLevelAccelStruct(dxrMesh_t* mesh, msurface_t* surfaces, int nu
 				v.xyz[2] = p->verts[d][2];
 				v.st[0] = p->verts[d][3];
 				v.st[1] = p->verts[d][4];
+				v.st[2] = materialInfo;
 				v.vtinfo[0] = x;
 				v.vtinfo[1] = y;
 				v.vtinfo[2] = w;
@@ -153,6 +161,7 @@ void GL_AliasVertexToDxrVertex(trivertx_t inVert, stvert_t stvert, dxrVertex_t &
 	vertex.xyz[2] = inVert.v[2];
 	vertex.st[0] = (stvert.s + 0.5) / w;
 	vertex.st[1] = (stvert.t + 0.5) / h;
+	vertex.st[2] = 0;
 
 	//assert(vertex.st[0] > 1 || vertex.st[1] > 0);
 	if(vertex.st[0] > 1 || vertex.st[1] > 1 || w == -1 || h == -1) {

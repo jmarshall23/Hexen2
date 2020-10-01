@@ -6,7 +6,7 @@ struct ShadowHitInfo {
 
 struct STriVertex {
   float3 vertex;
-  float2 st;
+  float3 st;
   float3 normal;
   float4 vtinfo;
 };
@@ -248,7 +248,7 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
   ndotl = max(0.25, ndotl);
 
   payload.colorAndDistance = float4(hitColor, 1.0);//float4(hitColor * ndotl * debug, RayTCurrent());
-  payload.lightColor = float4(ndotl, 1.0);
+  payload.lightColor = float4(ndotl, BTriVertex[vertId + 0].st.z);
   payload.worldOrigin.xyz = worldOrigin.xyz;
   
   float3 normal = BTriVertex[vertId + 0].normal;
