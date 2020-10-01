@@ -176,7 +176,7 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
   float3 debug = float3(1, 1, 1);
   for(int i = 0; i < 9; i++)
   {	  
-	  float3 normal = BTriVertex[vertId + 0].normal;
+	  
 	  
 	//bool isBackFacing = dot(normal, WorldRayDirection()) > 0.f;
 	//if (isBackFacing)
@@ -194,16 +194,20 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
 			{
 				ndotl += lightcolor[i].xyz * falloff * lightcolor[i].w; // normalize(centerLightDir); //max(0.f, dot(normal, normalize(centerLightDir))); 
 			}
-	  }
-	  
+	  }	  
+	//  debug = normal;
+  }
+  
+  for(int i = 4; i < 9; i++)
+  {
+	  float3 normal = BTriVertex[vertId + 0].normal;
 	  uint2 pixIdx = DispatchRaysIndex().xy;
 	  uint randSeed = initRand( pixIdx.x + pixIdx.y * 1920, 0 );
-	  int r = i * 2;
+	  int r = length(float3(worldOrigin.x + worldOrigin.y, worldOrigin.x + worldOrigin.y, worldOrigin.x + worldOrigin.y)) * i;
 	  float3 worldDir = getCosHemisphereSample(r, normal);
 	  if(IsLightShadowed(worldOrigin, worldDir, 5 * ( i * 0.1) )) {
 		  ndotl *= 0.1;
 	  }
-	//  debug = normal;
   }
   
   if(BTriVertex[vertId + 0].vtinfo.x != -1)
