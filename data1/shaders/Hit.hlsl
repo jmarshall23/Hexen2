@@ -16,10 +16,16 @@ struct SInstanceProperties
 	int startVertex;
 };
 
+struct sceneLightInfo_t {
+	float4 origin_radius;
+};
+
+
 StructuredBuffer<STriVertex> BTriVertex : register(t0);
 Texture2D<float4> MegaTexture : register(t1);
 StructuredBuffer<SInstanceProperties> BInstanceProperties : register(t2);
 RaytracingAccelerationStructure SceneBVH : register(t3);
+StructuredBuffer<sceneLightInfo_t> lightInfo : register(t4);
 
 float3 QuakeCoords(float3 xyz) {
 	return float3(xyz.x, -xyz.z, xyz.y);
@@ -142,29 +148,29 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
       float3(1.f - attrib.bary.x - attrib.bary.y, attrib.bary.x, attrib.bary.y);
 	  
 	  
-	float4 lightpositions[9] = {
-		float4(-891.667, 469.175, 1863.288, 2000),
-		float4(224.627, 296.664, 1944.997, 300),
-		float4(224.627, 296.664, 1690.184, 300),
-		float4(-1952.994, 193.610, 1863.288, 300),
-		float4(-1952.994, 112.598, 1425.305, 300),
-		float4(-1952.994, 211.580, 666.719, 900),
-		float4(-1810.802, -1.523, 863.279, 300),
-		float4(-2163.917, -1.523, 863.279, 300),
-		float4(-1917.619, -1.523, 329.545, 300),
-	};
-	
-	float4 lightcolor[9] = {
-		float4(	1, 1, 1, 1.5f ),
-		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
-		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
-		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
-		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
-		float4(	1, 1, 1, 1.5f ),
-		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
-		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
-		float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
-	};
+	//float4 lightpositions[9] = {
+	//	float4(-891.667, 469.175, 1863.288, 2000),
+	//	float4(224.627, 296.664, 1944.997, 300),
+	//	float4(224.627, 296.664, 1690.184, 300),
+	//	float4(-1952.994, 193.610, 1863.288, 300),
+	//	float4(-1952.994, 112.598, 1425.305, 300),
+	//	float4(-1952.994, 211.580, 666.719, 900),
+	//	float4(-1810.802, -1.523, 863.279, 300),
+	//	float4(-2163.917, -1.523, 863.279, 300),
+	//	float4(-1917.619, -1.523, 329.545, 300),
+	//};
+	//
+	//float4 lightcolor[9] = {
+	//	float4(	1, 1, 1, 1.5f ),
+	//	float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+	//	float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+	//	float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+	//	float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+	//	float4(	1, 1, 1, 1.5f ),
+	//	float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+	//	float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+	//	float4(	253.0 / 255, 207.0 / 255, 88.0 / 255, 3.0f ),
+	//};
 
   uint vertId = BInstanceProperties[InstanceID()].startVertex + (3 * PrimitiveIndex());
   float3 hitColor = float3(1, 0, 0);
@@ -174,25 +180,26 @@ bool IsLightShadowed(float3 worldOrigin, float3 lightDir, float distance)
   
   float3 ndotl = 0;
   float3 debug = float3(1, 1, 1);
-  for(int i = 0; i < 9; i++)
+  for(int i = 0; i < 64; i++)
   {	  
-	  
+	  if(lightInfo[i].origin_radius.w == 0)
+		  continue;
 	  
 	//bool isBackFacing = dot(normal, WorldRayDirection()) > 0.f;
 	//if (isBackFacing)
 	//	normal = -normal;
 	  
-	  float3 lightPos = QuakeCoords(lightpositions[i].xyz);
+	  float3 lightPos = (lightInfo[i].origin_radius.xyz);
 	  float3 centerLightDir = lightPos - worldOrigin;
 	  float lightDistance = length(centerLightDir);
-	  float falloff = attenuation(lightpositions[i].w, 1.0, lightDistance);  
+	  float falloff = attenuation(lightInfo[i].origin_radius.w, 1.0, lightDistance);  
 	  
 	  //bool isShadowed = dot(normal, centerLightDir) < 0;	  
 	  //if(!isShadowed)
 	  {
 		    if(!IsLightShadowed(worldOrigin, normalize(centerLightDir), lightDistance))
 			{
-				ndotl += lightcolor[i].xyz * falloff * lightcolor[i].w; // normalize(centerLightDir); //max(0.f, dot(normal, normalize(centerLightDir))); 
+				ndotl += float3(1, 1, 1) * falloff * 2; // normalize(centerLightDir); //max(0.f, dot(normal, normalize(centerLightDir))); 
 			}
 	  }	  
 	//  debug = normal;

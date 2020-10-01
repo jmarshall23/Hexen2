@@ -391,6 +391,14 @@ void SV_FindTouchedLeafs (edict_t *ent, mnode_t *node)
 	if (sides & 2)
 		SV_FindTouchedLeafs (ent, node->children[1]);
 }
+/*
+===============
+SV_GetMapNodes
+===============
+*/
+mnode_t *SV_GetMapNodes(void) {
+	return sv.worldmodel->nodes;
+}
 
 /*
 ===============

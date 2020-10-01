@@ -124,6 +124,7 @@ void GL_InitRaytracing(int width, int height) {
 			{ {1 /*t1*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 4},
 			  {2 /*t2*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 5},
 			  {3 /*t3*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*Top-level acceleration structure*/, 2},
+			  {4 /*t4*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*Top-level acceleration structure*/, 6},
 			});
 		m_hitSignature = rsc.Generate(m_device.Get(), true);
 	}
@@ -135,6 +136,7 @@ void GL_InitRaytracing(int width, int height) {
 			{ {1 /*t1*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 4},
 			  {2 /*t2*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*megatexture*/, 5},
 			  {3 /*t3*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*Top-level acceleration structure*/, 2},
+			  {4 /*t4*/, 1, 0, D3D12_DESCRIPTOR_RANGE_TYPE_SRV /*Top-level acceleration structure*/, 6},
 			});
 		m_shadowSignature = rsc.Generate(m_device.Get(), true);
 	}
@@ -665,7 +667,7 @@ void GL_FinishDXRLoading(void)
 
 	// Create a SRV/UAV/CBV descriptor heap. We need 2 entries - 1 UAV for the
 	// raytracing output and 1 SRV for the TLAS
-	m_srvUavHeap = nv_helpers_dx12::CreateDescriptorHeap( m_device.Get(), 6, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, true);
+	m_srvUavHeap = nv_helpers_dx12::CreateDescriptorHeap( m_device.Get(), 7, D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, true);
 
 	// Get a handle to the heap memory on the CPU side, to be able to write the
 	// descriptors directly
@@ -714,6 +716,8 @@ void GL_FinishDXRLoading(void)
 	GL_LoadMegaTexture(srvHandle);
 	srvHandle.ptr += m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	GL_CreateInstanceInfo(srvHandle);
+	srvHandle.ptr += m_device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	GL_InitLightInfoBuffer(srvHandle);
 
 	{
 		// The SBT helper class collects calls to Add*Program.  If called several
@@ -789,6 +793,8 @@ void GL_CalcFov(float base_fov, float& fov_x, float& fov_y) {
 void GL_Render(float x, float y, float z, float* viewAngles)
 {
 	std::vector<DirectX::XMMATRIX> matrices(4);
+
+	GL_BuildLightList(x, y, z);
 
 	// Update the top level acceleration structs based on new scene data. 
 	GL_CreateTopLevelAccelerationStructs(false);

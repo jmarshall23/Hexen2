@@ -118,4 +118,12 @@ void GL_FindMegaTile(const char* name, float& x, float& y, float& width, float& 
 
 void GL_InitCompositePass(tr_texture *albedoPass, tr_texture *lightPass, tr_texture* compositeStagingPass, tr_texture *compositePass, tr_texture* uiTexturePass);
 void GL_CompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_texture* compositeStagingPass, tr_texture* compositePas, ID3D12GraphicsCommandList4* cmdList, ID3D12CommandAllocator *commandAllocator);
+void GL_InitLightInfoBuffer(D3D12_CPU_DESCRIPTOR_HANDLE& srvPtr);
 extern tr_renderer *renderer;
+
+extern "C" {
+	byte* SV_FatPVS(vec3_t org);
+	mnode_t* SV_GetMapNodes(void);
+};
+
+void GL_BuildLightList(float x, float y, float z);

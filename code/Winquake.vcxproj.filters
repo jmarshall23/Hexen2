@@ -256,6 +256,9 @@
     <ClCompile Include="d3d12\d3d12_ui.cpp">
       <Filter>Source Files\d3d12</Filter>
     </ClCompile>
+    <ClCompile Include="d3d12\d3d12_raytrace_lights.cpp">
+      <Filter>Source Files\d3d12</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Adivtab.h">

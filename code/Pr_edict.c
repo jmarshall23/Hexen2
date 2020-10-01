@@ -827,7 +827,10 @@ qboolean	ED_ParseEpair (void *base, ddef_t *key, char *s)
 		break;
 		
 	case ev_float:
-		*(float *)d = atof (s);
+		{
+			float f = atof(s);
+			*(float*)d = f;
+		}
 		break;
 		
 	case ev_vector:
@@ -973,6 +976,10 @@ sprintf (com_token, "0 %s 0", temp);
 
 		if (!ED_ParseEpair ((void *)&ent->v, key, com_token))
 			Host_Error ("ED_ParseEdict: parse error");
+
+		if (!strcmp(keyname, "light_lev")) {
+			ent->v.light_level = atof(com_token);
+		}
 	}
 
 	if (!init)
@@ -1125,12 +1132,12 @@ void ED_LoadFromFile (char *data)
 			inhibit++;
 			continue;
 		}
-
-		//if (!strcmp("light", pr_strings + ent->v.classname)) {
-		//	ED_Free(ent);
-		//	inhibit++;
-		//	continue;
-		//}
+// jmarshall -- register our lights
+		const char* entityName = PR_GetString(ent->v.classname);		
+		if (strstr(entityName, "light") || ent->v.light_level > 0) {
+			GL_RegisterWorldLight(ent, ent->v.origin[0], ent->v.origin[1], ent->v.origin[2], max(ent->v.light_level, 200));
+		}
+// jmarshall end
 
 //
 // immediately call spawn function

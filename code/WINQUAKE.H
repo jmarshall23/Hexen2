@@ -149,6 +149,18 @@ inline void AnglesToAxis(vec3_t angles, vec3_t axis[3]) {
 	VectorSubtract(vec3_origin, right, axis[1]);
 }
 
+inline vec_t VectorLength(const vec3_t v) {
+	return (vec_t)sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
+}
+
+inline vec_t Distance(const vec3_t p1, const vec3_t p2) {
+	vec3_t	v;
+
+	VectorSubtract(p2, p1, v);
+	return VectorLength(v);
+}
+
+
 /*
  * $Log: /H3/game/WINQUAKE.H $
  * 

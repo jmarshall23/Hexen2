@@ -301,6 +301,7 @@ void create_brush_matrix(float matrix[16], entity_t* e, qboolean enable_left_han
 
 void GL_BlitUIImage(int texnum, int srcx, int srcy, int destx, int desty);
 void GL_BlitUIImageUV(int texnum, float u, float v, int destx, int desty, int w, int h);
+void GL_RegisterWorldLight(entity_t *ent, float x, float y, float z, float radius);
 
 /*
  * $Log: /H2 Mission Pack/glquake.h $
