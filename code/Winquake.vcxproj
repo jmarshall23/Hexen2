@@ -142,6 +142,7 @@
     <ClCompile Include="cvar.c" />
     <ClCompile Include="d3d12\d3d12_composite.cpp" />
     <ClCompile Include="d3d12\d3d12_main.cpp" />
+    <ClCompile Include="d3d12\d3d12_raytrace_cleanup.cpp" />
     <ClCompile Include="d3d12\d3d12_raytrace_entities.cpp" />
     <ClCompile Include="d3d12\d3d12_raytrace_lights.cpp" />
     <ClCompile Include="d3d12\d3d12_raytrace_mega.cpp" />

@@ -25,6 +25,18 @@ struct glTexture_t {
 
 
 glTexture_t textures[MAX_LOADED_TEXTURES];
+float canvas_x = 0;
+float canvas_y = 0;
+
+/*
+==============
+GL_SetUICanvas
+==============
+*/
+void GL_SetUICanvas(float x, float y, float width, float height) {
+	canvas_x = x;
+	canvas_y = y;
+}
 
 /*
 ==============
@@ -33,6 +45,9 @@ R_CopyImage
 */
 void R_CopyImage(byte* source, int sourceX, int sourceY, int sourceWidth, byte* dest, int destX, int destY, int destWidth, int width, int height)
 {
+	destX = destX + canvas_x;
+	destY = destY + canvas_y;
+
 	for (int y = 0; y < height; y++)
 	{
 		int _x = 0;
@@ -51,7 +66,7 @@ GL_BlitUIImage
 */
 void GL_BlitUIImage(int texnum, int srcx, int srcy, int destx, int desty) {
 	byte* src = textures[texnum].data;
-	int width = textures[texnum].width;
+	int width = textures[texnum].width; 
 	int height = textures[texnum].height;
 	if (destx < 0 || desty < 0 || destx + width > g_width || desty + height > g_height)
 		return;
@@ -65,13 +80,33 @@ GL_BlitUIImage
 =================
 */
 void GL_BlitUIImageUV(int texnum, float u, float v, int destx, int desty, int w, int h) {
-	if (destx < 0 || desty < 0)
+	if (destx < 0 || desty < 0 || destx + w > g_width || desty + h > g_height)
 		return;
 
 	byte* src = textures[texnum].data;
 	int width = textures[texnum].width;
 	int height = textures[texnum].height;
+	if (w > width)
+		w = width;
+
+	if (h > height)
+		h = height;
+
 	R_CopyImage(src, u * width, v * height, width, (byte*)uiTextureBuffer, destx, desty, g_width, w, h);
+}
+
+/*
+=================
+GL_BlitUIImage
+=================
+*/
+void GL_BlitUIImageUVNoScale(int texnum, float u, float v, int destx, int desty, int w, int h) {
+	if (destx < 0 || desty < 0 || destx + w > g_width || desty + h > g_height)
+		return;
+
+	byte* src = textures[texnum].data;	
+	int width = textures[texnum].width;
+	R_CopyImage(src, u, v, width, (byte*)uiTextureBuffer, destx, desty, g_width, w, h);
 }
 
 /*

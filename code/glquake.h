@@ -280,6 +280,8 @@ void BuildSurfaceDisplayList(msurface_t* fa);
 void GL_FinishDXRLoading(void);
 void GL_Render(float x, float y, float z, float *viewAngles);
 
+void Mod_ResetAll(void);
+
 extern int g_width, g_height;
 
 
@@ -301,7 +303,7 @@ void create_brush_matrix(float matrix[16], entity_t* e, qboolean enable_left_han
 
 void GL_BlitUIImage(int texnum, int srcx, int srcy, int destx, int desty);
 void GL_BlitUIImageUV(int texnum, float u, float v, int destx, int desty, int w, int h);
-void GL_RegisterWorldLight(entity_t *ent, float x, float y, float z, float radius);
+void GL_RegisterWorldLight(entity_t* ent, float x, float y, float z, float radius, int lightStyle, float r, float g, float b);
 
 /*
  * $Log: /H2 Mission Pack/glquake.h $

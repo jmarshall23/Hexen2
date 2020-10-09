@@ -30,6 +30,11 @@ typedef struct edict_s
 #else
 	entity_state_t	baseline;
 #endif
+
+	char	clientClassName[256];
+	vec3_t  clientOrigin;
+	int     light;
+	int     light_style;
 	
 	float		freetime;			// sv.time when the object was freed
 	float		alloctime;			// sv.time when the object was allocated

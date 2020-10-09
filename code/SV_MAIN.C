@@ -2353,6 +2353,8 @@ void SV_SpawnServer (char *server)
 	else 
 		stats_restored = false;
 
+	GL_ShutdownRaytracingMap();
+
 //
 // tell all connected clients that we are going to a new level
 //

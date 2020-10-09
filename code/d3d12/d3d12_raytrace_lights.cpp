@@ -9,10 +9,12 @@
 
 struct glLight_t {
 	vec4_t origin_radius;
+	vec4_t light_color;
 	vec3_t absmin;
 	vec3_t absmax;
-	entity_t* ent;
+	//entity_t* ent;
 	int leafnums[16];
+	int lightStyle;
 
 	int num_leafs;
 	int distance;
@@ -20,6 +22,7 @@ struct glLight_t {
 
 struct sceneLightInfo_t {
 	vec4_t origin_radius;
+	vec4_t light_color;
 };
 
 glLight_t worldLights[MAX_WORLD_LIGHTS];
@@ -27,6 +30,22 @@ int numWorldLights = 0;
 
 sceneLightInfo_t *sceneLights = NULL;
 tr_buffer* sceneLightInfoBuffer;
+
+/*
+===============
+GL_ClearLights
+===============
+*/
+void GL_ClearLights(void) {
+	memset(&worldLights[0], 0, sizeof(worldLights));
+	numWorldLights = 0;
+
+	if (sceneLightInfoBuffer != NULL)
+	{
+		tr_destroy_buffer(renderer, sceneLightInfoBuffer);
+		sceneLightInfoBuffer = NULL;
+	}
+}
 
 /*
 ===============
@@ -51,7 +70,7 @@ void GL_FindTouchedLeafs(glLight_t* ent, mnode_t* node)
 			return;
 
 		leaf = (mleaf_t*)node;
-		leafnum = leaf - sv.worldmodel->leafs - 1;
+		leafnum = leaf - loadmodel->leafs - 1;
 
 		ent->leafnums[ent->num_leafs] = leafnum;
 		ent->num_leafs++;
@@ -71,12 +90,17 @@ void GL_FindTouchedLeafs(glLight_t* ent, mnode_t* node)
 		GL_FindTouchedLeafs(ent, node->children[1]);
 }
 
-void GL_RegisterWorldLight(entity_t* ent, float x, float y, float z, float radius) {
+void GL_RegisterWorldLight(entity_t* ent, float x, float y, float z, float radius, int lightStyle, float r, float g, float b) {
 	glLight_t light;
 	light.origin_radius[0] = x;
 	light.origin_radius[1] = y;
 	light.origin_radius[2] = z;
 	light.origin_radius[3] = radius;
+
+	light.light_color[0] = r;
+	light.light_color[1] = g;
+	light.light_color[2] = b;
+
 	light.absmin[0] = x;
 	light.absmin[1] = y;
 	light.absmin[2] = z;
@@ -85,9 +109,11 @@ void GL_RegisterWorldLight(entity_t* ent, float x, float y, float z, float radiu
 	light.absmax[1] = y;
 	light.absmax[2] = z;
 
-	light.ent = ent;
+	light.lightStyle = lightStyle;
+
+	//light.ent = ent;
 	light.num_leafs = 0;
-	GL_FindTouchedLeafs(&light, SV_GetMapNodes());
+	GL_FindTouchedLeafs(&light, loadmodel->nodes);
 
 	worldLights[numWorldLights++] = light;
 }
@@ -140,7 +166,7 @@ void GL_BuildLightList(float x, float y, float z) {
 
 		glLight_t * ent = &worldLights[i];
 		vec3_t viewpos = { x, y, z };
-		byte* pvs = SV_FatPVS(viewpos);
+		byte* pvs = SV_FatPVS(viewpos, cl.worldmodel);
 
 		int d;
 		for (d = 0; d < ent->num_leafs; d++)
@@ -153,7 +179,16 @@ void GL_BuildLightList(float x, float y, float z) {
 		sceneLights[numVisLights].origin_radius[0] = ent->origin_radius[0];
 		sceneLights[numVisLights].origin_radius[1] = ent->origin_radius[1];
 		sceneLights[numVisLights].origin_radius[2] = ent->origin_radius[2];
-		sceneLights[numVisLights].origin_radius[3] = ent->origin_radius[3];
+		if(ent->lightStyle) {
+			sceneLights[numVisLights].origin_radius[3] = d_lightstylevalue[ent->lightStyle];
+		}
+		else {
+			sceneLights[numVisLights].origin_radius[3] = ent->origin_radius[3];
+		}
+
+		sceneLights[numVisLights].light_color[0] = ent->light_color[0];
+		sceneLights[numVisLights].light_color[1] = ent->light_color[1];
+		sceneLights[numVisLights].light_color[2] = ent->light_color[2];
 
 		numVisLights++;
 	}

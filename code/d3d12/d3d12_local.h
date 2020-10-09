@@ -3,6 +3,8 @@
 
 #pragma once
 
+#define qmodel_t model_t
+
 #include "d3dx12.h"
 #include <wrl/client.h>
 #include <dxgi1_4.h>
@@ -74,7 +76,7 @@ struct AccelerationStructureBuffers
 };
 
 struct dxrMesh_t {
-	int meshId;
+	//int meshId;
 
 	std::vector<dxrVertex_t> meshVertexes;
 	std::vector<dxrVertex_t> meshTriVertexes;
@@ -120,10 +122,17 @@ void GL_InitCompositePass(tr_texture *albedoPass, tr_texture *lightPass, tr_text
 void GL_CompositePass(tr_texture* albedoPass, tr_texture* lightPass, tr_texture* compositeStagingPass, tr_texture* compositePas, ID3D12GraphicsCommandList4* cmdList, ID3D12CommandAllocator *commandAllocator);
 void GL_InitLightInfoBuffer(D3D12_CPU_DESCRIPTOR_HANDLE& srvPtr);
 extern tr_renderer *renderer;
+extern std::vector<dxrVertex_t> sceneVertexes;
 
 extern "C" {
-	byte* SV_FatPVS(vec3_t org);
+	byte* SV_FatPVS(vec3_t org, qmodel_t* worldmodel);
 	mnode_t* SV_GetMapNodes(void);
+	extern cvar_t		scr_fov;
+	extern char map_name[512];
+	extern qmodel_t* loadmodel;
+	extern int r_finishDXRInit;
 };
 
 void GL_BuildLightList(float x, float y, float z);
+void GL_ClearLights(void);
+void GL_WaitForPreviousFrame(void);

@@ -11,6 +11,9 @@
 
 int m_frameIndex = 0;
 
+
+float sky_map_x, sky_map_y, sky_map_w, sky_map_h;
+
 tr_renderer *renderer;
 
 ComPtr<IDXGISwapChain3> m_swapChain;
@@ -353,16 +356,16 @@ void GL_Init(HWND hwnd, HINSTANCE hinstance, int width, int height)
 #if defined(_DEBUG)
 	// Enable the debug layer (requires the Graphics Tools "optional feature").
 	// NOTE: Enabling the debug layer after device creation will invalidate the active device.
-	{
-		ComPtr<ID3D12Debug> debugController;
-		if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
-		{
-			debugController->EnableDebugLayer();
-
-			// Enable additional debug layers.
-			dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
-		}
-	}
+	//{
+	//	ComPtr<ID3D12Debug> debugController;
+	//	if (SUCCEEDED(D3D12GetDebugInterface(IID_PPV_ARGS(&debugController))))
+	//	{
+	//		debugController->EnableDebugLayer();
+	//
+	//		// Enable additional debug layers.
+	//		dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
+	//	}
+	//}
 #endif
 
 	ComPtr<IDXGIFactory4> factory;
@@ -483,7 +486,7 @@ void GL_Init(HWND hwnd, HINSTANCE hinstance, int width, int height)
 		settings.swapchain.color_format = tr_format_b8g8r8a8_unorm;
 		settings.swapchain.depth_stencil_format = tr_format_undefined;
 
-		tr_create_renderer("Hexen 2", &settings, &renderer, m_device.Get(), m_swapChain.Get());
+		tr_create_renderer("Darklight", &settings, &renderer, m_device.Get(), m_swapChain.Get());
 	}
 
 	GL_InitRaytracing(width, height);
@@ -492,8 +495,10 @@ void GL_Init(HWND hwnd, HINSTANCE hinstance, int width, int height)
 
 	GL_LoadMegaXML("data1/mega/mega.xml");
 
-	DXGI_ADAPTER_DESC adapterDesc;
-	hardwareAdapter->GetDesc(&adapterDesc);
+	DXGI_ADAPTER_DESC adapterDesc;	
+    hardwareAdapter->GetDesc(&adapterDesc);
+
+	char gl_vendor[512];
 
 	sprintf(gl_vendor, "%ws", adapterDesc.Description);
 	Con_Printf("GL_GPU: %s\n", gl_vendor);
@@ -518,6 +523,8 @@ GL_BeginRendering
 void GL_BeginRendering(int* x, int* y, int* width, int* height)
 {
 	extern cvar_t gl_clear;
+
+	GL_WaitForPreviousFrame();
 
 	*x = *y = 0;
 	*width = WindowRect.right - WindowRect.left;
@@ -635,19 +642,20 @@ void GL_EndRendering(void)
 	ThrowIfFailed(m_swapChain->Present(0, 0));
 
 	uiTexture->dx_resource->WriteToSubresource(0, NULL, uiTextureBuffer, g_width * 4, 1);
-	GL_WaitForPreviousFrame();
 }
 
 void GL_Bind(int texnum)
 {
-	if (currenttexture == texnum)
-		return;
-	currenttexture = texnum;
+	//if (currenttexture == texnum)
+	//	return;
+	//currenttexture = texnum;
 	 
 }
 
 void GL_FinishDXRLoading(void) 
 {
+	GL_FindMegaTile("sky1", sky_map_x, sky_map_y, sky_map_w, sky_map_h);
+
 	GL_FinishVertexBufferAllocation();
 
 	{
@@ -816,7 +824,7 @@ void GL_Render(float x, float y, float z, float* viewAngles)
 	//matrices[1] =
 	//	DirectX::XMMatrixPerspectiveFovRH(fovAngleY, m_aspectRatio, 0.1f, 1000.0f);
 	float fov_x, fov_y;
-	GL_CalcFov(60.0f, fov_x, fov_y);
+	GL_CalcFov(scr_fov.value, fov_x, fov_y);
 	create_projection_matrix((float *)&matrices[1], 0.1, 1000.0f, fov_x, fov_y);
 
 	// Raytracing has to do the contrary of rasterization: rays are defined in
@@ -825,6 +833,20 @@ void GL_Render(float x, float y, float z, float* viewAngles)
 	DirectX::XMVECTOR det;
 	matrices[2] = XMMatrixInverse(&det, matrices[0]);
 	matrices[3] = XMMatrixInverse(&det, matrices[1]);
+
+	static float fakeFrameTime = 0;
+	fakeFrameTime += 1.0f;
+	//matrices[0][0] = fakeFrameTime;
+	float* frameData = (float *)&matrices[0];
+	frameData[0] = fakeFrameTime;
+	frameData[1] = vieworg[0];
+	frameData[2] = vieworg[1];
+	frameData[3] = vieworg[2];
+	frameData[4] = sky_map_x;
+	frameData[5] = sky_map_y;
+	frameData[6] = sky_map_w;
+	frameData[7] = sky_map_h;
+
 
 	// Copy the matrix contents
 	uint8_t* pData;

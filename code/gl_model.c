@@ -169,6 +169,43 @@ void Mod_ClearAll (void)
 			mod->needload = true;
 }
 
+
+void Mod_ResetAll(void)
+{
+	int		i;
+	model_t* mod;
+
+	//ericw -- free alias model VBOs
+	//GLMesh_DeleteVertexBuffers ();
+	Cache_Flush();
+	for (i = 0, mod = mod_known; i < mod_numknown; i++, mod++)
+	{
+		memset(mod, 0, sizeof(model_t));
+		//memset(mod->name, 0, 64);
+		//mod->needload = true;
+		//mod->numTris = 0;
+		//mod->numsurfaces = 0;
+		//mod->firstmodelsurface = 0;
+		//mod->nummodelsurfaces = 0;
+		//mod->numsubmodels = 0;
+		//mod->numplanes = 0;
+		//mod->numleafs = 0;
+		//mod->numvertexes = 0;
+		//mod->numedges = 0;
+		//mod->numnodes = 0;
+		//mod->numtexinfo = 0;
+		//mod->numsurfaces = 0;
+		//mod->numsurfedges = 0;
+		//mod->numclipnodes = 0;
+		//mod->nummarksurfaces = 0;
+		//mod->numtextures = 0;
+		//mod->bspversion = 0;
+		//mod->cache.data = NULL;
+	}
+	mod_numknown = 0;
+}
+
+
 /*
 ==================
 Mod_FindName
@@ -520,12 +557,144 @@ void Mod_LoadVisibility (lump_t *l)
 
 
 /*
+====================
+Mod_ParseEdict
+====================
+*/
+const char* Mod_ParseEdict(const char* data, edict_t* ent, qboolean skipClearHack)
+{
+	ddef_t* key;
+	char		keyname[256];
+	qboolean	anglehack, init;
+	int		n;
+
+	init = false;
+
+	// clear it
+	if (ent != sv.edicts && !skipClearHack)	// hack
+		memset(&ent->v, 0, progs->entityfields * 4);
+
+	// go through all the dictionary pairs
+	while (1)
+	{
+		// parse key
+		data = COM_Parse(data);
+		if (com_token[0] == '}')
+			break;
+		if (!data)
+			Host_Error("ED_ParseEntity: EOF without closing brace");
+
+		// anglehack is to allow QuakeEd to write single scalar angles
+		// and allow them to be turned into vectors. (FIXME...)
+		if (!strcmp(com_token, "angle"))
+		{
+			strcpy(com_token, "angles");
+			anglehack = true;
+		}
+		else
+			anglehack = false;
+
+		// FIXME: change light to _light to get rid of this hack
+		if (!strcmp(com_token, "light"))
+			strcpy(com_token, "light_lev");	// hack for single light def
+
+		q_strlcpy(keyname, com_token, sizeof(keyname));
+
+		// another hack to fix keynames with trailing spaces
+		n = strlen(keyname);
+		while (n && keyname[n - 1] == ' ')
+		{
+			keyname[n - 1] = 0;
+			n--;
+		}
+
+		// parse value
+		data = COM_Parse(data);
+		if (!data)
+			Host_Error("ED_ParseEntity: EOF without closing brace");
+
+		if (com_token[0] == '}')
+			Host_Error("ED_ParseEntity: closing brace without data");
+
+		init = true;
+
+		// keynames with a leading underscore are used for utility comments,
+		// and are immediately discarded by quake
+		if (keyname[0] == '_')
+			continue;
+
+
+		//key = ED_FindField(keyname);
+		//if (!key)
+		//{
+		//	//johnfitz -- HACK -- suppress error becuase fog/sky/alpha fields might not be mentioned in defs.qc
+		//	if (strncmp(keyname, "sky", 3) && strcmp(keyname, "fog") && strcmp(keyname, "alpha"))
+		//		Con_DPrintf("\"%s\" is not a field\n", keyname); //johnfitz -- was Con_Printf
+		//	continue;
+		//}
+		//
+		//if (anglehack)
+		//{
+		//	char	temp[32];
+		//	strcpy(temp, com_token);
+		//	sprintf(com_token, "0 %s 0", temp);
+		//}
+		//
+		//if (!ED_ParseEpair((void*)&ent->v, key, com_token))
+		//	Host_Error("ED_ParseEdict: parse error");
+
+		if (!strcmp(keyname, "classname")) {
+			//ent->light = atof(com_token);
+			strcpy(ent->clientClassName, com_token);
+		}
+
+		if (!strcmp(keyname, "origin")) {
+			char* v, * w;
+			char* end;
+			char	string[128];
+			q_strlcpy(string, com_token, sizeof(string));
+			end = (char*)string + strlen(string);
+			v = string;
+			w = string;
+
+			for (int i = 0; i < 3 && (w <= end); i++) // ericw -- added (w <= end) check
+			{
+				// set v to the next space (or 0 byte), and change that char to a 0 byte
+				while (*v && *v != ' ')
+					v++;
+				*v = 0;
+				ent->clientOrigin[i] = atof(w);
+				w = v = v + 1;
+			}
+		}
+
+		if (!strcmp(keyname, "light_lev")) {
+			ent->light = atof(com_token);
+		}
+
+		if (!strcmp(keyname, "style")) {
+			ent->light_style = atoi(com_token);
+		}
+	}
+
+	if (!init)
+		ent->free = true;
+
+	return data;
+}
+
+/*
 =================
 Mod_LoadEntities
 =================
 */
 void Mod_LoadEntities (lump_t *l)
 {
+	char	entfilename[MAX_QPATH];
+	char* ents;
+	int		mark;
+	unsigned int	path_id;
+
 	if (!l->filelen)
 	{
 		loadmodel->entities = NULL;
@@ -534,6 +703,133 @@ void Mod_LoadEntities (lump_t *l)
 	loadmodel->entities = Hunk_AllocName ( l->filelen, loadname);	
 	memcpy (loadmodel->entities, mod_base + l->fileofs, l->filelen);
 	entity_file_size = l->filelen;
+
+	char	rtfilename[MAX_QPATH];
+	q_strlcpy(rtfilename, loadmodel->name, sizeof(rtfilename));
+	COM_StripExtension(rtfilename, rtfilename, sizeof(rtfilename));
+	q_strlcat(rtfilename, ".rtlights", sizeof(rtfilename));
+	char* buf = COM_LoadHunkFile(rtfilename, &path_id);
+	qboolean rtLightsFile = false;
+	if (buf) {
+		rtLightsFile = true;
+
+		char* rtlight_buffer = buf;
+
+		while (rtlight_buffer != NULL)
+		{
+
+			if (rtlight_buffer[0] == '!')
+				rtlight_buffer++;
+
+			rtlight_buffer = COM_Parse(rtlight_buffer);
+			if (rtlight_buffer == NULL)
+				break;
+
+			float x = atof(com_token);
+
+			rtlight_buffer = COM_Parse(rtlight_buffer);
+			float y = atof(com_token);
+
+			rtlight_buffer = COM_Parse(rtlight_buffer);
+			float z = atof(com_token);
+
+			rtlight_buffer = COM_Parse(rtlight_buffer);
+			float intensity = atof(com_token);
+
+			rtlight_buffer = COM_Parse(rtlight_buffer);
+			float r = atof(com_token);
+
+			rtlight_buffer = COM_Parse(rtlight_buffer);
+			float g = atof(com_token);
+
+			rtlight_buffer = COM_Parse(rtlight_buffer);
+			float b = atof(com_token);
+
+			rtlight_buffer = COM_Parse(rtlight_buffer);
+			int lightstyles = atoi(com_token);
+
+			// Cubemap.
+			rtlight_buffer = COM_Parse(rtlight_buffer);
+			for (int d = 0; d < 8; d++) {
+				rtlight_buffer = COM_Parse(rtlight_buffer);
+			}
+			rtlight_buffer = COM_Parse(rtlight_buffer);
+
+			GL_RegisterWorldLight(NULL, x, y, z, intensity, lightstyles, r, g, b);
+		}
+	}
+
+	const char* data = (dvertex_t*)(mod_base + l->fileofs);
+
+	// parse ents
+	static edict_t ent;
+	while (1)
+	{
+		memset(&ent, 0, sizeof(edict_t));
+
+		// parse the opening brace
+		data = COM_Parse(data);
+		if (!data)
+			break;
+		if (com_token[0] != '{')
+			Host_Error("ED_LoadFromFile: found %s when expecting {", com_token);
+
+
+		data = Mod_ParseEdict(data, &ent, true);
+
+		if (!rtLightsFile)
+		{
+			const char* entityName = ent.clientClassName;
+			if (strstr(entityName, "light")) {
+				vec3_t origin;
+				origin[0] = ent.clientOrigin[0];
+				origin[1] = ent.clientOrigin[1];
+				origin[2] = ent.clientOrigin[2];
+
+				if (strstr(entityName, "torch") || strstr(entityName, "candle")) {
+					//vec3_t dirs[4] = { { 60, 0, 0 },
+					//				   { -60, 0, 0 },
+					//				   { 0, 60, 0},
+					//				   { 0, -60, 0} };
+					//
+					//for (int f = 0; f < 4; f++)
+					//{
+					//	trace_t trace;
+					//	vec3_t end;
+					//	vec3_t mins = { -5, -5, -5 };
+					//	vec3_t maxs = { -5, -5, -5 };
+					//
+					//	end[0] = origin[0] + dirs[f][0];
+					//	end[1] = origin[1] + dirs[f][1];
+					//	end[2] = origin[2] + dirs[f][2];
+					//
+					//	trace = SV_Move(origin, mins, maxs, end, false, &ent);
+					//
+					//	if (trace.fraction < 0.5) {
+					//		origin[0] += trace.plane.normal[0] * 20;
+					//		origin[1] += trace.plane.normal[1] * 20;
+					//		//origin[2] += 20.0f;
+					//		break;
+					//	}
+					//}
+					origin[2] += 20.0f;
+				}
+
+				if (ent.light == 0) {
+					ent.light = 200;
+				}
+
+				GL_RegisterWorldLight(&ent, origin[0], origin[1], origin[2], ent.light, ent.light_style, 1.0f, 1.0f, 1.0f);
+			}
+			else if (ent.light > 0) {
+				vec3_t origin;
+				origin[0] = ent.clientOrigin[0];
+				origin[1] = ent.clientOrigin[1];
+				origin[2] = ent.clientOrigin[2];
+				GL_RegisterWorldLight(&ent, origin[0], origin[1], origin[2], ent.light, ent.light_style, 1.0f, 1.0f, 1.0f);
+			}
+		}
+	}
 }
 
 
@@ -1240,8 +1536,22 @@ void Mod_LoadBrushModel (model_t *mod, void *buffer)
 
 	model_t* bspMod = mod;
 	currentmodel = bspMod;
+	currentmodel = bspMod;
 
 	// Mark Surfaces 
+	for (i = 1; i < mod->numsubmodels; i++)
+	{
+		bm = &mod->submodels[i];
+		for (int d = 0; d < bm->numfaces; d++)
+		{
+			mod->surfaces[bm->firstface + d].bmodelindex = i + 1;
+		}
+	}
+	mod = bspMod;
+	bspMod->dxrModel[0] = GL_LoadDXRMesh(bspMod->surfaces, bspMod->numsurfaces);
+	//
+	// set up the submodels (FIXME: this is confusing)
+	//
 	for (i = 0; i < mod->numsubmodels; i++)
 	{
 		bm = &mod->submodels[i];
@@ -1256,63 +1566,45 @@ void Mod_LoadBrushModel (model_t *mod, void *buffer)
 		mod->firstmodelsurface = bm->firstface;
 		mod->nummodelsurfaces = bm->numfaces;
 
-		if (i > 0)
-		{
-			for (int d = 0; d < mod->nummodelsurfaces; d++)
-			{
-				mod->surfaces[mod->firstmodelsurface + d].bmodelindex = i + 1;
-			}
-		}	
-	}
+		VectorCopy(bm->maxs, mod->maxs);
+		VectorCopy(bm->mins, mod->mins);
 
-	bspMod->dxrModel = GL_LoadDXRMesh(bspMod->surfaces, bspMod->numsurfaces);
-//
-// set up the submodels (FIXME: this is confusing)
-//
-	for (i=0 ; i<mod->numsubmodels ; i++)
-	{
-		bm = &mod->submodels[i];
-
-		mod->hulls[0].firstclipnode = bm->headnode[0];
-		for (j=1 ; j<MAX_MAP_HULLS ; j++)
+		//johnfitz -- correct physics cullboxes so that outlying clip brushes on doors and stuff are handled right
+		if (i > 0 || strcmp(mod->name, sv.modelname) != 0) //skip submodel 0 of sv.worldmodel, which is the actual world
 		{
-			mod->hulls[j].firstclipnode = bm->headnode[j];
-			mod->hulls[j].lastclipnode = mod->numclipnodes-1;
+			// start with the hull0 bounds
+			VectorCopy(mod->maxs, mod->clipmaxs);
+			VectorCopy(mod->mins, mod->clipmins);
+
+			// process hull1 (we don't need to process hull2 becuase there's
+			// no such thing as a brush that appears in hull2 but not hull1)
+			//Mod_BoundsFromClipNode (mod, 1, mod->hulls[1].firstclipnode); // (disabled for now becuase it fucks up on rotating models)
 		}
-		
-		mod->firstmodelsurface = bm->firstface;
-		mod->nummodelsurfaces = bm->numfaces;
+		//johnfitz
 
-// jmarshall
-	//	if (i > 0)
-		{
-			for (int d = 0; d < mod->nummodelsurfaces; d++)
-			{
-				mod->surfaces[mod->firstmodelsurface + d].bmodelindex = i + 1;
-			}
-		}
-// jmarshall end
-		
-		VectorCopy (bm->maxs, mod->maxs);
-		VectorCopy (bm->mins, mod->mins);
+		//johnfitz -- calculate rotate bounds and yaw bounds
+		//radius = RadiusFromBounds(mod->mins, mod->maxs);
+		//mod->rmaxs[0] = mod->rmaxs[1] = mod->rmaxs[2] = mod->ymaxs[0] = mod->ymaxs[1] = mod->ymaxs[2] = radius;
+		//mod->rmins[0] = mod->rmins[1] = mod->rmins[2] = mod->ymins[0] = mod->ymins[1] = mod->ymins[2] = -radius;
+		//johnfitz
 
-		mod->radius = RadiusFromBounds (mod->mins, mod->maxs);
 
 		mod->numleafs = bm->visleafs;
 
-		if (i < mod->numsubmodels-1)
+		if (i < mod->numsubmodels - 1)
 		{	// duplicate the basic information
 			char	name[10];
 
-			sprintf (name, "*%i", i+1);
-			loadmodel = Mod_FindName (name);
+			sprintf(name, "*%i", i + 1);
+			loadmodel = Mod_FindName(name);
+			qboolean loadDXRMesh = loadmodel->dxrModel[0] == NULL;
 			*loadmodel = *mod;
-			loadmodel->dxrModel = NULL;
+			if (loadDXRMesh)
 			{
 				currentmodel = loadmodel;
-				loadmodel->dxrModel = GL_LoadDXRMesh(&mod->surfaces[mod->firstmodelsurface], mod->nummodelsurfaces);
+				loadmodel->dxrModel[0] = GL_LoadDXRMesh(&mod->surfaces[mod->submodels[i + 1].firstface], mod->submodels[i + 1].numfaces);
 			}
-			strcpy (loadmodel->name, name);
+			strcpy(loadmodel->name, name);
 			mod = loadmodel;
 		}
 	}

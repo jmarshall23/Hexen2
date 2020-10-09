@@ -194,6 +194,8 @@ void CL_Disconnect (void)
 
 void CL_Disconnect_f (void)
 {
+	GL_ShutdownRaytracingMap();
+
 	CL_Disconnect ();
 	if (sv.active)
 		Host_ShutdownServer (false);

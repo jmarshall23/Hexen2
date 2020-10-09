@@ -176,41 +176,30 @@ R_StoreEfrags
 // FIXME: a lot of this goes away with edge-based
 ================
 */
-void R_StoreEfrags (efrag_t **ppefrag)
+void R_StoreEfrags(efrag_t** ppefrag)
 {
-	entity_t	*pent;
-	model_t		*clmodel;
-	efrag_t		*pefrag;
-
-
+	entity_t* pent;
+	efrag_t* pefrag;
+	// jmarshall 
 	while ((pefrag = *ppefrag) != NULL)
 	{
 		pent = pefrag->entity;
-		clmodel = pent->model;
 
-		switch (clmodel->type)
-		{
-		case mod_alias:
-		case mod_brush:
-		case mod_sprite:
-			pent = pefrag->entity;
-
-			if ((pent->visframe != r_framecount) &&
-				(cl_numvisedicts < MAX_VISEDICTS))
-			{
-				cl_visedicts[cl_numvisedicts++] = pent;
-
-			// mark that we've recorded this entity for this frame
-				pent->visframe = r_framecount;
-			}
-
-			ppefrag = &pefrag->leafnext;
-			break;
-
-		default:	
-			Sys_Error ("R_StoreEfrags: Bad entity type %d\n", clmodel->type);
+		if (strstr(pefrag->entity->model->name, "flame")) {
+			pent->skipShadows = true;
 		}
-	}
-}
+		else {
+			pent->skipShadows = false;
+		}
 
+		if ((cl_numvisedicts < MAX_VISEDICTS))
+		{
+			cl_visedicts[cl_numvisedicts++] = pent;
+			pent->visframe = r_framecount;
+		}
+
+		ppefrag = &pefrag->leafnext;
+	}
+	// jmarshall end
+}
 

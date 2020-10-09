@@ -36,6 +36,8 @@ float		model_constant_alpha;
 float		r_time1;
 float		r_lasttime1 = 0;
 
+int     r_finishDXRInit = 1;
+
 extern model_t *player_models[NUM_CLASSES];
 
 //
@@ -1381,10 +1383,10 @@ r_refdef must be set before the first call
 */
 void R_RenderScene ()
 {
-	static int firstFrameHack = 1;
-	if(firstFrameHack) {
+	// jmarshall: this is a stupid way to do this. 
+	if (r_finishDXRInit) {
 		GL_FinishDXRLoading(); // todo move me!
-		firstFrameHack = 0;
+		r_finishDXRInit = 0;
 	}
 
 	R_SetupFrame ();

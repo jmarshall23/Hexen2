@@ -417,7 +417,7 @@ typedef struct model_s
 	byte		*lightdata;
 	char		*entities;
 
-	void*		dxrModel;
+	void*		dxrModel[4096];
 
 	stvert_t	stverts[MAXALIASVERTS];
 	mtriangle_t	triangles[MAXALIASTRIS];
