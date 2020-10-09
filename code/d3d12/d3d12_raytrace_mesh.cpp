@@ -170,12 +170,12 @@ void GL_AliasVertexToDxrVertex(trivertx_t inVert, stvert_t stvert, dxrVertex_t &
 	vertex.st[1] = stvert.t;
 	vertex.st[2] = -1;
 
-	if(stvert.onseam && !facesFront) {
-		vertex.st[0] += w * 0.5f; // backface.
-	}
+	//if(stvert.onseam && !facesFront) {
+	//	vertex.st[0] += w * 0.5f; // backface.
+	//}
 
 	vertex.st[0] = (vertex.st[0] + 0.5) / w;
-	vertex.st[1] = (vertex.st[1] + 0.5) / h;
+	vertex.st[1] = 1.0 - ((vertex.st[1] + 0.5) / h);
 
 	//assert(vertex.st[0] > 1 || vertex.st[1] > 0);
 	//if(vertex.st[0] > 1 || vertex.st[1] > 1 || w == -1 || h == -1) {

@@ -131,7 +131,8 @@ void Tileset_ParseTile(tinyxml2::XMLNode* tile) {
 
 	MegaEntry_t entry;
 
-	COM_StripExtension((char *)attribute->Value(), entry.name);
+	//COM_StripExtension((char *)attribute->Value(), entry.name);
+	strcpy(entry.name, attribute->Value());
 	attribute = attribute->Next();
 	entry.x = atoi(attribute->Value());
 	attribute = attribute->Next();

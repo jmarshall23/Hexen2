@@ -151,7 +151,7 @@ float3 CalculateClouds() {
 		gOutput[launchIndex] = float4(sky.x, sky.y, sky.z, 1.0);
 		gLightOutput[launchIndex] = float4(1, 1, 1, 1);
 	}
-	else if(hit.lightColor.w > 0)
+	else if(hit.worldNormal.x == 0 && hit.worldNormal.y == 0 && hit.worldNormal.z != 0)
 	{
 		  uint2 launchIndex = DispatchRaysIndex().xy;
           float2 dims = float2(DispatchRaysDimensions().xy);
