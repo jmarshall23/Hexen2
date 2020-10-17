@@ -305,6 +305,26 @@ void GL_BlitUIImage(int texnum, int srcx, int srcy, int destx, int desty);
 void GL_BlitUIImageUV(int texnum, float u, float v, int destx, int desty, int w, int h);
 void GL_RegisterWorldLight(entity_t* ent, float x, float y, float z, float radius, int lightStyle, float r, float g, float b);
 
+
+inline vec_t VectorNormalize2(vec3_t v, vec3_t out)
+{
+	float	length, ilength;
+
+	length = v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+	length = sqrt(length);		// FIXME
+
+	if (length)
+	{
+		ilength = 1 / length;
+		out[0] = v[0] * ilength;
+		out[1] = v[1] * ilength;
+		out[2] = v[2] * ilength;
+	}
+
+	return length;
+
+}
+
 /*
  * $Log: /H2 Mission Pack/glquake.h $
  * 
